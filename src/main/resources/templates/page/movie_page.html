@@ -1,0 +1,18 @@
+<div xmlns:th="http://www.thymeleaf.org">
+	<div ng-repeat="item in movies">
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h5 class="card-title">{{item.name}}</h5>
+				<h6 class="card-subtitle mb-2 text-muted">{{item.gerne}}</h6>
+				<p class="card-text">{{item.trailer}}</p>
+				<p class="card-text">{{item.time}}</p>
+				<img ng-src="/images/{{item.image}}" width="50%" height="50%">
+				<p class="card-text">{{item.image}}</p>
+				<p class="card-text">{{item.publish_DATE}}</p>
+				<p class="card-text">{{item.description}}</p>
+				<a th:href="@{/movie_detail/{{item.id}}}" class="card-link">Movie detail</a>
+				<a href="#" class="card-link">Booking now</a>
+			</div>
+		</div>
+	</div>
+</div>

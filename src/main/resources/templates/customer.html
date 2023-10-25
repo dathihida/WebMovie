@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<head>
+<title>Customer</title>
+</head>
+<body ng-app ="app" ng-controller = "controller">
+	<div th:replace="~{/navbar/navbar}"></div>
+
+	<!-- form customer -->
+
+	<div>
+		<h2>RESTful Customers - AngularJS</h2>
+		<!--form-->
+		<div>
+			<input ng-model="form.id" type="hidden" />
+			<br /> 
+			<input ng-model="form.fullname" placeholder="fullname" />
+			<br /> 
+			<input ng-model="form.email" placeholder="email" />
+			<br /> 
+			<input ng-model="form.phonenumber" placeholder="phonenumber" />
+			<br /> 
+			<input type="password" ng-model="form.password" placeholder="password" />
+			<br /> 
+			<hr />
+			<button ng-click="createCustomer()">Create</button>
+			<button ng-click="updateCustomer()">Update</button>
+			<button ng-click="delete(form.id)">Delete</button>
+			<button ng-click="reset()">Reset</button>
+		</div>
+		<!-- table customer -->
+		<table style="width: 100%" border="1">
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Password</th>
+				
+				<th></th>
+			</tr>
+			<tr ng-repeat="cus in customers">
+				<td>{{cus.id}}</td>
+				<td>{{cus.fullname}}</td>
+				<td>{{cus.email}}</td>
+				<td>{{cus.phonenumber}}</td>
+				<td>
+					<button ng-click="edit(cus.fullname)">Edit</button>
+					<button ng-click="delete(cus.id)">Del</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- js -->
+	<script th:src="@{/js/customer.js}"></script>
+</body>
+</html>

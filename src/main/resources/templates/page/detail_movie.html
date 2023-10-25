@@ -1,0 +1,81 @@
+ <div xmlns:th="http://www.thymeleaf.org">
+    <main th:object="${movie1}">
+		<section>
+        <div class="bg_details">
+            <div class="bg_fillter" 
+            	th:style="'background-image: url(/images/' + ${movie1.IMAGE} + '); background-position: center center; background-size: cover; background-repeat: no-repeat;'"><!-- style="background: url(/assets/images/Details/kekientao.jpg) center center/cover no-repeat;" -->
+                
+                <div class="lopphu">
+                    <div class="container justify-content-center p-2">
+                        <div class="row d-flex">
+                            <div class=" col-lg-2 col-md-2 col-sm-4 col-5 pt-2 align-items-center">
+                                <div class="card card_img">
+                                    <a href="detail.html"></a>
+                                    	<img th:src="@{|/images/+${movie1.IMAGE}|}" class="card-img-top" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-10  col-md-10 col-sm-8 ps-3">
+                                <h3 class="mb-0">
+                                	<a href="detail.html" class="text-decoration-none text-white" th:inline="text">[[${movie1.NAME}]]</a></h3>
+                                <p class="theloai" th:inline="text">[[${movie1.GERNE}]]</p>
+                                <div class="container row justify-content-around">
+                                    <div class="col-lg-7 p-0">
+                                        <div class="mota d-flex justify-content-start gap-1 mb-3">
+                                            <button type="button">Thích</button>
+                                            <button type="button" class="btn btn-dark">Trailer</button>
+                                            <button type="button" class="btn_muave">Mua vé</button>
+                                        </div>
+                                        <p class="mota_docx text-white">
+                                           [[${movie1.DESCRIPTION}]]
+                                        </p>
+                                        <div class="row mota_2">
+                                            <div class="col-lg-4">
+                                                <span> <ion-icon name="calendar-outline"></ion-icon> Khởi chiếu</span>
+                                                <br>
+                                                <a href="detail.html">[[${movie1.PUBLISH_DATE}]]</a>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <span class="text-break">Thời lượng</span> <br>
+                                                <p>[[${movie1.TIME}]]</p>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <span>Giới hạn độ tuổi </span> <br>
+                                                <p>113 phút</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 pe-0 ps-3 mota_3">
+                                        <p>
+                                            <strong class="text-white">Diễn viên</strong> <br>
+                                            <span>
+                                                <a href="#" class="text-decoration-none">[[${movie1.ACTORS}]]</a>
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <strong class="text-white">Đạo diễn</strong> <br>
+                                            <span>
+                                                <a href="#" class="text-decoration-none">[[${movie1.DIRETORS}]]</a>
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <strong class="text-white">Nhà sản xuất</strong> <br>
+                                            <span>
+                                                <a href="#" class="text-decoration-none">Arnon Milchan, Gareth Edwards,
+                                                    Jim Spencer</a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <iframe class="video_responsive" width="100%" height="573px"
+					id="tm-video" th:src="${'https://www.youtube.com/embed/'+{movie1.TRAILER}}">
+	</iframe>
+    </main>
+</div> 

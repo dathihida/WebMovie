@@ -1,0 +1,39 @@
+<div xmlns:th="http://www.thymeleaf.org">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<div class="container-fluid">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link active" href="#">Active</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+				<li class="nav-item">
+					<div class="text-white" th:text="${#authentication.name}"></div>
+				</li>
+
+				<li class="nav-item">
+					<div class="bg-light" sec:authorize="hasAnyRole('ADMIN')">
+						<h2>ChucNang</h2>
+						<a class="btn" th:href="@{/home/movie}">Manager movie</a>
+						<a class="btn" th:href="@{/home/customer}">Manager user</a>
+						<a class="btn" th:href="@{/home/cinema}">Manager cinema</a>
+						<a class="btn" th:href="@{/home/room}">Manager room</a>
+					</div>
+				</li>
+				
+				<li class="nav-item">
+					<div class="bg-light" sec:authorize="!isAuthenticated()">
+						<a th:href="@{/login}">Sign in</a>
+						<a th:href="@{/signup}">Singup</a>
+					</div>
+				</li>
+				
+
+				
+
+				<div class="mt-5">
+					<a class="link-primary" th:href="@{/logout}">Logout</a>
+				</div>
+			</ul>
+		</div>
+	</nav>
+</div>
