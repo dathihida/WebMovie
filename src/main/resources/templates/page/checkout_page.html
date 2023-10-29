@@ -1,0 +1,131 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <main>
+
+        <section>
+            <div class="checkout container p-0">
+                <div class="hea-title text-center bg-dark text-white my-3 p-0">
+                    <h4>THANH TOÁN</h4>
+                </div>
+
+                <div class="checkout-content row mt-5">
+                    <div class="col-md-7 d-flex flex-column gap-3">
+                        <div class="promotion ">
+                            <h5>Khuyến mãi</h5>
+                            <div class="makhuyenmai mt-4">
+                                <h6>Mã khuyến mãi</h6>
+                                <div class="d-flex gap-2">
+                                    <input type="email" class="form-control p-1" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
+                                    <button type="submit" class="btn">Áp dụng</button>
+                                </div>
+                                <div class="dropdown my-3">
+                                    <a class="nav-link kmcuaban dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Khuyến mãi của bạn
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Giảm 20% giá khi mua từ 2 vé trở lên</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Giảm 10%</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pay-method ">
+                            <h5>Phương thức thanh toán</h5>
+                            <div class="list-pay mt-4 d-flex justify-content-around flex-column gap-3">
+                                <div class="form-check d-flex align-items-center">
+                                    <input class="form-check-input " type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault1" checked> <img th:src="@{|/assets/images/MoMo1.png|}"
+                                        alt="">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        ATM Card (Thẻ nội địa)</label>
+                                </div>
+                                <div class="form-check  d-flex align-items-center">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault1"> <img th:src="@{|/assets/images/MoMo1.png|}" alt="">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Thẻ quốc tế (Visa, Master,
+                                        ...)</label>
+                                </div>
+                                <div class="form-check d-flex align-items-center">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault1"> <img th:src="@{|/assets/images/payment/vnpay1.png|}"
+                                        alt="">
+                                    <label class="form-check-label" for="flexRadioDefault3">
+                                        VNPAY</label>
+                                </div>
+                                <div class="form-check d-flex align-items-center">
+                                    <input class="form-check-input " type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault1"> <img
+                                        th:src="@{|/assets/images/Thanhtoan/MoMo_Logo.png|}" alt="">
+                                    <label class="form-check-label" for="flexRadioDefault4">
+                                        Ví MoMo</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dieukhoan mt-4 gap-3 d-flex align-items-center">
+                            <input type="checkbox" id="" name="" value="true">
+                            <label for="true">Tôi đồng ý với <a href="#">điều khoản sử dụng</a> và mua vé cho người có
+                                độ
+                                tuổi phù hợp</label>
+                        </div>
+                    </div>
+                    <div class="detail-pay col-md-5">
+                        <div class="countdown text-center">
+                            Thời gian giữ ghế: <span id="time"> 10:00</span>
+                        </div>
+                        <div class="content-pay d-flex gap-3">
+                            <div class="card-img">
+                                <img th:src="@{|/images/phimdc7.jpg|}" alt="">
+                            </div>
+                            <div class="info-movie">
+                                <h5>Kẻ Kiến Tạo</h5>
+                                <span>3D Phụ đề </span> <br>
+                                <span class="dotuoi">T13</span>
+                            </div>
+                        </div>
+                        <div class="info-ticket mt-2">
+                            <div class="time">
+                                <div class="d-flex align-items-center gap-2">
+                                    <h6>MovieTime Trường Chinh</h6> - <span>RAP 4</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span>Suất: </span>
+                                    <h6>21:30 </h6> - <span> Thứ 3, 20/10/2023</span>
+                                </div>
+                            </div>
+                            <div class="fare d-flex justify-content-between">
+                                <div class="">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <h6>1</h6> x <span>Ghế đơn</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span>Ghế:</span>
+                                        <h6>F6</h6>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>65.000</span> <em class="text-decoration-underline">đ</em>
+                                </div>
+                            </div>
+                            <div class="total d-flex justify-content-between">
+                                <div>
+                                    <h6>Tổng cộng</h6>
+                                </div>
+                                <div>
+                                    <span>65.000</span> <em class="text-decoration-underline">đ</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-pay d-flex justify-content-between">
+                            <button type="submit" class="btn btn-outline-warning">Quay lại</button>
+                            <button type="submit" class="btn btn-warning pay">Thanh toán</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
