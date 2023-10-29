@@ -1,169 +1,192 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<head>
-<title>Customer</title>
-</head>
-<body ng-app ="app" ng-controller = "controller">
-	<div th:replace="~{/navbar/navbar}"></div>
 
-	<!-- From Start -->
-			<div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-xl-12">
-                        <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">CREATE MOVIE</h6>
-                            
-                            <div class="form-floating mb-3">
-                                <input ng-model="form.id" class="form-control" type="hidden">
-                                <label for="floatingInput">Id</label>
-                            </div>
-                            
+<head>
+    <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"> </script>
+    <script nomodule src="https://unpkg .com/ionicons@5.5.2/dist/ionicons/ionicons.js"> </script>
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+
+    <link rel="stylesheet" th:href="@{|/css/header.css|}">
+    <link rel="stylesheet" th:href="@{|/css/home.css|}">
+    <link rel="stylesheet" th:href="@{|/css/details.css|}">
+    <link rel="stylesheet" th:href="@{|/css/footer.css|}">
+    <link rel="stylesheet" th:href="@{|/css/manage_movie.css|}">
+
+    <title>Customer</title>
+</head>
+
+<body ng-app="app" ng-controller="controller">
+    <div th:replace="~{/navbar/navbar}"></div>
+
+    <!-- From Start -->
+    <div class="container pt-4 px-4">
+        <div class="row g-4 d-flex justify-content-center">
+                <div class="form1 p-4">
+                    <h6 class="mb-4">CREATE MOVIE</h6>
+
+                    <div class="form-floating mb-3">
+                        <input ng-model="form.id" class="form-control" type="hidden">
+                        <label for="floatingInput">Id</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
                             <div class="form-floating mb-3">
                                 <input ng-model="form.name" class="form-control">
                                 <label for="floatingInput">Name</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input ng-model="form.description" class="form-control">
-                                <label for="floatingPassword">description</label>
+                                <label for="floatingPassword">Description</label>
                             </div>
-                            
+
                             <div class="form-floating mb-3">
                                 <input ng-model="form.actors" class="form-control">
-                                <label for="floatingPassword">actors</label>
+                                <label for="floatingPassword">Actors</label>
                             </div>
-                            
+
                             <div class="form-floating mb-3">
                                 <input ng-model="form.diretors" class="form-control">
-                                <label for="floatingPassword">diretors</label>
+                                <label for="floatingPassword">Diretors</label>
                             </div>
-                            
+
                             <div class="form-floating mb-3">
                                 <input ng-model="form.gerne" class="form-control">
-                                <label for="floatingPassword">gerne</label>
+                                <label for="floatingPassword">Gerne</label>
                             </div>
-                            
+
                             <div class="form-floating mb-3">
                                 <input ng-model="form.trailer" class="form-control">
-                                <label for="floatingPassword">trailer</label>
+                                <label for="floatingPassword">Trailer</label>
                             </div>
-                            
+
                             <div class="form-floating mb-3">
                                 <input ng-model="form.time" class="form-control">
-                                <label for="floatingPassword">time</label>
-                            </div>
-                           
-                            <div class="form-floating mb-3">
-                            	<div class="mb-3">
-	                            	<label for="formFile" class="form-label">Image</label>
-	                                <input ng-model="form.image" class="form-control" type="file" id="formFile" 
-	                                	onchange="angular.element(this).scope().imageChanged(this.files)">
-                            	</div> 
-                            </div>
-                            <div class="form-floating mb-3">
-                                <img ng-src="/images/{{form.image}}" style="width: 50%; height: 50%">
+                                <label for="floatingPassword">Duration</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input ng-model="form.publish_DATE" type="date" class="form-control">
-                                <label for="floatingPassword">publish_DATE</label>
+                                <label for="floatingPassword">Release Date</label>
                             </div>
-                            
-                            <button ng-click="createMovie()" type="submit" class="btn btn-primary">Create</button>
-                            <button ng-click="updateMovie()" type="submit" class="btn btn-primary">Update</button>
-                            <button ng-click="delete(form.id)" type="submit" class="btn btn-primary">Delete</button>
-                            <button ng-click="reset()" type="submit" class="btn btn-primary">Reset</button>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Image</label>
+                                    <input ng-model="form.image" class="form-control" type="file" id="formFile"
+                                        onchange="angular.element(this).scope().imageChanged(this.files)">
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 d-flex justify-content-center align-items-center">
+                                <img ng-src="/images/{{form.image}}" style="width: 85%; height: 85%">
+                            </div>
                         </div>
                     </div>
+                    <button ng-click="createMovie()" type="submit" class="btn btn-primary">Create</button>
+                    <button ng-click="updateMovie()" type="submit" class="btn btn-primary">Update</button>
+                    <button ng-click="delete(form.id)" type="submit" class="btn btn-primary">Delete</button>
+                    <button ng-click="reset()" type="submit" class="btn btn-primary">Reset</button>
                 </div>
-            </div>
-			<!-- From End -->
-			
-            <!-- Table Start -->
-            <div class="container-fluid pt-4 px-4" ng-if="movies">
-                <div class="row g-4">
-                    <div class="col-12">
-                        <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Movie Table</h6>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Id</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">description</th>
-                                            <th scope="col">actors</th>
-                                            <th scope="col">diretors</th>
-                                            <th scope="col">gerne</th>
-                                            <th scope="col">trailer</th>
-                                            <th scope="col">time</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">publish_DATE</th>
-                                            <th></th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="p in pager.items">
-                                            <td>{{p.id}}</td>
-                                            <td>{{p.name}}</td>
-                                            <td>{{p.description}}</td>
-                                            <td>{{p.actors}}</td>
-                                            <td>{{p.diretors}}</td>
-                                            <td>{{p.gerne}}</td>
-                                            <td>{{p.trailer}}</td>
-                                            <td>{{p.time}}</td>
-                                            <td>{{p.image}}</td>
-                                            <td>{{p.publish_DATE | date:'dd-MM-yyyy'}}</td>
-                                            <td>
-                                            	<div>
-                                            		<button ng-click="edit(p.id)">Edit</button>
-                                            		<button ng-click="delete(p.id)">Delete</button>
-                                            	</div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <!-- Page Start -->
-								<nav aria-label="Page navigation example">
-								  <ul class="pagination justify-content-center">
-								    <li class="page-item">
-								      <a class="page-link" ng-click="pager.first()" tabindex="-1">First</a>
-								    </li>
-								    <li class="page-item">
-								    	<a class="page-link" ng-disabled="page == 1" ng-click="pager.prev()">Prevs</a>
-								    </li>
-								    
-								    
-								    <li class="page-item"><a class="page-link" href="#">{{pager.page +1}} of {{pager.count}}</a></li>
-								    
-								    
-								    
-								    <li class="page-item">
-								    	<a class="page-link" ng-click="pager.next()">Next</a>
-								    </li>
-								    <li class="page-item">
-								      <a class="page-link" ng-click="pager.last()">Last</a>
-								    </li>
-								  </ul>
-								</nav>
-                        </div>
-                    </div>
-                </div>
-                
-                
-            </div>
-            </div>
-            <!-- Table End -->
+        </div>
+    </div>
 
-	<!-- js -->
-	<script th:src="@{/js/movie.js}"></script>
+
+    <!-- From End -->
+
+ 
+    <div class="container list_movie pt-4 px-4" ng-if="movies">
+        <div class="row g-4">
+            <div class="col-12 p-0">
+                <div class="bg-light px-0 py-4">
+                    <h5 class="mb-4">Movie Table</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered border-secondary">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Actors</th>
+                                    <th scope="col">Diretors</th>
+                                    <th scope="col">Gerne</th>
+                                    <th scope="col">Trailer</th>
+                                    <th scope="col">Duration</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Release Date</th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="p in pager.items">
+                                    <td>{{p.id}}</td>
+                                    <td>{{p.name}}</td>
+                                    <td>{{p.description}}</td>
+                                    <td>{{p.actors}}</td>
+                                    <td>{{p.diretors}}</td>
+                                    <td>{{p.gerne}}</td>
+                                    <td>{{p.trailer}}</td>
+                                    <td>{{p.time}}</td>
+                                    <td>{{p.image}}</td>
+                                    <td>{{p.publish_DATE | date:'dd-MM-yyyy'}}</td>
+                                    <td>
+                                        <div class="btn d-flex flex-column align-items-center">
+                                            <button class="button1" ng-click="edit(p.id)"><ion-icon name="create-outline"></ion-icon></button>
+                                            <button class="button2 mt-2" ng-click="delete(p.id)"><ion-icon name="trash-outline"></ion-icon></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <!-- Page Start -->
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    <a class="page-link" ng-click="pager.first()" tabindex="-1">First</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" ng-disabled="page == 1" ng-click="pager.prev()">Prevs</a>
+                                </li>
+
+
+                                <li class="page-item"><a class="page-link" href="#">{{pager.page +1}} of
+                                        {{pager.count}}</a></li>
+
+
+
+                                <li class="page-item">
+                                    <a class="page-link" ng-click="pager.next()">Next</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" ng-click="pager.last()">Last</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- Table End -->
+
+    <!-- js -->
+    <script th:src="@{/js/movie.js}"></script>
 </body>
+
 </html>

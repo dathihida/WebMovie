@@ -25,7 +25,7 @@ public class CustomerService implements ICustomerService{
 	public Customer addCustomer(Customer customer) {
 		// TODO Auto-generated method stub
 		customer.setEXIST(true);
-		customer.setROLE("ROLE_USER");
+		customer.setROLE("ROLE_ADMIN");
 		customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
 		return customerRepository.save(customer);
 	}

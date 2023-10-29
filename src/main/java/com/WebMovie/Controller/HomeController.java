@@ -46,4 +46,10 @@ public class HomeController {
 	String day() {
 		return "detail_booking";
 	}
+	
+	@GetMapping("/home/checkout")
+	String checkout() {
+		return "checkout";
+	}
+
 }
