@@ -36,6 +36,11 @@ header .logo_hd img {
     color: rgb(237, 38, 71);
 }
 
+.dropdown-item:focus{
+    background-color: rgb(255, 255, 255);
+}
+
+
 /* ================LOGOUT============ */
 .sidebar .logout {
     font-size: 22px;
