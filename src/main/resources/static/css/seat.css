@@ -1,0 +1,141 @@
+@charset "ISO-8859-1";
+
+
+.seat_booking .showcase li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.seat_booking .showcase .seat {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+}
+
+.seat_booking .showcase .selected {
+    background-color: #00B300;
+    box-shadow: 0 0 10px #00B300;
+}
+
+.seat_booking .showcase .occupied {
+    background-color: rgb(135, 0, 0);
+}
+
+.seat_booking .showcase .sold {
+    background-color: rgb(86, 86, 86);
+}
+
+.seat_booking .screen {
+    background-color: #cccccc;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 20px 0px 50px;
+    font-weight: 700;
+    border-radius: 50% 50% 0 0;
+}
+
+.seat_booking .room_movie .name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 8px 8px 8px;
+    margin: 0;
+}
+
+.seat_booking .room_movie .name li {
+    list-style-type: none;
+    width: 30px;
+    height: 25px;
+    background-color: #372121;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    margin: 4px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.seat_booking .list_seat {
+    width: 100%;
+    height: auto;
+    margin-right: 20px;
+}
+
+.seat_booking .list_seat .seat {
+    list-style-type: none;
+    width: 25px;
+    height: 25px;
+    background-color: rgb(186, 186, 186);
+    border-radius: 3px;
+    margin: 4px;
+    color: rgba(0, 0, 0, 0);
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seat_booking .list_seat .seat:hover {
+    background-color: rgb(144, 144, 144);
+    color: #000000;
+}
+
+
+
+
+.seat_booking .list_seat .seat .selected {
+    background-color: #00B300;
+}
+
+.seat_booking .list_seat .seat .sold {
+    background-color: #404040;
+}
+
+.seat_booking .list_seat .seat:not(.sold):hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.seat_booking .list_seat .showcase .seat:not(.sold):hover {
+    cursor: default;
+    transform: scale(1);
+}
+
+
+
+
+.seat_booking .list_seat .x1 {
+    visibility: hidden;
+    pointer-events: none;
+    cursor: none;
+}
+
+.seat_booking .list_seat .vip {
+    background-color: #BFAA38;
+}
+
+.seat_booking .list_seat .couple {
+    background-color: #0336BA;
+    margin: 4px 4px;
+    width: 58px;
+    height: 25px;
+    border-radius: 3px;
+}
+
+.seat_booking .seat_type .standard {
+    background-color: rgb(186, 186, 186);
+}
+
+.seat_booking .seat_type .vip {
+    background-color: #BFAA38;
+}
+
+.seat_booking .seat_type .couple {
+    background-color: #0336BA;
+}
