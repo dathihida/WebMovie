@@ -47,10 +47,18 @@ public class HomeController {
 		return "detail_booking";
 	}
 	
+<<<<<<< HEAD
 	@GetMapping("/home/movie_scheduled")
 	String movie_scheduled() {
 		return "movie_scheduled";
 	}
 	
 	
+=======
+	@GetMapping("/home/checkout")
+	String checkout() {
+		return "checkout";
+	}
+
+>>>>>>> aa463904ad8472e77311c51ee7425cc66848ae4a
 }

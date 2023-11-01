@@ -1,59 +1,5 @@
 <div xmlns:th="http://www.thymeleaf.org">
-    <main th:object="${movie1}">
-<<<<<<< HEAD
-		<section>
-        <div class="bg_details">
-            <div class="bg_fillter" 
-            	th:style="'background-image: url(/images/' + ${movie1.IMAGE} + '); background-position: center center; background-size: cover; background-repeat: no-repeat;'"><!-- style="background: url(/assets/images/Details/kekientao.jpg) center center/cover no-repeat;" -->
-                
-                <div class="lopphu">
-                    <div class="container justify-content-center p-2">
-                        <div class="row d-flex">
-                            <div class=" col-lg-2 col-md-2 col-sm-4 col-5 pt-2 align-items-center">
-                                <div class="card card_img">
-                                    <a href="detail.html"></a>
-                                    	<img th:src="@{|/images/${movie1.IMAGE}|}" class="card-img-top" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-10  col-md-10 col-sm-8 ps-3">
-                                <h3 class="mb-0">
-                                	<a href="detail.html" class="text-decoration-none text-white" th:inline="text">[[${movie1.NAME}]]</a></h3>
-                                <p class="theloai" th:inline="text">[[${movie1.GERNE}]]</p>
-                                <div class="container row justify-content-around">
-                                    <div class="col-lg-7 p-0">
-                                        <div class="mota d-flex justify-content-start gap-1 mb-3">
-                                            <button type="button">Thích</button>
-                                            <button type="button" class="btn btn-dark">Trailer</button>
-                                            <!-- <button type="button" class="btn_muave" 
-                                            data-bs-toggle="modal" data-bs-target="#myModal" 
-                                            ng-click="loadMovie_ScheduledsById(inputValue)">Mua vé</button> -->
-                                            <button type="button" class="btn btn-primary" 
-                                            data-bs-toggle="modal" data-bs-target="#exampleModal" ng-click="loadMovie_ScheduledsById(inputValue)"> 
-											  Mua Ve
-											</button>
-                                           
-                                        </div>
-                                        <p class="mota_docx text-white">
-                                           [[${movie1.DESCRIPTION}]]
-                                           [[${movie1.ID}]]
-                                        </p>
-                                        <div class="row mota_2">
-                                            <div class="col-lg-4">
-                                                <span> <ion-icon name="calendar-outline"></ion-icon> Khởi chiếu</span>
-                                                <br>
-                                                <a href="detail.html">[[${movie1.PUBLISH_DATE}]]</a>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <span class="text-break">Thời lượng</span> <br>
-                                                <p>[[${movie1.TIME}]]</p>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <span>Giới hạn độ tuổi </span> <br>
-                                                <p>113 phút</p>
-                                            </div>
-                                        </div>
-=======
+    <main>
         <section>
             <div class="bg_details">
                 <div class="bg_fillter"
@@ -65,18 +11,17 @@
                                 <div class=" col-lg-2 col-md-2 col-sm-4 col-5 pt-2 align-items-center">
                                     <div class="card card_img">
                                         <a href="detail.html"></a>
-                                        <img th:src="@{|/images/${movie1.IMAGE}|}" class="card-img-top"
+                                        <img th:src="@{|/images/Phimsapchieu/phimdc5.webp|}" class="card-img-top"
                                             alt="display error">
                                         </a>
->>>>>>> aa463904ad8472e77311c51ee7425cc66848ae4a
                                     </div>
                                 </div>
                                 <div class="col ps-3 pe-0">
                                     <h3 class="mb-0">
                                         <a href="detail.html" class="text-decoration-none text-white"
-                                            th:inline="text">[[${movie1.NAME}]]</a>
+                                            th:inline="text">The Last Wife</a>
                                     </h3>
-                                    <p class="theloai" th:inline="text">[[${movie1.GERNE}]]</p>
+                                    <p class="theloai" th:inline="text">Romance, Drama</p>
                                     <div class="container row justify-content-around pe-0">
                                         <div class="col-lg-7 p-0">
                                             <div class="mota d-flex justify-content-start gap-1 mb-3">
@@ -89,19 +34,19 @@
                                                 
                                             </div>
                                             <p class="mota_docx text-white" th:inline="text">
-                                                [[${movie1.DESCRIPTION}]]
+                                                After a Black Friday riot ends in tragedy, a mysterious Thanksgiving-inspired killer terrorizes Plymouth, Massachusetts – the birthplace of the infamous holiday.
                                             </p>
 
                                             <div class="row mota_2">
                                                 <div class="col">
                                                     <span> <ion-icon name="calendar-outline"></ion-icon> Release Date</span>
                                                     <br>
-                                                    <a href="detail.html">[[${movie1.PUBLISH_DATE}]]</a>
+                                                    <a href="detail.html">03/11/2023</a>
                                                 </div>
                                                 <div class="col">
                                                     <span class="text-break"><ion-icon name="time-outline"></ion-icon>
                                                         Duration</span> <br>
-                                                    <p>[[${movie1.TIME}]] minutes</p>
+                                                    <p>132 minutes</p>
                                                 </div>
                                                 <div class="col">
                                                     <span><ion-icon name="person-add-outline"></ion-icon> Age Restricted
@@ -114,21 +59,19 @@
                                             <p>
                                                 <strong class="text-white">Actors</strong> <br>
                                                 <span>
-                                                    <a href="#" class="text-decoration-none">[[${movie1.ACTORS}]]</a>
+                                                    <a href="#" class="text-decoration-none">Kaity Nguyễn, Thuận Nguyễn, Ngọc Diệp, Quang Thắng</a>
                                                 </span>
                                             </p>
                                             <p>
                                                 <strong class="text-white">Directors</strong> <br>
                                                 <span>
-                                                    <a href="#" class="text-decoration-none">[[${movie1.DIRETORS}]]</a>
+                                                    <a href="#" class="text-decoration-none">Victor Vũ</a>
                                                 </span>
                                             </p>
                                             <p>
                                                 <strong class="text-white">Producers</strong> <br>
                                                 <span>
-                                                    <a href="#" class="text-decoration-none">Arnon Milchan, Gareth
-                                                        Edwards,
-                                                        Jim Spencer</a>
+                                                    <a href="#" class="text-decoration-none">Marvel Cinematic Universe</a>
                                                 </span>
                                             </p>
                                         </div>
@@ -139,64 +82,6 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-        </div>
-    </section>
-    
-    <input id="movieId" th:value="@{${movie1.ID}}" type="hidden">
-    <iframe class="video_responsive" width="100%" height="573px"
-					id="tm-video" th:src="${'https://www.youtube.com/embed/'+{movie1.TRAILER}}">
-	</iframe>
-	
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-fullscreen">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <div class="modal-body" >
-		      <ul>
-		      	<p>Chọn date:</p>
-		      	<li ng-repeat="date in displayedDates">
-					<input type="radio" id="idRadio" name="id"
-						ng-model="selectedDate" value="{{date}}" ng-click="filterDate(selectedDate)">
-					<label for="tuychon1">{{date}}</label><br>
-		      	</li>
-		      </ul>
-	      	<table class="table">
-	      		<thead>
-			      <tr>
-			        <th>MovieName</th>
-			        <th>TimeStart</th>
-			        <th>Room</th>
-			        <th>Cinema</th>
-			        <th>Address</th>
-			        <th>DateStart</th>
-			      </tr>
-			    </thead>
-			    <tbody>
-			      <tr ng-repeat="movieOfCinemas in filterMovieDate">
-			        <td>{{movieOfCinemas.id_MOVIE.name}}</td>
-			        <td>{{movieOfCinemas.time_START}}</td>
-			        <td>{{movieOfCinemas.id_ROOM.name}}</td>
-			        <td>{{movieOfCinemas.id_ROOM.id_CINEMAS.name}}</td>
-			        <td>{{movieOfCinemas.id_ROOM.id_CINEMAS.address}}</td>
-			        <td>{{movieOfCinemas.date_END}}</td>
-			        <td>
-			        	<a href="asdas">Booking</a>
-			        </td>
-			      </tr>
-			    </tbody>
-	      	</table>
-	      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-=======
         </section>
         <!--     <iframe class="video_responsive" width="100%" height="573px"
 					id="tm-video" th:src="${'https://www.youtube.com/embed/'+{movie1.TRAILER}}">
@@ -212,7 +97,7 @@
                     <div class="modal-body">
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item"
-                                th:src="${'https://www.youtube.com/embed/'+{movie1.TRAILER}}"
+                                src="https://www.youtube.com/embed/52RyHDKZ9TY?si=HzQ4DSq0fRxfAoO6"
                                 title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen></iframe>
@@ -582,6 +467,5 @@
                 </div>
             </div>
         </div>
->>>>>>> aa463904ad8472e77311c51ee7425cc66848ae4a
     </main>
 </div>

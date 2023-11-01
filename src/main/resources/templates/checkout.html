@@ -29,6 +29,7 @@
     <link rel="stylesheet" th:href="@{|/css/home.css|}">
     <link rel="stylesheet" th:href="@{|/css/details.css|}">
     <link rel="stylesheet" th:href="@{|/css/footer.css|}">
+    <link rel="stylesheet" th:href="@{|/css/checkout.css|}">
 
 
     <title>Customer</title>
@@ -37,23 +38,15 @@
 <body ng-app="app" ng-controller="controller">
     <div th:replace="~{/navbar/navbar}"></div>
 
-<<<<<<< HEAD
-	<!-- <script type="text/javascript" th="@{/js/movie.js}"></script> -->
-	
-	<script type="text/javascript" th:src="@{/js/movie_scheduled_detail.js}"></script>
-=======
-    <div th:replace="~{/page/detail_movie}"></div>
 
-    <div th:replace="~{/navbar/_topphim}"></div>
+    <div th:replace="~{/page/checkout_page}"></div>
+
 
     <div th:replace="~{/navbar/_footer}"></div>
-
 
     <!-- js -->
     <script th:src="@{/js/movie_detail.js}"></script>
     <script th:src="@{/js/layout/main.js}"></script>
-    <script th:src="@{/js/signup.js}"></script>
->>>>>>> aa463904ad8472e77311c51ee7425cc66848ae4a
 </body>
 
 </html>

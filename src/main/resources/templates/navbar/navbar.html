@@ -1,15 +1,6 @@
-<div xmlns:th="http://www.thymeleaf.org">
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<div class="container-fluid">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link active" href="#">Active</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-				<li class="nav-item">
-					<div class="text-white" th:text="${#authentication.name}"></div>
-				</li>
+<!-----------------------Header---------------------------------->
 
+<<<<<<< HEAD
 				<li class="nav-item">
 					<div class="bg-light" sec:authorize="hasAnyRole('ADMIN')">
 						<h2>ChucNang</h2>
@@ -28,9 +19,12 @@
 					</div>
 				</li>
 				
+=======
+>>>>>>> aa463904ad8472e77311c51ee7425cc66848ae4a
 
-				
+<header class="" xmlns:th="http://wwww.thymeleaf.org">
 
+<<<<<<< HEAD
 				<div class="mt-5">
 					<a class="link-primary" th:href="@{/logout}">Logout</a>
 				</div>
@@ -42,3 +36,83 @@
 		</div>
 	</nav>
 </div>
+=======
+    <nav class="navbar navbar-expand-lg bg-light " aria-label="Twelfth navbar example">
+
+        <div class="container">
+            <div class="logo_hd">
+                <a class="" th:href="@{/home}">
+                    <img th:src="@{|/images/Logo_Cinema.png|}" alt="logo">
+                </a>
+            </div>
+            <div class="d-flex flex-lg-grow-0 flex-md-grow-1 flex-sm-grow-1 flex-grow-1 justify-content-end">
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="sidebar offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header border-bottom">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Logo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body d-flex flex-column flex-lg-row p-2 justify-content-around">
+                    <ul class="navbar-nav justify-content-lg-center align-items-center flex-grow-1 gap-2">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link hahaa" aria-current="page" th:href="@{/home}">Home</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="#">Showtime</a>
+                        </li>
+                        <li class="nav-item dropdown mx-2">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Movies
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/home}">Now showing</a></li>
+                                <li><a class="dropdown-item" th:href="@{/home}">Coming soon</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="#">Services</a>
+                        </li>
+<!-- 
+                        <li class="nav-item mx-2 bg-info" sec:authorize="isAuthenticated()">
+                            <div class="text-black" th:text="${#authentication.name}"></div>
+                        </li> -->
+
+                        <li class="nav-item dropdown mx-2" sec:authorize="hasAnyRole('ADMIN')">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Manager
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/home/movie}">Manage movie</a></li>
+                                <li><a class="dropdown-item" th:href="@{/home/customer}">Manage user</a></li>
+                                <li><a class="dropdown-item" th:href="@{/home/cinema}">Manage cinema</a></li>
+                                <li><a class="dropdown-item" th:href="@{/home/room}">Manage room</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <div class="d-flex  justify-content-center align-items-center p-4 p-lg-0 gap-4 bg-light"
+                        sec:authorize="!isAuthenticated()">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#myModalLogin" class="text-dark">Sign In</a>
+                        <a href="" class="text-white text-decoration-none px-3 py-1 rounded-4"
+                            style="background-color: #000000;" data-bs-toggle="modal"
+                            data-bs-target="#myModalRegister">Sign Up</a>
+                    </div>
+                    <div  class="d-flex  justify-content-center align-items-center p-4 p-lg-0 gap-4 bg-light" sec:authorize="isAuthenticated()">
+                        <div class="text-black" th:text="${#authentication.name}"></div>
+                        <a class="logout" th:href="@{/logout}"><ion-icon name="log-out-outline"></ion-icon></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- ---------------------------END HEADER--------------------- -->
+>>>>>>> aa463904ad8472e77311c51ee7425cc66848ae4a
