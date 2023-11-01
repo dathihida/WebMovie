@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.WebMovie.Entity.Movie;
 import com.WebMovie.ImplService.MovieServiceImpl;
+import com.WebMovie.Service.Movie_ScheduledService;
 
 import jakarta.servlet.http.HttpServletRequest;
 

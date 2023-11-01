@@ -10,4 +10,5 @@ public interface RoomService {
 	Room updateRoom(Room room, Integer id);
 	Room getRoomById(Integer id);
 	void deleteRoom(Integer id);
+	List<Room> Roomdistinctname();
 }

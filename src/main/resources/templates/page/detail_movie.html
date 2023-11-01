@@ -11,7 +11,7 @@
                             <div class=" col-lg-2 col-md-2 col-sm-4 col-5 pt-2 align-items-center">
                                 <div class="card card_img">
                                     <a href="detail.html"></a>
-                                    	<img th:src="@{|/images/+${movie1.IMAGE}|}" class="card-img-top" alt="">
+                                    	<img th:src="@{|/images/${movie1.IMAGE}|}" class="card-img-top" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -24,10 +24,18 @@
                                         <div class="mota d-flex justify-content-start gap-1 mb-3">
                                             <button type="button">Thích</button>
                                             <button type="button" class="btn btn-dark">Trailer</button>
-                                            <button type="button" class="btn_muave">Mua vé</button>
+                                            <!-- <button type="button" class="btn_muave" 
+                                            data-bs-toggle="modal" data-bs-target="#myModal" 
+                                            ng-click="loadMovie_ScheduledsById(inputValue)">Mua vé</button> -->
+                                            <button type="button" class="btn btn-primary" 
+                                            data-bs-toggle="modal" data-bs-target="#exampleModal" ng-click="loadMovie_ScheduledsById(inputValue)"> 
+											  Mua Ve
+											</button>
+                                           
                                         </div>
                                         <p class="mota_docx text-white">
                                            [[${movie1.DESCRIPTION}]]
+                                           [[${movie1.ID}]]
                                         </p>
                                         <div class="row mota_2">
                                             <div class="col-lg-4">
@@ -74,8 +82,59 @@
             </div>
         </div>
     </section>
+    
+    <input id="movieId" th:value="@{${movie1.ID}}" type="hidden">
     <iframe class="video_responsive" width="100%" height="573px"
 					id="tm-video" th:src="${'https://www.youtube.com/embed/'+{movie1.TRAILER}}">
 	</iframe>
+	
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-fullscreen">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body" >
+		      <ul>
+		      	<p>Chọn date:</p>
+		      	<li ng-repeat="date in displayedDates">
+					<input type="radio" id="idRadio" name="id"
+						ng-model="selectedDate" value="{{date}}" ng-click="filterDate(selectedDate)">
+					<label for="tuychon1">{{date}}</label><br>
+		      	</li>
+		      </ul>
+	      	<table class="table">
+	      		<thead>
+			      <tr>
+			        <th>MovieName</th>
+			        <th>TimeStart</th>
+			        <th>Room</th>
+			        <th>Cinema</th>
+			        <th>Address</th>
+			        <th>DateStart</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr ng-repeat="movieOfCinemas in filterMovieDate">
+			        <td>{{movieOfCinemas.id_MOVIE.name}}</td>
+			        <td>{{movieOfCinemas.time_START}}</td>
+			        <td>{{movieOfCinemas.id_ROOM.name}}</td>
+			        <td>{{movieOfCinemas.id_ROOM.id_CINEMAS.name}}</td>
+			        <td>{{movieOfCinemas.id_ROOM.id_CINEMAS.address}}</td>
+			        <td>{{movieOfCinemas.date_END}}</td>
+			        <td>
+			        	<a href="asdas">Booking</a>
+			        </td>
+			      </tr>
+			    </tbody>
+	      	</table>
+	      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
     </main>
 </div> 

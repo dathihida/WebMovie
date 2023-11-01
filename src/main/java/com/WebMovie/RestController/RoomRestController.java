@@ -3,6 +3,7 @@ package com.WebMovie.RestController;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.WebMovie.Entity.Room;
+import com.WebMovie.Repository.RoomRepository;
 import com.WebMovie.Service.RoomService;
-
-import jakarta.persistence.criteria.CriteriaBuilder.In;
 
 @CrossOrigin
 @RestController
@@ -27,9 +27,17 @@ public class RoomRestController {
 	@Autowired
 	RoomService roomService;
 	
+	@Autowired
+	RoomRepository roomRepository;
+	
 	@GetMapping("/all")
 	List<Room> getAlls(){
 		return roomService.getAlls();
+	}
+	
+	@GetMapping("/dis")
+	List<Room> getAllRoomdistinctname(){
+		return roomService.Roomdistinctname();
 	}
 	
 	@PostMapping
@@ -55,4 +63,8 @@ public class RoomRestController {
 		return roomService.getRoomById(id);
 	}
 	
+	@GetMapping("/{IdRoom}/{IdCinemas}")
+	public ResponseEntity<List<Room>> findRoomByRoomAndCinemas(@PathVariable("IdRoom") Integer IdRoom, @PathVariable("IdCinemas") Integer IdCinemas) {
+		return ResponseEntity.ok(roomRepository.findRoomByRoomAndCinemas(IdRoom, IdCinemas));
+	}
 }

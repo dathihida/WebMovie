@@ -1,11 +1,10 @@
 package com.WebMovie.Entity;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -47,4 +46,8 @@ public class Movie_Scheduled {
 	
 	@Temporal(TemporalType.DATE)
 	private Date DATE_END;
+	
+	private String TIME_START;
+	
+	private String TIME_END;
 }

@@ -46,4 +46,11 @@ public class HomeController {
 	String day() {
 		return "detail_booking";
 	}
+	
+	@GetMapping("/home/movie_scheduled")
+	String movie_scheduled() {
+		return "movie_scheduled";
+	}
+	
+	
 }

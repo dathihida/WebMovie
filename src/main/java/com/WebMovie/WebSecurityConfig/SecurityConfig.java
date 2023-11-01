@@ -27,9 +27,11 @@ public class SecurityConfig {
                 .requestMatchers("/home","/home/**", "/login",
                 		"/signup", "/js/**", "/css/**", "/images/**", 
                 		"/add","/add/userNoExist",
-                		"/api/movie", "/movie_detail/**", "/v1/movie/**",
+                		"/api/movie/all", "/movie_detail/**", "/v1/movie/**",
                 		"/page/**", "/api/cinema/all",
-                		"/api/room/all").permitAll()
+                		"/api/room/all",
+                		"/api/movie_scheduled/all", "/listMovieSheduled/**", 
+                		"/api/movie_scheduled/detail/**", "/api/movie_scheduled/date/**").permitAll()
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/**", "/rest/**").authenticated()

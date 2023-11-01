@@ -45,4 +45,9 @@ public class RoomServiceImpl implements RoomService{
 		roomRepository.deleteById(id);
 	}
 
+	@Override
+	public List<Room> Roomdistinctname() {
+		// TODO Auto-generated method stub
+		return roomRepository.findAll();
+	}
 }

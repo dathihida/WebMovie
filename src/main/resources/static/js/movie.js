@@ -9,7 +9,7 @@ app.controller("controller", function($scope, $http){
     }
 
     $scope.loadAllMovies = function(){
-        var url = `${host}`;
+        var url = `${host}/all`;
         $http.get(url).then(resp=>{
             $scope.movies = resp.data;
             resp.data.publish_DATE = new Date(resp.data.publish_DATE);

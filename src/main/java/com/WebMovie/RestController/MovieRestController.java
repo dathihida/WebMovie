@@ -24,7 +24,7 @@ public class MovieRestController {
 	@Autowired
 	MovieServiceImpl movieServiceImpl;
 	
-	@GetMapping()
+	@GetMapping("/all")
 	public List<Movie> getAlls(){
 		return movieServiceImpl.getAlls();
 	}
