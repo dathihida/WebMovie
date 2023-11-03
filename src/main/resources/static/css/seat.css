@@ -38,6 +38,21 @@
     border-radius: 50% 50% 0 0;
 }
 
+/* 
+@media (max-width: 992px) {
+    .seat_booking .room_movie {
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .seat_booking .room_movie::-webkit-scrollbar {
+        width: 0 !important;
+        display: none;
+    }
+} */
+
+
 .seat_booking .room_movie .name {
     display: flex;
     flex-direction: column;
@@ -139,3 +154,9 @@
 .seat_booking .seat_type .couple {
     background-color: #0336BA;
 }
+
+
+
+
+/* ===============INFO_SEATBOOKING============= */
+
