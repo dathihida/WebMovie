@@ -22,19 +22,15 @@ public class Seat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ID;
+	private String SEAT_TYPE;
+	private String SEAT_ROW;
+	private String SEAT_NUMBER;
 	
 	@ManyToOne
 	@JoinColumn(name = "ID_ROOM")
 	private Room ID_ROOM;
 	
-//	@ManyToOne
-//	@JoinColumn(name= "ID_CUSTOMER")
-//	private Customer ID_CUSTOMER;
-	
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_SEAT")
 	private List<Seat_Scheduled> LIST_SEAT_SCHEDULED;
-
-//	@ElementCollection
-//	private List<String> SEAT_NAME;
 }

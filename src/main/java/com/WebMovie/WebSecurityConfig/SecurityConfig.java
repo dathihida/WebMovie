@@ -31,7 +31,9 @@ public class SecurityConfig {
                 		"/page/**", "/api/cinema/all",
                 		"/api/room/all",
                 		"/api/movie_scheduled/all", "/listMovieSheduled/**", 
-                		"/api/movie_scheduled/detail/**", "/api/movie_scheduled/date/**").permitAll()
+                		"/api/movie_scheduled/detail/**", "/api/movie_scheduled/date/**",
+                		"/api/seat_scheduled/all",
+                		"/api/seat/**").permitAll()
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/**", "/rest/**").authenticated()

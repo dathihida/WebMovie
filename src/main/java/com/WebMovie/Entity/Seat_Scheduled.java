@@ -30,13 +30,6 @@ public class Seat_Scheduled {
 	private Seat ID_SEAT;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_MOVIE_SCHEDULED")
-	private Movie_Scheduled ID_MOVIE_SCHEDULED;
-	
-	@Temporal(TemporalType.DATE)
-	private Date DATE;
-	
-	private String TIME;
-	
-	private String STATUS;
+	@JoinColumn(name = "ID_BOOKING")
+	private Booking ID_BOOKING;
 }

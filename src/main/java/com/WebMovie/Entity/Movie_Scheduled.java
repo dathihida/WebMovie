@@ -32,21 +32,14 @@ public class Movie_Scheduled {
 	@ManyToOne
 	@JoinColumn(name ="ID_ROOM")
 	private Room ID_ROOM;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy = "ID_MOVIE_SCHEDULED")
-	private List<Seat_Scheduled> LIST_SEAT_SCHEDULED;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_MOVIE_SCHEDULED")
 	private List<Booking> LIST_BOOKING;
 	
 	@Temporal(TemporalType.DATE)
-	private Date DATE_START;
-	
-	@Temporal(TemporalType.DATE)
-	private Date DATE_END;
-	
+	private Date DATE;
+
 	private String TIME_START;
 	
 	private String TIME_END;

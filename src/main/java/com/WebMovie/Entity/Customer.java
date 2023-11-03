@@ -26,10 +26,6 @@ public class Customer {
 	private String ROLE;
 	private Boolean EXIST;
 	
-//	@JsonIgnore
-//	@OneToMany(mappedBy = "ID_CUSTOMER")
-//	private List<Seat> LIST_SEAT;
-	
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_CUSTOMER")
 	private List<Booking> LIST_BOOKING;

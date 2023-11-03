@@ -123,7 +123,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-0">
-                        <ul class="toggle-tabs-day list-unstyled d-flex mb-0" id="viewday">
+                        <!-- <ul class="toggle-tabs-day list-unstyled d-flex mb-0" id="viewday">
                             <li>
                                 <a href="">
                                     <input class="radio-input" type="radio" name="radio" checked="">
@@ -236,8 +236,8 @@
                                     </div>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="toggle-tabs-map  list-unstyled d-flex mb-0">
+                        </ul> -->
+                        <!-- <ul class="toggle-tabs-map  list-unstyled d-flex mb-0">
                             <li class="current">
                                 <a href="" class="active">
                                     <span>Hồ Chí Minh</span>
@@ -370,8 +370,8 @@
                                     <span>Tiền Giang</span>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="toggle-tabs-D list-unstyled d-flex gap-1 mb-0">
+                        </ul> -->
+                        <!-- <ul class="toggle-tabs-D list-unstyled d-flex gap-1 mb-0">
                             <li class="current">
                                 <a href="">
                                     <span>2D Vietsub</span>
@@ -387,8 +387,8 @@
                                     <span>4DX2D Vietsub</span>
                                 </a>
                             </li>
-                        </ul>
-                        <div class="tab-content showtimes">
+                        </ul> -->
+                       <!--  <div class="tab-content showtimes">
                             <div class="site-mvt">
                                 <div class="site">
                                     <h3>MovieTime Hùng Vương Plaza</h3>
@@ -463,7 +463,42 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
+                        
+                        <ul>
+						   	<p>Chọn date:</p>
+						   	<li ng-repeat="date in displayedDates">
+							<input type="radio" id="idRadio" name="id"
+							ng-model="selectedDate" value="{{date}}" ng-click="filterDate(selectedDate)">
+							<label for="tuychon1">{{date}}</label><br>
+						   	</li>
+						   	</ul>
+						 <table class="table">
+						  	<thead>
+							    <tr>
+							      <th>MovieName</th>
+							      <th>TimeStart</th>
+							      <th>Room</th>
+							      <th>Cinema</th>
+							      <th>Address</th>
+							      <th>DateStart</th>
+							    </tr>
+						  	</thead>
+						  	<tbody>
+							    <tr ng-repeat="movieOfCinemas in filterMovieDate">
+							      <td>{{movieOfCinemas.id_MOVIE.name}}</td>
+							      <td>{{movieOfCinemas.time_START}}</td>
+							      <td>{{movieOfCinemas.id_ROOM.name}}</td>
+							      <td>{{movieOfCinemas.id_ROOM.id_CINEMAS.name}}</td>
+							      <td>{{movieOfCinemas.id_ROOM.id_CINEMAS.address}}</td>
+							      <td>{{movieOfCinemas.date}}</td>
+							      <td>
+							      	<a href="asdas">Booking</a>
+							      </td>
+							    </tr>
+						  	</tbody>
+						 </table>
+                        
                     </div>
                 </div>
             </div>

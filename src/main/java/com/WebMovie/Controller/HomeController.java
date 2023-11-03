@@ -57,4 +57,8 @@ public class HomeController {
 		return "checkout";
 	}
 
+	@GetMapping("/home/seat")
+	String seat() {
+		return "seat";
+	}
 }

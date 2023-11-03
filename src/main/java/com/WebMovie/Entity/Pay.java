@@ -27,4 +27,9 @@ public class Pay {
 	private Customer ID_CUSTOMER;
 	
 	private Double PRICE;
+	
+	private String CURRENCY;
+	private String METHOD;
+	private String INTENT;
+	private String DESCRIPTION;
 }

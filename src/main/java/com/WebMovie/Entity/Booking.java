@@ -3,6 +3,8 @@ package com.WebMovie.Entity;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +12,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Data
@@ -28,20 +33,15 @@ public class Booking {
 	@ManyToOne
 	@JoinColumn(name ="ID_MOVIE_SCHEDULED")
 	private Movie_Scheduled ID_MOVIE_SCHEDULED;
-	
-	private String MOVIE_NAME;
-	
-	private Double PRICE;
-	
+
+	@Temporal(TemporalType.DATE)
 	private Date DATE;
-	
-	private Date DATE_SHOW;
-	
-	private String TIME_SHOW;
+
+	private Integer PRICE;
 	
 	private String STATUS;
 	
-	/*
-	 * @ElementCollection private List<String> NAME_SEAT;
-	 */
+	@JsonIgnore
+	@OneToMany(mappedBy = "ID_BOOKING")
+	private List<Seat_Scheduled> LIST_SEAT_SCHEDULED;
 }

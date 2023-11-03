@@ -37,10 +37,9 @@
             </select>
             
 			<br /> 
-			<input ng-model="form.date_START" placeholder="date_START" />
+			<input ng-model="form.date" placeholder="date" />
 			<br /> 
-			<input ng-model="form.date_END" placeholder="date_END" />
-			<br /> 
+		
 			<input ng-model="form.time_START" placeholder="time_START" />
 			<br /> 
 			<input ng-model="form.time_END" placeholder="time_END" />
@@ -69,8 +68,7 @@
 				<td>{{ci.id_MOVIE.name}}</td>
 				<td>{{ci.id_ROOM.name}}</td>
 				<td>{{ci.id_ROOM.id_CINEMAS.name}}</td>
-				<td>{{ci.date_START}}</td>
-				<td>{{ci.date_END}}</td>
+				<td>{{ci.date}}</td>
 				<td>{{ci.time_START}}</td>
 				<td>{{ci.time_END}}</td>
 				<td>

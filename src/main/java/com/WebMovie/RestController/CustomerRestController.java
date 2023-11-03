@@ -44,13 +44,11 @@ public class CustomerRestController {
 	}
 	
 	@GetMapping("/user")
-	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public List<Customer> listAll(){
 		return customerService.getAlls();
 	}
 	
 	@PostMapping("/user")
-	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
 	public Customer addCustomer(@RequestBody Customer customer) {
 		return customerService.addCustomer(customer);
 	}

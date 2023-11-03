@@ -44,7 +44,7 @@ app.controller("controller", function($scope, $http){
             var myDateObj = resp.data;
         console.log(resp.data)
         for(var i=0; i< myDateObj.length; i++){
-			var date = myDateObj[i].date_END;
+			var date = myDateObj[i].date;
 			if(displayedDates.indexOf(date) === -1){
 				displayedDates.push(date);
 				$scope.displayedDates = displayedDates;
@@ -60,7 +60,7 @@ app.controller("controller", function($scope, $http){
     $scope.filterDate = function(id){
 		var date = id;
 		$scope.filterMovieDate = $scope.movie_scheduledsbyId.filter(function(movie) {
-	    	return movie.date_END === date;
+	    	return movie.date === date;
 	  	});
 	}
     

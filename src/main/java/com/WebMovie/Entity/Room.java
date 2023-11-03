@@ -30,9 +30,9 @@ public class Room {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_ROOM")
-	private List<Seat> LIST_SEAT;
+	private List<Movie_Scheduled> ID_MOVIE_SCHEDULED;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_ROOM")
-	private List<Movie_Scheduled> ID_MOVIE_SCHEDULED;
+	private List<Movie_Scheduled> ID_SEAT;
 }
