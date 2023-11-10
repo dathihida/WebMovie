@@ -17,6 +17,11 @@ public class HomeController {
 		return "home";
 	}
 	
+	@GetMapping("/home/admin")
+	String admin() {
+		return "admin";
+	}
+	
 	@RequestMapping("/signup")
 	String signup() {
 		return "signup";

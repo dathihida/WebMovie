@@ -44,12 +44,15 @@
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Services</a>
                         </li>
-<!-- 
+                        <li class="nav-item mx-2" sec:authorize="hasAnyRole('ADMIN')">
+                            <a class="nav-link" th:href="@{/home/admin}">Manage</a>
+                        </li>
+                        <!-- 
                         <li class="nav-item mx-2 bg-info" sec:authorize="isAuthenticated()">
                             <div class="text-black" th:text="${#authentication.name}"></div>
                         </li> -->
 
-                        <li class="nav-item dropdown mx-2" sec:authorize="hasAnyRole('ADMIN')">
+                        <!-- <li class="nav-item dropdown mx-2" sec:authorize="hasAnyRole('ADMIN')">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 Manager
@@ -60,16 +63,17 @@
                                 <li><a class="dropdown-item" th:href="@{/home/cinema}">Manage cinema</a></li>
                                 <li><a class="dropdown-item" th:href="@{/home/room}">Manage room</a></li>
                             </ul>
-                        </li>
+                        </li> -->
 
                     </ul>
                     <div class="d-flex  justify-content-center align-items-center p-4 p-lg-0 gap-4 bg-light"
                         sec:authorize="!isAuthenticated()">
-                        <a th:href="@{/signup}" class="text-dark">Sign In</a>
+                        <a th:href="@{/signin}" class="text-dark">Sign In</a>
                         <a th:href="@{/signup}" class="text-white text-decoration-none px-3 py-1 rounded-4"
-                            style="background-color: #000000;" >Sign Up</a>
+                            style="background-color: #000000;">Sign Up</a>
                     </div>
-                    <div  class="d-flex  justify-content-center align-items-center p-4 p-lg-0 gap-4 bg-light" sec:authorize="isAuthenticated()">
+                    <div class="d-flex  justify-content-center align-items-center p-4 p-lg-0 gap-4 bg-light"
+                        sec:authorize="isAuthenticated()">
                         <div class="text-black" th:text="${#authentication.name}"></div>
                         <a class="logout" th:href="@{/logout}"><ion-icon name="log-out-outline"></ion-icon></a>
                     </div>

@@ -307,15 +307,41 @@
 
             </div>
 
-            <div class="info_seatbooking col-4 bg-danger m-0 px-2">
+            <div class="info_seatbooking col-4 m-0 px-2 d-flex flex-column gap-5">
+
+                <div class="countdown text-center">
+                    Thời gian giữ ghế: <span id="time"> 10:00</span>
+                </div>
 
                 <div class="info_seat">
-                    <div class=" card-body">
-                        p
+                    <div class="card-body gap-3">
+                        <span>The Creator</span>
+                        <h5 class="mt-1">MovieTime Truong Chinh</h5>dh
+                        <div class="d-flex align-items-center gap-2 mt-1">
+                            <span>Suất</span>
+                            <h6> 21:30 </h6> - <h6> Thứ 3, 20/10/2023</h6>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-1">
+                            <span>Screen </span>
+                            <h6>04 </h6> - Seat(s)<h6 id="selected-seats"> F06</h6>
+                        </div>
                     </div>
                 </div>
 
-                <div id="selected-seats"></div>
+                <div class="total_price">
+                    <div class="card-body">
+                        <span class="title">TOTAL PRICE</span>
+                        <div class="price">
+                            <span>60.000</span> <em class="text-decoration-underline">đ</em>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn_directional d-flex justify-content-around align-items-center" >
+                        <button type="submit" class="btn btn-outline-dark">Back</button>
+                        <button type="submit" class="btn next">Continue</button>
+                </div>
+
             </div>
 
         </div>
