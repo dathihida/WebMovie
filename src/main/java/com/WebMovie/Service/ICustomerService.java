@@ -15,4 +15,6 @@ public interface ICustomerService {
 	
 	Optional<Customer> findCustomerByNAME(String name);
 	Optional<Customer> findCustomerByEMAIL(String EAMIL);
+	
+	String getLoggedInUserId();
 }

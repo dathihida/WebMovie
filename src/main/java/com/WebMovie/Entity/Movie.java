@@ -24,16 +24,24 @@ public class Movie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ID;
+	@Column(name ="name", columnDefinition = "NVARCHAR")
 	private String NAME;
+	@Column(name ="time", columnDefinition = "NVARCHAR")
 	private String TIME;
+	
 	private String IMAGE;
+	@Column(name = "description", columnDefinition = "nvarchar", nullable = false)
 	private String DESCRIPTION;
+	@Column(name = "diretors", columnDefinition = "nvarchar", nullable = false)
 	private String DIRETORS;
+	@Column(name ="actors", columnDefinition = "nvarchar", nullable = false)
 	private String ACTORS;
 	@Temporal(TemporalType.DATE)
 	private Date PUBLISH_DATE;
+	@Column(name ="trailer", columnDefinition = "nvarchar", nullable = false)
 	private String TRAILER;
 	private Boolean EXIST;
+	@Column(name ="gerne", columnDefinition = "nvarchar", nullable = false)
 	private String GERNE;
 	
 	@JsonIgnore

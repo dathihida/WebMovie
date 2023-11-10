@@ -2,6 +2,7 @@ let host="http://localhost:8080/api/movie_scheduled";
 let host_movie="http://localhost:8080/api/movie";
 let host_room="http://localhost:8080/api/room";
 let host_cinemas="http://localhost:8080/api/cinema";
+let host_booking = "http://localhost:8080/api/booking/update";
 const app = angular.module("app",[]);
 app.controller("controller", function($scope, $http){
     $scope.form = {};
@@ -19,11 +20,58 @@ app.controller("controller", function($scope, $http){
         $scope.form = {};
     }
     
+    //lay thoi gian hien tai hh:mm:ss
+	function getCurrentTime() {
+	  const now = new Date();
+	  const hours = now.getHours().toString().padStart(2, '0');
+	  const minutes = now.getMinutes().toString().padStart(2, '0');
+	  const seconds = now.getSeconds().toString().padStart(2, '0');
+	
+	  return hours + ':' + minutes + ':' + seconds;
+	}
+	
+	// Gọi hàm và lấy giờ hiện tại định dạng "hh:mm:ss"
+	$scope.currentTime = getCurrentTime();
+	
+	console.log($scope.currentTime);	
+	
+	function getCurrentDate() {
+	   const now = new Date();
+	   const year = now.getFullYear();
+	   const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Tháng tính từ 0
+	   const day = now.getDate().toString().padStart(2, '0');
+	
+	   return year + '-' + month + '-' + day;
+	}
+	
+	// Gọi hàm và lấy ngày hiện tại định dạng "yyyy-MM-DD"
+	$scope.currentDate = getCurrentDate();
+	
+	console.log($scope.currentDate);
+	
     $scope.loadAllMovie_Scheduleds = function(){
         var url = `${host}/all`;
         $http.get(url).then(resp=>{
             $scope.movie_scheduleds = resp.data;
             console.log("Allmovie_scheduleds", resp);
+            
+            var getAllMovieScheduled = $scope.movie_scheduleds;
+            
+            var findMovie = getAllMovieScheduled.find(function(movie){
+				var dayTimeMovie = new Date(movie.date +' ' + movie.time_END);
+				var datTimeToday = new Date($scope.currentDate + ' ' + $scope.currentTime);
+				
+				return (
+					dayTimeMovie < datTimeToday
+				);
+			})
+			
+			if(findMovie){
+				$scope.updateStatusBooking();
+			}else{
+				
+			}
+            
         }).catch(error=>{
             console.log("Error", error);
         })
@@ -42,7 +90,7 @@ app.controller("controller", function($scope, $http){
         $http.get(url).then(resp=>{
             $scope.movie_scheduledsbyId = resp.data;
             var myDateObj = resp.data;
-        console.log(resp.data)
+        console.log("myDateObj",resp.data)
         for(var i=0; i< myDateObj.length; i++){
 			var date = myDateObj[i].date;
 			if(displayedDates.indexOf(date) === -1){
@@ -60,8 +108,16 @@ app.controller("controller", function($scope, $http){
     $scope.filterDate = function(id){
 		var date = id;
 		$scope.filterMovieDate = $scope.movie_scheduledsbyId.filter(function(movie) {
+			var dayTimeToDay = new Date($scope.currentTime);
+			var dayTimeMovie = new Date(movie.time_END);
+
 	    	return movie.date === date;
+	    	
+	    	
 	  	});
+	  	console.log("filterMovieDate", $scope.filterMovieDate);
+	  	
+	  	
 	}
     
     //select cinemas
@@ -73,6 +129,20 @@ app.controller("controller", function($scope, $http){
 	  	});
 	}
 
+  	// Hàm kiểm tra xem một mục có nên hiển thị hay không
+  	$scope.isFutureEvent = function(movieOfCinemas) {
+	  	var endTime = new Date(movieOfCinemas.date + ' ' + movieOfCinemas.time_END);
+	  	var currentDateTime = new Date($scope.currentDate + ' ' + $scope.currentTime);
+	  		// Kiểm tra xem có dữ liệu hay không
+			if (endTime < currentDateTime) {
+	        // Nếu không có dữ liệu, hiển thị thông báo
+	        	$scope.noDataMessage = "Đã hết thời gian lên phim";
+	   		 } else {
+	        // Nếu có dữ liệu, đặt thông báo về null
+	       		$scope.noDataMessage = null;
+	    	}
+	  	return endTime > currentDateTime;
+	};
 
 	$scope.loadAllMovies = function(){
         var url = `${host_movie}/all`;
@@ -169,8 +239,19 @@ app.controller("controller", function($scope, $http){
             console.log("Error", error);
         })
     }
+    
+    $scope.updateStatusBooking = function(){
+        var url = `${host_booking}`;
+        $http.get(url).then(resp=>{
+            console.log("updateStatusBooking", resp);
+        }).catch(error=>{
+            console.log("Error", error);
+        })
+    }
+    
     $scope.loadAllMovie_Scheduleds();
     $scope.loadAllMovies();
     $scope.loadAllCinemas();
     $scope.loadAllRooms();
+    
 });

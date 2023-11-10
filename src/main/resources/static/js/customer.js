@@ -76,5 +76,8 @@ app.controller("controller", function($scope, $http){
             console.log("Error", error);
         })
     }
+    
+    
+    
     $scope.loadAllCustomers();
 });

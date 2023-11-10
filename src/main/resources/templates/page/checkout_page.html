@@ -1,6 +1,5 @@
 <div xmlns:th="http://www.thymeleaf.org">
     <main>
-
         <section>
             <div class="checkout container p-0">
                 <div class="hea-title text-center bg-dark text-white my-3 p-0">
@@ -71,16 +70,16 @@
                                 tuổi phù hợp</label>
                         </div>
                     </div>
-                    <div class="detail-pay col-md-5">
+                    <div class="detail-pay col-md-5" ng-repeat = "movie in movie_ScheduledById">
                         <div class="countdown text-center">
                             Thời gian giữ ghế: <span id="time"> 10:00</span>
                         </div>
                         <div class="content-pay d-flex gap-3">
                             <div class="card-img">
-                                <img th:src="@{|/images/phimdc7.jpg|}" alt="">
+                                <img th:src="@{|/images/{{movie.id_MOVIE.image}}|}" alt="">
                             </div>
                             <div class="info-movie">
-                                <h5>Kẻ Kiến Tạo</h5>
+                                <h5>{{movie.id_MOVIE.name}}</h5>
                                 <span>3D Phụ đề </span> <br>
                                 <span class="dotuoi">T13</span>
                             </div>
@@ -88,25 +87,25 @@
                         <div class="info-ticket mt-2">
                             <div class="time">
                                 <div class="d-flex align-items-center gap-2">
-                                    <h6>MovieTime Trường Chinh</h6> - <span>RAP 4</span>
+                                    <h6>{{movie.id_ROOM.id_CINEMAS.name}}</h6> - <span>{{movie.id_ROOM.name}}</span>
                                 </div>
                                 <div class="d-flex align-items-center gap-2">
                                     <span>Suất: </span>
-                                    <h6>21:30 </h6> - <span> Thứ 3, 20/10/2023</span>
+                                    <h6>{{movie.time_START}}</h6> - <span>{{movie.date| date:'dd-MM-yyyy'}}</span>
                                 </div>
                             </div>
-                            <div class="fare d-flex justify-content-between">
+                            <div class="fare d-flex justify-content-between" ng-repeat = "ss in selectedSeats">
                                 <div class="">
                                     <div class="d-flex align-items-center gap-2">
                                         <h6>1</h6> x <span>Ghế đơn</span>
                                     </div>
                                     <div class="d-flex align-items-center gap-2">
                                         <span>Ghế:</span>
-                                        <h6>F6</h6>
+                                        <h6>{{ss.seat_NUMBER}}{{ss.seat_ROW}}</h6>
                                     </div>
                                 </div>
                                 <div>
-                                    <span>65.000</span> <em class="text-decoration-underline">đ</em>
+                                    <span>{{ss.seat_TYPE === 'VIP' ? 20 : (ss.seat_TYPE === 'ECO' ? 10 : ss.seat_TYPE)}}</span> <em class="text-decoration-underline">.000đ</em>
                                 </div>
                             </div>
                             <div class="total d-flex justify-content-between">
@@ -114,7 +113,7 @@
                                     <h6>Tổng cộng</h6>
                                 </div>
                                 <div>
-                                    <span>65.000</span> <em class="text-decoration-underline">đ</em>
+                                    <span>{{ totalAmount }}</span> <em class="text-decoration-underline">.000đ</em>
                                 </div>
                             </div>
                         </div>
