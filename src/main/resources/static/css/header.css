@@ -3,6 +3,10 @@
 
 /* ==================HEADER========================== */
 
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
 @media (max-with: 991px) {
     .sidebar {
         backdrop-filter: blur(10px);
