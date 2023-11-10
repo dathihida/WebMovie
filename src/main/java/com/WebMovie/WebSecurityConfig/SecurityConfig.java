@@ -24,7 +24,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/home","/home/**", "/login",
+                .requestMatchers("/","/home","/home/**", "/login",
                 		"/signup", "/js/**", "/css/**", "/images/**", 
                 		"/add","/add/userNoExist",
                 		"/api/movie/all", "/movie_detail/**", "/v1/movie/**",
@@ -32,8 +32,10 @@ public class SecurityConfig {
                 		"/api/room/all",
                 		"/api/movie_scheduled/all", "/listMovieSheduled/**", 
                 		"/api/movie_scheduled/detail/**", "/api/movie_scheduled/date/**",
-                		"/api/seat_scheduled/all",
-                		"/api/seat/**").permitAll()
+                		"/api/seat_scheduled/**", "/api/seat_scheduled","/api/movie_scheduled/**",
+                		"/api/seat/**",
+                		"/booking/**", "/api/booking/**", "/api/booking",
+                		"/pay", "/pay/**").permitAll()
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/**", "/rest/**").authenticated()

@@ -13,11 +13,17 @@ import java.util.stream.Collectors;
 
 public class UserInfoDetails implements UserDetails {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer id;
     private String name;
     private String password;
     private List<GrantedAuthority> roles;
 
     public UserInfoDetails(Customer user){
+    	this.id = user.getID();
         this.name = user.getEMAIL();
         this.password = user.getPASSWORD();
         this.roles = Arrays.stream(user.getROLE().split(","))
@@ -30,6 +36,10 @@ public class UserInfoDetails implements UserDetails {
         return this.roles;
     }
 
+    public Integer getId() {
+        return this.id;
+    }
+    
     @Override
     public String getPassword() {
         return this.password;

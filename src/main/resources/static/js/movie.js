@@ -1,12 +1,90 @@
 let host="http://localhost:8080/api/movie";
+let movie_scheduled="http://localhost:8080/api/movie_scheduled";
 const app = angular.module("app",[]);
-app.controller("controller", function($scope, $http){
+app.controller("controller", function($scope, $http,  $filter){
     $scope.form = {};
     $scope.movies = [];
+    $scope.movie_scheduleds = [];
 
     $scope.reset = function(){
         $scope.form = {};
     }
+    
+    	//lay thoi gian hien tai hh:mm:ss
+	function getCurrentTime() {
+		const now = new Date();
+		const hours = now.getHours().toString().padStart(2, '0');
+		const minutes = now.getMinutes().toString().padStart(2, '0');
+		const seconds = now.getSeconds().toString().padStart(2, '0');
+
+		return hours + ':' + minutes + ':' + seconds;
+	}
+
+	// Gọi hàm và lấy giờ hiện tại định dạng "hh:mm:ss"
+	$scope.currentTime = getCurrentTime();
+
+	console.log($scope.currentTime);
+
+	function getCurrentDate() {
+		const now = new Date();
+		const year = now.getFullYear();
+		const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Tháng tính từ 0
+		const day = now.getDate().toString().padStart(2, '0');
+
+		return year + '-' + month + '-' + day;
+	}
+
+	// Gọi hàm và lấy ngày hiện tại định dạng "yyyy-MM-DD"
+	$scope.currentDate = getCurrentDate();
+
+	console.log($scope.currentDate);
+    
+    $scope.loadAllMovie_Scheduleds = function(){
+        var url = `${movie_scheduled}/all`;
+        $http.get(url).then(resp=>{
+            $scope.movie_scheduleds = resp.data;
+            console.log("Allmovie_scheduleds", resp);
+        }).catch(error=>{
+            console.log("Error", error);
+        })
+    }
+    
+    $scope.loadAllMovie_ScheduledsNextDay = function(){
+        var url = `${movie_scheduled}/all`;
+        $http.get(url).then(resp=>{
+            $scope.movie_scheduleds = resp.data;
+            console.log("Allmovie_scheduleds", resp);
+            // Assume your data is stored in $scope.movies
+    		var currentDate = new Date();
+
+		    // Sử dụng $filter để lọc mảng theo điều kiện
+		    $scope.filteredMovies = $filter('filter')($scope.movie_scheduleds, function (movie) {
+		        var movieDate = new Date(movie.date + ' ' + movie.time_START); // Tạo đối tượng ngày từ chuỗi ngày và giờ
+		
+		        // So sánh ngày giờ hiện tại với ngày giờ trong mục
+		        return movieDate > currentDate;
+		    });
+		    
+		    console.log("filteredMovies", $scope.filteredMovies);
+		    
+		    // Sử dụng $filter để lọc mảng theo điều kiện
+		    $scope.filteredMoviesToDay = $filter('filter')($scope.movie_scheduleds, function (movie) {
+		        var movieDate = new Date(movie.date); // Tạo đối tượng ngày từ chuỗi ngày và giờ
+		        
+				var dateToday = new Date($scope.currentDate);
+
+		        // So sánh ngày giờ hiện tại với ngày giờ trong mục
+		        return (
+					movieDate.toDateString() === dateToday.toDateString()
+		        )
+		    });
+		    console.log("filteredMoviesToDay", $scope.filteredMoviesToDay);
+        }).catch(error=>{
+            console.log("Error", error);
+        })
+    }
+    
+    
 
     $scope.loadAllMovies = function(){
         var url = `${host}/all`;
@@ -14,6 +92,7 @@ app.controller("controller", function($scope, $http){
             $scope.movies = resp.data;
             resp.data.publish_DATE = new Date(resp.data.publish_DATE);
             console.log("AllMovies", resp);
+            console.log("resp.data.publish_DATE",resp.data.publish_DATE);
         }).catch(error=>{
             console.log("Error", error);
         })
@@ -119,4 +198,6 @@ app.controller("controller", function($scope, $http){
 	}
 	
 	$scope.loadAllMovies();
+	$scope.loadAllMovie_Scheduleds();
+	$scope.loadAllMovie_ScheduledsNextDay();
 })

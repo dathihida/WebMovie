@@ -52,7 +52,6 @@ public class Movie_ScheduledRestController {
 	}
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	Movie_Scheduled getMovie_ScheduledById(@PathVariable Integer id) {
 		return movie_ScheduledService.getMovie_ScheduledById(id);
 	}

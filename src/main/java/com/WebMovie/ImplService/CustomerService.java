@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.WebMovie.Entity.Customer;
 import com.WebMovie.Repository.CustomerRepository;
 import com.WebMovie.Service.ICustomerService;
+import com.WebMovie.WebSecurityConfig.UserInfoDetails;
 
 @Service
 public class CustomerService implements ICustomerService{
@@ -73,6 +76,18 @@ public class CustomerService implements ICustomerService{
 	public Optional<Customer> findCustomerByEMAIL(String EAMIL) {
 		// TODO Auto-generated method stub
 		return customerRepository.findCustomerByEMAIL(EAMIL);
+	}
+
+	@Override
+	public String getLoggedInUserId() {
+		// TODO Auto-generated method stub
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+	        UserInfoDetails use = (UserInfoDetails) authentication.getPrincipal();
+	        Integer idUser = use.getId();
+	        return String.valueOf(idUser);
+        }
+        return null;
 	}
 
 }

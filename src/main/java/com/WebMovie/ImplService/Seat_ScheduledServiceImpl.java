@@ -1,5 +1,6 @@
 package com.WebMovie.ImplService;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,12 @@ public class Seat_ScheduledServiceImpl implements Seat_ScheduledService{
 	public List<Seat_Scheduled> getAll() {
 		// TODO Auto-generated method stub
 		return seat_ScheduledRepository.findAll();
+	}
+
+	@Override
+	public List<Seat_Scheduled> getSeat_ScheduledByIdRoom(Integer id, Date date, String time, Integer idMovieSh) {
+		// TODO Auto-generated method stub
+		return seat_ScheduledRepository.getAllSeat_ScheduledByIdRoom(id, date, time, idMovieSh);
 	}
 
 }
