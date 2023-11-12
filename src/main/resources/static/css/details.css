@@ -172,157 +172,19 @@
 
 /* ===================MODAL BUY TICKET================ */
 
-.modal_buyticket {
-    background-color: #151717b8;
-}
+
 
 .modal_buyticket .modal-dialog .modal-content {
-    border-radius: 4px;
+    border-radius: 5px;
     height: 600px;
 }
 
-.modal_buyticket .modal-header {
-    border-bottom: 0px;
-}
-
-.modal_buyticket .modal-body a {
-    text-decoration: none;
-}
-
-/* -------------ul-day--------------- */
-
-
-.modal_buyticket .toggle-tabs-day {
-    /* display: flex; */
-    flex-wrap: wrap;
-    padding: 20px;
-    border-bottom: 2px solid black;
-    border-top: 2px solid black;
-}
-
-.modal_buyticket .day {
-    width: 77px;
-    height: 48px;
-    border: 2px solid rgba(238, 238, 238, 0);
-    border-radius: 5px;
-}
-
-.modal_buyticket .li {
-    border: 2px solid rgb(33, 33, 33);
-    border-radius: 5px;
-}
-
-.modal_buyticket .toggle-tabs-day input {
-    display: none;
-}
-
-.modal_buyticket .toggle-tabs-day input:checked+.day {
-    border: 2px solid rgb(33, 33, 33);
-    border-radius: 5px;
-}
-
-
-.modal_buyticket .day:hover {
-    border: 2px solid rgb(33, 33, 33);
-    border-radius: 5px;
-}
-
-
-.modal_buyticket .day1 {
-    width: 20px;
-    font-size: 11px;
-    padding: 0%;
-    color: #717171;
-
-}
-
-.modal_buyticket .day2 {
-    font-size: 32px;
-    font-weight: 300;
-    color: #717171;
-}
-
-/* ----------------ul-map------------ */
-
-.modal_buyticket .toggle-tabs-map {
-    /* display: flex; */
-    flex-wrap: wrap;
-    padding: 20px 0px;
-    margin: 0px 20px;
-    border-bottom: 2px solid black;
-}
-
-.modal_buyticket .toggle-tabs-map li {
-    border: 2px solid rgba(255, 255, 255, 0);
-    border-radius: 5px;
+.modal_buyticket .modal-body .choose_date {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    list-style-type: none;
+    gap: 10px;
 }
 
-/* .modal_buyticket .toggle-tabs-map li:hover {
-    border: 2px solid rgb(33, 33, 33);
-    border-radius: 5px;
-} */
-
-.modal_buyticket .toggle-tabs-map a {
-    color: #636363;
-}
-
-.modal_buyticket .toggle-tabs-map .active {
-    color: #636363;
-    background-color: #151717;
-    border-radius: 5px;
-    color: white;
-}
-
-
-.modal_buyticket .toggle-tabs-map span {
-    padding: 0px 10px;
-    font-size: 13px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-}
-
-/* ----------------thể loại------------------ */
-
-.modal_buyticket .toggle-tabs-D {
-    flex-wrap: wrap;
-    padding: 20px;
-    margin: 0px 20px;
-    border-bottom: 2px solid black;
-}
-
-.modal_buyticket .toggle-tabs-D li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal_buyticket .toggle-tabs-D a {
-    color: #636363;
-}
-
-.modal_buyticket .toggle-tabs-D .active {
-    background-color: #151717;
-    color: white;
-}
-
-.modal_buyticket .toggle-tabs-D span {
-    padding: 0px 10px;
-    font-size: 13px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-}
-
-.modal_buyticket .toggle-tabs-D li {
-    border: 2px solid rgb(0, 0, 0);
-    border-radius: 5px;
-}
-
-/* ------------------ Địa điểm------------------ */
 
 .modal_buyticket .showtimes {
     margin: 0px 20px;
@@ -342,11 +204,15 @@
     margin-bottom: 10px;
 }
 
+.modal_buyticket .showtimes .site-mvt .cinema {
+    margin-bottom: 10px;
+}
+
 .modal_buyticket .showtimes .site-mvt .cinema h4 {
     font-size: 14px;
     font-weight: 400;
     color: #000000;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 .modal_buyticket .showtimes .site-mvt .products-grid-movie {
@@ -356,27 +222,56 @@
 
 .modal_buyticket .showtimes .site-mvt .item {
     margin: 3px 3px 0 0;
-    padding: 5px 10px;
-    width: 125px;
+    width: 117px;
     text-align: center;
+    border-radius: 5px;
     border: 0.6px solid rgb(168, 168, 168);
     font-size: 14px;
-    height: 29px;
+
 }
 
 .modal_buyticket .showtimes .site-mvt .item:hover {
     margin: 3px 3px 0 0;
-    padding: 5px 10px;
-    width: 125px;
+    width: 117x;
     text-align: center;
-    border: 0.6px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    border: 0.6px solid rgb(13, 26, 43);
     font-size: 14px;
-    height: 29px;
+
+    background-color: rgb(18, 38, 63);
 }
 
-.modal_buyticket .showtimes .site-mvt .item span {
+.modal_buyticket .showtimes .site-mvt .item a {
+    text-decoration: none;
+    color: #000000;
+    font-size: 15px;
+    font-weight: 300px;
+    width: 125px;
+    height: 29px;
+    padding: 10px 40px;
+}
+
+.modal_buyticket .showtimes .site-mvt .item a:hover {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 400px;
+    width: 125px;
+    height: 29px;
+    padding: 10px 40px;
+}
+
+/* .modal_buyticket .showtimes .site-mvt .item span {
     height: 16px;
     font-size: 14px;
-    align-items: center;
     color: #000000;
+    margin: 5px 10px 15px 10px;
 }
+.modal_buyticket .showtimes .site-mvt .item span:hover{
+    color: white;
+    font-weight: 300;
+    margin: 5px 10px 15px 10px;
+} */
+
+;
+;

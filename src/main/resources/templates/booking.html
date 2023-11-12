@@ -37,63 +37,63 @@
 <body ng-app="app" ng-controller="controller">
     <div th:replace="~{/navbar/navbar}"></div>
 
-	<ul ng-repeat="row in seatRows">
-      <li>Hàng {{ row.row }}:
-          <span ng-repeat="seat in row.seats">
-              <input type="checkbox" ng-model="seat.isSelected" ng-disabled="seat.isDisabled" ng-change="onSeatChange(seat)">
-              {{ seat.seat_NUMBER }}
-          </span>
-      </li>
+    <ul ng-repeat="row in seatRows">
+        <li>Hàng {{ row.row }}:
+            <span ng-repeat="seat in row.seats">
+                <input type="checkbox" ng-model="seat.isSelected" ng-disabled="seat.isDisabled"
+                    ng-change="onSeatChange(seat)">
+                {{ seat.seat_NUMBER }}
+            </span>
+        </li>
     </ul>
     <p>Tổng tiền: {{ totalAmount }}</p>
-    <div ng-repeat = "mo in movie_ScheduledById">
-	    <ul>
-	    	<li>IdUser: {{userId}}</li>
-	    	<li th:text="${#authentication.name}"></li>
-	    	<li>IdRoom: {{idRoom}}</li>
-	    	<li>IdMovieSchedueld: {{idMovieScheduled}}</li>
-	    	<li>ToDay: {{form.date | date : 'yyyy-MM-dd'}}</li>
-	    	<li ng-repeat = "ss in selectedSeats">
-	    		SelectSeat: {{ss.id}} - {{ss.seat_ROW}}-{{ss.seat_NUMBER}}
-	    		{{ss.seat_TYPE === 'VIP' ? 20 : (ss.seat_TYPE === 'ECO' ? 10 : ss.seat_TYPE)}}
-	    	</li>
-	    </ul>
-    
-    	{{mo.date}}
-    	{{mo.id_MOVIE.name}}
+    <div ng-repeat="mo in movie_ScheduledById">
+        <ul>
+            <li>IdUser: {{userId}}</li>
+            <li th:text="${#authentication.name}"></li>
+            <li>IdRoom: {{idRoom}}</li>
+            <li>IdMovieSchedueld: {{idMovieScheduled}}</li>
+            <li>ToDay: {{form.date | date : 'yyyy-MM-dd'}}</li>
+            <li ng-repeat="ss in selectedSeats">
+                SelectSeat: {{ss.id}} - {{ss.seat_ROW}}-{{ss.seat_NUMBER}}
+                {{ss.seat_TYPE === 'VIP' ? 20 : (ss.seat_TYPE === 'ECO' ? 10 : ss.seat_TYPE)}}
+            </li>
+        </ul>
+
+        {{mo.date}}
+        {{mo.id_MOVIE.name}}
     </div>
-	<div>
-		<h2>RESTful Booking - AngularJS</h2>
-		<!--form-->
-		<div>
-			<input ng-model="form.id" type="hidden" />
-			<br /> 
-			<label>Id_Customers</label>
-			<input ng-model="form.id_CUSTOMER.id" ng-value="form.id_CUSTOMER.id">
-            <br /> 
+    <div>
+        <h2>RESTful Booking - AngularJS</h2>
+        <!--form-->
+        <div>
+            <input ng-model="form.id" type="hidden" />
+            <br />
+            <label>Id_Customers</label>
+            <input ng-model="form.id_CUSTOMER.id" ng-value="form.id_CUSTOMER.id">
+            <br />
             <label>IdMovieSchedueld</label>
             <input ng-model="form.id_MOVIE_SCHEDULED.id" ng-value="form.id_MOVIE_SCHEDULED.id">
-			<br /> 
-			<label>Date</label>
-			<input ng-model="form.date" ng-value ="form.date | date:'yyyy-MM-dd' ">
-			<br /> 
-			<label>price</label>
-			<input ng-model="form.price">
-			<br /> 
-			<label>status</label>
-			<input ng-model="form.status">
-			<br /> 
-			<hr />
-			<button ng-click="createBooking()">Booking</button>
-			<a th:href="@{/home/checkout/{{idRoom}}/{{day}}/{{timeStart}}/{{idMovieScheduled}}}">Datve</a>
-		</div>
-	</div>
-    
+            <br />
+            <label>Date</label>
+            <input ng-model="form.date" ng-value="form.date | date:'yyyy-MM-dd' ">
+            <br />
+            <label>price</label>
+            <input ng-model="form.price">
+            <br />
+            <label>status</label>
+            <input ng-model="form.status">
+            <br />
+            <hr />
+            <button ng-click="createBooking()">Booking</button>
+            <a th:href="@{/home/checkout/{{idRoom}}/{{day}}/{{timeStart}}/{{idMovieScheduled}}}">Datve</a>
+        </div>
+    </div>
+
     <!-- js -->
     <script th:src="@{/js/booking.js}"></script>
-    
+
     <script th:src="@{/js/layout/main.js}"></script>
-    <script th:src="@{/js/signup.js}"></script>
 </body>
 
 </html>
