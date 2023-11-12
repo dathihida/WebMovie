@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"> </script>
     <script nomodule src="https://unpkg .com/ionicons@5.5.2/dist/ionicons/ionicons.js"> </script>
     <!-- <script src="js/bootstrap.bundle.min.js"></script>
@@ -35,7 +35,7 @@
     <title>Payment</title>
 </head>
 
-<body ng-app="app" ng-controller="controller">
+<body ng-app="appBooking" ng-controller="controllerBooking">
     <div th:replace="~{/navbar/navbar}"></div>
 
 
@@ -45,7 +45,7 @@
     <div th:replace="~{/navbar/_footer}"></div>
 
     <!-- js -->
-    <script th:src="@{/js/booking.js}"></script>
+    <script th:src="@{/js/checkout.js}"></script>
     <script th:src="@{/js/layout/main.js}"></script>
 </body>
 

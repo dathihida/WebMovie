@@ -41,6 +41,12 @@ public class Seat_ScheduledRestController {
 	
 	@PostMapping
 	Seat_Scheduled addScheduled(@RequestBody Seat_Scheduled seat_Scheduled) {
+		
 		return seat_ScheduledRepository.save(seat_Scheduled);
+	}
+	
+	@GetMapping("/v1/{id}")
+	List<Seat_Scheduled> getAllSeat_ScheduledByIdBooking(@PathVariable("id") Integer id){
+		return seat_ScheduledRepository.getAllSeat_ScheduledByIdBooking(id);
 	}
 }

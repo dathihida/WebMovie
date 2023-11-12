@@ -13,10 +13,18 @@ public class BookingRepo {
 	
 	@Transactional
 	public void updateEntities() {
-		String jpql = "UPDATE Booking b " +
+		String jpql = "UPDATE Movie_Scheduled b " +
             "SET b.STATUS = 'false' " +
             "WHERE b.ID_MOVIE_SCHEDULED IN (SELECT ms.ID FROM Movie_Scheduled ms WHERE ms.DATE < GETDATE())";
 	 	entityManager.createQuery(jpql).executeUpdate();
 	 }
+	
+//	@Transactional
+//	public void updateStatusBooking() {
+//		String jpql = "UPDATE Booking b SET b.status = 'success' WHERE b.id = :bookingId";
+//		entityManager.createQuery(jpql)
+//		    .setParameter("bookingId", yourBookingId)
+//		    .executeUpdate();
+//	}
 
 }

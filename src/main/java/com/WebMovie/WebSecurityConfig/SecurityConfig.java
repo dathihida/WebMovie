@@ -27,15 +27,16 @@ public class SecurityConfig {
                 .requestMatchers("/","/home","/home/**", "/login",
                 		"/signup", "/js/**", "/css/**", "/images/**", 
                 		"/add","/add/userNoExist",
-                		"/api/movie/all", "/movie_detail/**", "/v1/movie/**",
+                		"/api/movie/all", "/movie/**", "/v1/movie/**",
                 		"/page/**", "/api/cinema/all",
                 		"/api/room/all",
                 		"/api/movie_scheduled/all", "/listMovieSheduled/**", 
                 		"/api/movie_scheduled/detail/**", "/api/movie_scheduled/date/**",
                 		"/api/seat_scheduled/**", "/api/seat_scheduled","/api/movie_scheduled/**",
                 		"/api/seat/**",
-                		"/booking/**", "/api/booking/**", "/api/booking",
-                		"/pay", "/pay/**").permitAll()
+                		"/booking/**", "/api/booking/**", "/api/booking", "/api/booking/update/**",
+                		"/checkout/**",
+                		"/pay", "/pay/**", "/api/pay","/api/pay/**","/historyBooking/**").permitAll()
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/**", "/rest/**").authenticated()

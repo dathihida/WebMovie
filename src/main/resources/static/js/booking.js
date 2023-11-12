@@ -5,31 +5,16 @@ let host_customer = "http://localhost:8080/api";
 let host_movie_scheduled = "http://localhost:8080/api/movie_scheduled";
 const app = angular.module("app", []);
 
-app.controller("controller", function($scope, $http) {
+app.controller("controller", function($scope, $http, $rootScope) {
 	$scope.seats = [];
 	$scope.seatsScheduled = [];
 	$scope.booking = [];
 
 	var url = window.location.href;
-	var parts = url.split('/'); // Tách URL bằng dấu '/'
-	var idRoom = parts[parts.length - 4]; // Lấy phần tử trước cuối (2)
-	var day = parts[parts.length - 3];
-	var timeStart = parts[parts.length - 2];
+	var parts = url.split('/');
 	var idMovieScheduled = parts[parts.length - 1];
 
-	$scope.idRoom = idRoom;
 	$scope.idMovieScheduled = idMovieScheduled;
-	$scope.day = day;
-	$scope.timeStart = timeStart;
-	
-	console.log(idRoom)
-	console.log(day)
-	console.log(timeStart)
-	
-	var url1 = "http://localhost:8080/pay/success?paymentId=PAYID-MVGZLIQ4RU36492C5915754R&token=EC-9JE66047438291340&PayerID=34VC8HZ42WVBA";
-	var parts1 = url1.split('/'); // Tách URL bằng dấu '/'
-	var statusPay = parts1[parts1.length - 1];
-	console.log("statusPay",statusPay)
 
 	//lay thoi gian hien tai hh:mm:ss
 	function getCurrentTime() {
@@ -60,9 +45,36 @@ app.controller("controller", function($scope, $http) {
 
 	console.log($scope.currentDate);
 
+	//bat dau
+	
+	$scope.movie_ScheduledById = [];
+	$scope.getMovieScheduledById = function(){
+		//find movieScheduledById => filter idRoom, idMovieScheduled, day, timeStart 
+	    var url = `${host_movie_scheduled}/${idMovieScheduled}`;
+	    $http.get(url).then(resp => {
+	        $scope.movie_ScheduledById.push(resp.data);
+	        console.log("movie_ScheduledById", resp.data);
+	
+	        $scope.idRoom = resp.data.id_ROOM.id;
+			$scope.idMovieScheduled = resp.data.id;
+			$scope.day = resp.data.date;
+			$scope.timeStart = resp.data.time_START;
+	        
+	        var idRoom = $scope.idRoom;
+	        var idMovieScheduled = $scope.idMovieScheduled;
+	        var day = $scope.day = resp.data.date;
+	        var timeStart = $scope.timeStart;
+	        
+	        console.log("idRoom", $scope.idRoom);
+	        console.log("idMovieScheduled", $scope.idMovieScheduled);
+	        console.log("day", $scope.day);
+	        console.log("timeStart", $scope.timeStart);
+	        
+	
+	// tat ca cac ghe trong phong va cac ghe da dat theo phong
 	$scope.loadSeatByIdRoomAndLoadSeat_ScheduledByIdRoom = function(idRoom) {
 		//loadSeatByIdRoom
-		var url = `${host}/${idRoom}`;
+		var url = `${host}/${idRoom}`;//idRoom
 		$http.get(url).then(resp => {
 			$scope.seats = resp.data;
 			var seats = resp.data;
@@ -72,25 +84,16 @@ app.controller("controller", function($scope, $http) {
 				return a.seat_ROW.localeCompare(b.seat_ROW);
 			});
 			//in seat
-			console.log("getLoadSeatById", seats);
+			console.log("tat ca cac ghe trong phong", seats);
 
-			//loadSeatScheduledByIdRoom
+			//load cac da dat co trong phong
 			var url1 = `${host_seatScheduled}/${idRoom}/${day}/${timeStart}/${idMovieScheduled}`;
 			$http.get(url1).then(resp => {
 				$scope.seatsScheduled = resp.data;
 				var getAllSeat_scheduledByIdRoom = resp.data;
-
 				//in getAllSeat_scheduledByIdRoom
+				
 				console.log("getAllSeat_scheduledByIdRoom", getAllSeat_scheduledByIdRoom);
-
-				//loadBookingByIdRoom
-				var url2 = `${host_booking}/${idRoom}`;
-				$http.get(url2).then(resp => {
-					$scope.booking = resp.data;
-					var getBookingByIdRoom = resp.data;
-
-					console.log(getBookingByIdRoom);
-
 					// Tạo mảng chứa hàng và cột tương ứng
 					var seatRows = [];
 					var currentRow = null;
@@ -118,25 +121,27 @@ app.controller("controller", function($scope, $http) {
 					$scope.onSeatChange = function(seat) {
 						if (seat.isSelected) {
 							$scope.selectedSeats.push(seat);
-							if (seat.seat_TYPE === "ECO") {
-								$scope.totalAmount += 10;
-							} else if (seat.seat_TYPE === "VIP") {
-								$scope.totalAmount += 20;
-							}
-						} else {
-							var index = $scope.selectedSeats.indexOf(seat);
-							if (index !== -1) {
-								$scope.selectedSeats.splice(index, 1);
 								if (seat.seat_TYPE === "ECO") {
-									$scope.totalAmount -= 10;
+									$scope.totalAmount += 10;
 								} else if (seat.seat_TYPE === "VIP") {
-									$scope.totalAmount -= 20;
+									$scope.totalAmount += 20;
+								}
+							} else {
+								var index = $scope.selectedSeats.indexOf(seat);
+									if (index !== -1) {
+										$scope.selectedSeats.splice(index, 1);
+										if (seat.seat_TYPE === "ECO") {
+											$scope.totalAmount -= 10;
+										} else if (seat.seat_TYPE === "VIP") {
+											$scope.totalAmount -= 20;
+									}
 								}
 							}
-						}
-						console.log('selectedSeats', $scope.selectedSeats);
-						createFormObject();
-						$scope.getIdSeat();
+							console.log('selectedSeats', $scope.selectedSeats);
+							$rootScope.selectedSeats = $scope.selectedSeats;
+							createFormObject();
+							$scope.getIdSeat();
+							
 					};
 
 					// Duyệt qua danh sách ghế và kiểm tra điều kiện
@@ -167,13 +172,10 @@ app.controller("controller", function($scope, $http) {
 						}
 					});
 				});
-			});
 		}).catch(error => {
 			console.log("Error", error);
 		})
 	}
-
-	
 	$scope.loadSeatByIdRoomAndLoadSeat_ScheduledByIdRoom(idRoom);
 
 	$scope.userId = [];
@@ -182,11 +184,13 @@ app.controller("controller", function($scope, $http) {
 		$http.get('http://localhost:8080/api/getUserId').then(function(response) {
 			$scope.userId = response.data;
 			userIdLogin = $scope.userId;
+			$scope.getAllBookingByCustomer(userIdLogin);
 			console.log('idUserLogin', userIdLogin);
 			createFormObject();
 		});
 	}
-
+	$scope.loadIdUserLogin();
+	
 	function createFormObject() {
 		$scope.form = {
 			id_CUSTOMER: {
@@ -196,17 +200,133 @@ app.controller("controller", function($scope, $http) {
 			id_MOVIE_SCHEDULED: {
 				id: idMovieScheduled
 			},
-			status: true,
 			price: $scope.totalAmount,
 		}
-
 	}
 
+	$scope.ids = []; // Đặt biến ids ở cấp độ phạm vi của $scope
+	$scope.idsExists = [];
+	$scope.getIdSeat = function() {
+		$scope.ids = []; // Xóa danh sách IDs hiện có và thay thế bằng danh sách mới
+		$scope.anotherArray = [...$scope.selectedSeats];
+		
+		$scope.idsExists = [];// 
+		$scope.idsExistsanotherArray = [...$scope.seatsScheduled];// ghe da ton tai trong database
+		
+		for(var i = 0; i< $scope.idsExistsanotherArray.length; i++){
+			$scope.idsExists.push($scope.idsExistsanotherArray[i].id_SEAT.id);
+		}
+		for (var i = 0; i < $scope.anotherArray.length; i++) {
+			$scope.ids.push($scope.anotherArray[i].id);
+		}
+		console.log("ids", $scope.ids);
+		console.log("idsExists", $scope.idsExists);
+		
+		console.log("muarray", $scope.anotherArray);
+		console.log("idsExistsanotherArray", $scope.idsExistsanotherArray);
+	};
+	
+	
+	
+	$scope.createBooking = function() {
+		//
+		$scope.loadSeat = function(idRoom, day, timeStart, idMovieScheduled){
+		var url1 = `${host_seatScheduled}/${idRoom}/${day}/${timeStart}/${idMovieScheduled}`;
+			$http.get(url1).then(resp => {
+				$scope.seat = resp.data;
+				console.log("$scope.seat",$scope.seat);
+				$rootScope.seatsScheduled1 = $scope.seat;
+				
+				//$rootScope chiase data
+				var seatsScheduled  = $rootScope.seatsScheduled1;
+				console.log("seatsScheduleddcCHiase", seatsScheduled);
+				
+				var selectedSeats = $rootScope.selectedSeats;
+				console.log("selectedSeats", selectedSeats);
+				
+				// Lấy danh sách các ID của selectedSeats
+				var selectedSeatIds = selectedSeats.map(function(selectedSeat) {
+				    return selectedSeat.id;
+				});
+				console.log("Danh sach id select seat",selectedSeatIds);
+				
+				
+				var idSeatScheduled = seatsScheduled.map(function(seatScheduled){
+					return seatScheduled.id_SEAT.id;
+				})
+				console.log("Danh sach id seatScheduled", idSeatScheduled);
+				
+				// Tìm phần tử chung giữa hai mảng
+				var phanTuChung = selectedSeatIds.filter(function(id) {
+				    return idSeatScheduled.includes(id);
+				});
+				
+				console.log(phanTuChung);
+				if(phanTuChung.length > 0){
+					alert("phantuchung", phanTuChung);
+				}else{
+					var booking = angular.copy($scope.form);
+					var url = `${host_booking}`;
+					$http.post(url, booking).then(resp => {
+						$scope.booking_create.push(booking);
+						$scope.loadAllBooking();
+						// Lấy ID ghế vừa được thêm vào cơ sở dữ liệu
+						var newSeatId = resp.data.id;
+						globalNewSeatId = newSeatId;
+						console.log("Bookingnew", resp);
+						console.log('New seat ID:', newSeatId);
+			
+						// Gọi hàm insertSeats sau khi đã có globalNewSeatId
+						$scope.insertSeats(newSeatId);
+					}).catch(error => {
+						console.log(error);
+					});
+				}
+			})
+		}
+		
+		$scope.loadSeat(idRoom, day, timeStart, idMovieScheduled);
+	};
+	
+	
+	var globalNewSeatId;
+	
+	$scope.idBooking = globalNewSeatId;
+	console.log("idBooking", $scope.idBooking)
+	//newSeatId
+	$scope.insertSeats = function(newSeatId) {
+		var url1 = `${host_seatScheduled}/${idRoom}/${day}/${timeStart}/${idMovieScheduled}`;
+		$http.get(url1).then(resp => {
+			$scope.seatsScheduled = resp.data;
 
-	$scope.loadIdUserLogin();
+			console.log("idsSeat", $scope.seatsScheduled);
 
+			for (var i = 0; i < $scope.ids.length; i++) {
+				var seat = $scope.ids[i];
+				var data = {
+					id_SEAT: {
+						id: seat
+					},
+					id_BOOKING: {
+						id: globalNewSeatId
+					}
+				};
+				//luu vo ghe
+				$http.post('http://localhost:8080/api/seat_scheduled', data).then(function(response) {
+					$scope.getAllSeatScheduled();
+					console.log('Seat inserted successfully:', response.data);
+					window.location.href = `http://localhost:8080/checkout/` + newSeatId
+				}, function(error) {
+					console.error('Error inserting seat:', error);
+				});
+			}
+		})
+	};
 
-
+	    });
+	}
+	
+	
 	$scope.customers = [];
 	$scope.movie_Scheudled = [];
 	$scope.booking_create = [];
@@ -240,81 +360,23 @@ app.controller("controller", function($scope, $http) {
 			console.log("Error", error);
 		})
 	}
-
-	$scope.ids = []; // Đặt biến ids ở cấp độ phạm vi của $scope
-
-	$scope.getIdSeat = function() {
-		$scope.ids = []; // Xóa danh sách IDs hiện có và thay thế bằng danh sách mới
-		$scope.anotherArray = [...$scope.selectedSeats];
-		for (var i = 0; i < $scope.anotherArray.length; i++) {
-			$scope.ids.push($scope.anotherArray[i].id);
-		}
-		console.log("ids", $scope.ids);
-		console.log("muarray", $scope.anotherArray);
-	};
-
-	var globalNewSeatId;
-
-	$scope.insertSeats = function() {
-		var url1 = `${host_seatScheduled}/${idRoom}/${day}/${timeStart}/${idMovieScheduled}`;
-		$http.get(url1).then(resp => {
-			$scope.seatsScheduled = resp.data;
-
-			console.log("idsSeat", $scope.seatsScheduled);
-
-			for (var i = 0; i < $scope.ids.length; i++) {
-				if ($scope.ids[i] === $scope.idsSeat) {
-					alert("Co ve cho ngoi ban chon da co nguoi nhanh tay hon");
-					return;
-				}
-
-
-				for (var i = 0; i < $scope.ids.length; i++) {
-					var seat = $scope.ids[i];
-					var data = {
-						id_SEAT: {
-							id: seat
-						},
-						id_BOOKING: {
-							id: globalNewSeatId
-						}
-					};
-					$http.post('http://localhost:8080/api/seat_scheduled', data).then(function(response) {
-						console.log('Seat inserted successfully:', response.data);
-					}, function(error) {
-						console.error('Error inserting seat:', error);
-					});
-				}
-			}
-		})
-	};
-
-	$scope.createBooking = function() {
-		var booking = angular.copy($scope.form);
-		var url = `${host_booking}`;
-		$http.post(url, booking).then(resp => {
-			$scope.booking_create.push(booking);
-			$scope.loadAllBooking();
-			// Lấy ID ghế vừa được thêm vào cơ sở dữ liệu
-			var newSeatId = resp.data.id;
-			globalNewSeatId = newSeatId;
-			console.log("Bookingnew", resp);
-			console.log('New seat ID:', newSeatId);
-
-			// Gọi hàm insertSeats sau khi đã có globalNewSeatId
-			$scope.insertSeats();
-		}).catch(error => {
-			console.log(error);
-		});
-	};
-	$scope.movie_ScheduledById = [];
-	$scope.getMovieScheduledById = function(){
-		var url = `${host_movie_scheduled}/${idMovieScheduled}`;
+	
+	$scope.seatScheduled = [];
+	
+	$scope.getAllSeatScheduled = function(){
+		var url = `${host_seatScheduled}/all`;
 		$http.get(url).then(resp =>{
-			 $scope.movie_ScheduledById.push(resp.data);
-        	 console.log("movie_ScheduledById", resp.data);
+			$scope.seatScheduled = resp.data;
 		})
-		
+	}
+	
+	$scope.BookingByIdCustomer = [];
+	$scope.getAllBookingByCustomer = function(userIdLogin){
+		var url = `${host_booking}/profile/${userIdLogin}`;
+		$http.get(url).then(resp =>{
+			$scope.BookingByIdCustomer = resp.data;
+			console.log("getAllBookingByCustomer",resp.data);
+		})
 	}
 
 	$scope.loadAllCustomers();

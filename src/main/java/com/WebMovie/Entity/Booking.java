@@ -3,8 +3,11 @@ package com.WebMovie.Entity;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,9 +42,18 @@ public class Booking {
 
 	private Integer PRICE;
 	
-	private String STATUS;
+	private String STATUS;//success failed unpaid
+	
+	@Column(name = "startTime", columnDefinition="DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
+	private Date startTime;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_BOOKING")
 	private List<Seat_Scheduled> LIST_SEAT_SCHEDULED;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "ID_BOOKING")
+	private List<Pay> LIST_PAY;
 }

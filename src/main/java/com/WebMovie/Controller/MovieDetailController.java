@@ -18,7 +18,7 @@ public class MovieDetailController {
 	@Autowired
 	MovieServiceImpl impl;
 	
-	@RequestMapping("/movie_detail/{id}")
+	@RequestMapping("/movie/{id}")
 	public String moviedetail(@PathVariable("id") Integer id, Model model, HttpServletRequest httpServletRequest) {
 		model.addAttribute("movie1", impl.getMovieById(id));
 		return "movie_detail";

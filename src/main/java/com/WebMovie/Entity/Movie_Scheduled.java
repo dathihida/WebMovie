@@ -43,4 +43,6 @@ public class Movie_Scheduled {
 	private String TIME_START;
 	
 	private String TIME_END;
+	
+	private Boolean STATUS;
 }

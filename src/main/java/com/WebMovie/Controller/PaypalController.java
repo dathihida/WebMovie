@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.WebMovie.Entity.Booking;
 import com.WebMovie.Entity.Pay;
+import com.WebMovie.Service.BookingService;
+import com.WebMovie.Service.PayService;
 import com.WebMovie.Service.PaypalService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
@@ -23,6 +26,12 @@ public class PaypalController {
 
 	@Autowired
 	PaypalService service;
+	
+	@Autowired
+	PayService payService;
+	
+	@Autowired
+	BookingService bookingService;
 
 	public static final String SUCCESS_URL = "pay/success";
 	public static final String CANCEL_URL = "pay/cancel";
@@ -33,12 +42,11 @@ public class PaypalController {
 	}
 
 	@PostMapping("/pay")
-	public String payment(@ModelAttribute("order") Pay order) {
+	public String payment(@ModelAttribute("order") Pay order, HttpServletRequest request) {
 		try {
 			Payment payment = service.createPayment(order.getPRICE(), order.getCURRENCY(), order.getMETHOD(),
 					order.getINTENT(), order.getDESCRIPTION(), "http://localhost:8080/" + CANCEL_URL,
 					"http://localhost:8080/" + SUCCESS_URL);
-
 			for (Links link : payment.getLinks()) {
 				if (link.getRel().equals("approval_url")) {
 					return "redirect:" + link.getHref();
@@ -69,5 +77,5 @@ public class PaypalController {
 	         System.out.println(e.getMessage());
 	        }
 	        return "redirect:/";
-	    }
+	 }
 }

@@ -31,22 +31,42 @@
     <link rel="stylesheet" th:href="@{|/css/footer.css|}">
 
 
-    <title>Customer</title>
+    <title>Booking</title>
 </head>
 
 <body ng-app="app" ng-controller="controller">
     <div th:replace="~{/navbar/navbar}"></div>
 
-    <div th:replace="~{/page/detail_movie}"></div>
-
-    <div th:replace="~{/navbar/_topphim}"></div>
-
-    <div th:replace="~{/navbar/_footer}"></div>
-
-
+	<table class="table table-bordered">
+    <thead>
+      <tr>
+      	<th>MovieName</th>
+      	<th>CINEMAS</th>
+      	<th>Room</th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Payment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat = "b in BookingByIdCustomer">
+        <td>{{b.id_MOVIE_SCHEDULED.id_MOVIE.name}}</td>
+        <td>{{b.id_MOVIE_SCHEDULED.id_ROOM.id_CINEMAS.name}}</td>
+        <td>{{b.id_MOVIE_SCHEDULED.id_ROOM.name}}</td>
+        <td>{{b.date}}</td>
+        <td>{{b.price}}</td>
+        <td>{{b.status}}</td>
+        <td>
+        	<a th:href = "@{/checkout/{{b.id}}}">Detail</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+    
     <!-- js -->
-    <script th:src="@{/js/movie_scheduled_detail.js}"></script>
-    <script th:src="@{/js/movie_detail.js}"></script>
+    <script th:src="@{/js/booking.js}"></script>
+    
     <script th:src="@{/js/layout/main.js}"></script>
     <script th:src="@{/js/signup.js}"></script>
 </body>

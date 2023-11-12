@@ -57,11 +57,8 @@ public class HomeController {
 		return "movie_scheduled";
 	}
 	
-	@GetMapping("/home/checkout/{id}/{date}/{time}/{idMovieSh}")
-	String checkout(@PathVariable("id") Integer id,
-			   @PathVariable("date") Date date, 
-			   @PathVariable("time") String time, 
-			   @PathVariable("idMovieSh") Integer idMovieSh) {
+	@GetMapping("/checkout/{idBooking}")
+	String checkout(@PathVariable("idBooking") Integer idBooking) {
 		return "checkout";
 	}
 
@@ -70,11 +67,13 @@ public class HomeController {
 		return "seat";
 	}
 	
-	@GetMapping("/booking/{id}/{date}/{time}/{idMovieSh}")
-	String booking(@PathVariable("id") Integer id,
-				   @PathVariable("date") Date date, 
-				   @PathVariable("time") String time, 
-				   @PathVariable("idMovieSh") Integer idMovieSh) {
+	@GetMapping("/booking/{idMovieSh}")
+	String booking(@PathVariable("idMovieSh") Integer idMovieSh) {
 		return "booking";
+	}
+	
+	@GetMapping("/historyBooking/{id}")
+	String profile(@PathVariable("id") Integer id) {
+		return "historyBooking";
 	}
 }

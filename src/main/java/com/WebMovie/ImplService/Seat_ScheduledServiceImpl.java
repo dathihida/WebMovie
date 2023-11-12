@@ -28,4 +28,11 @@ public class Seat_ScheduledServiceImpl implements Seat_ScheduledService{
 		return seat_ScheduledRepository.getAllSeat_ScheduledByIdRoom(id, date, time, idMovieSh);
 	}
 
+	@Override
+	public List<Seat_Scheduled> getAllSeat_ScheduledByIdBooking(Integer id) {
+		// TODO Auto-generated method stub
+		return seat_ScheduledRepository.getAllSeat_ScheduledByIdBooking(id);
+	}
+	
+	
 }

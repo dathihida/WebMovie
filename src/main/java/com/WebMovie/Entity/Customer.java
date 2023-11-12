@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ID;
+	
 	private String FULLNAME;
 	private String PASSWORD;
 	private String EMAIL;
@@ -29,8 +31,4 @@ public class Customer {
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_CUSTOMER")
 	private List<Booking> LIST_BOOKING;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy = "ID_CUSTOMER")
-	private List<Pay> LIST_PAY;
 }

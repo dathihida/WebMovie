@@ -1,5 +1,6 @@
 <div xmlns:th="http://www.thymeleaf.org">
     <main>
+
         <section>
             <div class="checkout container p-0">
                 <div class="hea-title text-center bg-dark text-white my-3 p-0">
@@ -70,56 +71,65 @@
                                 tuổi phù hợp</label>
                         </div>
                     </div>
-                    <div class="detail-pay col-md-5" ng-repeat = "movie in movie_ScheduledById">
+                    <div class="detail-pay col-md-5">
                         <div class="countdown text-center">
-                            Thời gian giữ ghế: <span id="time"> 10:00</span>
+                            Thời gian giữ ghế: <span id="time"> <p>{{ elapsedTime }}</p></span>
                         </div>
-                        <div class="content-pay d-flex gap-3">
-                            <div class="card-img">
-                                <img th:src="@{|/images/{{movie.id_MOVIE.image}}|}" alt="">
-                            </div>
-                            <div class="info-movie">
-                                <h5>{{movie.id_MOVIE.name}}</h5>
-                                <span>3D Phụ đề </span> <br>
-                                <span class="dotuoi">T13</span>
+                        <div ng-repeat = "booking in booking">
+	                        <div class="content-pay d-flex gap-3">
+	                            <div class="card-img">
+	                                <img th:src="@{|/images/{{booking.id_MOVIE_SCHEDULED.id_MOVIE.image}}|}" alt="">
+	                            </div>
+	                            <div class="info-movie">
+	                                <h5>{{booking.id_MOVIE_SCHEDULED.id_MOVIE.name}}</h5>
+	                                <span>{{booking.id_MOVIE_SCHEDULED.id_ROOM.name}}</span> <br>
+	                                <span class="dotuoi">T13</span>
+	                            </div>
+	                        </div>
+                        </div>
+                        
+                        <div class="info-ticket mt-2" >
+                        	<div>
+	                        	<div class="time" ng-repeat = "booking in booking">
+	                                <div class="d-flex align-items-center gap-2">
+	                                    <h6>{{booking.id_MOVIE_SCHEDULED.id_ROOM.id_CINEMAS.name}}</h6> - <span>{{booking.id_MOVIE_SCHEDULED.id_ROOM.name}}</span>
+	                                </div>
+	                                <div class="d-flex align-items-center gap-2">
+	                                    <span>Suất: </span>
+	                                    <h6>{{booking.id_MOVIE_SCHEDULED.time_START}}</h6> - <span>{{booking.id_MOVIE_SCHEDULED.date| date:'dd-MM-yyyy'}}</span>
+	                                </div>
+	                            </div>
+	                            <div ng-repeat="seat in seatArray">
+	                            	<div class="fare d-flex justify-content-between">
+		                                <div class="">
+		                                    <div class="d-flex align-items-center gap-2">
+		                                        <h6>1</h6> x <span>Ghế đơn: {{seat.seat_TYPE}}</span>
+		                                    </div>
+		                                    <div class="d-flex align-items-center gap-2">
+		                                        <span>Ghế:</span>
+		                                        <h6>{{seat.seat_ROW}}{{seat.seat_NUMBER}}</h6>
+		                                    </div>
+		                                </div>
+		                                <div>
+		                                    <span>{{seat.seat_PRICE}}.000</span> <em class="text-decoration-underline">đ</em>
+		                                </div>
+                        			</div>
+	                            </div>
+	                            
+                           
+	                            <div class="total d-flex justify-content-between">
+	                                <div>
+	                                    <h6>Tổng cộng</h6>
+	                                </div>
+	                                <div ng-repeat = "booking in booking">
+	                                    <span>{{booking.price}}.000</span> <em class="text-decoration-underline">đ</em>
+	                                </div>
+	                            </div>
                             </div>
                         </div>
-                        <div class="info-ticket mt-2">
-                            <div class="time">
-                                <div class="d-flex align-items-center gap-2">
-                                    <h6>{{movie.id_ROOM.id_CINEMAS.name}}</h6> - <span>{{movie.id_ROOM.name}}</span>
-                                </div>
-                                <div class="d-flex align-items-center gap-2">
-                                    <span>Suất: </span>
-                                    <h6>{{movie.time_START}}</h6> - <span>{{movie.date| date:'dd-MM-yyyy'}}</span>
-                                </div>
-                            </div>
-                            <div class="fare d-flex justify-content-between" ng-repeat = "ss in selectedSeats">
-                                <div class="">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <h6>1</h6> x <span>Ghế đơn</span>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span>Ghế:</span>
-                                        <h6>{{ss.seat_NUMBER}}{{ss.seat_ROW}}</h6>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span>{{ss.seat_TYPE === 'VIP' ? 20 : (ss.seat_TYPE === 'ECO' ? 10 : ss.seat_TYPE)}}</span> <em class="text-decoration-underline">.000đ</em>
-                                </div>
-                            </div>
-                            <div class="total d-flex justify-content-between">
-                                <div>
-                                    <h6>Tổng cộng</h6>
-                                </div>
-                                <div>
-                                    <span>{{ totalAmount }}</span> <em class="text-decoration-underline">.000đ</em>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="btn-pay d-flex justify-content-between">
+                        <div class="btn-pay d-flex justify-content-between" ng-repeat = "booking in booking">
                             <button type="submit" class="btn btn-outline-warning">Quay lại</button>
-                            <button type="submit" class="btn btn-warning pay">Thanh toán</button>
+                            <button type="submit" ng-click="thanhtoan(booking.price)" ng-disabled="booking.status === 'success' || booking.status === 'failed'" class="btn btn-warning pay">Thanh toán</button>
                         </div>
                     </div>
                 </div>

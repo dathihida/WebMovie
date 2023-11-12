@@ -23,11 +23,10 @@ public class Pay {
 	private Integer ID;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_CUSTOMER")
-	private Customer ID_CUSTOMER;
-	
+	@JoinColumn(name = "ID_BOOKING")
+	private Booking ID_BOOKING;
+
 	private Double PRICE;
-	
 	private String CURRENCY;
 	private String METHOD;
 	private String INTENT;

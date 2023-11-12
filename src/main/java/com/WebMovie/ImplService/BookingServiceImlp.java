@@ -24,7 +24,31 @@ public class BookingServiceImlp implements BookingService{
 	@Override
 	public Booking addBooking(Booking booking) {
 		// TODO Auto-generated method stub
+		booking.setSTATUS("unpaid");
 		return bookingRepository.save(booking);
+	}
+
+	@Override
+	public Booking getBookingById(Integer id) {
+		// TODO Auto-generated method stub
+		return bookingRepository.findById(id).get();
+	}
+
+	@Override
+	public void updateStatusBooking(Integer id) {
+		bookingRepository.updateStatusBooking(id);
+	}
+
+	@Override
+	public void updateStatusBookingWithFailed(Integer id) {
+		// TODO Auto-generated method stub
+		bookingRepository.updateStatusBookingWithFailed(id);
+	}
+
+	@Override
+	public List<Booking> getAllBookingByIdCustomer(Integer id) {
+		// TODO Auto-generated method stub
+		return bookingRepository.geAllBookingByIdCustomer(id);
 	}
 	
 }

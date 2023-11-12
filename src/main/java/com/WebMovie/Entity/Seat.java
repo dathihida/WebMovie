@@ -25,7 +25,7 @@ public class Seat {
 	private String SEAT_TYPE;
 	private String SEAT_ROW;
 	private String SEAT_NUMBER;
-	
+	private Integer SEAT_PRICE;
 	@ManyToOne
 	@JoinColumn(name = "ID_ROOM")
 	private Room ID_ROOM;

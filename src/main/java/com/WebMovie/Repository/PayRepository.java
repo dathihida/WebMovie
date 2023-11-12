@@ -6,5 +6,5 @@ import com.WebMovie.Entity.Pay;
 
 
 public interface PayRepository extends JpaRepository<Pay, Integer>{
-
+	
 }

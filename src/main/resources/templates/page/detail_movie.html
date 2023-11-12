@@ -158,7 +158,7 @@
 							      	<a th:href="@{/login}">Dang nhap</a>
 							      </td>
 							      <td sec:authorize="isAuthenticated()">
-							      	<a th:href="@{/booking/{{movieOfCinemas.id_ROOM.id}}/{{movieOfCinemas.date}}/{{movieOfCinemas.time_START}}/{{movieOfCinemas.id}}}">Booking</a>
+							      	<a th:href="@{/booking/{{movieOfCinemas.id}}}">Booking</a>
 							      </td>
 							    </tr>
 						  	</tbody>
