@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.WebMovie.Entity.Customer;
+import com.WebMovie.Repository.CustomerRepository;
 import com.WebMovie.Service.ICustomerService;
 
 
@@ -27,6 +28,9 @@ import com.WebMovie.Service.ICustomerService;
 public class CustomerRestController {
 	@Autowired
 	ICustomerService customerService;
+	
+	@Autowired
+	CustomerRepository customerRepository;
 	
 	@GetMapping("/user1")
 	@PreAuthorize("hasAuthority('ROLE_USER')")
@@ -61,8 +65,8 @@ public class CustomerRestController {
 		return customerService.findCustomerByNAME(name);
 	}
 	
-	@PutMapping("/{id}")
-	public Customer updateCustomer(@RequestBody Customer customer, @PathVariable Integer id) {
+	@PutMapping("/user/v1/{id}")
+	public Customer updateCustomer(@RequestBody Customer customer, @PathVariable("id") Integer id) {
 		return customerService.updateCustomer(customer, id);
 	}
 	
@@ -76,5 +80,19 @@ public class CustomerRestController {
 	 public ResponseEntity<String> getUserId() {
 	        String userId = customerService.getLoggedInUserId();
 	        return new ResponseEntity<>(userId, HttpStatus.OK);
+	 }
+	 
+	 @GetMapping("/resetPassword/{email}")
+	 Customer findByEmail(@PathVariable("email") String email, Customer customer) throws Exception {
+		 customer = customerService.findCustomerByEmail(email);
+		 if(customer != null) {
+			 return customerService.findCustomerByEmail(email);
+		 }
+		 return null;
+	 }
+	 
+	 @GetMapping("/find/{id}")
+	 Customer findId(@PathVariable("id") Integer id) {
+		 return customerRepository.findById(id).get();
 	 }
 }

@@ -155,7 +155,7 @@
 							      <td>{{movieOfCinemas.date}}</td>
 							      <td sec:authorize="!isAuthenticated()">
 							      //tu sua
-							      	<a th:href="@{/login}">Dang nhap</a>
+							      	<a th:href="@{/home}">Dang nhap</a>
 							      </td>
 							      <td sec:authorize="isAuthenticated()">
 							      	<a th:href="@{/booking/{{movieOfCinemas.id}}}">Booking</a>

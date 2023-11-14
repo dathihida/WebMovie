@@ -1,4 +1,4 @@
-package com.WebMovie.RestController;
+   package com.WebMovie.RestController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,9 +27,15 @@ public class SignupRestController {
 	String sdd(){
 		return "ko nhe";
 	}
+	
 	@PostMapping("/userNoExist")
 	public Customer addCustomerNoExist(@RequestBody Customer customer) {
 //		customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
 		return customerService.addCustomer(customer);
 	}
+	
+//	@PostMapping("/create")
+//	public Customer addCustomer(@RequestBody Customer customer) {
+//		return customerService.addCustomer(customer);
+//	}
 }

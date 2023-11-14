@@ -46,7 +46,7 @@ app.controller("controller", function($scope, $http){
 
     $scope.updateCustomer = function(){
         var customer = angular.copy($scope.form);
-        var url = `${host}/${$scope.form.id}`;
+        var url = `${host}/user/v1/${$scope.form.id}`;
         $http.put(url, customer).then(resp=>{
             var index = $scope.customers.findIndex(customer => customer.id == $scope.form.id);
             $scope.customers[index] = resp.data;
@@ -57,7 +57,7 @@ app.controller("controller", function($scope, $http){
     }
 
     $scope.edit = function(name){
-        var url = `${host}/${name}`;
+        var url = `${host}/find/${name}`;
         $http.get(url).then(resp=>{
             $scope.form = resp.data;
             console.log("CustomerEdit", resp);

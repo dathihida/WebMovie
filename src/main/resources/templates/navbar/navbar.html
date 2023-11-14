@@ -56,14 +56,35 @@
                                 <li><a class="dropdown-item" th:href="@{/home/customer}">Manage user</a></li>
                                 <li><a class="dropdown-item" th:href="@{/home/cinema}">Manage cinema</a></li>
                                 <li><a class="dropdown-item" th:href="@{/home/room}">Manage room</a></li>
+                                <li>
+                                	<button ng-click="loadIdUserLogin()">HistoryBooking</button>
+                                </li>
                             </ul>
                         </li>
+                        
+                        <li class="nav-item dropdown mx-2" sec:authorize="hasAnyRole('USER')">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Manager
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                	<button ng-click="loadIdUserLogin()">HistoryBooking</button>
+                                </li>
+                                <li>
+                                	<a class="dropdown-item" th:href="@{/home/room}">Manage room</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
                     </ul>
                     <div class="d-flex  justify-content-center align-items-center p-4 p-lg-0 gap-4 bg-light"
                         sec:authorize="!isAuthenticated()">
                         <a href="" data-bs-toggle="modal" data-bs-target="#myModalLogin" class="text-dark">Sign In</a>
                         <a href="" class="text-white text-decoration-none px-3 py-1 rounded-4"
-                            style="background-color: #000000;" data-bs-toggle="modal" data-bs-target="#myModalRegister">Sign Up</a>
+                            style="background-color: #000000;" data-bs-toggle="modal" data-bs-target="#myModalRegister">Sign Up
+                        </a>
+                        <a th:href="@{/home/resetPassword}" >ResetPassword</a>
                     </div>
                     <div  class="d-flex  justify-content-center align-items-center p-4 p-lg-0 gap-4 bg-light" sec:authorize="isAuthenticated()">
                         <div class="text-black" th:text="${#authentication.name}"></div>

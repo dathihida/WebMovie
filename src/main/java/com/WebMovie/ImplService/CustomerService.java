@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.WebMovie.Entity.Customer;
 import com.WebMovie.Repository.CustomerRepository;
 import com.WebMovie.Service.ICustomerService;
+import com.WebMovie.Service.MailService;
 import com.WebMovie.WebSecurityConfig.UserInfoDetails;
 
 @Service
@@ -24,12 +25,17 @@ public class CustomerService implements ICustomerService{
 	@Autowired
 	private PasswordEncoder bCryptPasswordEncoder;
 	
+	@Autowired
+	MailService mailService;
+	
 	@Override
 	public Customer addCustomer(Customer customer) {
 		// TODO Auto-generated method stub
 		customer.setEXIST(true);
 		customer.setROLE("ROLE_ADMIN");
 		customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
+		
+		mailService.sendMailCreateCustomer(customer);
 		return customerRepository.save(customer);
 	}
 
@@ -43,8 +49,8 @@ public class CustomerService implements ICustomerService{
 	public Customer updateCustomer(Customer customer, Integer id) {
 		// TODO Auto-generated method stub
 		customer.setEXIST(true);
-		customer.setROLE("ROLE_USER");
 		customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
+		mailService.sendMailUpdateCustomer(customer);
 		return customerRepository.save(customer);
 	}
 
@@ -90,4 +96,27 @@ public class CustomerService implements ICustomerService{
         return null;
 	}
 
+	@Override
+	public Customer findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return customerRepository.findByEMAIL(email).get();
+	}
+
+	@Override
+	public Customer findCustomerByEmail(String email) {
+		return customerRepository.findCustomerByEmail1(email);
+	}
+
+	@Override
+	public Customer updatePassowrd(Customer customer) {
+		// TODO Auto-generated method stub
+		customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
+		return customerRepository.save(customer);
+	}
+
+	@Override
+	public void updatePassword(String password, Integer id) {
+		customerRepository.updatePassword(password, id);
+		
+	}
 }
