@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"> </script>
@@ -15,178 +15,728 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
 
+
+
+    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{|/js/plugins/fontawesome-free/css/all.min.css|}">
+    <!-- DataTables -->
+    <link rel="stylesheet" th:href="@{|/js/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css|}">
+    <link rel="stylesheet" th:href="@{|/js/plugins/datatables-responsive/css/responsive.bootstrap4.min.css|}">
+    <link rel="stylesheet" th:href="@{|/js/plugins/datatables-buttons/css/buttons.bootstrap4.min.css|}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{|/css/dist/css/adminlte.min.css|}">
 
 
-    <link rel="stylesheet" th:href="@{|/css/header.css|}">
-    <link rel="stylesheet" th:href="@{|/css/home.css|}">
-    <link rel="stylesheet" th:href="@{|/css/details.css|}">
-    <link rel="stylesheet" th:href="@{|/css/footer.css|}">
-    <link rel="stylesheet" th:href="@{|/css/manage_movie.css|}">
+    <link rel="stylesheet" th:href="@{|/css/ad_movie.css|}">
+    <link rel="stylesheet" th:href="@{|/css/admin.css|}">
 
-    <title>Customer</title>
+
+    <title>Admin</title>
 </head>
 
-<body ng-app="app" ng-controller="controller">
-    <div th:replace="~{/navbar/navbar}"></div>
+<body class="hold-transition sidebar-mini" ng-app="app" ng-controller="controller">
 
-    <!-- From Start -->
-    <div class="container pt-4 px-4">
-        <div class="row g-4 d-flex justify-content-center">
-                <div class="form1 p-4">
-                    <h6 class="mb-4">CREATE MOVIE</h6>
-
-                    <div class="form-floating mb-3">
-                        <input ng-model="form.id" class="form-control" type="hidden">
-                        <label for="floatingInput">Id</label>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="form-floating mb-3">
-                                <input ng-model="form.name" class="form-control">
-                                <label for="floatingInput">Name</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input ng-model="form.description" class="form-control">
-                                <label for="floatingPassword">Description</label>
-                            </div>
-
-                            <div class="form-floating mb-3">
-                                <input ng-model="form.actors" class="form-control">
-                                <label for="floatingPassword">Actors</label>
-                            </div>
-
-                            <div class="form-floating mb-3">
-                                <input ng-model="form.diretors" class="form-control">
-                                <label for="floatingPassword">Diretors</label>
-                            </div>
-
-                            <div class="form-floating mb-3">
-                                <input ng-model="form.gerne" class="form-control">
-                                <label for="floatingPassword">Gerne</label>
-                            </div>
-
-                            <div class="form-floating mb-3">
-                                <input ng-model="form.trailer" class="form-control">
-                                <label for="floatingPassword">Trailer</label>
-                            </div>
-
-                            <div class="form-floating mb-3">
-                                <input ng-model="form.time" class="form-control">
-                                <label for="floatingPassword">Duration</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input ng-model="form.publish_DATE" type="date" class="form-control">
-                                <label for="floatingPassword">Release Date</label>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-floating mb-3">
-                                <div class="mb-3">
-                                    <label for="formFile" class="form-label">Image</label>
-                                    <input ng-model="form.image" class="form-control" type="file" id="formFile"
-                                        onchange="angular.element(this).scope().imageChanged(this.files)">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a th:href="@{/home/admin}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Services</a>
+                </li>
+            </ul>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Navbar Search -->
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <div class="navbar-search-block">
+                        <form class="form-inline">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                                    aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                        <i class="fas fa-times"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="form-floating mb-3 d-flex justify-content-center align-items-center">
-                                <img ng-src="/images/{{form.image}}" style="width: 85%; height: 85%">
+                        </form>
+                    </div>
+                </li>
+
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-comments"></i>
+                        <span class="badge badge-danger navbar-badge">3</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="dist/img/user1-128x128.jpg" alt="User Avatar"
+                                    class="img-size-50 mr-3 img-circle">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        Brad Diesel
+                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                    </h3>
+                                    <p class="text-sm">Call me whenever you can...</p>
+                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                                </div>
                             </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="dist/img/user8-128x128.jpg" alt="User Avatar"
+                                    class="img-size-50 img-circle mr-3">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        John Pierce
+                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                                    </h3>
+                                    <p class="text-sm">I got your message bro</p>
+                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="dist/img/user3-128x128.jpg" alt="User Avatar"
+                                    class="img-size-50 img-circle mr-3">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        Nora Silvester
+                                        <span class="float-right text-sm text-warning"><i
+                                                class="fas fa-star"></i></span>
+                                    </h3>
+                                    <p class="text-sm">The subject goes here</p>
+                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                    </div>
+                </li>
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <span class="badge badge-warning navbar-badge">15</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">15 Notifications</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i> 4 new messages
+                            <span class="float-right text-muted text-sm">3 mins</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-users mr-2"></i> 8 friend requests
+                            <span class="float-right text-muted text-sm">12 hours</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-file mr-2"></i> 3 new reports
+                            <span class="float-right text-muted text-sm">2 days</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-white-primary elevation-3 ">
+            <!-- Brand Logo -->
+            <a th:href="@{/home}" class="brand_logo brand-link d-flex justify-content-center">
+                <img th:src="@{|/images/Logo_Cinema.png|}" alt="MovieTime Logo" class="brand-image">
+                <!-- <span class="brand-text font-weight-light">MovieTime</span> -->
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <!--                     <div class="image">
+                        <img src="" class="img-circle elevation-2" alt="User Image">
+                    </div> -->
+                    <div class="info">
+                        <a href="#" id="name_user" class="d-block" th:text="${#authentication.name}"></a>
+                    </div>
+                </div>
+
+                <!-- SidebarSearch Form -->
+                <div class="form-inline search_slidebar">
+                    <div class="input-group" data-widget="sidebar-search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                            aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-sidebar">
+                                <i class="fas fa-search fa-fw"></i>
+                            </button>
                         </div>
                     </div>
-                    <button ng-click="createMovie()" type="submit" class="btn btn-primary">Create</button>
-                    <button ng-click="updateMovie()" type="submit" class="btn btn-primary">Update</button>
-                    <button ng-click="delete(form.id)" type="submit" class="btn btn-primary">Delete</button>
-                    <button ng-click="reset()" type="submit" class="btn btn-primary">Reset</button>
                 </div>
-        </div>
-    </div>
 
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="sl_menu nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
 
-    <!-- From End -->
-
- 
-    <div class="container list_movie pt-4 px-4" ng-if="movies">
-        <div class="row g-4">
-            <div class="col-12 p-0">
-                <div class="bg-light px-0 py-4">
-                    <h5 class="mb-4">Movie Table</h5>
-                    <div class="table-responsive">
-                        <table class="table table-bordered border-secondary">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Actors</th>
-                                    <th scope="col">Diretors</th>
-                                    <th scope="col">Gerne</th>
-                                    <th scope="col">Trailer</th>
-                                    <th scope="col">Duration</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Release Date</th>
-                                    <th></th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="p in pager.items">
-                                    <td>{{p.id}}</td>
-                                    <td>{{p.name}}</td>
-                                    <td>{{p.description}}</td>
-                                    <td>{{p.actors}}</td>
-                                    <td>{{p.diretors}}</td>
-                                    <td>{{p.gerne}}</td>
-                                    <td>{{p.trailer}}</td>
-                                    <td>{{p.time}}</td>
-                                    <td>{{p.image}}</td>
-                                    <td>{{p.publish_DATE | date:'dd-MM-yyyy'}}</td>
-                                    <td>
-                                        <div class="btn d-flex flex-column align-items-center">
-                                            <button class="button1" ng-click="edit(p.id)"><ion-icon name="create-outline"></ion-icon></button>
-                                            <button class="button2 mt-2" ng-click="delete(p.id)"><ion-icon name="trash-outline"></ion-icon></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-
-                        <!-- Page Start -->
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item">
-                                    <a class="page-link" ng-click="pager.first()" tabindex="-1">First</a>
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link active menu_title">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    Manager
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview" id="list_menu">
+                                <li class="nav-item">
+                                    <a th:href="@{/home/movie}" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Manage Movie</p>
+                                    </a>
                                 </li>
-                                <li class="page-item">
-                                    <a class="page-link" ng-disabled="page == 1" ng-click="pager.prev()">Prevs</a>
+                                <li class="nav-item">
+                                    <a th:href="@{/home/customer}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Manage user</p>
+                                    </a>
                                 </li>
-
-
-                                <li class="page-item"><a class="page-link" href="#">{{pager.page +1}} of
-                                        {{pager.count}}</a></li>
-
-
-
-                                <li class="page-item">
-                                    <a class="page-link" ng-click="pager.next()">Next</a>
+                                <li class="nav-item">
+                                    <a th:href="@{/home/cinema}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Manage cinema</p>
+                                    </a>
                                 </li>
-                                <li class="page-item">
-                                    <a class="page-link" ng-click="pager.last()">Last</a>
+                                <li class="nav-item">
+                                    <a th:href="@{/home/room}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Manage room</p>
+                                    </a>
                                 </li>
                             </ul>
-                        </nav>
-                    </div>
-                </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Tables
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="pages/tables/simple.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Simple Tables</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>DataTables</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>jsGrid</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li class="nav-header">MULTI LEVEL EXAMPLE</li>
+						<li class="nav-item" sec:authorize="isAuthenticated()">
+							<a th:href="@{/logout}" class="nav-link">
+								<i class="fas fa-circle nav-icon"></i>
+								<p>Logout</p>
+							</a>
+						</li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-circle nav-icon"></i>
+                                <p>Level 1</p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
             </div>
+            <!-- /.sidebar -->
+        </aside>
 
 
+        <!-- Content Wrapper. Contains page content=========================================================-->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Movies</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Data Moive</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- SELECT2 EXAMPLE -->
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">Edit Movie</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">;;
+                            <div class="row g-4 d-flex justify-content-center">
+                                <div class="form1 p-4">
+                                    <div class="form-floating mb-3" hidden>
+                                        <input ng-model="form.id" class="form-control" type="hidden">
+                                        <label for="floatingInput">Id</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="form-floating mb-3">
+                                                <input ng-model="form.name" class="form-control">
+                                                <label for="floatingInput">Name</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input ng-model="form.description" class="form-control">
+                                                <label for="floatingPassword">Description</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input ng-model="form.actors" class="form-control">
+                                                <label for="floatingPassword">Actors</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input ng-model="form.diretors" class="form-control">
+                                                <label for="floatingPassword">Diretors</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input ng-model="form.gerne" class="form-control">
+                                                <label for="floatingPassword">Gerne</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input ng-model="form.trailer" class="form-control">
+                                                <label for="floatingPassword">Trailer</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input ng-model="form.time" class="form-control">
+                                                <label for="floatingPassword">Duration</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input ng-model="form.publish_DATE" type="date" class="form-control">
+                                                <label for="floatingPassword">Release Date</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-floating mb-3">
+                                                <div class="mb-3">
+                                                    <label for="formFile" class="form-label">Image</label>
+                                                    <input ng-model="form.image" class="form-control" type="file"
+                                                        id="formFile"
+                                                        onchange="angular.element(this).scope().imageChanged(this.files)">
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="form-floating mb-3 d-flex justify-content-center align-items-center">
+                                                <img ng-src="/images/{{form.image}}" style="width: 85%; height: 85%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button ng-click="createMovie()" type="submit"
+                                        class="btn btn-primary">Create</button>
+                                    <button ng-click="updateMovie()" type="submit"
+                                        class="btn btn-primary">Update</button>
+                                    <button ng-click="delete(form.id)" type="submit"
+                                        class="btn btn-primary">Delete</button>
+                                    <button ng-click="reset()" type="submit" class="btn btn-primary">Reset</button>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <!-- /.container-fluid -->
+            </section>
+
+
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card" ng-if="movies">
+                                <div class="card-header">
+                                    <h3 class="card-title">DataTable </h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Actors</th>
+                                                <th>Diretors</th>
+                                                <th>Gerne</th>
+                                                <th>Trailer</th>
+                                                <th>Duration</th>
+                                                <th>Image</th>
+                                                <th>Release Date</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="p in pager.items">
+                                                <td>{{p.id}}</td>
+                                                <td>{{p.name}}</td>
+                                                <td>{{p.description}}</td>
+                                                <td>{{p.actors}}</td>
+                                                <td>{{p.diretors}}</td>
+                                                <td>{{p.gerne}}</td>
+                                                <td>{{p.trailer}}</td>
+                                                <td>{{p.time}}</td>
+                                                <td>{{p.image}}</td>
+                                                <td>{{p.publish_DATE | date:'dd-MM-yyyy'}}</td>
+                                                <td>
+                                                    <div class="btn d-flex flex-column align-items-center">
+                                                        <button class="button1" ng-click="edit(p.id)"><ion-icon
+                                                                name="create-outline"></ion-icon></button>
+                                                        <button class="button2 mt-2" ng-click="delete(p.id)"><ion-icon
+                                                                name="trash-outline"></ion-icon></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- Page Start -->
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item">
+                                                <a class="page-link" ng-click="pager.first()" tabindex="-1">First</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" ng-disabled="page == 1"
+                                                    ng-click="pager.prev()">Prevs</a>
+                                            </li>
+
+
+                                            <li class="page-item"><a class="page-link" href="#">{{pager.page +1}} of
+                                                    {{pager.count}}</a></li>
+
+
+
+                                            <li class="page-item">
+                                                <a class="page-link" ng-click="pager.next()">Next</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" ng-click="pager.last()">Last</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+
+            <!-- /.content -->
         </div>
-    </div>
-    <!-- Table End -->
+        <!-- /.content-wrapper================================================================================= -->
 
-    <!-- js -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <strong>© 2023 MovieTime: <a href="https://adminlte.io">MovieTime.com</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 1.4.0
+            </div>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+
+
+
+
+
+    <!-- REQUIRED SCRIPTS -->
+
+
+
+
+
     <script th:src="@{/js/movie.js}"></script>
+
+
+
+    <!-- jQuery -->
+    <script th:src="@{/js/plugins/jquery/jquery.min.js}"></script>
+    <!-- Bootstrap -->
+    <script th:src="@{/js/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <!-- DataTables  & Plugins -->
+    <script th:src="@{/js/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/js/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+    <script th:src="@{/js/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+    <script th:src="@{/js/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+    <script th:src="@{/js/plugins/datatables-buttons/js/dataTables.buttons.min.js}"></script>
+    <script th:src="@{/js/plugins/datatables-buttons/js/buttons.bootstrap4.min.js}"></script>
+    <script th:src="@{/js/plugins/jszip/jszip.min.js}"></script>
+    <script th:src="@{/js/plugins/pdfmake/pdfmake.min.js}"></script>
+    <script th:src="@{/js/plugins/pdfmake/vfs_fonts.js}"></script>
+    <script th:src="@{/js/plugins/datatables-buttons/js/buttons.html5.min.js}"></script>
+    <script th:src="@{/js/plugins/datatables-buttons/js/buttons.print.min.js}"></script>
+    <script th:src="@{/js/plugins/datatables-buttons/js/buttons.colVis.min.js}"></script>
+    <!-- AdminLTE -->
+    <!-- <script th:src="@{/css/dist/js/adminlte.js}"></script> -->
+    <script th:src="@{/css/dist/js/adminlte.min.js}"></script>
+    <!-- OPTIONAL SCRIPTS -->
+    <!-- <script th:src="@{/js/plugins/chart.js/Chart.min.js}"></script> -->
+    <!-- AdminLTE for demo purposes -->
+    <script th:src="@{/css/dist/js/demo.js}"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script th:src="@{/css/dist/js/pages/dashboard3.js}"></script>
+
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+
+
+
+
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            //Money Euro
+            $('[data-mask]').inputmask()
+
+            //Date picker
+            $('#reservationdate').datetimepicker({
+                format: 'L'
+            });
+
+            //Date and time picker
+            $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+            //Date range picker
+            $('#reservation').daterangepicker()
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'MM/DD/YYYY hh:mm A'
+                }
+            })
+            //Date range as a button
+            $('#daterange-btn').daterangepicker(
+                {
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
+                },
+                function (start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                }
+            )
+
+            //Timepicker
+            $('#timepicker').datetimepicker({
+                format: 'LT'
+            })
+
+            //Bootstrap Duallistbox
+            $('.duallistbox').bootstrapDualListbox()
+
+            //Colorpicker
+            $('.my-colorpicker1').colorpicker()
+            //color picker with addon
+            $('.my-colorpicker2').colorpicker()
+
+            $('.my-colorpicker2').on('colorpickerChange', function (event) {
+                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+            })
+
+            $("input[data-bootstrap-switch]").each(function () {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            })
+
+        })
+        // BS-Stepper Init
+        document.addEventListener('DOMContentLoaded', function () {
+            window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+        })
+
+        // DropzoneJS Demo Code Start
+        Dropzone.autoDiscover = false
+
+        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+        var previewNode = document.querySelector("#template")
+        previewNode.id = ""
+        var previewTemplate = previewNode.parentNode.innerHTML
+        previewNode.parentNode.removeChild(previewNode)
+
+        var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+            url: "/target-url", // Set the url
+            thumbnailWidth: 80,
+            thumbnailHeight: 80,
+            parallelUploads: 20,
+            previewTemplate: previewTemplate,
+            autoQueue: false, // Make sure the files aren't queued until manually added
+            previewsContainer: "#previews", // Define the container to display the previews
+            clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+        })
+
+        myDropzone.on("addedfile", function (file) {
+            // Hookup the start button
+            file.previewElement.querySelector(".start").onclick = function () { myDropzone.enqueueFile(file) }
+        })
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function (progress) {
+            document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+        })
+
+        myDropzone.on("sending", function (file) {
+            // Show the total progress bar when upload starts
+            document.querySelector("#total-progress").style.opacity = "1"
+            // And disable the start button
+            file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+        })
+
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("queuecomplete", function (progress) {
+            document.querySelector("#total-progress").style.opacity = "0"
+        })
+
+        // Setup the buttons for all transfers
+        // The "add files" button doesn't need to be setup because the config
+        // `clickable` has already been specified.
+        document.querySelector("#actions .start").onclick = function () {
+            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+        }
+        document.querySelector("#actions .cancel").onclick = function () {
+            myDropzone.removeAllFiles(true)
+        }
+        // DropzoneJS Demo Code End
+    </script>
+
 </body>
 
 </html>
