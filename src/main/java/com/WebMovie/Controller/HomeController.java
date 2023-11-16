@@ -2,15 +2,19 @@ package com.WebMovie.Controller;
 
 import java.sql.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jakarta.persistence.criteria.CriteriaBuilder.In;
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+	private PasswordEncoder bCryptPasswordEncoder;
 	
 	@RequestMapping("/login")
 	String login() {
@@ -78,5 +82,15 @@ public class HomeController {
 	@GetMapping("/historyBooking/{id}")
 	String profile(@PathVariable("id") Integer id) {
 		return "historyBooking";
+	}
+	
+	@GetMapping("/home/resetPassword")
+	String resetPassword() {
+		return "resetPassword";
+	}
+	
+	@GetMapping("/changePassword/{id}")
+	String changePassword(@PathVariable("id") Integer id) {
+		return "changePassword";
 	}
 }

@@ -17,4 +17,11 @@ public interface ICustomerService {
 	Optional<Customer> findCustomerByEMAIL(String EAMIL);
 	
 	String getLoggedInUserId();
+	
+	Customer findByEmail(String email);
+	
+	Customer findCustomerByEmail(String email);
+	Customer updatePassowrd(Customer customer);
+	
+	void updatePassword(String password, Integer id);
 }

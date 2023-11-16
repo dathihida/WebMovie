@@ -51,27 +51,28 @@
                         <a th:href="@{/signin}" class="text-dark">Sign In</a>
                         <a th:href="@{/signup}" class="text-white text-decoration-none px-3 py-1 rounded-4"
                             style="background-color: #000000;">Sign Up</a>
+
                     </div>
 
                     <div class="d-flex  justify-content-center align-items-center p-4 p-lg-0 gap-4 bg-light"
                         sec:authorize="isAuthenticated()">
                         <ul class="navbar-nav">
-                        <li class="nav-item dropdown mx-2">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" th:text="${#authentication.name}">
-                                
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="logout" th:href="@{/logout}">Logout</a></li>
-                                <li><a class="history_booking" th:href="@{/historyBooking/{id}}">Order History</a></li>
+                            <li class="nav-item dropdown mx-2" sec:authorize="hasAnyRole('USER')">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false" th:text="${#authentication.name}">
 
-                            </ul>
-                        </li>
-                        <li class="nav-item mx-2" sec:authorize="hasAnyRole('ADMIN')">
-                            <a class="nav-link" th:href="@{/home/admin}">Manage</a>
-                        </li>
-                    </ul>
-                        
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="logout" th:href="@{/logout}">Logout</a></li>
+                                    <li><button ng-click="loadIdUserLogin()">Order History</button></li>
+                                    <li><a th:href="@{/home/resetPassword}">ResetPassword</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item mx-2" sec:authorize="hasAnyRole('ADMIN')">
+                                <a class="nav-link" th:href="@{/home/admin}">Manage</a>
+                            </li>
+                        </ul>
+
                     </div>
                 </div>
             </div>
