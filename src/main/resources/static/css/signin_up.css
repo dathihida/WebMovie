@@ -11,7 +11,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif; 
+    font-family: 'Montserrat', sans-serif;
 }
 
 .signin {
@@ -446,4 +446,86 @@
 
 .signup .container h1 {
     font-size: 32px;
+}
+
+
+
+
+/* =====================Password Reset========================== */
+
+.reset_pw {
+    margin: 120px 0;
+    margin-bottom: 170px;
+}
+
+
+.subscribe {
+    position: relative;
+    height: 200px;
+    width: 340px;
+    padding: 20px;
+    background-color: #FFF;
+    border-radius: 4px;
+    color: #333;
+    box-shadow: 0px 0px 60px 5px rgba(130, 62, 62, 0.521);
+}
+
+.subscribe:after {
+    position: absolute;
+    content: "";
+    right: -10px;
+    bottom: 18px;
+    width: 0;
+    height: 0;
+    border-left: 0px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid rgb(237, 38, 71);
+}
+.subscribe p {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    line-height: 28px;
+}
+
+.subscribe input {
+    position: absolute;
+    bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #d4d4d4;
+    padding: 10px;
+    width: 82%;
+    background: transparent;
+    transition: all .25s ease;
+}
+
+.subscribe input:focus {
+    outline: none;
+    border-bottom: 1px solid rgb(120, 16, 33);
+}
+
+.subscribe .submit-btn {
+    position: absolute;
+    border-radius: 30px;
+    border: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    background-color: rgb(237, 38, 71);
+    color: #FFF;
+    padding: 12px 25px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    right: -10px;
+    bottom: -20px;
+    cursor: pointer;
+    transition: all .25s ease;
+    box-shadow: -5px 6px 20px 0px rgba(84, 32, 32, 0.507);
+}
+
+.subscribe .submit-btn:hover {
+    background-color: rgb(226, 82, 106);
+    box-shadow: -5px 6px 20px 0px rgba(82, 32, 32, 0.704);
 }

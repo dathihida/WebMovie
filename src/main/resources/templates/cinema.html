@@ -80,95 +80,6 @@
 					</div>
 				</li>
 
-				<!-- Messages Dropdown Menu -->
-				<li class="nav-item dropdown">
-					<a class="nav-link" data-toggle="dropdown" href="#">
-						<i class="far fa-comments"></i>
-						<span class="badge badge-danger navbar-badge">3</span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<a href="#" class="dropdown-item">
-							<!-- Message Start -->
-							<div class="media">
-								<img src="dist/img/user1-128x128.jpg" alt="User Avatar"
-									class="img-size-50 mr-3 img-circle">
-								<div class="media-body">
-									<h3 class="dropdown-item-title">
-										Brad Diesel
-										<span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-									</h3>
-									<p class="text-sm">Call me whenever you can...</p>
-									<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-								</div>
-							</div>
-							<!-- Message End -->
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<!-- Message Start -->
-							<div class="media">
-								<img src="dist/img/user8-128x128.jpg" alt="User Avatar"
-									class="img-size-50 img-circle mr-3">
-								<div class="media-body">
-									<h3 class="dropdown-item-title">
-										John Pierce
-										<span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-									</h3>
-									<p class="text-sm">I got your message bro</p>
-									<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-								</div>
-							</div>
-							<!-- Message End -->
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<!-- Message Start -->
-							<div class="media">
-								<img src="dist/img/user3-128x128.jpg" alt="User Avatar"
-									class="img-size-50 img-circle mr-3">
-								<div class="media-body">
-									<h3 class="dropdown-item-title">
-										Nora Silvester
-										<span class="float-right text-sm text-warning"><i
-												class="fas fa-star"></i></span>
-									</h3>
-									<p class="text-sm">The subject goes here</p>
-									<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-								</div>
-							</div>
-							<!-- Message End -->
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-					</div>
-				</li>
-				<!-- Notifications Dropdown Menu -->
-				<li class="nav-item dropdown">
-					<a class="nav-link" data-toggle="dropdown" href="#">
-						<i class="far fa-bell"></i>
-						<span class="badge badge-warning navbar-badge">15</span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<span class="dropdown-item dropdown-header">15 Notifications</span>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<i class="fas fa-envelope mr-2"></i> 4 new messages
-							<span class="float-right text-muted text-sm">3 mins</span>
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<i class="fas fa-users mr-2"></i> 8 friend requests
-							<span class="float-right text-muted text-sm">12 hours</span>
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<i class="fas fa-file mr-2"></i> 3 new reports
-							<span class="float-right text-muted text-sm">2 days</span>
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-					</div>
-				</li>
 				<li class="nav-item">
 					<a class="nav-link" data-widget="fullscreen" href="#" role="button">
 						<i class="fas fa-expand-arrows-alt"></i>
@@ -187,8 +98,8 @@
 		<aside class="main-sidebar sidebar-white-primary elevation-3">
 			<!-- Brand Logo -->
 			<a th:href="@{/home}" class="brand_logo brand-link d-flex justify-content-center">
-                <img th:src="@{|/images/Logo_Cinema.png|}" alt="MovieTime Logo" class="brand-image">
-                <!-- <span class="brand-text font-weight-light">MovieTime</span> -->
+				<img th:src="@{|/images/Logo_Cinema.png|}" alt="MovieTime Logo" class="brand-image">
+				<!-- <span class="brand-text font-weight-light">MovieTime</span> -->
 			</a>
 
 			<!-- Sidebar -->
@@ -222,7 +133,14 @@
 						data-accordion="false">
 						<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-
+						<li class="nav-item">
+							<a th:href="@{/home/admin}" class="nav-link">
+								<i class="nav-icon fas fa-chart-pie"></i>
+								<p>
+									Statistics
+								</p>
+							</a>
+						</li>
 						<li class="nav-item menu-open">
 							<a href="#" class="nav-link active">
 								<i class="nav-icon fas fa-edit"></i>
@@ -259,6 +177,14 @@
 							</ul>
 						</li>
 						<li class="nav-item">
+							<a th:href="@{/home/movie_scheduled}" class="nav-link">
+								<i class="nav-icon fas fa-calendar-alt"></i>
+								<p>
+									Movie schedule
+								</p>
+							</a>
+						</li>
+						<!-- <li class="nav-item">
 							<a href="#" class="nav-link">
 								<i class="nav-icon fas fa-table"></i>
 								<p>
@@ -286,22 +212,22 @@
 									</a>
 								</li>
 							</ul>
+						</li> -->
+
+
+						<li class="nav-header">ACCOUNT</li>
+						<li class="nav-item" sec:authorize="isAuthenticated()">
+							<a th:href="@{/logout}" class="nav-link">
+								<i class="fas fa-circle nav-icon"></i>
+								<p>Logout</p>
+							</a>
 						</li>
-
-
-						<li class="nav-header">MULTI LEVEL EXAMPLE</li>
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a href="#" class="nav-link">
 								<i class="fas fa-circle nav-icon"></i>
 								<p>Level 1</p>
 							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="fas fa-circle nav-icon"></i>
-								<p>Level 1</p>
-							</a>
-						</li>
+						</li> -->
 					</ul>
 				</nav>
 				<!-- /.sidebar-menu -->
@@ -364,13 +290,10 @@
 											<label for="floatingPassword">Address</label>
 										</div>
 									</div>
-									<button ng-click="createCinemas()" type="submit"
-										class="btn btn-primary">Create</button>
-									<button ng-click="updateCinema()" type="submit"
-										class="btn btn-primary">Update</button>
-									<button ng-click="delete(form.id)" type="submit"
-										class="btn btn-primary">Delete</button>
-									<button ng-click="reset()" type="submit" class="btn btn-primary">Reset</button>
+									<button id="btn" ng-click="createCinemas()" type="submit">Create</button>
+									<button id="btn" ng-click="updateCinema()" type="submit">Update</button>
+									<button id="btn" ng-click="delete(form.id)" type="submit">Delete</button>
+									<button id="btn" ng-click="reset()" type="submit">Reset</button>
 								</div>
 							</div>
 						</div>
@@ -398,7 +321,7 @@
 												<th>Id</th>
 												<th>Name</th>
 												<th>Address</th>
-												<th></th>
+												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -408,11 +331,9 @@
 												<td>{{ci.address}}</td>
 												<td>
 													<div
-														class="btn d-flex gap-3 justify-content-center align-items-center">
-														<button class="button1" ng-click="edit(ci.id)"><ion-icon
-																name="create-outline"></ion-icon></button>
-														<button class="button2" ng-click="delete(ci.id)"><ion-icon
-																name="trash-outline"></ion-icon></button>
+														class="d-flex gap-3 justify-content-center align-items-center">
+														<button id="btn" ng-click="edit(ci.id)">Edit</button>
+														<button id="btn" ng-click="delete(ci.id)">Delete</button>
 													</div>
 												</td>
 											</tr>

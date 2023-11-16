@@ -60,7 +60,6 @@
                             <li class="nav-item dropdown mx-2" sec:authorize="hasAnyRole('USER')">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false" th:text="${#authentication.name}">
-
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="logout" th:href="@{/logout}">Logout</a></li>
@@ -68,8 +67,18 @@
                                     <li><a th:href="@{/home/resetPassword}">ResetPassword</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item mx-2" sec:authorize="hasAnyRole('ADMIN')">
-                                <a class="nav-link" th:href="@{/home/admin}">Manage</a>
+                            <li class="nav-item dropdown mx-2" sec:authorize="hasAnyRole('ADMIN')">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false" th:text="${#authentication.name}">
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/home/admin}">Manage</a></li>
+                                    <li><button class="dropdown-item" ng-click="loadIdUserLogin()">Order History</button></li>
+                                    <li><a class="dropdown-item" th:href="@{/home/resetPassword}">Reset Password</a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li><a class="logout dropdown-item" th:href="@{/logout}">Logout</a></li>
+                                </ul>
+
                             </li>
                         </ul>
 
