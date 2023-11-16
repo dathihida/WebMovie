@@ -32,9 +32,9 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 				$scope.invoiceTime = new Date(resp.data.startTime);
 
 				if(resp.data.status === "success"){
-					$scope.elapsedTime = "Da thanh toan";
+					$scope.elapsedTime = "Đã thanh toán";
 				}else if(resp.data.status === "failed"){
-					$scope.elapsedTime = "Thanh toan that bai";
+					$scope.elapsedTime = "Thanh toán thất bại";
 				}else{
 					intervalPromise = $interval(function() {
 						$scope.currentTime = new Date();

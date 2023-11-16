@@ -29,6 +29,7 @@
     <link rel="stylesheet" th:href="@{|/css/home.css|}">
     <link rel="stylesheet" th:href="@{|/css/details.css|}">
     <link rel="stylesheet" th:href="@{|/css/footer.css|}">
+    <link rel="stylesheet" th:href="@{|/css/booking.css|}">
 
 
     <title>Booking</title>
@@ -37,60 +38,179 @@
 <body ng-app="app" ng-controller="controller">
     <div th:replace="~{/navbar/navbar}"></div>
 
-	<ul ng-repeat="row in seatRows">
-      <li>Hàng {{ row.row }}:
-          <span ng-repeat="seat in row.seats">
-              <input type="checkbox" ng-model="seat.isSelected" ng-disabled="seat.isDisabled" ng-change="onSeatChange(seat)">
-              {{ seat.seat_NUMBER }}
-          </span>
-      </li>
-    </ul>
-    <p>Tổng tiền: {{ totalAmount }}</p>
-    <div ng-repeat = "mo in movie_ScheduledById">
-	    <ul>
-	    	<li>IdUser: {{userId}}</li>
-	    	<li th:text="${#authentication.name}"></li>
-	    	<li>IdRoom: {{idRoom}}</li>
-	    	<li>IdMovieSchedueld: {{idMovieScheduled}}</li>
-	    	<li>ToDay: {{form.date | date : 'yyyy-MM-dd'}}</li>
-	    	<li ng-repeat = "ss in selectedSeats">
-	    		SelectSeat: {{ss.id}} - {{ss.seat_ROW}}-{{ss.seat_NUMBER}}
-	    		{{ss.seat_TYPE === 'VIP' ? 20 : (ss.seat_TYPE === 'ECO' ? 10 : ss.seat_TYPE)}}
-	    	</li>
-	    </ul>
-    
-    	{{mo.date}}
-    	{{mo.id_MOVIE.name}}
-    </div>
-	<div>
-		<h2>RESTful Booking - AngularJS</h2>
-		<!--form-->
-		<div>
-			<input ng-model="form.id" type="hidden" />
-			<br /> 
-			<label>Id_Customers</label>
-			<input ng-model="form.id_CUSTOMER.id" ng-value="form.id_CUSTOMER.id">
-            <br /> 
-            <label>IdMovieSchedueld</label>
-            <input ng-model="form.id_MOVIE_SCHEDULED.id" ng-value="form.id_MOVIE_SCHEDULED.id">
-			<br /> 
-			<label>Date</label>
-			<input ng-model="form.date" ng-value ="form.date | date:'yyyy-MM-dd' ">
-			<br /> 
-			<label>price</label>
-			<input ng-model="form.price">
-			<br /> 
-			<hr />
-			<button ng-click="createBooking()">Booking</button>
-			<a th:href="@{/home/checkout/{{idRoom}}/{{day}}/{{timeStart}}/{{idMovieScheduled}}}">Datve</a>
-		</div>
-	</div>
-    
+
+
+
+    <section class="container mt-4">
+        <div class=" row">
+            <div class="seat_booking col-8">
+                <div class="seat_status">
+                    <ul class="showcase d-flex justify-content-center align-content-center gap-5 p-0 m-2 ms-3">
+                        <li>
+                            <div class="seat selected"></div>
+                            <small>Yours</small>
+                        </li>
+
+                        <li>
+                            <div class="seat occupied"></div>
+                            <small>Unavailable</small>
+                        </li>
+
+                        <!-- <li>
+                            <div class="seat sold"></div>
+                            <small>Sold</small>
+                        </li> -->
+                    </ul>
+                </div>
+
+                <div class="screen">
+                    <span>SCREEN</span>
+                </div>
+
+                <div class="room_movie d-flex mt-5 ">
+                    <div class="column_name">
+                        <ul class="name" ng-repeat="row in seatRows">
+                            <li>{{ row.row }}</li>
+                        </ul>
+                    </div>
+                    <div class="list_seat d-flex flex-column justify-content-center align-items-center">
+                        <ul ng-repeat="row in seatRows">
+                            <li ng-repeat="seat in row.seats">
+
+                                <!-- <span class="seat_number"></span>
+                                    <span class="seat1"></span> -->
+                                <!-- <label for="seat_number" class="seat1">{{ seat.seat_NUMBER }}</label> -->
+                           
+                                <div class="seat1" for="seat_number">{{ seat.seat_NUMBER }}</div>
+                                <input id="seat_number" class="seat" type="checkbox" ng-model="seat.isSelected"
+                                ng-disabled="seat.isDisabled" ng-change="onSeatChange(seat)">
+                                <!-- <div class="gr">
+                                <label >
+                                <input id="seat_number" class="seat" type="checkbox" ng-model="seat.isSelected"
+                                    ng-disabled="seat.isDisabled" ng-change="onSeatChange(seat)">
+                                    <span>{{ seat.seat_NUMBER }}</span>
+                                </label>
+                                </div> -->
+                            </li>
+                        </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="seat_type mt-3">
+                    <ul class="showcase d-flex justify-content-center align-content-center gap-4 p-0 m-2 ms-3">
+                        <li>
+                            <div class="seat standard"></div>
+                            <small>Standard</small>
+                        </li>
+
+                        <li>
+                            <div class="seat vip"></div>
+                            <small>Vip</small>
+                        </li>
+
+                        <!-- <li>
+                            <div class="seat couple"></div>
+                            <small>Couple</small>
+                        </li> -->
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="info_seatbooking col-4 m-0 px-2 d-flex flex-column gap-5">
+
+                <div class="countdown text-center p-2 m-2">
+                    <p hidden> Thời gian giữ ghế: <span id="time"> {{ elapsedTime }}</span></p>
+                </div>
+
+                <div class="info_seat">
+                    <div class="card-body gap-3" ng-repeat="mo in movie_ScheduledById">
+                        <span>{{mo.id_MOVIE.name}}</span>
+                        <div>
+                            <h5 class="mt-1">{{mo.id_ROOM.id_CINEMAS.name}}</h5>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-1">
+                            <span>Session</span>
+                            <h6> {{timeStart}} </h6> - <h6>{{day}}</h6>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-1">
+                            <span>Screen </span>
+                            <h6>{{idRoom}}</h6> - Seat(s)
+
+                            <h6 id="selected-seats" ng-repeat="ss in selectedSeats">
+                                <p hidden>{{ss.id}}</p>
+                                {{ss.seat_ROW}}{{ss.seat_NUMBER}}
+
+                                ({{ss.seat_TYPE === 'VIP' ? 'VIP' : (ss.seat_TYPE === 'ECO' ? 'Sta' : ss.seat_TYPE)}})
+
+                            </h6>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="total_price">
+                    <div class="card-body">
+                        <span class="title">TOTAL PRICE</span>
+                        <div class="price">
+                            <span> {{ totalAmount }}</span> <em class="text-decoration-underline">đ</em>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn_directional d-flex justify-content-around align-items-center">
+                    <button type="submit" class="btn btn-outline-dark">Back</button>
+                    <button type="submit" class="btn next" ng-click="createBooking()">Continue</button>
+                    <a th:href="@{/home/checkout/{{idRoom}}/{{day}}/{{timeStart}}/{{idMovieScheduled}}}"
+                        hidden>Datve</a>
+                </div>
+                <div hidden>
+                    <div>
+                        <input ng-model="form.id" type="hidden" />
+                        <br />
+                        <label>Id_Customers</label>
+                        <input ng-model="form.id_CUSTOMER.id" ng-value="form.id_CUSTOMER.id">
+                        <br />
+                        <label>IdMovieSchedueld</label>
+                        <input ng-model="form.id_MOVIE_SCHEDULED.id" ng-value="form.id_MOVIE_SCHEDULED.id">
+                        <br />
+                        <label>Date</label>
+                        <input ng-model="form.date" ng-value="form.date | date:'yyyy-MM-dd' ">
+                        <br />
+                        <label>price</label>
+                        <input ng-model="form.price">
+                        <br />
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div hidden>
+            <ul>
+                <li>IdUser: {{userId}}</li>
+                <li th:text="${#authentication.name}"></li>
+                <li>IdMovieSchedueld: {{idMovieScheduled}}</li>
+                <li>ToDay: {{form.date | date : 'yyyy-MM-dd'}}</li>
+            </ul>
+
+            {{mo.date}}
+        </div>
+
+    </section>
+
+
+    <div th:replace="~{/navbar/_footer}"></div>
     <!-- js -->
     <script th:src="@{/js/booking.js}"></script>
-    
+
     <script th:src="@{/js/layout/main.js}"></script>
-    <script th:src="@{/js/signup.js}"></script>
+
+
+
+
 </body>
+
+
 
 </html>
