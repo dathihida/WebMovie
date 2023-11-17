@@ -17,24 +17,24 @@ import com.WebMovie.Service.MailService;
 import com.WebMovie.WebSecurityConfig.UserInfoDetails;
 
 @Service
-public class CustomerService implements ICustomerService{
+public class CustomerService implements ICustomerService {
 
 	@Autowired
 	CustomerRepository customerRepository;
-	
+
 	@Autowired
 	private PasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
 	MailService mailService;
-	
+
 	@Override
 	public Customer addCustomer(Customer customer) {
 		// TODO Auto-generated method stub
 		customer.setEXIST(true);
-		customer.setROLE("ROLE_ADMIN");
+		customer.setROLE("ROLE_USER");
 		customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
-		
+
 		mailService.sendMailCreateCustomer(customer);
 		return customerRepository.save(customer);
 	}
@@ -88,12 +88,12 @@ public class CustomerService implements ICustomerService{
 	public String getLoggedInUserId() {
 		// TODO Auto-generated method stub
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
-	        UserInfoDetails use = (UserInfoDetails) authentication.getPrincipal();
-	        Integer idUser = use.getId();
-	        return String.valueOf(idUser);
-        }
-        return null;
+		if (authentication != null) {
+			UserInfoDetails use = (UserInfoDetails) authentication.getPrincipal();
+			Integer idUser = use.getId();
+			return String.valueOf(idUser);
+		}
+		return null;
 	}
 
 	@Override
@@ -117,6 +117,6 @@ public class CustomerService implements ICustomerService{
 	@Override
 	public void updatePassword(String password, Integer id) {
 		customerRepository.updatePassword(password, id);
-		
+
 	}
 }
