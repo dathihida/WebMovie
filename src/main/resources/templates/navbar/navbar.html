@@ -62,9 +62,10 @@
                                     aria-expanded="false" th:text="${#authentication.name}">
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="logout" th:href="@{/logout}">Logout</a></li>
-                                    <li><button ng-click="loadIdUserLogin()">Order History</button></li>
-                                    <li><a th:href="@{/home/resetPassword}">ResetPassword</a></li>
+                                    <li><button class="dropdown-item" ng-click="loadIdUserLogin()">Order History</button></li>
+                                    <li><a class="dropdown-item" th:href="@{/home/resetPassword}">ResetPassword</a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li><a class="dropdown-item logout" th:href="@{/logout}">Logout</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown mx-2" sec:authorize="hasAnyRole('ADMIN')">
