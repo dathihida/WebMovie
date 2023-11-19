@@ -171,8 +171,7 @@ app.controller("controller", function($scope, $http,  $filter){
     }
     
     
-    	//phan trang
-	
+    //phan trang
 	$scope.pager = {
 		page:0,
 		size:10,

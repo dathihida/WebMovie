@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.WebMovie.Entity.Movie_Scheduled;
+import com.WebMovie.Repository.BookingRepo;
 import com.WebMovie.Service.Movie_ScheduledService;
 
 @RestController
@@ -23,6 +24,9 @@ import com.WebMovie.Service.Movie_ScheduledService;
 public class Movie_ScheduledRestController {
 	@Autowired
 	Movie_ScheduledService movie_ScheduledService;
+	
+	@Autowired
+	BookingRepo bookingRepo;
 	
 	@GetMapping("/all")
 	List<Movie_Scheduled> getAll(){
@@ -60,5 +64,10 @@ public class Movie_ScheduledRestController {
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	void DeleteMoviScheduleById(@PathVariable Integer id) {
 		movie_ScheduledService.deleteMovie_Scheduled(id);
+	}
+	
+	@GetMapping("/updateStatusMovie_Scheduled")
+	void updateStatusMovie_Scheduled() {
+		bookingRepo.updateStatusMovie_Scheduled();
 	}
 }

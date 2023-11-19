@@ -50,10 +50,10 @@ public class BookingRestController {
 		return bookingService.addBooking(booking);
 	}
 
-	@GetMapping("/update")
-	void updateBooking() {
-		bookingRepo.updateEntities();
-	}
+//	@GetMapping("/update")
+//	void updateBooking() {
+//		bookingRepo.updateEntities();
+//	}
 
 	@GetMapping("/update/{id}")
 	void updateStatusBooking(@PathVariable("id") Integer id) {

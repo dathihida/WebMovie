@@ -3,6 +3,7 @@ package com.WebMovie.Controller;
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,37 +25,47 @@ public class HomeController {
 	String home() {
 		return "home";
 	}
-
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	@GetMapping("/home/admin")
+	String admin() {
+		return "admin";
+	}
 	@RequestMapping("/signup")
 	String signup() {
 		return "signup";
 	}
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/home/customer")
 	String customer() {
 		return "customer";
 	}
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/home/movie")
 	String movie() {
 		return "movie";
 	}
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/home/cinema")
 	String cinema() {
 		return "cinema";
 	}
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/home/room")
 	String room() {
 		return "room";
 	}
 
+	
 	@GetMapping("/home/day")
 	String day() {
 		return "detail_booking";
 	}
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/home/movie_scheduled")
 	String movie_scheduled() {
 		return "movie_scheduled";

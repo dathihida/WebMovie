@@ -63,5 +63,31 @@ app.controller("controller", function($scope, $http){
             console.log("Error", error);
         })
     }
+
+    //phan trang
+	$scope.pager = {
+		page:0,
+		size:10,
+		get items(){
+			var start = this.page * this.size;
+			return  $scope.cinemas.slice(start, start + this.size);
+		},
+		get count(){
+			return Math.ceil(1.0* $scope.cinemas.length/ this.size)
+		},
+		first(){
+			this.page=0;
+		},
+		prev(){
+			this.page--;
+		},
+		next(){
+			this.page++;
+		},
+		last(){
+			this.page = this.count-1;
+		}
+	}
+
     $scope.loadAllCinemas();
 });

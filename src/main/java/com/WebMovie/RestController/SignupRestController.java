@@ -1,8 +1,6 @@
-   package com.WebMovie.RestController;
+package com.WebMovie.RestController;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,23 +17,23 @@ import com.WebMovie.Service.ICustomerService;
 public class SignupRestController {
 	@Autowired
 	ICustomerService customerService;
-	
-//	@Autowired
-//	private PasswordEncoder bCryptPasswordEncoder;
-	
+
+	// @Autowired
+	// private PasswordEncoder bCryptPasswordEncoder;
+
 	@GetMapping()
-	String sdd(){
+	String sdd() {
 		return "ko nhe";
 	}
-	
+
 	@PostMapping("/userNoExist")
 	public Customer addCustomerNoExist(@RequestBody Customer customer) {
-//		customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
+		// customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
 		return customerService.addCustomer(customer);
 	}
-	
-//	@PostMapping("/create")
-//	public Customer addCustomer(@RequestBody Customer customer) {
-//		return customerService.addCustomer(customer);
-//	}
+
+	// @PostMapping("/create")
+	// public Customer addCustomer(@RequestBody Customer customer) {
+	// return customerService.addCustomer(customer);
+	// }
 }

@@ -19,12 +19,12 @@
                                 <img ng-src="/images/{{item.id_MOVIE.image}}" class="card-img-top"
                                     alt="Hollywood Sign on The Hill" />
                             </a>
-                            <div class="card-header d-flex justify-content-between align-items-center py-2 px-2">
+<!--                             <div class="card-header d-flex justify-content-between align-items-center py-2 px-2">
                                 <small class="text-muted">{{item.time_START}}</small>
                                 <small class="text-muted">{{item.date | date:'dd-MM-yyyy'}}</small>
                                 <small class="text-muted">{{item.id_ROOM.name}}</small>
                                 <small class="text-muted">{{item.id_ROOM.id_CINEMAS.name}}</small>
-                            </div>
+                            </div> -->
                             <div class="card-body p-2">
                                 <h6 class="card-title">{{item.id_MOVIE.name}}</h6>
                             </div>
@@ -34,8 +34,12 @@
                 </div>
                 <div class="d-flex justify-content-end mt-3">
 
-                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">View more
-                        >></button>
+                    <button class="cta">
+                        <span class="hover-underline-animation"> Shop now </span>
+                        <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
+                            <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -63,8 +67,12 @@
                 </div>
                 <div class="d-flex justify-content-end mt-3">
 
-                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark">Xem
-                        thêm</button>
+                    <a href="" class="cta text-decoration-none">
+                        <span class="hover-underline-animation"> View </span>
+                        <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
+                            <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                        </svg>
+                    </a>
                 </div>
             </div>
 

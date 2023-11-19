@@ -21,7 +21,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/home", "/home/**", "/login", "/home/resetPassword",
+                .requestMatchers("/", "/home", "/login", "/home/resetPassword",
                         "/signup", "/js/**", "/css/**", "/images/**",
                         "/add", "/add/userNoExist",
                         "/api/movie/all", "/movie/**", "/v1/movie/**",
@@ -36,6 +36,7 @@ public class SecurityConfig {
                         "/api/resetPassword/**", "/changePassword/**", "/api/user/**", "/api/find/**", "/error/404")
                 .permitAll()
                 .requestMatchers("/booking/**", "/checkout/**", "/historyBooking/**").authenticated()
+                .requestMatchers("/home/**").authenticated()
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/**", "/rest/**").authenticated()

@@ -1,0 +1,49 @@
+@charset "ISO-8859-1";
+
+.container .form1 {
+  width: 80%;
+  border: solid 1px #8d8d8d;
+  border-radius: 10px;
+}
+
+
+.content #btn {
+  height: 2em;
+  width: 4.7em;
+  color: white;
+  font-weight: 500;
+  border-radius: 5px;
+  border: 0.1rem solid transparent;
+  background-color: rgb(16, 38, 63);
+  transition: 0.3s;
+  font-size: 1em;
+}
+.content #btn:hover {
+  cursor: pointer;
+  transform: scale(1.05) rotate(3deg);
+}
+
+.content #btn:active {
+  animation: borderMove 0.5s forwards;
+  transform: scale(0.9) rotate(-3deg);
+  background-color: rgb(255, 255, 255);
+  color: rgb(55, 69, 86);
+  border: 0.1rem solid rgb(16, 38, 63);
+}
+
+@keyframes borderMove {
+  0% {
+    border-width: 0.1rem;
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    border-width: 0.4rem;
+    transform: scale(0.9) rotate(-3deg);
+  }
+
+  100% {
+    border-width: 0.15rem;
+    transform: scale(1) rotate(0deg);
+  }
+}
