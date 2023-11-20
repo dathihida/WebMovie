@@ -50,10 +50,10 @@ public class BookingRestController {
 		return bookingService.addBooking(booking);
 	}
 
-//	@GetMapping("/update")
-//	void updateBooking() {
-//		bookingRepo.updateEntities();
-//	}
+	// @GetMapping("/update")
+	// void updateBooking() {
+	// bookingRepo.updateEntities();
+	// }
 
 	@GetMapping("/update/{id}")
 	void updateStatusBooking(@PathVariable("id") Integer id) {
@@ -68,5 +68,10 @@ public class BookingRestController {
 	@GetMapping("/profile/{id}")
 	List<Booking> getAllBookingByIdCustomer(@PathVariable("id") Integer id) {
 		return bookingService.getAllBookingByIdCustomer(id);
+	}
+
+	@GetMapping("/updateStatus")
+	void updateStatus() {
+		bookingRepo.updateStatusBookingAll();
 	}
 }

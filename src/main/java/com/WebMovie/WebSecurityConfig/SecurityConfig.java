@@ -11,6 +11,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
+
+import io.micrometer.core.ipc.http.HttpSender.Request;
 
 @Configuration
 @EnableWebSecurity
@@ -42,7 +48,9 @@ public class SecurityConfig {
                 .requestMatchers("/api/**", "/rest/**").authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login").loginProcessingUrl("/login")
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                // .successHandler(saveRequestAuthenticationSuccessHandler())
                 // return page home
                 .defaultSuccessUrl("/home", true)
                 // logout in page home
@@ -54,8 +62,25 @@ public class SecurityConfig {
                 // url and page 404
                 .and()
                 .exceptionHandling().accessDeniedPage("/error/404")// duong dan
+                // them moi
+                // .and().requestCache().requestCache(requestCache())
                 .and().build();
     }
+
+    // @Bean
+    // public AuthenticationSuccessHandler saveRequestAuthenticationSuccessHandler()
+    // {
+    // SavedRequestAwareAuthenticationSuccessHandler authenticationSuccessHandler =
+    // new SavedRequestAwareAuthenticationSuccessHandler();
+    // authenticationSuccessHandler.setTargetUrlParameter("targetUrl");
+    // // authenticationSuccessHandler.setDefaultTargetUrl("/home");
+    // return authenticationSuccessHandler;
+    // }
+
+    // @Bean
+    // public RequestCache requestCache() {
+    // return new HttpSessionRequestCache();
+    // }
 
     @Bean
     public UserDetailsService userDetailsService() {

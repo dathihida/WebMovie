@@ -1,5 +1,6 @@
 let host="http://localhost:8080/api/movie";
 let movie_scheduled="http://localhost:8080/api/movie_scheduled";
+let booking = "http://localhost:8080/api/booking"
 const app = angular.module("app",[]);
 app.controller("controller", function($scope, $http,  $filter){
     $scope.form = {};
@@ -204,7 +205,15 @@ app.controller("controller", function($scope, $http,  $filter){
 			window.location.href = `http://localhost:8080/historyBooking/` + userIdLogin
 		});
 	}
+
+	$scope.updateStatus = function(){
+		var url = `${booking}/updateStatus`
+		$http.get(url).then(resp=>{
+			console.log(resp.data);
+		})
+	}
 	
+	$scope.updateStatus();
 	$scope.loadAllMovies();
 	$scope.loadAllMovie_Scheduleds();
 	$scope.loadAllMovie_ScheduledsNextDay();
