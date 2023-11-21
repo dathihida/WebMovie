@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -27,7 +29,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/home", "/login", "/home/resetPassword",
+                .requestMatchers("/", "/home", "/login", "/home/resetPassword","/login-success",
                         "/signup", "/js/**", "/css/**", "/images/**",
                         "/add", "/add/userNoExist",
                         "/api/movie/all", "/movie/**", "/v1/movie/**",
@@ -46,41 +48,24 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/**", "/rest/**").authenticated()
-                .and()
+               .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                // .successHandler(saveRequestAuthenticationSuccessHandler())
                 // return page home
-                .defaultSuccessUrl("/home", true)
+                .defaultSuccessUrl("/login-success", true)
+                .permitAll()
                 // logout in page home
                 .and()
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/home")
                 .permitAll()
-                // url and page 404
+                 // url and page 404
                 .and()
                 .exceptionHandling().accessDeniedPage("/error/404")// duong dan
-                // them moi
-                // .and().requestCache().requestCache(requestCache())
                 .and().build();
     }
-
-    // @Bean
-    // public AuthenticationSuccessHandler saveRequestAuthenticationSuccessHandler()
-    // {
-    // SavedRequestAwareAuthenticationSuccessHandler authenticationSuccessHandler =
-    // new SavedRequestAwareAuthenticationSuccessHandler();
-    // authenticationSuccessHandler.setTargetUrlParameter("targetUrl");
-    // // authenticationSuccessHandler.setDefaultTargetUrl("/home");
-    // return authenticationSuccessHandler;
-    // }
-
-    // @Bean
-    // public RequestCache requestCache() {
-    // return new HttpSessionRequestCache();
-    // }
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -98,5 +83,10 @@ public class SecurityConfig {
         daoAuthenticationProvider.setUserDetailsService(userDetailsService());
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
+    }
+    
+    @Bean
+    public RedirectStrategy redirectStrategy() {
+    	return new DefaultRedirectStrategy();
     }
 }
