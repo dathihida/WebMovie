@@ -1,6 +1,7 @@
 let host_seatScheduled = "http://localhost:8080/api/seat_scheduled";
 let host_booking = "http://localhost:8080/api/booking";
 let host_pay = "http://localhost:8080/api/pay";
+let host_voucher = "http://localhost:8080/api/voucher"
 const app = angular.module("appBooking", []);
 
 app.controller("controllerBooking", function($scope, $http, $interval, $timeout) {
@@ -87,21 +88,86 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 			});
 		})
 	}
+	
+	$scope.payBooking= [];
+	$scope.pay = function(idBooking){
+		var url = `${host_pay}/${idBooking}`;
+		$http.get(url).then(resp=>{
+			$scope.payBooking.push(resp.data);
+			console.log("payBooking",resp.data);		
+		})
+	}
+	
+	$scope.availableVouchers = [];
+	
+	$scope.voucher = function(){
+		var url = `${host_voucher}/all`;
+		$http.get(url).then(resp =>{
+			$scope.availableVouchers = resp.data;
+			console.log("availableVouchers",$scope.availableVouchers)
+		})
+	}
 
-	//thanh toan
-	$scope.thanhtoan = function(price) {
+	$scope.form = {};
+
+	$scope.updatePrice = function(idBooking){
+		var data = angular.copy($scope.form);
+		var index = $scope.availableVouchers.findIndex(idVoucher => idVoucher.id === $scope.form.idVoucher);
+		const discount = $scope.availableVouchers[index].discount;
+		var url = `${host_booking}/v1/${idBooking}`;
+		$http.get(url).then(resp => {
+			console.log(resp.data.price);
+			console.log(discount);
+			$scope.discountedPrice = resp.data.price - (resp.data.price * discount/100);
+		})
+	}
+
+	$scope.thanhtoan = function(idBooking) {
+		var dataVoucher = angular.copy($scope.form);
+		var index = $scope.availableVouchers.findIndex(idVoucher => idVoucher.id === $scope.form.idVoucher);
+	
+		// Kiểm tra nếu index không tìm thấy hoặc discount là undefined
+		if (index === -1 || $scope.availableVouchers[index].discount === undefined) {
+			// Xử lý khi không chọn voucher hoặc khi discount là undefined
+			console.log("No voucher selected or discount is undefined");
+			// Thực hiện thanh toán với giá gốc
+			var url = `${host_booking}/v1/${idBooking}`;
+			$http.get(url).then(resp => {
+				$scope.discountedPrice = resp.data.price;
+				$scope.form.idVoucher = null;
+				// Gọi hàm xử lý thanh toán
+				$scope.performPayment1(idBooking);
+			});
+			return;
+		}
+	
+		const discount = $scope.availableVouchers[index].discount;
+	
+		var url = `${host_booking}/v1/${idBooking}`;
+		$http.get(url).then(resp => {
+			$scope.discountedPrice = resp.data.price - (resp.data.price * discount / 100);
+			// Gọi hàm xử lý thanh toán
+			$scope.performPayment(idBooking);
+		});
+	}
+	
+	$scope.performPayment = function(idBooking) {
 		var data = {
-			price: price,
+			price: $scope.discountedPrice,
 			intent: "Buy",
 			method: "Online",
 			currency: "VND",
 			description: "Thanh toan tien ve xem phim",
 			id_BOOKING: {
 				id: idBooking
+			},
+			id_VOUCHER: {
+				id: $scope.form.idVoucher
 			}
 		};
+	
 		console.log("data", data);
-		
+	
 		// create pay
 		$http.post(`${host_pay}`, data).then(resp => {
 			console.log("pay", resp.data);
@@ -111,15 +177,50 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 				// id customer
 				var url = `${host_booking}/v1/${idBooking}`;
 				$http.get(url).then(resp => {
-					console.log(resp.data)
+					console.log("sdss", resp.data.id_CUSTOMER.id);
 					window.location.href = `http://localhost:8080/historyBooking/` + resp.data.id_CUSTOMER.id;
-				})
-			})
+				});
+			});
 			$scope.stopClock();
 		}).catch(error => {
 			console.log("Error", error);
-		})
-	}
+		});
+	};
+		$scope.performPayment1 = function(idBooking) {
+			var data = {
+				price: $scope.discountedPrice,
+				intent: "Buy",
+				method: "Online",
+				currency: "VND",
+				description: "Thanh toan tien ve xem phim",
+				id_BOOKING: {
+					id: idBooking
+				}
+			};
+		
+			console.log("data", data);
+		
+			// create pay
+			$http.post(`${host_pay}`, data).then(resp => {
+				console.log("pay", resp.data);
+				//update status booking
+				$http.get(`${host_booking}/update/${idBooking}`).then(resp => {
+					console.log("update", resp.data);
+					// id customer
+					var url = `${host_booking}/v1/${idBooking}`;
+					$http.get(url).then(resp => {
+						console.log("sdss", resp.data.id_CUSTOMER.id);
+						window.location.href = `http://localhost:8080/historyBooking/` + resp.data.id_CUSTOMER.id;
+					});
+				});
+				$scope.stopClock();
+			}).catch(error => {
+				console.log("Error", error);
+			});
+	};
+	
+	$scope.pay(idBooking);
 	$scope.getBookingId(idBooking);
 	$scope.getSeat_Scheduled(idBooking);
+	$scope.voucher();
 });

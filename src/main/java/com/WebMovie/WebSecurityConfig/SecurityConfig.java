@@ -13,12 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
-import org.springframework.security.web.savedrequest.RequestCache;
-
-import io.micrometer.core.ipc.http.HttpSender.Request;
 
 @Configuration
 @EnableWebSecurity
@@ -29,7 +23,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/home", "/login", "/home/resetPassword","/login-success",
+                .requestMatchers("/", "/home", "/login", "/home/resetPassword", "/login-success",
                         "/signup", "/js/**", "/css/**", "/images/**",
                         "/add", "/add/userNoExist",
                         "/api/movie/all", "/movie/**", "/v1/movie/**",
@@ -39,7 +33,7 @@ public class SecurityConfig {
                         "/api/movie_scheduled/detail/**", "/api/movie_scheduled/date/**",
                         "/api/seat_scheduled/**", "/api/seat_scheduled", "/api/movie_scheduled/**",
                         "/api/seat/**",
-                        "/api/booking/**", "/api/booking", "/api/booking/update/**",
+                        "/api/booking/**", "/api/booking", "/api/booking/update/**", "/api/voucher/**",
                         "/pay", "/pay/**", "/api/pay", "/api/pay/**", "/mail/**",
                         "/api/resetPassword/**", "/changePassword/**", "/api/user/**", "/api/find/**", "/error/404")
                 .permitAll()
@@ -48,7 +42,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/**", "/rest/**").authenticated()
-               .and()
+                .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
@@ -61,7 +55,7 @@ public class SecurityConfig {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/home")
                 .permitAll()
-                 // url and page 404
+                // url and page 404
                 .and()
                 .exceptionHandling().accessDeniedPage("/error/404")// duong dan
                 .and().build();
@@ -84,9 +78,9 @@ public class SecurityConfig {
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
     }
-    
+
     @Bean
     public RedirectStrategy redirectStrategy() {
-    	return new DefaultRedirectStrategy();
+        return new DefaultRedirectStrategy();
     }
 }

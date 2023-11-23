@@ -85,6 +85,12 @@ app.controller("controller", function($scope, $http,  $filter){
         })
     }
     
+	$scope.updateStatusMovie_Scheduled = function(){
+		var url = `${movie_scheduled}/updateStatusMovie_Scheduled`;
+		$http.get(url).then(resp=>{
+
+		})
+	}
     
 
     $scope.loadAllMovies = function(){
@@ -217,4 +223,5 @@ app.controller("controller", function($scope, $http,  $filter){
 	$scope.loadAllMovies();
 	$scope.loadAllMovie_Scheduleds();
 	$scope.loadAllMovie_ScheduledsNextDay();
+	$scope.updateStatusMovie_Scheduled();
 })

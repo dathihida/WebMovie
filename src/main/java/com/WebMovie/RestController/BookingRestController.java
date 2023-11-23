@@ -74,4 +74,5 @@ public class BookingRestController {
 	void updateStatus() {
 		bookingRepo.updateStatusBookingAll();
 	}
+
 }

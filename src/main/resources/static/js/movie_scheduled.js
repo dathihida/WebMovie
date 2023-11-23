@@ -22,7 +22,8 @@ app.controller("controller", function($scope, $http){
     $scope.loadAllMovie_Scheduleds = function(){
         var url = `${host}/all`;
         $http.get(url).then(resp=>{
-            $scope.movie_scheduleds = resp.data;
+            // $scope.movie_scheduleds = resp.data;
+            $scope.movie_scheduleds = resp.data.filter(item => item.status !== false);
             console.log("Allmovie_scheduleds", resp);
         }).catch(error=>{
             console.log("Error", error);

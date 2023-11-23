@@ -23,7 +23,7 @@ public class HomeController {
 
 	@Autowired
 	private PasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
 	private RedirectStrategy redirectStrategy;
 
@@ -36,25 +36,28 @@ public class HomeController {
 
 	@GetMapping("/login-success")
 	public void loginSuccess(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//		SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
+		// SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request,
+		// response);
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
-		
-		if(prevPage != null && !prevPage.contains("/login")) {
+
+		if (prevPage != null && !prevPage.contains("/login")) {
 			redirectStrategy.sendRedirect(request, response, prevPage);
-		}else {
+		} else {
 			redirectStrategy.sendRedirect(request, response, "/home");
 		}
 	}
-	
+
 	@GetMapping("/home")
 	String home() {
 		return "home";
 	}
+
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/home/admin")
 	String admin() {
 		return "admin";
 	}
+
 	@RequestMapping("/signup")
 	String signup() {
 		return "signup";
@@ -84,7 +87,6 @@ public class HomeController {
 		return "room";
 	}
 
-	
 	@GetMapping("/home/day")
 	String day() {
 		return "detail_booking";
@@ -94,6 +96,12 @@ public class HomeController {
 	@GetMapping("/home/movie_scheduled")
 	String movie_scheduled() {
 		return "movie_scheduled";
+	}
+
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	@GetMapping("/home/voucher")
+	String voucher() {
+		return "voucher";
 	}
 
 	@GetMapping("/checkout/{idBooking}")
