@@ -25,6 +25,29 @@
   color: rgb(55, 69, 86);
   border: 0.1rem solid rgb(16, 38, 63);
 }
+.content #btn1 {
+  height: 2em;
+  width: 4.7em;
+  color: white;
+  font-weight: 500;
+  border-radius: 5px;
+  border: 0.1rem solid transparent;
+  background-color: rgb(16, 38, 63);
+  transition: 0.3s;
+  font-size: 1em;
+}
+.content #btn1:hover {
+  cursor: pointer;
+  transform: scale(1.05) rotate(3deg);
+}
+
+.content #btn1:active {
+  animation: borderMove 0.5s forwards;
+  transform: scale(0.9) rotate(-3deg);
+  background-color: rgb(255, 255, 255);
+  color: rgb(55, 69, 86);
+  border: 0.1rem solid rgb(16, 38, 63);
+}
 
 @keyframes borderMove {
   0% {
@@ -41,4 +64,40 @@
     border-width: 0.15rem;
     transform: scale(1) rotate(0deg);
   }
+}
+.input__note textarea {
+  width: 100%;
+  min-height: 200px;
+  border: 1px solid #ccc;
+  user-select: none;
+  resize: none;
+  padding: 1rem;
+}
+.input__note textarea:focus {
+  border: 1px solid #00bfa6;
+}
+.form-group {
+  position: relative;
+}
+.form-group:last-child {
+  margin-bottom: 0;
+}
+.form-group.success input {
+  border-color: #2ecc71;
+}
+.form-group.error input {
+  border-color: #e74c3c;
+}
+.form-group small {
+  color: #e74c3c;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  visibility: hidden;
+  font-size: 12px;
+  padding-left: 14px;
+  margin-bottom: 17px;
+}
+.form-group.error small {
+  visibility: visible;
 }

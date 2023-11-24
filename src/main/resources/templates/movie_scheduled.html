@@ -49,15 +49,15 @@
 				<li class="nav-item d-none d-sm-inline-block">
 					<a th:href="@{/home/admin}" class="nav-link">Home</a>
 				</li>
-				<li class="nav-item d-none d-sm-inline-block">
+				<!-- <li class="nav-item d-none d-sm-inline-block">
 					<a href="#" class="nav-link">Services</a>
-				</li>
+				</li> -->
 			</ul>
 
 			<!-- Right navbar links -->
 			<ul class="navbar-nav ml-auto">
 				<!-- Navbar Search -->
-				<li class="nav-item">
+				<!-- <li class="nav-item">
 					<a class="nav-link" data-widget="navbar-search" href="#" role="button">
 						<i class="fas fa-search"></i>
 					</a>
@@ -77,18 +77,18 @@
 							</div>
 						</form>
 					</div>
-				</li>
+				</li> -->
 
 				<li class="nav-item">
 					<a class="nav-link" data-widget="fullscreen" href="#" role="button">
 						<i class="fas fa-expand-arrows-alt"></i>
 					</a>
 				</li>
-				<li class="nav-item">
+				<!-- <li class="nav-item">
 					<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
 						<i class="fas fa-th-large"></i>
 					</a>
-				</li>
+				</li> -->
 			</ul>
 		</nav>
 		<!-- /.navbar -->
@@ -114,7 +114,7 @@
 				</div>
 
 				<!-- SidebarSearch Form -->
-				<div class="form-inline search_slidebar">
+				<!-- <div class="form-inline search_slidebar">
 					<div class="input-group" data-widget="sidebar-search">
 						<input class="form-control form-control-sidebar" type="search" placeholder="Search"
 							aria-label="Search">
@@ -124,7 +124,7 @@
 							</button>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				<!-- Sidebar Menu -->
 				<nav class="mt-2">
@@ -245,7 +245,7 @@
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item"><a th:href="@{/home/admin}">Home</a></li>
 								<li class="breadcrumb-item active">Data Movie Schedule</li>
 							</ol>
 						</div>
@@ -283,37 +283,48 @@
 
 										<input ng-model="form.id" type="hidden" />
 										<br />
-										<label>Movie</label>
-										<select ng-model="form.id_MOVIE.id" class="form-select mb-3" id="floatingSelect"
-											aria-label="Floating label select example">
-											<option ng-repeat="c in movies" ng-value="c.id">{{c.name}}</option>
-										</select>
+										<div class="form-group">
+											<label>Movie</label>
+											<select ng-model="form.id_MOVIE.id" class="form-select mb-3"
+												id="floatingSelect" aria-label="Floating label select example">
+												<option ng-repeat="c in movies" ng-value="c.id">{{c.name}}</option>
+											</select>
+											<small>Error message</small>
+										</div>
+										<div class="form-group">
+											<label>Room-CINEMAS</label>
+											<select ng-model="form.id_ROOM.id" class="form-select mb-3"
+												id="floatingSelect" aria-label="Floating label select example">
+												<option ng-repeat="c in rooms" ng-value="c.id">
+													{{c.name}}-{{c.id_CINEMAS.name}}</option>
+											</select>
+											<small>Error message</small>
+										</div>
+
 
 										<br />
-										<label>Room-CINEMAS</label>
-										<select ng-model="form.id_ROOM.id" class="form-select mb-3" id="floatingSelect"
-											aria-label="Floating label select example">
-											<option ng-repeat="c in rooms" ng-value="c.id">
-												{{c.name}}-{{c.id_CINEMAS.name}}</option>
-										</select>
 
-										<div class="form-floating mb-3 mt-4">
-											<input ng-model="form.date" class="form-control">
+
+										<div class="form-floating mb-3 mt-4 form-group">
+											<input ng-model="form.date" class="form-control" id="date">
+											<small>Error message</small>
 											<label for="floatingInput">Date</label>
 										</div>
-										<div class="form-floating mb-3">
-											<input ng-model="form.time_START" class="form-control">
+										<div class="form-floating mb-3 form-group">
+											<input ng-model="form.time_START" class="form-control" id="timestart">
+											<small>Error message</small>
 											<label for="floatingInput">Time Start</label>
 										</div>
-										<div class="form-floating mb-3">
-											<input ng-model="form.time_END" class="form-control">
-											<label for="floatingInput">Tim End</label>
+										<div class="form-floating mb-3 form-group">
+											<input ng-model="form.time_END" class="form-control" id="timeend">
+											<small>Error message</small>
+											<label for="floatingInput">Time End</label>
 										</div>
 
 									</div>
-									<button id="btn" ng-click="createmovie_scheduled()" type="submit">Create</button>
+									<button id="btn1" ng-click="createmovie_scheduled()" type="submit">Create</button>
 									<button id="btn" ng-click="createmovie_scheduled()" type="submit">Update</button>
-									<button id="btn" ng-click="delete(form.id)" type="submit">Delete</button>
+									<!-- <button id="btn" ng-click="delete(form.id)" type="submit">Delete</button> -->
 									<button id="btn" ng-click="reset()" type="submit">Reset</button>
 
 								</div>
@@ -361,10 +372,9 @@
 												<td>{{ci.time_START}}</td>
 												<td>{{ci.time_END}}</td>
 												<td>
-													<div
-														class="d-flex gap-3 justify-content-center align-items-center">
+													<div class="d-flex gap-3 justify-content-center align-items-center">
 														<button id="btn" ng-click="edit(ci.id)">Edit</button>
-														<button id="btn" ng-click="delete(ci.id)">Delete</button>
+														<!-- <button id="btn" ng-click="delete(ci.id)">Delete</button> -->
 													</div>
 												</td>
 											</tr>
@@ -437,6 +447,8 @@
 
 
 	<script th:src="@{/js/movie_scheduled.js}"></script>
+	<script th:src="@{/js/layout/validate_adscheduled.js}"></script>
+
 
 
 
