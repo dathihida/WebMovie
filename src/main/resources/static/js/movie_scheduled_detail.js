@@ -65,13 +65,12 @@ app.controller("controller", function($scope, $http){
 					dayTimeMovie < datTimeToday
 				);
 			})
-			
+/*			
 			if(findMovie){
 				$scope.updateStatusBooking();
 			}else{
 				
-			}
-            
+			}*/
         }).catch(error=>{
             console.log("Error", error);
         })
@@ -240,14 +239,14 @@ app.controller("controller", function($scope, $http){
         })
     }
     
-    $scope.updateStatusBooking = function(){
+/*    $scope.updateStatusBooking = function(){
         var url = `${host_booking}`;
         $http.get(url).then(resp=>{
             console.log("updateStatusBooking", resp);
         }).catch(error=>{
             console.log("Error", error);
         })
-    }
+    }*/
     
     $scope.loadAllMovie_Scheduleds();
     $scope.loadAllMovies();

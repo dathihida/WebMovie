@@ -31,4 +31,8 @@ public class Pay {
 	private String METHOD;
 	private String INTENT;
 	private String DESCRIPTION;
+	
+	@ManyToOne
+	@JoinColumn(name = "ID_VOUCHER")
+	private Voucher ID_VOUCHER;
 }

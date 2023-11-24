@@ -31,4 +31,10 @@ public class BookingRepo {
 		String updateStatus = "UPDATE Booking b SET b.STATUS = 'failed' WHERE b.STATUS = 'unpaid' AND DATEDIFF(MINUTE, b.startTime, CURRENT_TIMESTAMP()) > 15";
 		entityManager.createQuery(updateStatus).executeUpdate();
 	}
+
+	@Transactional
+	public void updateStatusVoucher() {
+		String jpql = "UPDATE Voucher v SET v.STATUS = false WHERE v.DATE_END < GETDATE()";
+		entityManager.createQuery(jpql).executeUpdate();
+	}
 }
