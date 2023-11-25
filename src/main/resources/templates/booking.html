@@ -159,8 +159,11 @@
                 </div>
 
                 <div class="btn_directional d-flex justify-content-around align-items-center">
-                    <button type="submit" class="btn btn-outline-dark">Back</button>
+                    <button type="submit" class="btn btn-outline-dark" onclick="history.back()">Back</button>
                     <button type="submit" class="btn next" ng-click="createBooking()">Continue</button>
+
+
+
                     <a th:href="@{/home/checkout/{{idRoom}}/{{day}}/{{timeStart}}/{{idMovieScheduled}}}"
                         hidden>Datve</a>
                 </div>

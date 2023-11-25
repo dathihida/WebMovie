@@ -12,13 +12,16 @@
                             <h5>Khuyến mãi</h5>
                             <div class="makhuyenmai mt-4">
                                 <h6>Mã khuyến mãi</h6>
-                                <div class="dropdown my-3" ng-repeat = "booking in booking">
+                                <div class="dropdown my-3" ng-repeat="booking in booking">
                                     <label> Khuyến mãi của bạn </label>
-									<select ng-model="form.idVoucher" ng-click="updatePrice(idBooking)" class="form-select mb-3" id="floatingSelect" ng-disabled="booking.status === 'success' || booking.status === 'failed'"
-										aria-label="Floating label select example">
-										<option ng-repeat="voucher in availableVouchers" ng-value="voucher.id" ng-if="voucher.status !== false">
-											{{voucher.name}}-{{voucher.describe}}</option>
-									</select>
+                                    <select ng-model="form.idVoucher" ng-click="updatePrice(idBooking)"
+                                        class="form-select mb-3" id="floatingSelect"
+                                        ng-disabled="booking.status === 'success' || booking.status === 'failed'"
+                                        aria-label="Floating label select example">
+                                        <option id="vcher" ng-repeat="voucher in availableVouchers"
+                                            ng-value="voucher.id" ng-if="voucher.status !== false">
+                                            {{voucher.name}}-{{voucher.describe}}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -66,70 +69,83 @@
                         <div class="countdown text-center">
                             Thời gian giữ ghế (15 phút): <span id="time">{{ elapsedTime }}</span>
                         </div>
-                        <div ng-repeat = "booking in booking">
-	                        <div class="content-pay d-flex gap-3">
-	                            <div class="card-img">
-	                                <img th:src="@{|/images/{{booking.id_MOVIE_SCHEDULED.id_MOVIE.image}}|}" alt="">
-	                            </div>
-	                            <div class="info-movie">
-	                                <h5>{{booking.id_MOVIE_SCHEDULED.id_MOVIE.name}}</h5>
-	                                <span>{{booking.id_MOVIE_SCHEDULED.id_ROOM.name}}</span> <br>
-	                                <span class="dotuoi">T13</span>
-	                            </div>
-	                        </div>
-                        </div>
-                        
-                        <div class="info-ticket mt-2" >
-                        	<div>
-	                        	<div class="time" ng-repeat = "booking in booking">
-	                                <div class="d-flex align-items-center gap-2">
-	                                    <h6>{{booking.id_MOVIE_SCHEDULED.id_ROOM.id_CINEMAS.name}}</h6> - <span>{{booking.id_MOVIE_SCHEDULED.id_ROOM.name}}</span>
-	                                </div>
-	                                <div class="d-flex align-items-center gap-2">
-	                                    <span>Suất: </span>
-	                                    <h6>{{booking.id_MOVIE_SCHEDULED.time_START}}</h6> - <span>{{booking.id_MOVIE_SCHEDULED.date| date:'dd-MM-yyyy'}}</span>
-	                                </div>
-	                            </div>
-	                            <div ng-repeat="seat in seatArray">
-	                            	<div class="fare d-flex justify-content-between">
-		                                <div class="">
-		                                    <div class="d-flex align-items-center gap-2">
-		                                        <h6>1</h6> x <span>Ghế đơn: {{seat.seat_TYPE}}</span>
-		                                    </div>
-		                                    <div class="d-flex align-items-center gap-2">
-		                                        <span>Ghế:</span>
-		                                        <h6>{{seat.seat_ROW}}{{seat.seat_NUMBER}}</h6>
-		                                    </div>
-		                                </div>
-		                                <div>
-		                                    <span>{{seat.seat_PRICE}}.000</span> <em class="text-decoration-underline">đ</em>
-		                                </div>
-                        			</div>
-	                            </div>
-                           
-	                            <div class="total d-flex justify-content-between">
-	                                <div>
-	                                    <h6>Tổng cộng</h6>
-	                                </div>
-	                                <div ng-repeat = "booking in booking">
-	                                    <span>{{booking.price}}.000</span> <em class="text-decoration-underline">đ</em>	
-	                                </div>
-	                                <div ng-show="form.idVoucher">
-									        <p>Giá sau khi giảm: {{ discountedPrice}}.000</p><em class="text-decoration-underline">đ</em>
-									</div>	
-									<div ng-repeat="pay in payBooking">
-									    <div ng-if="pay.id_BOOKING.status === 'success' || pay.id_BOOKING.status === 'failed'">
-									        <p>Thong tin voucher: {{ pay.id_VOUCHER.describe }} - {{ pay.id_VOUCHER.discount }}%</p>
-									        <p>Giá sau khi giảm: {{ pay.price }}.000<em class="text-decoration-underline">đ</em></p>
-									    </div>
-									</div>
-	                            </div>
+                        <div ng-repeat="booking in booking">
+                            <div class="content-pay d-flex gap-3">
+                                <div class="card-img">
+                                    <img th:src="@{|/images/{{booking.id_MOVIE_SCHEDULED.id_MOVIE.image}}|}" alt="">
+                                </div>
+                                <div class="info-movie">
+                                    <h5>{{booking.id_MOVIE_SCHEDULED.id_MOVIE.name}}</h5>
+                                    <span>{{booking.id_MOVIE_SCHEDULED.id_ROOM.name}}</span> <br>
+                                    <span class="dotuoi">T13</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="btn-pay d-flex justify-content-between" ng-repeat = "booking in booking">
-                            <button type="submit" class="btn btn-outline-warning">Quay lại</button>
-                            <button type="submit" ng-click="thanhtoan(idBooking)" ng-disabled="booking.status === 'success' || booking.status === 'failed'" 
-                            class="btn btn-warning pay">Thanh toán</button>
+
+                        <div class="info-ticket mt-2">
+                            <div>
+                                <div class="time" ng-repeat="booking in booking">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <h6>{{booking.id_MOVIE_SCHEDULED.id_ROOM.id_CINEMAS.name}}</h6> -
+                                        <span>{{booking.id_MOVIE_SCHEDULED.id_ROOM.name}}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span>Suất: </span>
+                                        <h6>{{booking.id_MOVIE_SCHEDULED.time_START}}</h6> -
+                                        <span>{{booking.id_MOVIE_SCHEDULED.date| date:'dd-MM-yyyy'}}</span>
+                                    </div>
+                                </div>
+                                <div ng-repeat="seat in seatArray">
+                                    <div class="fare d-flex justify-content-between">
+                                        <div class="">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <h6>1</h6> x <span>Ghế đơn: {{seat.seat_TYPE}}</span>
+                                            </div>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span>Ghế:</span>
+                                                <h6>{{seat.seat_ROW}}{{seat.seat_NUMBER}}</h6>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span>{{seat.seat_PRICE}}.000</span> <em
+                                                class="text-decoration-underline">đ</em>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="total d-flex justify-content-between">
+                                    <div>
+                                        <h6>Tổng cộng</h6>
+                                    </div>
+                                    <div ng-repeat="booking in booking">
+                                        <span>{{booking.price}}.000</span> <em class="text-decoration-underline">đ</em>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div ng-show="form.idVoucher">
+                                        <h5>Giá sau khi giảm: {{ discountedPrice}}.000</h5><em
+                                            class="text-decoration-underline">đ</em>
+                                    </div>
+                                    <div ng-repeat="pay in payBooking">
+                                        <div
+                                            ng-if="pay.id_BOOKING.status === 'success' || pay.id_BOOKING.status === 'failed'">
+                                            <p>Thong tin voucher: {{ pay.id_VOUCHER.describe }} - {{
+                                                pay.id_VOUCHER.discount }}%</p>
+                                            <p>Giá sau khi giảm: {{ pay.price }}.000<em
+                                                    class="text-decoration-underline">đ</em></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="btn-pay d-flex justify-content-between" ng-repeat="booking in booking">
+                            <a th:href="@{/home}"><button type="submit"
+                                    class="btn btn-outline-warning">Thoát</button></a>
+                            <button type="submit" ng-click="thanhtoan(idBooking)"
+                                ng-disabled="booking.status === 'success' || booking.status === 'failed'"
+                                class="btn btn-warning pay">Thanh toán</button>
                         </div>
                     </div>
                 </div>

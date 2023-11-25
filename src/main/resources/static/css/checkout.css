@@ -18,24 +18,33 @@
     padding: 0 12px 0 12px;
 } */
 
-.checkout .makhuyenmai input {
+/* .checkout .makhuyenmai input {
     width: 250px;
     border: 2px solid rgb(209, 209, 209);
     border-radius: 4px;
-}
+} */
 
-.checkout .makhuyenmai button {
+/* .checkout .makhuyenmai button {
     border: 1px solid rgb(225, 225, 225);
     border-radius: 4px;
     background-color: rgb(237, 38, 71);
     color: white;
     font-weight: 500;
     padding: 6px 15px;
-}
+} */
 
-.checkout .kmcuaban:hover {
-    color: black !important;
+.checkout .makhuyenmai select{
+    width: 70%;
 }
+/* .checkout .makhuyenmai #vchet{
+    background-color: rgb(237, 38, 71);
+    color: white;
+
+} */
+
+/* .checkout .kmcuaban:hover {
+    color: black !important;
+} */
 
 
 /* ---------------method-payment-------------- */
