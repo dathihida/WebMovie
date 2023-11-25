@@ -31,24 +31,16 @@ public class HomeController {
 
 	@RequestMapping("/login")
 	String login(HttpServletRequest request) {
-		// // String referrer = request.getHeader("Referer");
-		// String currentPath = ((ServletRequestAttributes)
-		// RequestContextHolder.currentRequestAttributes())
-		// .getRequest().getRequestURI();
-		// // System.out.println(referrer);
-		// System.out.println(currentPath);
-		// if (!currentPath.equals("/login")) {
-		// // Nếu không phải là "/login", lưu trữ đường dẫn hiện tại vào session
-		// request.getSession().setAttribute("prevPage", currentPath);
-		// }
-		// // request.getSession().setAttribute("prevPage", referrer);
+		String referrer = request.getHeader("Referer");
+		request.getSession().setAttribute("prevPage", referrer);
 		return "signin";
 	}
 
 	@GetMapping("/login-success")
 	public void loginSuccess(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
-		System.out.println(prevPage);
+
 		if (prevPage != null && !prevPage.contains("/login")) {
 			redirectStrategy.sendRedirect(request, response, prevPage);
 		} else {

@@ -263,7 +263,8 @@ app.controller("controller", function($scope, $http, $rootScope) {
 				
 				console.log(phanTuChung);
 				if(phanTuChung.length > 0){
-					alert("phantuchung", phanTuChung);
+					alert("Ai đó đã nhanh tay hơn bạn", phanTuChung);
+					location.reload();
 				}else{
 					var booking = angular.copy($scope.form);
 					var url = `${host_booking}`;
