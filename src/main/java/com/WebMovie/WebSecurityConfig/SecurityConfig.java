@@ -47,7 +47,8 @@ public class SecurityConfig {
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 // return page home
-                .defaultSuccessUrl("/login-success", true)
+                // .defaultSuccessUrl("/login-success", true)
+                .defaultSuccessUrl("/home")
                 .permitAll()
                 // logout in page home
                 .and()
