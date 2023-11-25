@@ -147,12 +147,18 @@
                                     </h4>
                                 </div>
                                 <ul class="products-grid-movie tab-showtime list-unstyled">
-                                    <li class="item" sec:authorize="!isAuthenticated()">
+                                    <!-- <li class="item" sec:authorize="!isAuthenticated()">
                                         <a th:href="@{/login}">
                                             {{movieOfCinemas.time_START}}
                                         </a>
                                     </li>
                                     <li class="item" sec:authorize="isAuthenticated()">
+                                        <a
+                                            th:href="@{/booking/{{movieOfCinemas.id}}}">
+                                            {{movieOfCinemas.time_START}}
+                                        </a>
+                                    </li> -->
+                                    <li class="item">
                                         <a
                                             th:href="@{/booking/{{movieOfCinemas.id}}}">
                                             {{movieOfCinemas.time_START}}

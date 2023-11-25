@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,17 +31,24 @@ public class HomeController {
 
 	@RequestMapping("/login")
 	String login(HttpServletRequest request) {
-		String referrer = request.getHeader("Referer");
-		request.getSession().setAttribute("prevPage", referrer);
+		// // String referrer = request.getHeader("Referer");
+		// String currentPath = ((ServletRequestAttributes)
+		// RequestContextHolder.currentRequestAttributes())
+		// .getRequest().getRequestURI();
+		// // System.out.println(referrer);
+		// System.out.println(currentPath);
+		// if (!currentPath.equals("/login")) {
+		// // Nếu không phải là "/login", lưu trữ đường dẫn hiện tại vào session
+		// request.getSession().setAttribute("prevPage", currentPath);
+		// }
+		// // request.getSession().setAttribute("prevPage", referrer);
 		return "signin";
 	}
 
 	@GetMapping("/login-success")
 	public void loginSuccess(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request,
-		// response);
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
-
+		System.out.println(prevPage);
 		if (prevPage != null && !prevPage.contains("/login")) {
 			redirectStrategy.sendRedirect(request, response, prevPage);
 		} else {
