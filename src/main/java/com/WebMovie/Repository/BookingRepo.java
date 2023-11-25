@@ -22,7 +22,7 @@ public class BookingRepo {
 
 	@Transactional
 	public void updateStatusMovie_Scheduled() {
-		String jpql = "UPDATE Movie_Scheduled b SET b.STATUS = false WHERE b.DATE < GETDATE()";
+		String jpql = "UPDATE Movie_Scheduled b SET b.STATUS = false WHERE b.DATE <= current_date() and b.TIME_END < current_time()";
 		entityManager.createQuery(jpql).executeUpdate();
 	}
 
