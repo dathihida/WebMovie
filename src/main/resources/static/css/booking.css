@@ -21,16 +21,17 @@
 }
 
 .seat_booking .showcase .selected {
-    background-color: rgb(73, 73, 73);
-    /* box-shadow: 0 0 10px #00B300; */
+    background-color: #00B300;
+    box-shadow: 0 0 7px #00B300;
 }
 
-.seat_booking .showcase .occupied {
+/* .seat_booking .showcase .occupied {
     background-color: rgba(162, 162, 162, 0.808);
-}
+} */
 
 .seat_booking .showcase .sold {
-    background-color: rgb(86, 86, 86);
+    background-color: #dedede;
+    box-shadow: 0 0 2px rgb(237, 38, 71);
 }
 
 .seat_booking .screen {
@@ -113,10 +114,13 @@
 
 
 
-.seat_booking .list_seat .seat {
+
+.seat_booking .list_seat input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: rgb(186, 186, 186);
     width: 25px;
     height: 25px;
-    background-color: rgb(238, 10, 10);
     border-radius: 3px;
 }
 
@@ -166,6 +170,7 @@
     opacity: 0;
 } */
 
+
 .seat_booking .list_seat input[type="checkbox"]:hover {
     z-index: 2;
     position: relative;
@@ -174,10 +179,27 @@
 }
 
 .seat_booking .list_seat input[type="checkbox"]:checked {
-    z-index: 1;
+    z-index: 2;
     position: relative;
     left: -10px;
-
+    transform: scale(1.1);
+    background-color: #00B300;
+    box-shadow: 0 0 7px #00B300;
+}
+.seat_booking .list_seat input[type="checkbox"]:checked:disabled {
+    z-index: 2;
+    position: relative;
+    left: -10px;
+    background-color: #dedede;
+    box-shadow: 0 0 1px rgb(237, 38, 71);
+    transform: scale(1.1);
+}
+.seat_booking .list_seat input[type="checkbox"]:disabled:hover {
+    z-index: 2;
+    position: relative;
+    left: -10px;
+    opacity: 0.5;   
+    cursor: default;
 }
 
 /* .seat_booking .list_seat .seat1:hover{
@@ -187,14 +209,14 @@
     transform: scale(1.1);
 } */
 
-.seat_booking .list_seat .seat1:checked {
+/* .seat_booking .list_seat .seat1:checked {
     z-index: 2;
     position: relative;
     right: -10px;
     transform: scale(1.1);
     background-color: #00B300;
     box-shadow: 0 0 10px #00B300;
-}
+} */
 
 /* .seat_booking .list_seat input[type="checkbox"]:checked+.seat_booking .list_seat .seat1::after {
     opacity: 1;

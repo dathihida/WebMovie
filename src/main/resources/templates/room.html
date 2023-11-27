@@ -268,7 +268,7 @@
 					<!-- SELECT2 EXAMPLE -->
 					<div class="card card-default">
 						<div class="card-header">
-							<h3 class="card-title">Edit Cinema</h3>
+							<h3 class="card-title">Edit Room</h3>
 
 							<div class="card-tools">
 								<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -294,17 +294,18 @@
 											<label for="floatingInput">Name</label>
 										</div>
 										<div class="form-group">
-											<select ng-model="form.id_CINEMAS.id" class="form-select" id="floatingSelect"
-											aria-label="Floating label select example">
-											<option ng-repeat="c in cinemas" ng-value="c.id">{{c.name}}</option>
-										</select>
+											<label for="floatingInput">Cinema</label>
+											<select ng-model="form.id_CINEMAS.id" class="form-select" id="h1"
+												aria-label="Floating label select example">
+												<option ng-repeat="c in cinemas" ng-value="c.id">{{c.name}}</option>
+											</select>
 										<small>Error message</small>
 										</div>
 
 									</div>
 									<div class="mt-2">
-										<button id="btn1" ng-click="createCinemas()" type="submit">Create</button>
-										<button id="btn" ng-click="updateCinema()" type="submit">Update</button>
+										<button id="btn1" ng-click="checkAndcreateRoom()" type="submit">Create</button>
+										<button id="btn2" ng-click="checkAndupdateRoom()" type="submit">Update</button>
 										<!-- <button id="btn" ng-click="delete(form.id)" type="submit">Delete</button> -->
 										<button id="btn" ng-click="reset()" type="submit">Reset</button>
 									</div>

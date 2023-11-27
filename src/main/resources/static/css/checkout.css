@@ -81,7 +81,14 @@
     width: 20px;
     height: 20px;
 }
-
+/* .checkout .dieukhoan #checkbox{
+    box-shadow: 0 0 10px rgba(237, 38, 71, 0.965);
+} */
+.checkout .dieukhoan #checkbox:hover{
+    /* box-shadow: 0 0 10px rgba(237, 38, 71, 0.965); */
+    border: 1px solid rgb(237, 38, 71);
+    cursor: pointer;
+}
 /* ---------------DETAIL_PAY--------------- */
 
 .checkout .detail-pay {

@@ -4,7 +4,7 @@ let host_pay = "http://localhost:8080/api/pay";
 let host_voucher = "http://localhost:8080/api/voucher"
 const app = angular.module("appBooking", []);
 
-app.controller("controllerBooking", function($scope, $http, $interval, $timeout) {
+app.controller("controllerBooking", function ($scope, $http, $interval, $timeout) {
 	var url = window.location.href;
 	var parts = url.split('/'); // Tách URL bằng dấu '/'
 	var idBooking = parts[parts.length - 1];
@@ -15,16 +15,16 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 	$scope.seat_scheduled = [];
 	$scope.booking = [];
 
-	$scope.stopClock = function() {
+	$scope.stopClock = function () {
 		if (intervalPromise) {
 			$interval.cancel(intervalPromise);
 		}
 	}
 
-	$scope.getBookingId = function(idBooking) {
+	$scope.getBookingId = function (idBooking) {
 		var url = `${host_booking}/v1/${idBooking}`;
 		$http.get(url).then(resp => {
-			
+
 			if (resp.data && resp.data.startTime) {
 				$scope.booking.push(resp.data);
 				console.log("booking", resp.data);
@@ -32,26 +32,26 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 				// Chuyển đổi chuỗi startTime thành đối tượng Date
 				$scope.invoiceTime = new Date(resp.data.startTime);
 
-				if(resp.data.status === "success"){
+				if (resp.data.status === "success") {
 					$scope.elapsedTime = "Đã thanh toán";
-				}else if(resp.data.status === "failed"){
+				} else if (resp.data.status === "failed") {
 					$scope.elapsedTime = "Thanh toán thất bại";
-				}else{
-					intervalPromise = $interval(function() {
+				} else {
+					intervalPromise = $interval(function () {
 						$scope.currentTime = new Date();
-						
+
 						// Kiểm tra xem currentTime và invoiceTime có phải là đối tượng Date hợp lệ hay không
 						if (!isNaN($scope.currentTime) && !isNaN($scope.invoiceTime)) {
 							// Tính thời gian đã trôi qua từ thời điểm tạo hóa đơn
 							var elapsedTimeMilliseconds = $scope.currentTime - $scope.invoiceTime;
 							$scope.elapsedTime = formatElapsedTime(elapsedTimeMilliseconds);
-							
+
 							// Kiểm tra nếu thời gian đã trôi qua lớn hơn 15 phút
 							if (elapsedTimeMilliseconds > 15 * 60 * 1000) {
 								// Hiển thị cảnh báo và dừng cập nhật thời gian
 								$scope.elapsedTime = "Hết giờ";
 								$interval.cancel(intervalPromise);
-								$timeout(function() {
+								$timeout(function () {
 									//update status booking
 									$http.get(`${host_booking}/updateFailed/${idBooking}`).then(resp => {
 										console.log("updateFailed", resp.data);
@@ -62,8 +62,8 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 						}
 					}, 1000);
 				}
-					// Cập nhật thời gian hiện tại mỗi giây
-					
+				// Cập nhật thời gian hiện tại mỗi giây
+
 				console.log(resp.data.status);
 			}
 		});
@@ -78,39 +78,39 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 
 	$scope.seatArray = [];
 
-	$scope.getSeat_Scheduled = function(idBooking) {
+	$scope.getSeat_Scheduled = function (idBooking) {
 		var url = `${host_seatScheduled}/v1/${idBooking}`;
 		$http.get(url).then(resp => {
 			$scope.seat_scheduled = resp.data;
 			console.log("seat_scheduled", resp.data);
-			$scope.seatArray = resp.data.map(function(booking) {
+			$scope.seatArray = resp.data.map(function (booking) {
 				return booking.id_SEAT;
 			});
 		})
 	}
-	
-	$scope.payBooking= [];
-	$scope.pay = function(idBooking){
+
+	$scope.payBooking = [];
+	$scope.pay = function (idBooking) {
 		var url = `${host_pay}/${idBooking}`;
-		$http.get(url).then(resp=>{
+		$http.get(url).then(resp => {
 			$scope.payBooking.push(resp.data);
-			console.log("payBooking",resp.data);		
+			console.log("payBooking", resp.data);
 		})
 	}
-	
+
 	$scope.availableVouchers = [];
-	
-	$scope.voucher = function(){
+
+	$scope.voucher = function () {
 		var url = `${host_voucher}/all`;
-		$http.get(url).then(resp =>{
+		$http.get(url).then(resp => {
 			$scope.availableVouchers = resp.data;
-			console.log("availableVouchers",$scope.availableVouchers)
+			console.log("availableVouchers", $scope.availableVouchers)
 		})
 	}
 
 	$scope.form = {};
 
-	$scope.updatePrice = function(idBooking){
+	$scope.updatePrice = function (idBooking) {
 		var data = angular.copy($scope.form);
 		var index = $scope.availableVouchers.findIndex(idVoucher => idVoucher.id === $scope.form.idVoucher);
 		const discount = $scope.availableVouchers[index].discount;
@@ -118,14 +118,36 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 		$http.get(url).then(resp => {
 			console.log(resp.data.price);
 			console.log(discount);
-			$scope.discountedPrice = resp.data.price - (resp.data.price * discount/100);
+			$scope.discountedPrice = resp.data.price - (resp.data.price * discount / 100);
 		})
 	}
 
-	$scope.thanhtoan = function(idBooking) {
+
+
+	$scope.updateCheckbox = function () {
+		var isValid = checkValidate();
+
+		if (isValid) {
+			// Nếu validation thành công, gọi createMovie()
+			$scope.thanhtoan(idBooking);
+		}
+	};
+	const btncheckbox = document.getElementById('checkbox');
+	// const btnThanhToan = document.getElementById('thanhtoan');
+
+    function checkValidate() {
+        let isCheck = true;
+        if (!btncheckbox.checked) {
+			btncheckbox.focus();
+            isCheck = false;
+		}
+        return isCheck;
+    }
+
+	$scope.thanhtoan = function (idBooking) {
 		var dataVoucher = angular.copy($scope.form);
 		var index = $scope.availableVouchers.findIndex(idVoucher => idVoucher.id === $scope.form.idVoucher);
-	
+
 		// Kiểm tra nếu index không tìm thấy hoặc discount là undefined
 		if (index === -1 || $scope.availableVouchers[index].discount === undefined) {
 			// Xử lý khi không chọn voucher hoặc khi discount là undefined
@@ -140,9 +162,9 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 			});
 			return;
 		}
-	
+
 		const discount = $scope.availableVouchers[index].discount;
-	
+
 		var url = `${host_booking}/v1/${idBooking}`;
 		$http.get(url).then(resp => {
 			$scope.discountedPrice = resp.data.price - (resp.data.price * discount / 100);
@@ -150,8 +172,8 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 			$scope.performPayment(idBooking);
 		});
 	}
-	
-	$scope.performPayment = function(idBooking) {
+
+	$scope.performPayment = function (idBooking) {
 		var data = {
 			price: $scope.discountedPrice,
 			intent: "Buy",
@@ -165,9 +187,9 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 				id: $scope.form.idVoucher
 			}
 		};
-	
+
 		console.log("data", data);
-	
+
 		// create pay
 		$http.post(`${host_pay}`, data).then(resp => {
 			console.log("pay", resp.data);
@@ -186,39 +208,41 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 			console.log("Error", error);
 		});
 	};
-		$scope.performPayment1 = function(idBooking) {
-			var data = {
-				price: $scope.discountedPrice,
-				intent: "Buy",
-				method: "Online",
-				currency: "VND",
-				description: "Thanh toan tien ve xem phim",
-				id_BOOKING: {
-					id: idBooking
-				}
-			};
-		
-			console.log("data", data);
-		
-			// create pay
-			$http.post(`${host_pay}`, data).then(resp => {
-				console.log("pay", resp.data);
-				//update status booking
-				$http.get(`${host_booking}/update/${idBooking}`).then(resp => {
-					console.log("update", resp.data);
-					// id customer
-					var url = `${host_booking}/v1/${idBooking}`;
-					$http.get(url).then(resp => {
-						console.log("sdss", resp.data.id_CUSTOMER.id);
-						window.location.href = `http://localhost:8080/historyBooking/` + resp.data.id_CUSTOMER.id;
-					});
+	$scope.performPayment1 = function (idBooking) {
+		var data = {
+			price: $scope.discountedPrice,
+			intent: "Buy",
+			method: "Online",
+			currency: "VND",
+			description: "Thanh toan tien ve xem phim",
+			id_BOOKING: {
+				id: idBooking
+			}
+		};
+
+		console.log("data", data);
+
+		// create pay
+		$http.post(`${host_pay}`, data).then(resp => {
+			console.log("pay", resp.data);
+			//update status booking
+			$http.get(`${host_booking}/update/${idBooking}`).then(resp => {
+				console.log("update", resp.data);
+				// id customer
+				var url = `${host_booking}/v1/${idBooking}`;
+				$http.get(url).then(resp => {
+					console.log("sdss", resp.data.id_CUSTOMER.id);
+					window.location.href = `http://localhost:8080/historyBooking/` + resp.data.id_CUSTOMER.id;
 				});
-				$scope.stopClock();
-			}).catch(error => {
-				console.log("Error", error);
 			});
+			$scope.stopClock();
+		}).catch(error => {
+			console.log("Error", error);
+		});
 	};
-	
+
+
+
 	$scope.pay(idBooking);
 	$scope.getBookingId(idBooking);
 	$scope.getSeat_Scheduled(idBooking);

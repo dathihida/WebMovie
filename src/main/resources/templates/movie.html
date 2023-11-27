@@ -297,7 +297,8 @@
                                                 <label for="floatingInput">Name</label>
                                             </div>
                                             <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.description" class="form-control" id="description">
+                                                <input ng-model="form.description" class="form-control"
+                                                    id="description">
                                                 <small>Error message</small>
                                                 <label for="floatingPassword">Description</label>
                                             </div>
@@ -332,7 +333,8 @@
                                                 <label for="floatingPassword">Duration</label>
                                             </div>
                                             <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.publish_DATE" type="date" class="form-control" id="date">
+                                                <input ng-model="form.publish_DATE" type="date" class="form-control"
+                                                    id="date">
                                                 <small>Error message</small>
                                                 <label for="floatingPassword">Release Date</label>
                                             </div>
@@ -344,7 +346,7 @@
                                                     <input ng-model="form.image" class="form-control" type="file"
                                                         id="formFile"
                                                         onchange="angular.element(this).scope().imageChanged(this.files)">
-                                                        <small>Error message</small>
+                                                    <small>Error message</small>
                                                 </div>
 
                                             </div>
@@ -355,8 +357,8 @@
                                         </div>
                                     </div>
                                     <div class="mt-2 form-group">
-                                        <button id="btn1" ng-click="createMovie()" type="submit">Create</button>
-                                        <button id="btn" ng-click="updateMovie()" type="submit">Update</button>
+                                        <button id="btnmovie" ng-click="checkAndCreateMovie()" type="submit">Create</button>
+                                        <button id="btnmovie2" ng-click="checkAndUpdateMovie()" type="submit">Update</button>
                                         <!-- <button id="btn" ng-click="delete(form.id)" type="submit">Delete</button> -->
                                         <button id="btn" ng-click="reset()" type="submit">Reset</button>
                                     </div>
@@ -496,7 +498,7 @@
 
 
     <script th:src="@{/js/movie.js}"></script>
-    <script th:src="@{/js/layout/validate_admovie.js}"></script>
+    <!-- <script th:src="@{/js/layout/validate_admovie.js}"></script> -->
 
 
 

@@ -184,13 +184,13 @@
 							</a>
 						</li>
 						<li class="nav-item">
-                            <a th:href="@{/home/voucher}" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
-                                <p>
-                                    Voucher
-                                </p>
-                            </a>
-                        </li>
+							<a th:href="@{/home/voucher}" class="nav-link">
+								<i class="nav-icon fas fa-copy"></i>
+								<p>
+									Voucher
+								</p>
+							</a>
+						</li>
 						<!-- <li class="nav-item">
 							<a href="#" class="nav-link">
 								<i class="nav-icon fas fa-table"></i>
@@ -293,16 +293,16 @@
 										<br />
 										<div class="form-group">
 											<label>Movie</label>
-											<select ng-model="form.id_MOVIE.id" class="form-select mb-3"
-												id="floatingSelect" aria-label="Floating label select example">
+											<select ng-model="form.id_MOVIE.id" class="form-select mb-3" id="nameMovie"
+												aria-label="Floating label select example">
 												<option ng-repeat="c in movies" ng-value="c.id">{{c.name}}</option>
 											</select>
 											<small>Error message</small>
 										</div>
 										<div class="form-group">
 											<label>Room-CINEMAS</label>
-											<select ng-model="form.id_ROOM.id" class="form-select mb-3"
-												id="floatingSelect" aria-label="Floating label select example">
+											<select ng-model="form.id_ROOM.id" class="form-select mb-3" id="roomCinema"
+												aria-label="Floating label select example">
 												<option ng-repeat="c in rooms" ng-value="c.id">
 													{{c.name}}-{{c.id_CINEMAS.name}}</option>
 											</select>
@@ -321,17 +321,19 @@
 										<div class="form-floating mb-3 form-group">
 											<input ng-model="form.time_START" class="form-control" id="timestart">
 											<small>Error message</small>
-											<label for="floatingInput">Time Start</label>
+											<label for="floatingInput">Start Time</label>
 										</div>
 										<div class="form-floating mb-3 form-group">
 											<input ng-model="form.time_END" class="form-control" id="timeend">
 											<small>Error message</small>
-											<label for="floatingInput">Time End</label>
+											<label for="floatingInput">End Time</label>
 										</div>
 
 									</div>
-									<button id="btn1" ng-click="createmovie_scheduled()" type="submit">Create</button>
-									<button id="btn" ng-click="createmovie_scheduled()" type="submit">Update</button>
+									<button id="btn1" ng-click="checkAndcreateMovie_scheduled()"
+										type="submit">Create</button>
+									<button id="btn2" ng-click="checkAndupdateMovie_scheduled()"
+										type="submit">Update</button>
 									<!-- <button id="btn" ng-click="delete(form.id)" type="submit">Delete</button> -->
 									<button id="btn" ng-click="reset()" type="submit">Reset</button>
 
