@@ -61,17 +61,24 @@ app.controller("controller", function($scope, $http,  $filter){
 		    // Sử dụng $filter để lọc mảng theo điều kiện
 		    $scope.filteredMovies = $filter('filter')($scope.movie_scheduleds, function (movie) {
 		        var movieDate = new Date(movie.date + ' ' + movie.time_START); // Tạo đối tượng ngày từ chuỗi ngày và giờ
-		
+				
 		        // So sánh ngày giờ hiện tại với ngày giờ trong mục
 		        return movieDate > currentDate;
 		    });
-		    
+		    // xoa id_Movie trung
+			var uniqueMovies = {};
+			$scope.filteredMovies = $scope.filteredMovies.filter(function(movie) {
+				if (!uniqueMovies[movie.id_MOVIE.id]) {
+					uniqueMovies[movie.id_MOVIE.id] = true;
+					return true;
+				}
+				return false;
+			});
 		    console.log("filteredMovies", $scope.filteredMovies);
 		    
 		    // Sử dụng $filter để lọc mảng theo điều kiện
 		    $scope.filteredMoviesToDay = $filter('filter')($scope.movie_scheduleds, function (movie) {
 		        var movieDate = new Date(movie.date); // Tạo đối tượng ngày từ chuỗi ngày và giờ
-		        
 				var dateToday = new Date($scope.currentDate);
 
 		        // So sánh ngày giờ hiện tại với ngày giờ trong mục
@@ -79,6 +86,15 @@ app.controller("controller", function($scope, $http,  $filter){
 					movieDate.toDateString() === dateToday.toDateString()
 		        )
 		    });
+			// xoa id_Movie trung
+			var uniqueMovies = {};
+			$scope.filteredMoviesToDay = $scope.filteredMoviesToDay.filter(function(movie) {
+				if (!uniqueMovies[movie.id_MOVIE.id]) {
+					uniqueMovies[movie.id_MOVIE.id] = true;
+					return true;
+				}
+				return false;
+			});
 		    console.log("filteredMoviesToDay", $scope.filteredMoviesToDay);
         }).catch(error=>{
             console.log("Error", error);

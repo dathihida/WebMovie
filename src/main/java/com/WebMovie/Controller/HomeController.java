@@ -38,7 +38,6 @@ public class HomeController {
 
 	@GetMapping("/login-success")
 	public void loginSuccess(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
 
 		if (prevPage != null && !prevPage.contains("/login")) {
