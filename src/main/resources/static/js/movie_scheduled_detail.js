@@ -12,8 +12,12 @@ app.controller("controller", function($scope, $http, $timeout){
 	$scope.rooms = [];
 	$scope.cinemas = [];
 	
-	
-	
+    $scope.commentLimit = 5;
+	$scope.showMoreComments = function () {
+        $scope.commentLimit += 5; // Tăng giá trị để hiển thị thêm 5 bình luận
+    };
+
+
 	$scope.movie_scheduledsbyId = [];
 	
     $scope.reset = function(){

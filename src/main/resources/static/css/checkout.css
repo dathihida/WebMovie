@@ -18,24 +18,33 @@
     padding: 0 12px 0 12px;
 } */
 
-.checkout .makhuyenmai input {
+/* .checkout .makhuyenmai input {
     width: 250px;
     border: 2px solid rgb(209, 209, 209);
     border-radius: 4px;
-}
+} */
 
-.checkout .makhuyenmai button {
+/* .checkout .makhuyenmai button {
     border: 1px solid rgb(225, 225, 225);
     border-radius: 4px;
     background-color: rgb(237, 38, 71);
     color: white;
     font-weight: 500;
     padding: 6px 15px;
-}
+} */
 
-.checkout .kmcuaban:hover {
-    color: black !important;
+.checkout .makhuyenmai select{
+    width: 70%;
 }
+/* .checkout .makhuyenmai #vchet{
+    background-color: rgb(237, 38, 71);
+    color: white;
+
+} */
+
+/* .checkout .kmcuaban:hover {
+    color: black !important;
+} */
 
 
 /* ---------------method-payment-------------- */
@@ -72,7 +81,14 @@
     width: 20px;
     height: 20px;
 }
-
+/* .checkout .dieukhoan #checkbox{
+    box-shadow: 0 0 10px rgba(237, 38, 71, 0.965);
+} */
+.checkout .dieukhoan #checkbox:hover{
+    /* box-shadow: 0 0 10px rgba(237, 38, 71, 0.965); */
+    border: 1px solid rgb(237, 38, 71);
+    cursor: pointer;
+}
 /* ---------------DETAIL_PAY--------------- */
 
 .checkout .detail-pay {

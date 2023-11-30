@@ -33,7 +33,7 @@
 
 
     <link rel="stylesheet" th:href="@{|/css/admin.css|}">
-    <link rel="stylesheet" th:href="@{|/css/ad_moive.css|}">
+    <link rel="stylesheet" th:href="@{|/css/ad_room.css|}">
 
 
 
@@ -143,8 +143,8 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active menu_title">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link menu_title">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
                                     Manager
@@ -153,7 +153,7 @@
                             </a>
                             <ul class="nav nav-treeview" id="list_menu">
                                 <li class="nav-item">
-                                    <a th:href="@{/home/movie}" class="nav-link active">
+                                    <a th:href="@{/home/movie}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Manage Movie</p>
                                     </a>
@@ -195,7 +195,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a th:href="@{/home/bill}" class="nav-link">
+                            <a th:href="@{/home/bill}" class="nav-link active">
                                 <i class=" nav-icon fa-solid fa-file-invoice-dollar"></i>
                                 <p>
                                     Bill
@@ -261,12 +261,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Movies</h1>
+                            <h1>Bill</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a th:href="@{/home/admin}">Home</a></li>
-                                <li class="breadcrumb-item active">Data Moive</li>
+                                <li class="breadcrumb-item active">Data Bill</li>
                             </ol>
                         </div>
                     </div>
@@ -279,7 +279,7 @@
                     <!-- SELECT2 EXAMPLE -->
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title">Edit Movie</h3>
+                            <h3 class="card-title">Edit Bill</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -294,81 +294,45 @@
                         <div class="card-body">
                             <div class="row g-4 d-flex justify-content-center">
                                 <div class="form1 p-4">
-                                    <div class="form-floating mb-3 form-group" hidden>
+                                    <div class="form-floating mb-3" hidden>
                                         <input ng-model="form.id" class="form-control" type="hidden">
                                         <label for="floatingInput">Id</label>
                                     </div>
                                     <div class="row">
-                                        <div class="col-8">
+                                        <div class="col-12">
                                             <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.name" class="form-control" id="name" type="text">
+                                                <input ng-model="form.name" class="form-control" id="name">
                                                 <small>Error message</small>
                                                 <label for="floatingInput">Name</label>
                                             </div>
                                             <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.description" class="form-control"
-                                                    id="description">
+                                                <input ng-model="form.discount" class="form-control" id="discount">
                                                 <small>Error message</small>
-                                                <label for="floatingPassword">Description</label>
+                                                <label for="floatingPassword">Discount</label>
                                             </div>
 
                                             <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.actors" class="form-control" id="actors">
+                                                <input ng-model="form.date_START" class="form-control" id="date_START" type="date">
                                                 <small>Error message</small>
-                                                <label for="floatingPassword">Actors</label>
+                                                <label for="floatingPassword">StartDate</label>
                                             </div>
 
                                             <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.diretors" class="form-control" id="diretors">
+                                                <input ng-model="form.date_END" class="form-control" id="date_END" type="date">
                                                 <small>Error message</small>
-                                                <label for="floatingPassword">Diretors</label>
+                                                <label for="floatingPassword">EndDate</label>
                                             </div>
 
                                             <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.gerne" class="form-control" id="gerne">
+                                                <input ng-model="form.describe" class="form-control" id="describe">
                                                 <small>Error message</small>
-                                                <label for="floatingPassword">Gerne</label>
-                                            </div>
-
-                                            <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.trailer" class="form-control" id="trailer">
-                                                <small>Error message</small>
-                                                <label for="floatingPassword">Trailer</label>
-                                            </div>
-
-                                            <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.time" class="form-control" id="duration">
-                                                <small>Error message</small>
-                                                <label for="floatingPassword">Duration</label>
-                                            </div>
-                                            <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.publish_DATE" type="date" class="form-control"
-                                                    id="date">
-                                                <small>Error message</small>
-                                                <label for="floatingPassword">Release Date</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-floating mb-3">
-                                                <div class="mb-3 form-group">
-                                                    <label for="formFile" class="form-label">Image</label>
-                                                    <input ng-model="form.image" class="form-control" type="file"
-                                                        id="formFile"
-                                                        onchange="angular.element(this).scope().imageChanged(this.files)">
-                                                    <small>Error message</small>
-                                                </div>
-
-                                            </div>
-                                            <div
-                                                class="form-floating mb-3 d-flex justify-content-center align-items-center">
-                                                <img ng-src="/images/{{form.image}}" style="width: 85%; height: 85%">
+                                                <label for="floatingPassword">Describe</label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mt-2 form-group">
-                                        <button id="btnmovie" ng-click="checkAndCreateMovie()" type="submit">Create</button>
-                                        <button id="btnmovie2" ng-click="checkAndUpdateMovie()" type="submit">Update</button>
-                                        <!-- <button id="btn" ng-click="delete(form.id)" type="submit">Delete</button> -->
+                                    <div class="mt-2">
+                                        <button id="btn1" ng-click="checkAndcreateVoucher()" type="submit">Create</button>
+                                        <button id="btn2" ng-click="checkAndupdateVoucher()" type="submit">Update</button>
                                         <button id="btn" ng-click="reset()" type="submit">Reset</button>
                                     </div>
                                 </div>
@@ -392,7 +356,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <div class="card" ng-if="movies">
+                            <div class="card" ng-if="vouchers">
                                 <div class="card-header">
                                     <h3 class="card-title">DataTable </h3>
                                 </div>
@@ -403,35 +367,26 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Actors</th>
-                                                <th>Diretors</th>
-                                                <th>Gerne</th>
-                                                <th>Trailer</th>
-                                                <th>Duration</th>
-                                                <th>Image</th>
-                                                <th>Release Date</th>
-                                                <th>Action</th>
+                                                <th>Discount</th>
+                                                <th>Date_start</th>
+                                                <th>Date_end</th>
+                                                <th>Describe</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="p in pager.items">
                                                 <td>{{p.id}}</td>
                                                 <td>{{p.name}}</td>
-                                                <td>{{p.description}}</td>
-                                                <td>{{p.actors}}</td>
-                                                <td>{{p.diretors}}</td>
-                                                <td>{{p.gerne}}</td>
-                                                <td>{{p.trailer}}</td>
-                                                <td>{{p.time}}</td>
-                                                <td>{{p.image}}</td>
-                                                <td>{{p.publish_DATE | date:'dd-MM-yyyy'}}</td>
+                                                <td>{{p.discount}}</td>
+                                                <td>{{p.date_START | date:'dd-MM-yyyy'}}</td>
+                                                <td>{{p.date_END | date:'dd-MM-yyyy'}}</td>
+                                                <td>{{p.describe}}</td>
                                                 <td>
                                                     <div class="d-flex flex-column align-items-center mt-3">
                                                         <button id="btn" class="button1"
                                                             ng-click="edit(p.id)">Edit</button>
-                                                        <!-- <button id="btn" class="button2 mt-2"
-                                                            ng-click="delete(p.id)">Delete</button> -->
+                                                        <button id="btn" class="button2 mt-2"
+                                                            ng-click="delete(p.id)">Delete</button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -506,8 +461,7 @@
 
 
 
-    <script th:src="@{/js/movie.js}"></script>
-    <!-- <script th:src="@{/js/layout/validate_admovie.js}"></script> -->
+    <script th:src="@{/js/voucher.js}"></script>
 
 
 
@@ -528,9 +482,6 @@
     <script th:src="@{/js/plugins/datatables-buttons/js/buttons.html5.min.js}"></script>
     <script th:src="@{/js/plugins/datatables-buttons/js/buttons.print.min.js}"></script>
     <script th:src="@{/js/plugins/datatables-buttons/js/buttons.colVis.min.js}"></script>
-    <!-- jquery-validation -->
-    <!-- <script th:src="@{/js/plugins/jquery-validation/jquery.validate.min.js}"></script>
-    <script th:src="@{/js/plugins/jquery-validation/additional-methods.min.js}"></script> -->
     <!-- AdminLTE -->
     <!-- <script th:src="@{/css/dist/js/adminlte.js}"></script> -->
     <script th:src="@{/css/dist/js/adminlte.min.js}"></script>
@@ -558,6 +509,8 @@
             });
         });
     </script>
+
+
 
 
 
