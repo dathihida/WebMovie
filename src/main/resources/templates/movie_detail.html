@@ -39,14 +39,21 @@
 
     <div th:replace="~{/page/detail_movie}"></div>
 
+	<div th:replace="~{/page/comment}"></div>
+	
     <div th:replace="~{/navbar/_topphim}"></div>
 
     <div th:replace="~{/navbar/_footer}"></div>
 
 
     <!-- js -->
+    
+    <!-- <script th:src="@{/js/movie_detail.js}"></script> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-websocket/2.0.1/angular-websocket.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/angular-websocket@2.0.1/dist/angular-websocket.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script th:src="@{/js/movie_scheduled_detail.js}"></script>
-    <script th:src="@{/js/movie_detail.js}"></script>
     <script th:src="@{/js/layout/main.js}"></script>
 </body>
 

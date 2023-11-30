@@ -2,6 +2,7 @@ package com.WebMovie.WebSecurityConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -23,7 +24,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/home", "/login", "/home/resetPassword", "/login-success",
+                .requestMatchers("/", "/home", "/login", "/home/resetPassword","/my-websocket-endpoint", "/my-websocket-endpoint/**",
                         "/signup", "/js/**", "/css/**", "/images/**",
                         "/add", "/add/userNoExist",
                         "/api/movie/all", "/movie/**", "/v1/movie/**",
@@ -35,9 +36,10 @@ public class SecurityConfig {
                         "/api/seat/**",
                         "/api/booking/**", "/api/booking", "/api/booking/update/**", "/api/voucher/**",
                         "/pay", "/pay/**", "/api/pay", "/api/pay/**", "/mail/**",
-                        "/api/resetPassword/**", "/changePassword/**", "/api/user/**", "/api/find/**", "/error/404")
+                        "/api/resetPassword/**", "/changePassword/**", "/api/user/**", "/api/find/**", "/error/**",
+                        "/api/comment/**", "/api/comment")
                 .permitAll()
-                .requestMatchers("/booking/**", "/checkout/**", "/historyBooking/**").authenticated()
+                .requestMatchers("/booking/**", "/checkout/**", "/historyBooking/**", "/login-success").authenticated()
                 .requestMatchers("/home/**").authenticated()
                 .and()
                 .authorizeHttpRequests()
@@ -45,7 +47,7 @@ public class SecurityConfig {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .loginProcessingUrl("/login")
+                // .loginProcessingUrl("/login")
                 // return page home
                 .defaultSuccessUrl("/login-success", true)
                 // .defaultSuccessUrl("/home", true)

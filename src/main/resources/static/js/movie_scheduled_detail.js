@@ -4,7 +4,7 @@ let host_room="http://localhost:8080/api/room";
 let host_cinemas="http://localhost:8080/api/cinema";
 let host_booking = "http://localhost:8080/api/booking/update";
 const app = angular.module("app",[]);
-app.controller("controller", function($scope, $http){
+app.controller("controller", function($scope, $http, $timeout){
     $scope.form = {};
     
     $scope.movie_scheduleds = [];
@@ -77,6 +77,7 @@ app.controller("controller", function($scope, $http){
     }
     
 	$scope.inputValue = document.getElementById("movieId").value;
+	console.log("$scope.inputValue", $scope.inputValue);
 	$scope.selectedValue = "";
 	$scope.selectedDate = "";
 	
@@ -247,7 +248,91 @@ app.controller("controller", function($scope, $http){
             console.log("Error", error);
         })
     }*/
+	
+	$scope.listComments = [];
+
+    // Load initial data from the server
+    $http.get("http://localhost:8080/api/comment/all").then(function (response) {
+        $scope.listComments= response.data;
+        
+        console.log("listComments",$scope.listComments)
+    });
+
+    // Establish WebSocket connection after loading initial data
+    var socket = new SockJS("http://localhost:8080/my-websocket-endpoint");
+    var stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function (frame) {
+        console.log("Connected: " + frame);
+
+        // Subscribe to the WebSocket topic and define the callback function
+        stompClient.subscribe("/topic/product", function (message) {
+            console.log("WebSocket Message Received:", message.body);
+            var commentData = JSON.parse(message.body);
+            console.log("Parsed Data:", commentData);
+        
+            $timeout(function () {
+                $scope.listComments.push(commentData.body); // Only push message.body
+                console.log("Updated listComments:", $scope.listComments);
+            });
+        });
+        
+    });
+
+    $scope.addComment = function () {
+		$scope.loadIdUserLogin = function() {
+			$http.get('http://localhost:8080/api/getUserId').then(function(response) {
+				$scope.userId = response.data;
+				userIdLogin = $scope.userId;
+				console.log('idUserLogin', userIdLogin);
+				$http.get(`http://localhost:8080/api/find/${userIdLogin}`).then(function(response){
+					var message = {
+						id_CUSTOMER: {
+							id: userIdLogin,
+							fullname: response.data.fullname
+						},
+						id_MOVIE: {
+							id: $scope.inputValue
+						},
+			            content: $scope.content
+			        };
+			        stompClient.send("/app/products", {}, JSON.stringify(message));
+				})
+			});
+		}
+		$scope.loadIdUserLogin();
+    };
     
+    $scope.addCommentChildren = function (idComment, contentChilren) {
+	    $scope.loadIdUserLogin = function() {
+	        $http.get('http://localhost:8080/api/getUserId').then(function(response) {
+	            $scope.userId = response.data;
+	            userIdLogin = $scope.userId;
+	            console.log('idUserLogin', userIdLogin);
+	            
+	            $http.get(`http://localhost:8080/api/find/${userIdLogin}`).then(function(response) {
+	                var message = {
+	                    id_CUSTOMER: {
+	                        id: userIdLogin,
+	                        fullname: response.data.fullname
+	                    },
+	                    id_MOVIE: {
+	                        id: $scope.inputValue
+	                    },
+	                    content: contentChilren,
+	                    id_COMMENT: {
+	                        id: idComment
+	                    }
+	                };
+	
+	                // Send the WebSocket message inside this success callback
+	                stompClient.send("/app/products", {}, JSON.stringify(message));
+	            });
+	        });
+	    };
+	
+	    $scope.loadIdUserLogin();
+	};
     $scope.loadAllMovie_Scheduleds();
     $scope.loadAllMovies();
     $scope.loadAllCinemas();

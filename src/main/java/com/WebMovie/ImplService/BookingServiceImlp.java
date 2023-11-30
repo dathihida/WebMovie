@@ -6,14 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.WebMovie.Entity.Booking;
+import com.WebMovie.Entity.Customer;
 import com.WebMovie.Repository.BookingRepository;
 import com.WebMovie.Service.BookingService;
+import com.WebMovie.Service.MailService;
 
 @Service
 public class BookingServiceImlp implements BookingService{
 
 	@Autowired
 	BookingRepository bookingRepository;
+	
+	@Autowired
+	MailService mailService;
 	
 	@Override
 	public List<Booking> listBookingByIdRoom(Integer id) {
@@ -25,6 +30,7 @@ public class BookingServiceImlp implements BookingService{
 	public Booking addBooking(Booking booking) {
 		// TODO Auto-generated method stub
 		booking.setSTATUS("unpaid");
+		//mailService.sendMailBookingMovie(booking);
 		return bookingRepository.save(booking);
 	}
 
@@ -36,6 +42,7 @@ public class BookingServiceImlp implements BookingService{
 
 	@Override
 	public void updateStatusBooking(Integer id) {
+		//mailService.sendMailBookingMovie(customer, booking);
 		bookingRepository.updateStatusBooking(id);
 	}
 

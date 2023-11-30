@@ -234,7 +234,6 @@ app.controller("controller", function($scope, $http,  $filter){
 			console.log(resp.data);
 		})
 	}
-	
 	$scope.updateStatus();
 	$scope.loadAllMovies();
 	$scope.loadAllMovie_Scheduleds();

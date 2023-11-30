@@ -128,21 +128,21 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 		var isValid = checkValidate();
 
 		if (isValid) {
-			// Nếu validation thành công, gọi createMovie()
+			// Nếu validation thành công, gọi thanhtoan(idBooking)
 			$scope.thanhtoan(idBooking);
 		}
 	};
 	const btncheckbox = document.getElementById('checkbox');
 	// const btnThanhToan = document.getElementById('thanhtoan');
 
-    function checkValidate() {
-        let isCheck = true;
-        if (!btncheckbox.checked) {
+	function checkValidate() {
+		let isCheck = true;
+		if (!btncheckbox.checked) {
 			btncheckbox.focus();
-            isCheck = false;
+			isCheck = false;
 		}
-        return isCheck;
-    }
+		return isCheck;
+	}
 
 	$scope.thanhtoan = function (idBooking) {
 		var dataVoucher = angular.copy($scope.form);
@@ -159,6 +159,7 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 				$scope.form.idVoucher = null;
 				// Gọi hàm xử lý thanh toán
 				$scope.performPayment1(idBooking);
+				console.log("thanhtoan", resp.data);
 			});
 			return;
 		}
@@ -170,6 +171,7 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 			$scope.discountedPrice = resp.data.price - (resp.data.price * discount / 100);
 			// Gọi hàm xử lý thanh toán
 			$scope.performPayment(idBooking);
+			console.log("thanhtoan", resp.data);
 		});
 	}
 
@@ -192,10 +194,19 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 
 		// create pay
 		$http.post(`${host_pay}`, data).then(resp => {
-			console.log("pay", resp.data);
+
+
+
+
 			//update status booking
 			$http.get(`${host_booking}/update/${idBooking}`).then(resp => {
 				console.log("update", resp.data);
+
+				//guigmail
+				$http.get(`${host_pay}/${idBooking}`).then(resp => {
+					console.log("pay", resp.data);
+				})
+
 				// id customer
 				var url = `${host_booking}/v1/${idBooking}`;
 				$http.get(url).then(resp => {
@@ -208,7 +219,7 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 			console.log("Error", error);
 		});
 	};
-	$scope.performPayment1 = function (idBooking) {
+	performPayment1 = function (idBooking) {
 		var data = {
 			price: $scope.discountedPrice,
 			intent: "Buy",
@@ -220,31 +231,42 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 			}
 		};
 
+
 		console.log("data", data);
 
 		// create pay
 		$http.post(`${host_pay}`, data).then(resp => {
-			console.log("pay", resp.data);
+
+
+
 			//update status booking
 			$http.get(`${host_booking}/update/${idBooking}`).then(resp => {
 				console.log("update", resp.data);
+
+				//guigmail
+				$http.get(`${host_pay}/${idBooking}`).then(resp => {
+					console.log("pay", resp.data);
+				})
+
 				// id customer
 				var url = `${host_booking}/v1/${idBooking}`;
 				$http.get(url).then(resp => {
 					console.log("sdss", resp.data.id_CUSTOMER.id);
-					window.location.href = `http://localhost:8080/historyBooking/` + resp.data.id_CUSTOMER.id;
+					//window.location.href = `http://localhost:8080/historyBooking/` + resp.data.id_CUSTOMER.id;
 				});
+
 			});
-			$scope.stopClock();
-		}).catch(error => {
-			console.log("Error", error);
 		});
+		$scope.stopClock();
+	}).catch(error => {
+		console.log("Error", error);
+	});
 	};
 
 
 
-	$scope.pay(idBooking);
-	$scope.getBookingId(idBooking);
-	$scope.getSeat_Scheduled(idBooking);
-	$scope.voucher();
+$scope.pay(idBooking);
+$scope.getBookingId(idBooking);
+$scope.getSeat_Scheduled(idBooking);
+$scope.voucher();
 });

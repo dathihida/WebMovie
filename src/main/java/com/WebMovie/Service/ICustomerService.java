@@ -24,4 +24,6 @@ public interface ICustomerService {
 	Customer updatePassowrd(Customer customer);
 	
 	void updatePassword(String password, Integer id);
+	
+	Optional<Customer> findCustomerById(Integer id);
 }

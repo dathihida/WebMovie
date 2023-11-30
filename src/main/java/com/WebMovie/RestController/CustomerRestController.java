@@ -95,4 +95,6 @@ public class CustomerRestController {
 	 Customer findId(@PathVariable("id") Integer id) {
 		 return customerRepository.findById(id).get();
 	 }
+	 
+//	 @GetMapping("/")
 }
