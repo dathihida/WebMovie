@@ -76,7 +76,7 @@ app.controller("controller", function ($scope, $http, $filter) {
     const btnVoucher1 = document.getElementById('btn1');
     const btnVoucher2 = document.getElementById('btn2');
     const inputEles = document.querySelectorAll('.form-group');
-
+	// Nếu nhảy lỗi console đến đây thì copy 3 nút thêm,sửa, resset qua file html chứa file js này rồi chỉnh hidden
     btnVoucher1.addEventListener('click', function () {
         Array.from(inputEles).map((ele) =>
             ele.classList.remove('success', 'error')

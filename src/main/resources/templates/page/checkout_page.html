@@ -58,9 +58,10 @@
                                 </div>
                             </div> -->
                         </div>
+
                         <div class="dieukhoan mt-4 gap-3 d-flex align-items-center">
                             <input type="checkbox" id="checkbox" name="" value="false" >
-                            <label for="true">Tôi đồng ý với <a href="#">điều khoản sử dụng</a> và mua vé cho người có
+                            <label for="true">Tôi đồng ý với <a th:href="@{/home/terms-use}">điều khoản sử dụng</a> và mua vé cho người có
                                 độ
                                 tuổi phù hợp</label>
                         </div>
@@ -147,6 +148,8 @@
                                 ng-disabled="booking.status === 'success' || booking.status === 'failed'"
                                 class="btn btn-warning pay" id="thanhtoan">Thanh toán</button>
                         </div>
+
+
                     </div>
                 </div>
             </div>

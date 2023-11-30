@@ -119,6 +119,9 @@
 .form-group:last-child {
   margin-bottom: 0;
 }
+.form-group.normal input {
+  border-color: #ccc;
+}
 
 .form-group.success input {
   border-color: #2ecc71;

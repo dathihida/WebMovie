@@ -104,6 +104,11 @@ public class HomeController {
 	String voucher() {
 		return "voucher";
 	}
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	@GetMapping("/home/bill")
+	String bill() {
+		return "bill";
+	}
 
 	@GetMapping("/checkout/{idBooking}")
 	String checkout(@PathVariable("idBooking") Integer idBooking) {
@@ -113,6 +118,56 @@ public class HomeController {
 	@GetMapping("/home/seat")
 	String seat() {
 		return "seat";
+	}
+	
+	@GetMapping("/home/nowshowing")
+	String nowshowing() {
+		return "nowshowing";
+	}
+
+	@GetMapping("/home/comingsoon")
+	String comingsoon() {
+		return "comingsoon";
+	}
+	
+	@GetMapping("/home/about-us")
+	String aboutus() {
+		return "infopage/about_us";
+	}
+	
+	@GetMapping("/home/payment-policy")
+	String paymentpolicy() {
+		return "infopage/payment_policy";
+	}
+	
+	@GetMapping("/home/privacy-policy")
+	String privacypolicy() {
+		return "infopage/privacy_policy";
+	}
+	
+	@GetMapping("/home/terms-conditions")
+	String termsconditions() {
+		return "infopage/terms_conditions";
+	}
+	
+	@GetMapping("/home/terms-use")
+	String termsuse() {
+		return "infopage/terms_use";
+	}
+	
+	@GetMapping("/home/connect")
+	String connect() {
+		return "infopage/connect";
+	}
+	
+	@GetMapping("/home/showtime")
+	String showtime() {
+		return "showtime";
+	}
+	
+	@GetMapping("/home/question")
+	String question() {
+		return "infopage/question";
 	}
 
 	@GetMapping("/booking/{idMovieSh}")

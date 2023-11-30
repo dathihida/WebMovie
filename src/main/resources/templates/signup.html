@@ -25,7 +25,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" th:href="@{|/css/header.css|}">
 	<link rel="stylesheet" th:href="@{|/css/footer.css|}">
- <link rel="stylesheet" th:href="@{|/css/signin_up.css|}">
+	<link rel="stylesheet" th:href="@{|/css/signin_up.css|}">
 
 	<title>MovieTime</title>
 
@@ -80,7 +80,8 @@
 					</div>
 					<div class="form-group">
 						<small>Error message</small>
-						<input type="text" ng-model="form.phonenumber" id="phonenumber_signup" placeholder="Phone number">
+						<input type="text" ng-model="form.phonenumber" id="phonenumber_signup"
+							placeholder="Phone number">
 					</div>
 					<div class="form-group">
 						<small>Error message</small>
@@ -112,9 +113,9 @@
 	</div>
 
 	<div th:replace="~{/navbar/_footer}"></div>
-   <script th:src="@{/js/signup.js}"></script>
+	<script th:src="@{/js/signup.js}"></script>
 
-	<!-- 	<div th:replace="~{/navbar/_footer}"></div> -->
+
 
 	<script th:src="@{/js/layout/main.js}"></script>
 	<script th:src="@{/js/layout/signin_up.js}"></script>

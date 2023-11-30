@@ -202,89 +202,6 @@
     cursor: default;
 }
 
-/* .seat_booking .list_seat .seat1:hover{
-    z-index: 1;
-    position: relative;
-    right: -10px;
-    transform: scale(1.1);
-} */
-
-/* .seat_booking .list_seat .seat1:checked {
-    z-index: 2;
-    position: relative;
-    right: -10px;
-    transform: scale(1.1);
-    background-color: #00B300;
-    box-shadow: 0 0 10px #00B300;
-} */
-
-/* .seat_booking .list_seat input[type="checkbox"]:checked+.seat_booking .list_seat .seat1::after {
-    opacity: 1;
-} */
-
-
-
-
-
-
-/* .seat_booking .list_seat .gr {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-}
-
-.seat_booking .list_seat label {
-    display: flex;
-    cursor: pointer;
-    font-weight: 500;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 0.375em;
-    margin-top: 0.375em;
-
-}
-
-.seat_booking .list_seat label input {
-    position: absolute;
-    left: -9999px;
-}
-
-.seat_booking .list_seat label input:checked+span {
-    background-color: rgb(20, 62, 96);
-    color: white;
-}
-
-.seat_booking .list_seat label input:checked+span:before {
-    box-shadow: inset 0 0 0 0.4375em rgb(18, 38, 63);
-}
-
-.seat_booking .list_seat label span {
-    display: flex;
-    align-items: center;
-    padding: 0.375em 0.75em 0.375em 0.375em;
-    border-radius: 60px;
-    transition: 0.25s ease;
-    color: #797979;
-}
-
-.seat_booking .list_seat label span:hover {
-    background-color: #d6d6e5;
-}
-
-.seat_booking .list_seat label span:before {
-    display: flex;
-    flex-shrink: 0;
-    content: "";
-    background-color: #fff;
-    width: 1.3em;
-    height: 1.3em;
-    border-radius: 60%;
-    margin-right: 0.375em;
-    transition: 0.25s ease;
-    box-shadow: inset 0 0 0 0.125em rgb(20, 62, 96);
-}
- */
-
 
 
 
@@ -420,4 +337,32 @@ h6 {
     color: white;
     font-weight: 500;
     background-color: #ED2647;
+}
+
+
+/* =================MODAL AUTO SHOW================ */
+
+.policy .modal-body a{
+    text-decoration: none;
+    color: rgb(237, 38, 71);
+}
+.policy .modal-body a:hover{
+    font-weight: 500;
+    color: rgb(237, 38, 71);
+}
+
+.policy .modal-footer{
+    border-top: 0;
+}
+
+.policy .modal-footer button{
+    background-color: rgb(18, 38, 63);
+    color: white;
+    font-weight: 500;
+    border: 0;
+}
+.policy .modal-footer button:hover{
+    background-color: rgb(2, 6, 11);
+    color: white;
+    font-weight: 500;
 }

@@ -13,18 +13,12 @@
         <div class="tab-content " id="ex1-content">
             <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
                 <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 grid-phimdc">
-                    <div class="col p-2" ng-repeat="item in filteredMoviesToDay">
+                    <div class="col p-2" ng-repeat="item in filteredMoviesToDay | limitTo:moviesLimit">
                         <div class="card">
                             <a th:href="@{/movie/{{item.id_MOVIE.id}}}">
                                 <img ng-src="/images/{{item.id_MOVIE.image}}" class="card-img-top"
                                     alt="Hollywood Sign on The Hill" />
                             </a>
-                            <!--                             <div class="card-header d-flex justify-content-between align-items-center py-2 px-2">
-                                <small class="text-muted">{{item.time_START}}</small>
-                                <small class="text-muted">{{item.date | date:'dd-MM-yyyy'}}</small>
-                                <small class="text-muted">{{item.id_ROOM.name}}</small>
-                                <small class="text-muted">{{item.id_ROOM.id_CINEMAS.name}}</small>
-                            </div> -->
                             <div class="card-body p-2">
                                 <h6 class="card-title">{{item.id_MOVIE.name}}</h6>
                             </div>
@@ -32,7 +26,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end mt-3">
-                    <a href="" class="cta text-decoration-none">
+                    <a th:href="@{/home/nowshowing}" class="cta text-decoration-none">
                         <span class="hover-underline-animation"> View more </span>
                         <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg"
                             id="arrow-horizontal">
@@ -47,14 +41,14 @@
             <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
 
                 <div class="row row-cols-1 row-cols-md-5 g-4">
-                    <div class="col p-2" ng-repeat="item in filteredMovies">
+                    <div class="col p-2" ng-repeat="item in filteredMovies | limitTo:moviesLimit">
                         <div class="card">
                             <a th:href="@{/movie/{{item.id_MOVIE.id}}}">
                                 <img ng-src="/images/{{item.id_MOVIE.image}}" class="card-img-top"
                                     alt="Hollywood Sign on The Hill" />
                             </a>
                             <div class="card-header d-flex justify-content-between align-items-center py-2 px-2">
-
+                                <small class="text-muted">{{item.date | date:'dd-MM-yyyy'}}</small>
                             </div>
                             <div class="card-body p-2">
                                 <h6 class="card-title">{{item.id_MOVIE.name}}</h6>
@@ -63,7 +57,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end mt-3">
-                    <a href="" class="cta text-decoration-none">
+                    <a th:href="@{/home/comingsoon}" class="cta text-decoration-none">
                         <span class="hover-underline-animation"> View more </span>
                         <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg"
                             id="arrow-horizontal">
@@ -78,3 +72,11 @@
         </div>
     </div>
 </section>
+<!--dùng để fix bug validate kiểu chữa cháy :)) -->
+<div class="mt-2 form-group" hidden>
+    <button id="btnmovie" ng-click="checkAndCreateMovie()" type="submit">Create</button>
+    <button id="btnmovie2" ng-click="checkAndUpdateMovie()" type="submit">Update</button>
+    <!-- <button id="btn" ng-click="delete(form.id)" type="submit">Delete</button> -->
+    <button id="btn" ng-click="reset()" type="submit">Reset</button>
+</div>
+<!--dùng để fix bug validate kiểu chữa cháy  -->

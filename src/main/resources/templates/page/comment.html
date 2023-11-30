@@ -1,35 +1,36 @@
-<div xmlns:th="http://www.thymeleaf.org">
-    <div>
-    	<!-- input cha -->
-    	<input ng-model="content" placeholder="content" />
-    	<br />
-        <div sec:authorize="!isAuthenticated()">
-        	<a th:href="@{/login}">
-                Hay dang nhap rui comment
-            </a>
-        </div>
-        <div sec:authorize="isAuthenticated()">
-        	<button ng-click="addComment()">Add</button>
-        </div>
-    </div>
-    
-    <ul ng-repeat="com in listComments">
-    	<li>{{com.id_CUSTOMER.fullname}}</li>
-    	<li>{{com.content}}</li>
-    	<li>{{com.time_COMMENT}}</li>
-    	<li>
-    		<!-- input con -->
-    		<input ng-model="contentChilren" placeholder="content" />
-    		<div sec:authorize="!isAuthenticated()">
-	        	<a th:href="@{/login}">
-	                Hay dang nhap rui tra loi tuong tac
-	            </a>
-	        </div>
-	        <div sec:authorize="isAuthenticated()">
-	        	<button ng-click="addCommentChildren(com.id, contentChilren)">Add</button>
-	        </div>
-    	</li>
-    </ul>
-    
-</div>
+<section xmlns:th="http://www.thymeleaf.org">
+	<div class="container">
+		<div>
+			<!-- input cha -->
+			<input ng-model="content" placeholder="content" />
+			<br />
+			<div sec:authorize="!isAuthenticated()">
+				<a th:href="@{/login}">
+					Hay dang nhap rui comment
+				</a>
+			</div>
+			<div sec:authorize="isAuthenticated()">
+				<button ng-click="addComment()">Add</button>
+			</div>
+		</div>
 
+		<ul ng-repeat="com in listComments">
+			<li>{{com.id_CUSTOMER.fullname}}</li>
+			<li>{{com.content}}</li>
+			<li>{{com.time_COMMENT}}</li>
+			<li>
+				<!-- input con -->
+				<input ng-model="contentChilren" placeholder="content" />
+				<div sec:authorize="!isAuthenticated()">
+					<a th:href="@{/login}">
+						Hay dang nhap rui tra loi tuong tac
+					</a>
+				</div>
+				<div sec:authorize="isAuthenticated()">
+					<button ng-click="addCommentChildren(com.id, contentChilren)">Add</button>
+				</div>
+			</li>
+		</ul>
+
+	</div>
+</section>

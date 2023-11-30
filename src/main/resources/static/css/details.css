@@ -2,7 +2,7 @@
 
 
 /* ===================DETAILS=================== */
-*{
+* {
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -405,5 +405,129 @@
     margin: 5px 10px 15px 10px;
 } */
 
-;
-;
+
+
+
+/* ===================================COMMENT============================== */
+
+.comment h4{
+    color: rgb(38, 58, 82);
+}
+.comment .cmt{
+    padding: 20px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.10);
+}
+
+.comment .cmt input {
+    height: 40px;
+    border: 0;
+    border-bottom: 0.5px solid rgb(185, 185, 185);
+    padding: 0 5px;
+    width: 100%;
+}
+
+.comment .cmt input::after + :focus {
+    height: 40px;
+    border: 0;
+    border-bottom: 0.5px solid rgb(43, 52, 114);
+    padding: 0 5px;
+    width: 100%;
+}
+
+.comment .cmt button {
+    background-color: rgb(18, 38, 63);
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    float: right;
+}
+
+/* Định dạng cho bình luận chính */
+.comment-container {
+    margin-bottom: 20px;
+    border: 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.comment-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.comment-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comment-time {
+    color: #888;
+}
+
+.comment-content {
+    margin-bottom: 10px;
+}
+
+/* Định dạng cho phần trả lời bình luận */
+
+.comment-reply input {
+    height: 30px;
+    border: 0;
+    border-bottom: 0.5px solid rgb(185, 185, 185);
+    padding: 0 5px;
+    width: 100%;
+}
+
+/* Định dạng cho link đăng nhập khi chưa đăng nhập */
+.comment-reply a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.comment-reply button {
+    background-color: #626262;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    height: 30px;
+    width: 70px;
+}
+
+.comment-reply button:hover {
+    background-color: #333333;
+}
+
+.comment .showcmt button{
+    width: 100px;
+    height: auto;
+    border: 0;
+    box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+    border-radius: 3px;
+    color: rgb(17, 13, 68);
+}
+.comment .showcmt button:hover{
+    width: 100px;
+    height: auto;
+    border: 0;
+    box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+    border-radius: 3px;
+    transform: scale(1.1);
+    transition:  1s ;
+}

@@ -7,6 +7,10 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+header *{
+    background-color: white;
+}
+
 @media (max-with: 991px) {
     .sidebar {
         backdrop-filter: blur(10px);

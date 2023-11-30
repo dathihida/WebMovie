@@ -144,6 +144,7 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 		return isCheck;
 	}
 
+
 	$scope.thanhtoan = function (idBooking) {
 		var dataVoucher = angular.copy($scope.form);
 		var index = $scope.availableVouchers.findIndex(idVoucher => idVoucher.id === $scope.form.idVoucher);
@@ -219,7 +220,7 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 			console.log("Error", error);
 		});
 	};
-	performPayment1 = function (idBooking) {
+	$scope.performPayment1 = function (idBooking) {
 		var data = {
 			price: $scope.discountedPrice,
 			intent: "Buy",
@@ -252,11 +253,11 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 				var url = `${host_booking}/v1/${idBooking}`;
 				$http.get(url).then(resp => {
 					console.log("sdss", resp.data.id_CUSTOMER.id);
-					//window.location.href = `http://localhost:8080/historyBooking/` + resp.data.id_CUSTOMER.id;
+					window.location.href = `http://localhost:8080/historyBooking/` + resp.data.id_CUSTOMER.id;
 				});
 
 			});
-		});
+		
 		$scope.stopClock();
 	}).catch(error => {
 		console.log("Error", error);

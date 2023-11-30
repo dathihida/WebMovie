@@ -24,7 +24,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/home", "/login", "/home/resetPassword","/my-websocket-endpoint", "/my-websocket-endpoint/**",
+                .requestMatchers("/home/**","/", "/home", "/login", "/home/resetPassword","/my-websocket-endpoint", "/my-websocket-endpoint/**",
                         "/signup", "/js/**", "/css/**", "/images/**",
                         "/add", "/add/userNoExist",
                         "/api/movie/all", "/movie/**", "/v1/movie/**",
