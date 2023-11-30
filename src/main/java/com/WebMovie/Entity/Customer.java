@@ -31,4 +31,8 @@ public class Customer {
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_CUSTOMER")
 	private List<Booking> LIST_BOOKING;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "ID_CUSTOMER")
+	private List<Comment> LIST_COMMENT;
 }

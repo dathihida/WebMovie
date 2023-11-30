@@ -20,11 +20,13 @@ public class UserInfoDetails implements UserDetails {
 	private Integer id;
     private String name;
     private String password;
+    private String fullname;
     private List<GrantedAuthority> roles;
 
     public UserInfoDetails(Customer user){
     	this.id = user.getID();
         this.name = user.getEMAIL();
+        this.fullname = user.getFULLNAME();
         this.password = user.getPASSWORD();
         this.roles = Arrays.stream(user.getROLE().split(","))
                 .map(SimpleGrantedAuthority::new)

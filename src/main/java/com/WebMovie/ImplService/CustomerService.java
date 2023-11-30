@@ -32,7 +32,7 @@ public class CustomerService implements ICustomerService {
 	public Customer addCustomer(Customer customer) {
 		// TODO Auto-generated method stub
 		customer.setEXIST(true);
-		customer.setROLE("ROLE_ADMIN");
+		customer.setROLE("ROLE_USER");
 		customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
 
 		mailService.sendMailCreateCustomer(customer);
@@ -118,5 +118,11 @@ public class CustomerService implements ICustomerService {
 	public void updatePassword(String password, Integer id) {
 		customerRepository.updatePassword(password, id);
 
+	}
+
+	@Override
+	public Optional<Customer> findCustomerById(Integer id) {
+		// TODO Auto-generated method stub
+		return customerRepository.findByID(id);
 	}
 }

@@ -33,13 +33,14 @@ public class HomeController {
 	String login(HttpServletRequest request) {
 		String referrer = request.getHeader("Referer");
 		request.getSession().setAttribute("prevPage", referrer);
+		System.out.println(referrer);
 		return "signin";
 	}
 
 	@GetMapping("/login-success")
 	public void loginSuccess(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
-
+		System.out.println("prevPage" + prevPage);
 		if (prevPage != null && !prevPage.contains("/login")) {
 			redirectStrategy.sendRedirect(request, response, prevPage);
 		} else {
@@ -134,7 +135,7 @@ public class HomeController {
 		return "changePassword";
 	}
 
-	@GetMapping(value = "/error/404")
+	@GetMapping("/error/404")
 	public String pageUrl404() {
 		return "error404";
 	}

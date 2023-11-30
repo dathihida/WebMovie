@@ -45,4 +45,8 @@ public class Movie {
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_MOVIE")
 	List<Movie_Scheduled> MOVIE_SCHEDULED;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "ID_MOVIE")
+	private List<Comment> LIST_COMMENT;
 }

@@ -27,4 +27,10 @@ public class PayImlp implements PayService{
 		return payRepository.findAll();
 	}
 
+	@Override
+	public Pay findPayByIdBooking(Integer id) {
+		// TODO Auto-generated method stub
+		return payRepository.findById(id).get();
+	}
+
 }

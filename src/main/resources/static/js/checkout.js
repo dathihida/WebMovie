@@ -137,6 +137,7 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 				$scope.form.idVoucher = null;
 				// Gọi hàm xử lý thanh toán
 				$scope.performPayment1(idBooking);
+				console.log("thanhtoan", resp.data);
 			});
 			return;
 		}
@@ -148,6 +149,7 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 			$scope.discountedPrice = resp.data.price - (resp.data.price * discount / 100);
 			// Gọi hàm xử lý thanh toán
 			$scope.performPayment(idBooking);
+			console.log("thanhtoan", resp.data);
 		});
 	}
 	
@@ -170,10 +172,19 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 	
 		// create pay
 		$http.post(`${host_pay}`, data).then(resp => {
-			console.log("pay", resp.data);
+
+			
+			
+			
 			//update status booking
 			$http.get(`${host_booking}/update/${idBooking}`).then(resp => {
 				console.log("update", resp.data);
+				
+				//guigmail
+				$http.get(`${host_pay}/${idBooking}`).then(resp=>{
+					console.log("pay", resp.data);
+				})
+				
 				// id customer
 				var url = `${host_booking}/v1/${idBooking}`;
 				$http.get(url).then(resp => {
@@ -186,31 +197,39 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 			console.log("Error", error);
 		});
 	};
-		$scope.performPayment1 = function(idBooking) {
-			var data = {
-				price: $scope.discountedPrice,
-				intent: "Buy",
-				method: "Online",
-				currency: "VND",
-				description: "Thanh toan tien ve xem phim",
-				id_BOOKING: {
-					id: idBooking
-				}
-			};
+	$scope.performPayment1 = function(idBooking) {
+		var data = {
+			price: $scope.discountedPrice,
+			intent: "Buy",
+			method: "Online",
+			currency: "VND",
+			description: "Thanh toan tien ve xem phim",
+			id_BOOKING: {
+				id: idBooking
+			}
+		};
 		
-			console.log("data", data);
+		console.log("data", data);
 		
-			// create pay
-			$http.post(`${host_pay}`, data).then(resp => {
-				console.log("pay", resp.data);
+		// create pay
+		$http.post(`${host_pay}`, data).then(resp => {
+			
+			
+			
 				//update status booking
 				$http.get(`${host_booking}/update/${idBooking}`).then(resp => {
 					console.log("update", resp.data);
+					
+					//guigmail
+					$http.get(`${host_pay}/${idBooking}`).then(resp=>{
+						console.log("pay", resp.data);
+					})
+					
 					// id customer
 					var url = `${host_booking}/v1/${idBooking}`;
 					$http.get(url).then(resp => {
 						console.log("sdss", resp.data.id_CUSTOMER.id);
-						window.location.href = `http://localhost:8080/historyBooking/` + resp.data.id_CUSTOMER.id;
+						//window.location.href = `http://localhost:8080/historyBooking/` + resp.data.id_CUSTOMER.id;
 					});
 				});
 				$scope.stopClock();
