@@ -29,7 +29,7 @@ public class HomeController {
 	@Autowired
 	private RedirectStrategy redirectStrategy;
 
-	@RequestMapping("/login")
+	@RequestMapping("/signin")
 	String login(HttpServletRequest request) {
 		String referrer = request.getHeader("Referer");
 		request.getSession().setAttribute("prevPage", referrer);

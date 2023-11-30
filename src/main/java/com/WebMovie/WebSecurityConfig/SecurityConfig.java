@@ -24,7 +24,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/home", "/login", "/home/resetPassword","/my-websocket-endpoint", "/my-websocket-endpoint/**",
+                .requestMatchers("/", "/home", "/home/resetPassword", "/my-websocket-endpoint",
+                        "/my-websocket-endpoint/**",
                         "/signup", "/js/**", "/css/**", "/images/**",
                         "/add", "/add/userNoExist",
                         "/api/movie/all", "/movie/**", "/v1/movie/**",
@@ -46,11 +47,9 @@ public class SecurityConfig {
                 .requestMatchers("/api/**", "/rest/**").authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                // .loginProcessingUrl("/login")
-                // return page home
-                .defaultSuccessUrl("/login-success", true)
-                // .defaultSuccessUrl("/home", true)
+                .loginPage("/signin")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/home")
                 .permitAll()
                 // logout in page home
                 .and()

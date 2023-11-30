@@ -4,7 +4,7 @@
     	<input ng-model="content" placeholder="content" />
     	<br />
         <div sec:authorize="!isAuthenticated()">
-        	<a th:href="@{/login}">
+        	<a th:href="@{/signin}">
                 Hay dang nhap rui comment
             </a>
         </div>
@@ -21,7 +21,7 @@
     		<!-- input con -->
     		<input ng-model="contentChilren" placeholder="content" />
     		<div sec:authorize="!isAuthenticated()">
-	        	<a th:href="@{/login}">
+	        	<a th:href="@{/signin}">
 	                Hay dang nhap rui tra loi tuong tac
 	            </a>
 	        </div>
