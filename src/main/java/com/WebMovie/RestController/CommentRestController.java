@@ -8,6 +8,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,5 +34,10 @@ public class CommentRestController {
 		commentSevrice.addComment(comment);
 		System.out.println("Comment added to the database: " + comment.getID());
 		return ResponseEntity.ok(comment);
+	}
+	
+	@GetMapping("/{id}")
+	List<Comment> getCommentByIdMovie(@PathVariable("id") Integer id){
+		return commentSevrice.getCommentByIdMovie(id);
 	}
 }

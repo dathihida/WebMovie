@@ -13,18 +13,20 @@ import java.util.stream.Collectors;
 
 public class UserInfoDetails implements UserDetails {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Integer id;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    private Customer user;
+    private Integer id;
     private String name;
     private String password;
     private String fullname;
     private List<GrantedAuthority> roles;
 
-    public UserInfoDetails(Customer user){
-    	this.id = user.getID();
+    public UserInfoDetails(Customer user) {
+        this.user = user;
+        this.id = user.getID();
         this.name = user.getEMAIL();
         this.fullname = user.getFULLNAME();
         this.password = user.getPASSWORD();
@@ -41,7 +43,11 @@ public class UserInfoDetails implements UserDetails {
     public Integer getId() {
         return this.id;
     }
-    
+
+    public String getFullName() {
+        return this.user.getFULLNAME();
+    }
+
     @Override
     public String getPassword() {
         return this.password;

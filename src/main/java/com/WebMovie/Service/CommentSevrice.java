@@ -9,4 +9,5 @@ public interface CommentSevrice {
 	Comment addComment(Comment comment);
 	//Comment updateComment()
 	//void deleteComment(Integer id);
+	List<Comment> getCommentByIdMovie(Integer id);
 }

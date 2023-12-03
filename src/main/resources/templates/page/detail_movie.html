@@ -135,8 +135,9 @@
                             </li>
                         </ul>
  						 <div class="tab-content showtimes">
-                            <div ng-if="noDataMessage">{{noDataMessage}}</div>
+                            
                             <div class="site-mvt" ng-repeat="movieOfCinemas in filterMovieDate" ng-if="isFutureEvent(movieOfCinemas)">
+                                <div ng-if="noDataMessage">{{noDataMessage}}</div>
                                 <div class="site d-flex flex-column">
                                     <span>{{movieOfCinemas.id_ROOM.id_CINEMAS.name}}</span>
                                     <em>{{movieOfCinemas.id_ROOM.id_CINEMAS.address}} - <a target="_blank" href="https://www.google.com/maps/search/{{movieOfCinemas.id_ROOM.id_CINEMAS.address}}">Bản đồ</a></em>
@@ -158,6 +159,7 @@
                                             {{movieOfCinemas.time_START}}
                                         </a>
                                     </li> -->
+                                    <!-- ng-if="noDataMessage === null" -->
                                     <li class="item">
                                         <a
                                             th:href="@{/booking/{{movieOfCinemas.id}}}">
@@ -169,7 +171,7 @@
                         </div>
 						 
 						 <table class="table" hidden>
-						 	<div ng-if="noDataMessage">{{noDataMessage}}</div>
+						 	<!-- <div ng-if="noDataMessage">{{noDataMessage}}</div> -->
 						  	<thead>
 							    <tr>
 							      <th>MovieName</th>

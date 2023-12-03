@@ -131,16 +131,46 @@ app.controller("controller", function($scope, $http, $timeout){
 
   	// Hàm kiểm tra xem một mục có nên hiển thị hay không
   	$scope.isFutureEvent = function(movieOfCinemas) {
+
+        // $interval(function() {
+        //     $scope.checkShowTimes();
+        // }, 1000 * 60); // Kiểm tra mỗi 1 phút
+
+        // $scope.checkShowTimes = function() {
+        //     var currentTime = new Date();
+
+        //     angular.forEach($scope.movie_scheduleds, function(movie) {
+        //         var showDateTimeString = movie.date + ' ' + movie.time_START;
+        //         var showDateTime = new Date(showDateTimeString);
+        //         var notificationTime = new Date(showDateTime - 15 * 60 * 1000);
+
+        //         if (currentTime >= notificationTime && currentTime < showDateTime) {
+        //             $scope.notificationMessage = 'Thông báo: Đóng vé cho ' + movie.id_MOVIE.name + ' sẽ diễn ra trong 15 phút tới!';
+        //         }
+        //     });
+        // };
+
+        // // Kiểm tra ngay khi trang được tải lên
+        // $scope.checkShowTimes();
+        var currentTime = new Date();
+        var startTime = new Date(movieOfCinemas.date + ' ' + movieOfCinemas.time_START);
+        var showDateTime = new Date(startTime);
+        var timeCheck = new Date(showDateTime - 15 * 60 * 1000);
+
 	  	var endTime = new Date(movieOfCinemas.date + ' ' + movieOfCinemas.time_END);
 	  	var currentDateTime = new Date($scope.currentDate + ' ' + $scope.currentTime);
-	  		// Kiểm tra xem có dữ liệu hay không
-			if (endTime < currentDateTime) {
-	        // Nếu không có dữ liệu, hiển thị thông báo
-	        	$scope.noDataMessage = "Đã hết thời gian lên phim";
-	   		 } else {
-	        // Nếu có dữ liệu, đặt thông báo về null
-	       		$scope.noDataMessage = null;
-	    	}
+            // if(currentTime >= timeCheck && currentTime < showDateTime){
+            //     $scope.noDataMessage = "Phim đã đến giờ chiếu nên sẽ khóa đặt chỗ";
+            // } else {
+                
+            // }
+            if (endTime < currentDateTime) {
+                // Nếu không có dữ liệu, hiển thị thông báo
+                    $scope.noDataMessage = "Phim đã kết thúc";
+                } else {
+                // Nếu có dữ liệu, đặt thông báo về null
+                    $scope.noDataMessage = null;
+                }
 	  	return endTime > currentDateTime;
 	};
 

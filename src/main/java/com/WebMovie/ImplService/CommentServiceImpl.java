@@ -26,4 +26,10 @@ public class CommentServiceImpl implements CommentSevrice{
 		return commentReporitory.save(comment);
 	}
 
+	@Override
+	public List<Comment> getCommentByIdMovie(Integer id) {
+		// TODO Auto-generated method stub
+		return commentReporitory.getCommentByIdMovie(id);
+	}
+
 }

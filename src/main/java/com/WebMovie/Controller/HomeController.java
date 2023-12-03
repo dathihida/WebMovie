@@ -139,4 +139,9 @@ public class HomeController {
 	public String pageUrl404() {
 		return "error404";
 	}
+
+	// @GetMapping("/comment")
+	// public String comment() {
+	// return "movie_detail";
+	// }
 }

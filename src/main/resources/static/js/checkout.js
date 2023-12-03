@@ -229,7 +229,7 @@ app.controller("controllerBooking", function($scope, $http, $interval, $timeout)
 					var url = `${host_booking}/v1/${idBooking}`;
 					$http.get(url).then(resp => {
 						console.log("sdss", resp.data.id_CUSTOMER.id);
-						//window.location.href = `http://localhost:8080/historyBooking/` + resp.data.id_CUSTOMER.id;
+						window.location.href = `http://localhost:8080/historyBooking/` + resp.data.id_CUSTOMER.id;
 					});
 				});
 				$scope.stopClock();

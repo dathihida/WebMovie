@@ -61,6 +61,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false" th:text="${#authentication.name}">
                                 </a>
+                                
                                 <ul class="dropdown-menu">
                                     <li><button class="dropdown-item" ng-click="loadIdUserLogin()">Order History</button></li>
                                     <li><a class="dropdown-item" th:href="@{/home/resetPassword}">ResetPassword</a></li>
