@@ -29,7 +29,7 @@
                             <a class="nav-link hahaa" aria-current="page" th:href="@{/home}">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Showtime</a>
+                            <a class="nav-link" th:href="@{/home/showtime}">Showtime</a>
                         </li>
                         <li class="nav-item dropdown mx-2">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -37,12 +37,12 @@
                                 Movies
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" th:href="@{/home}">Now showing</a></li>
-                                <li><a class="dropdown-item" th:href="@{/home}">Coming soon</a></li>
+                                <li><a class="dropdown-item" th:href="@{/home/nowshowing}">Now showing</a></li>
+                                <li><a class="dropdown-item" th:href="@{/home/comingsoon}">Coming soon</a></li>
                             </ul>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Services</a>
+                            <a class="nav-link" th:href="@{/home/about-us}">Services</a>
                         </li>
 
                     </ul>
@@ -90,7 +90,6 @@
         </div>
     </nav>
 </header>
-
 <!-- ---------------------------END HEADER 1--------------------- -->
 
 <!-- data-bs-toggle="modal"

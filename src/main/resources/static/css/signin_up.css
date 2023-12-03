@@ -23,7 +23,6 @@
     flex-direction: column;
     height: 80vh;
 }
-
 .signin .container {
     background-color: #fff;
     border-radius: 30px;
@@ -621,4 +620,61 @@
 
 .change_pw .submit-btn:hover {
     box-shadow: 0px 0px 0px 2px #ffffff, 0px 0px 0px 4px rgba(93, 24, 24, 0.704);
+}
+
+
+
+
+/* ====================Validation================ */
+
+.input__note textarea {
+    width: 100%;
+    min-height: 200px;
+    border: 1px solid #ccc;
+    user-select: none;
+    resize: none;
+    padding: 1rem;
+}
+
+.input__note textarea:focus {
+    border: 1px solid #00bfa6;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group.success input {
+    border-color: #2ecc71;
+}
+
+.form-group.error input {
+    border-color: #e74c3c;
+}
+
+.form-group small {
+    color: #e74c3c;
+    position: absolute;
+    left: 0;
+    visibility: hidden;
+    font-size: 12px;
+}
+
+.form-group.error small {
+    visibility: visible;
+}
+.social-icons small {
+    color: #e74c3c;
+    position: absolute;
+    left: 0;
+    visibility: hidden;
+    font-size: 12px;
+}
+
+.social-icons.error small {
+    visibility: visible;
 }

@@ -2,6 +2,59 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+footer *{
+  background-color: white;
+}
+
+footer .icon_connect i{
+  width: 50px;
+  height: auto;
+}
+
+footer .logo_ft img {
+  width: 12rem;
+  height: auto;
+}
+
+footer .dk_bo_congthuong img {
+  width: 150px;
+  height: auto;
+}
+
+footer * a{
+  text-decoration: none;
+  
+}
+footer .footer_mvt_policy p:hover{
+  color: rgb(237, 38, 71);
+  transform: scale(1.1);
+}
+footer .footer_mvt_address p{
+  text-align: center;
+  color: black;
+}
+
+
+footer .footer_mvt_address p{
+  font-size: 12px;
+}
+
+
+footer .ft_end a:hover{
+  color: rgb(237, 38, 71);
+}
+
+footer .hotline h6{
+  color: rgb(215, 143, 0);
+}
+
+
+
+
+
 /* =======================BACK TO TOP=================== */
 #btn-back-to-top {
   position: fixed;
@@ -14,6 +67,4 @@
   color: white;
 }
 
-*{
-  font-family: 'Montserrat', sans-serif;
-}
+

@@ -25,7 +25,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" th:href="@{|/css/header.css|}">
 	<link rel="stylesheet" th:href="@{|/css/footer.css|}">
- <link rel="stylesheet" th:href="@{|/css/signin_up.css|}">
+	<link rel="stylesheet" th:href="@{|/css/signin_up.css|}">
 
 	<title>MovieTime</title>
 
@@ -46,34 +46,53 @@
 				<form class="form" method="post" role="form" th:action="@{/login}">
 					<h1>Sign In</h1>
 					<div class="social-icons">
-						<a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+						<!-- <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
 						<a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-						<!-- <a href="#" class="icon"><i class="fa-brands fa-github"></i></a> -->
-						<a href="#" class="icon"><i class="fa-brands fa-x-twitter"></i></a> 
+						<a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+						<a href="#" class="icon"><i class="fa-brands fa-x-twitter"></i></a> -->
 					</div>
-					<span>or use your email password</span>
-					<input type="email" id="username" name="username" placeholder="Email">
-					<input type="password" id="password" name="password" placeholder="Password">
+					<span>Use your email password</span>
+					<div class="form-group">
+						<small>Error message</small>
+						<input type="email" id="username" name="username" placeholder="Email">
+					</div>
+					<div class="form-group">
+						<small>Error message</small>
+						<input type="password" id="password" name="password" placeholder="Password">
+					</div>
 					<a th:href="@{/home/resetPassword}">Forget Your Password?</a>
-					<button type="submit">Sign In</button>
+					<button type="submit" id="btn1">Sign In</button>
 				</form>
 			</div>
 			<div class="form-container sign-in">
 				<form>
 					<h1>Create Account</h1>
 					<div class="social-icons">
-						<a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+						<!-- <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
 						<a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-						<!-- <a href="#" class="icon"><i class="fa-brands fa-github"></i></a> -->
-						<a href="#" class="icon"><i class="fa-brands fa-x-twitter"></i></a> 
+						<a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+						<a href="#" class="icon"><i class="fa-brands fa-x-twitter"></i></a>  -->
 					</div>
-					<span>or use your email for registeration</span>
-					<input type="text" ng-model="form.fullname" placeholder="Name">
-					<input type="text" ng-model="form.phonenumber" placeholder="Phone number">
-					<input type="email" ng-model="form.email" placeholder="Email">
-					<input type="password" ng-model="form.password" placeholder="Password">
+					<span>Use your email for registeration</span>
+					<div class="form-group">
+						<small>Error message</small>
+						<input type="text" ng-model="form.fullname" id="name_signup" placeholder="Name">
+					</div>
+					<div class="form-group">
+						<small>Error message</small>
+						<input type="text" ng-model="form.phonenumber" id="phonenumber_signup"
+							placeholder="Phone number">
+					</div>
+					<div class="form-group">
+						<small>Error message</small>
+						<input type="email" ng-model="form.email" id="email_signup" placeholder="Email">
+					</div>
+					<div class="form-group">
+						<small>Error message</small>
+						<input type="password" ng-model="form.password" id="password_signup" placeholder="Password">
+					</div>
 					<input ng-model="form.id" type="hidden" />
-					<button ng-click="createCustomer()">Sign Up</button>
+					<button ng-click="checkAndcreateCustomer()" id="btn2">Sign Up</button>
 				</form>
 			</div>
 			<div class="toggle-container">
@@ -94,10 +113,9 @@
 	</div>
 
 	<div th:replace="~{/navbar/_footer}"></div>
-
 	<script th:src="@{/js/signup.js}"></script>
 
-	<!-- 	<div th:replace="~{/navbar/_footer}"></div> -->
+
 
 	<script th:src="@{/js/layout/main.js}"></script>
 	<script th:src="@{/js/layout/signin_up.js}"></script>
