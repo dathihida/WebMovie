@@ -1,12 +1,11 @@
 <section xmlns:th="http://www.thymeleaf.org">
 	<div class="container comment mt-4">
-
 		<div class="row">
 			<div class="col-md-8">
 				<h4>Comments</h4>
 				<div class="d-flex flex-column gap-2 mt-5 mb-4 cmt">
 					<!-- Input cho bình luận -->
-					<input ng-model="content" placeholder="Viết bình luận..." />
+					<input ng-model="content" id="inputData" placeholder="Viết bình luận..." />
 					<div class="btn_cmt">
 						<div sec:authorize="!isAuthenticated()">
 							<!-- Nếu chưa đăng nhập, hiển thị link đăng nhập -->
@@ -19,37 +18,86 @@
 							<button ng-click="addComment()">Bình luận</button>
 						</div>
 					</div>
+				</div>
 
+
+				<div ng-repeat="comment in listComments">
+					<div ng-if="!comment.id_COMMENT">
+					  <!-- Comment cha -->
+					  <strong>{{ comment.id_CUSTOMER.fullname }}</strong>: {{ comment.content }}
+					</div>
+					<div ng-if="comment.id_COMMENT">
+					  <!-- Comment con -->
+						<span style="margin-left: 50px;">
+							<strong>{{ comment.id_CUSTOMER.fullname }}</strong>: {{ comment.content }}
+						</span>
+					</div>
 				</div>
 
 				<!-- Hiển thị danh sách bình luận -->
 				<div ng-repeat="com in listComments | limitTo:commentLimit" class="comment-container">
 					<!-- Thông tin của bình luận -->
-					<div class="comment-info">
-						<img th:src="@{|/images/avt.jpg|}" alt="Avatar" class="avatar" />
-						<div class="comment-details">
-							<h6 class="comment-author">{{com.id_CUSTOMER.fullname}}</h6>
-							<small class="comment-time">{{com.time_COMMENT}}</small>
+					<div ng-if="!com.id_COMMENT">
+						<div class="comment-info">
+							<img th:src="@{|/images/avt.jpg|}" alt="Avatar" class="avatar" />
+							<div class="comment-details">
+								<h6 class="comment-author">{{com.id_CUSTOMER.fullname}}</h6>
+								<small class="comment-time">{{com.time_COMMENT}}</small>
+							</div>
+						</div>
+
+						<!-- Nội dung bình luận -->
+						<div class="comment-content">{{com.content}}</div>
+
+						<!-- Phần trả lời bình luận -->
+						<div class="comment-reply d-flex align-items-center gap-2">
+							<input ng-model="contentChilren" id="inputData" placeholder="Trả lời bình luận..." />
+							<div sec:authorize="!isAuthenticated()">
+								<!-- Nếu chưa đăng nhập, hiển thị link đăng nhập -->
+								<a th:href="@{/signin}">
+									Hãy đăng nhập để trả lời
+								</a>
+							</div>
+							<div sec:authorize="isAuthenticated()">
+								<!-- Nếu đã đăng nhập, hiển thị nút thêm bình luận con -->
+								<button ng-click="addCommentChildren(com.id, contentChilren)">Trả lời</button>
+							</div>
 						</div>
 					</div>
 
-					<!-- Nội dung bình luận -->
-					<div class="comment-content">{{com.content}}</div>
+					<div ng-if="com.id_COMMENT" >
+						<div ng-style="{'margin-left': '100px !important'}">
+							<div class="comment-info">
+								<img th:src="@{|/images/avt.jpg|}" alt="Avatar" class="avatar" />
+								<div class="comment-details">
+									<h6 class="comment-author">{{com.id_CUSTOMER.fullname}}</h6>
+									<small class="comment-time">{{com.time_COMMENT}}</small>
+								</div>
+							</div>
 
-					<!-- Phần trả lời bình luận -->
-					<div class="comment-reply d-flex align-items-center gap-2">
-						<input ng-model="contentChilren" placeholder="Trả lời bình luận..." />
-						<div sec:authorize="!isAuthenticated()">
-							<!-- Nếu chưa đăng nhập, hiển thị link đăng nhập -->
-							<a th:href="@{/signin}">
-								Hãy đăng nhập để trả lời
-							</a>
+							<!-- Nội dung bình luận -->
+							<div class="comment-content">{{com.content}}</div>
+
+							<!-- Phần trả lời bình luận -->
+							<div class="comment-reply d-flex align-items-center gap-2">
+								<input ng-model="contentChilren" placeholder="Trả lời bình luận..." />
+								<div sec:authorize="!isAuthenticated()">
+									<!-- Nếu chưa đăng nhập, hiển thị link đăng nhập -->
+									<a th:href="@{/signin}">
+										Hãy đăng nhập để trả lời
+									</a>
+								</div>
+								<div sec:authorize="isAuthenticated()">
+									<!-- Nếu đã đăng nhập, hiển thị nút thêm bình luận con -->
+									<button ng-click="addCommentChildren(com.id, contentChilren)">Trả lời</button>
+								</div>
+							</div>
+							<strong>{{ comment.id_CUSTOMER.fullname }}</strong>: {{ comment.content }}
 						</div>
-						<div sec:authorize="isAuthenticated()">
-							<!-- Nếu đã đăng nhập, hiển thị nút thêm bình luận con -->
-							<button ng-click="addCommentChildren(com.id, contentChilren)">Trả lời</button>
-						</div>
+						
 					</div>
+
+
 				</div>
 				<div class="showcmt">
 					<button ng-click="showMoreComments()">

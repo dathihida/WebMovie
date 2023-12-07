@@ -13,7 +13,7 @@ public class CinamesServiceImpl implements CinemaService{
 
 	@Autowired
 	CinemasRepository cinemasRepository;
-	
+
 	@Override
 	public Cinemas addCinemas(Cinemas cinemas) {
 		// TODO Auto-generated method stub

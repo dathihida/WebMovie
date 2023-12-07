@@ -70,6 +70,12 @@ public class BookingRestController {
 		return bookingService.getAllBookingByIdCustomer(id);
 	}
 
+	// @GetMapping("/profile/{email}")
+	// List<Booking> getAllBookingByIdCustomer(@PathVariable("email") String email)
+	// {
+	// return bookingService.getAllBookingByEmailCustomer(email);
+	// }
+
 	@GetMapping("/updateStatus")
 	void updateStatus() {
 		bookingRepo.updateStatusBookingAll();

@@ -19,22 +19,22 @@ import com.WebMovie.Service.PayService;
 @RestController
 @RequestMapping("/api/pay")
 public class PayRestController {
-	
+
 	@Autowired
 	PayService payService;
 	@Autowired
 	PayRepository payRepository;
-	
+
 	@PostMapping
 	Pay addPay(@RequestBody Pay pay) {
 		return payService.addPay(pay);
 	}
-	
+
 	@GetMapping("/all")
 	List<Pay> getAllPay(){
 		return payService.geAllPay();
 	}
-	
+
 	@GetMapping("/{id}")
 	Pay listPayIdBooking(@PathVariable("id") Integer id){
 		return payRepository.listPayByIdBooking(id);

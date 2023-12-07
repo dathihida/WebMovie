@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,7 +28,7 @@ public class Seat {
 	@ManyToOne
 	@JoinColumn(name = "ID_ROOM")
 	private Room ID_ROOM;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_SEAT")
 	private List<Seat_Scheduled> LIST_SEAT_SCHEDULED;

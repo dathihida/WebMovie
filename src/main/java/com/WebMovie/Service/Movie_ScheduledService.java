@@ -11,7 +11,7 @@ public interface Movie_ScheduledService {
 	Movie_Scheduled updateMovie_Scheduled(Movie_Scheduled movie_Scheduled, Integer id);
 	Movie_Scheduled getMovie_ScheduledById(Integer id);
 	void deleteMovie_Scheduled(Integer id);
-	
+
 	List<Movie_Scheduled> listMovieSheduledById(Integer id);
 	List<Movie_Scheduled> listDateMovieScheduled(Integer id);
 }

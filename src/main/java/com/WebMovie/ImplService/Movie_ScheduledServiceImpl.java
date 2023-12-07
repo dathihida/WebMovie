@@ -13,7 +13,7 @@ public class Movie_ScheduledServiceImpl implements Movie_ScheduledService{
 
 	@Autowired
 	Movie_ScheduledRepository movie_ScheduledRepository;
-	
+
 	@Override
 	public Movie_Scheduled addMovie_Scheduled(Movie_Scheduled movie_Scheduled) {
 		// TODO Auto-generated method stub

@@ -24,11 +24,11 @@ public class Movie_Scheduled {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ID;
-	
+
 	@ManyToOne
 	@JoinColumn(name="ID_MOVIE")
 	private Movie ID_MOVIE;
-	
+
 	@ManyToOne
 	@JoinColumn(name ="ID_ROOM")
 	private Room ID_ROOM;
@@ -36,13 +36,13 @@ public class Movie_Scheduled {
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_MOVIE_SCHEDULED")
 	private List<Booking> LIST_BOOKING;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date DATE;
 
 	private String TIME_START;
-	
+
 	private String TIME_END;
-	
+
 	private Boolean STATUS;
 }

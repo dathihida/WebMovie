@@ -30,7 +30,7 @@ public class Voucher {
     private Date DATE_END;
     private String DESCRIBE;
     private Boolean STATUS;
-    
+
     @JsonIgnore
 	@OneToMany(mappedBy = "ID_VOUCHER")
 	private List<Pay> LIST_PAY;

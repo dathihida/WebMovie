@@ -22,12 +22,12 @@ import com.WebMovie.Service.CommentSevrice;
 public class CommentRestController {
 	@Autowired
 	CommentSevrice commentSevrice;
-	
+
 	@GetMapping("/all")
 	List<Comment> getAllComment(){
 		return commentSevrice.getAllComment();
 	}
-	
+
 	@MessageMapping("/products")
 	@SendTo("/topic/product")
 	public ResponseEntity<Comment> addComment(@RequestBody Comment comment) {
@@ -35,7 +35,7 @@ public class CommentRestController {
 		System.out.println("Comment added to the database: " + comment.getID());
 		return ResponseEntity.ok(comment);
 	}
-	
+
 	@GetMapping("/{id}")
 	List<Comment> getCommentByIdMovie(@PathVariable("id") Integer id){
 		return commentSevrice.getCommentByIdMovie(id);

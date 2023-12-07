@@ -12,10 +12,10 @@ import com.WebMovie.ImplService.MovieServiceImpl;
 @CrossOrigin
 @RestController
 public class MovieDetailRestController {
-	
+
 	@Autowired
 	MovieServiceImpl movieServiceImpl;
-	
+
 	@GetMapping("/v1/movie/{id}")
 	public Movie getMovieById(@PathVariable Integer id) {
 		return movieServiceImpl.getMovieById(id);

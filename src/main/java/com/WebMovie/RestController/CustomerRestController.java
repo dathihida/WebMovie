@@ -28,60 +28,60 @@ import com.WebMovie.Service.ICustomerService;
 public class CustomerRestController {
 	@Autowired
 	ICustomerService customerService;
-	
+
 	@Autowired
 	CustomerRepository customerRepository;
-	
+
 	@GetMapping("/user1")
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	String tesst() {
 		return "hell user";
 	}
-	
+
 	@GetMapping()
 	String tesst1() {
 		return "hell WORL";
 	}
-	
+
 	@GetMapping("/admin")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	String tesst2() {
 		return "hell ADMIN";
 	}
-	
+
 	@GetMapping("/user")
 	public List<Customer> listAll(){
 		return customerService.getAlls();
 	}
-	
+
 	@PostMapping("/user")
 	public Customer addCustomer(@RequestBody Customer customer) {
 		return customerService.addCustomer(customer);
 	}
-	
+
 	@GetMapping("/{name}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public Optional<Customer> findByName(@PathVariable String name) {
 		return customerService.findCustomerByNAME(name);
 	}
-	
+
 	@PutMapping("/user/v1/{id}")
 	public Customer updateCustomer(@RequestBody Customer customer, @PathVariable("id") Integer id) {
 		return customerService.updateCustomer(customer, id);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public void deleteCustomer(@PathVariable Integer id) {
 		customerService.deleteCustomer(id);
 	}
-	
+
 	 @GetMapping("/getUserId")
 	 public ResponseEntity<String> getUserId() {
 	        String userId = customerService.getLoggedInUserId();
 	        return new ResponseEntity<>(userId, HttpStatus.OK);
 	 }
-	 
+
 	 @GetMapping("/resetPassword/{email}")
 	 Customer findByEmail(@PathVariable("email") String email, Customer customer) throws Exception {
 		 customer = customerService.findCustomerByEmail(email);
@@ -90,11 +90,11 @@ public class CustomerRestController {
 		 }
 		 return null;
 	 }
-	 
+
 	 @GetMapping("/find/{id}")
 	 Customer findId(@PathVariable("id") Integer id) {
 		 return customerRepository.findById(id).get();
 	 }
-	 
+
 //	 @GetMapping("/")
 }

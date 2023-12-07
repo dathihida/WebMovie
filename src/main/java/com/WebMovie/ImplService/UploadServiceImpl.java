@@ -2,7 +2,6 @@ package com.WebMovie.ImplService;
 
 import java.io.File;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,12 +15,12 @@ public class UploadServiceImpl implements UploadService{
 
 	@Autowired
 	ServletContext app;
-	
+
 	@Override
 	public File save(MultipartFile file, String folder) {
 		// TODO Auto-generated method stub
 		File dir= new File(app.getRealPath(folder));
-		
+
 		if(!dir.exists()) {
 			dir.mkdirs();
 		}

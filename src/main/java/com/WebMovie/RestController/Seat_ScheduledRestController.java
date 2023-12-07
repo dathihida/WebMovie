@@ -20,31 +20,31 @@ import com.WebMovie.Service.Seat_ScheduledService;
 @RestController
 @RequestMapping("/api/seat_scheduled")
 public class Seat_ScheduledRestController {
-	
+
 	@Autowired
 	Seat_ScheduledService seat_ScheduledService;
 	@Autowired
 	Seat_ScheduledRepository seat_ScheduledRepository;
-	
+
 	@GetMapping("/all")
 	List<Seat_Scheduled> getAll(){
 		return seat_ScheduledService.getAll();
 	}
-	
+
 	@GetMapping("/{id}/{date}/{time}/{idMovieSh}")
-	List<Seat_Scheduled> getListSeat_scheduledByIdRoom(@PathVariable("id") Integer id, 
+	List<Seat_Scheduled> getListSeat_scheduledByIdRoom(@PathVariable("id") Integer id,
 													   @PathVariable("date") Date date,
 													   @PathVariable("time") String time,
 													   @PathVariable("idMovieSh") Integer idMovieSh){
 		return seat_ScheduledService.getSeat_ScheduledByIdRoom(id, date, time, idMovieSh);
 	}
-	
+
 	@PostMapping
 	Seat_Scheduled addScheduled(@RequestBody Seat_Scheduled seat_Scheduled) {
-		
+
 		return seat_ScheduledRepository.save(seat_Scheduled);
 	}
-	
+
 	@GetMapping("/v1/{id}")
 	List<Seat_Scheduled> getAllSeat_ScheduledByIdBooking(@PathVariable("id") Integer id){
 		return seat_ScheduledRepository.getAllSeat_ScheduledByIdBooking(id);

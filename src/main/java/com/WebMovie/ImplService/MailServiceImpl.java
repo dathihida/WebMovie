@@ -2,7 +2,6 @@ package com.WebMovie.ImplService;
 
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import com.WebMovie.Entity.Booking;
 import com.WebMovie.Entity.Customer;
-import com.WebMovie.Service.ICustomerService;
 import com.WebMovie.Service.MailService;
 import com.WebMovie.Service.ThymeleafService;
 
@@ -117,7 +115,7 @@ public class MailServiceImpl implements MailService {
 //			MimeMessage message = mailSender.createMimeMessage();
 //			MimeMessageHelper helper = new MimeMessageHelper(
 //					message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
-//			
+//
 //			Customer customer = customerService.getCustomerGetById(bto.getID_CUSTOMER().getID());
 //			String email = customer.getEMAIL();
 //			//helper.setTo(dto.getEMAIL());
