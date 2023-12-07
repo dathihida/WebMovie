@@ -63,6 +63,8 @@
                                 </a>
                                 
                                 <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/user/profile}">My Account</a></li>
+                                    <div class="dropdown-divider"></div>
                                     <li><button class="dropdown-item" ng-click="loadIdUserLogin()">Order History</button></li>
                                     <li><a class="dropdown-item" th:href="@{/home/resetPassword}">ResetPassword</a></li>
                                     <div class="dropdown-divider"></div>
@@ -75,6 +77,8 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" th:href="@{/home/admin}">Manage</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/user/profile}">My Account</a></li>
+                                    <div class="dropdown-divider"></div>
                                     <li><button class="dropdown-item" ng-click="loadIdUserLogin()">Order History</button></li>
                                     <li><a class="dropdown-item" th:href="@{/home/resetPassword}">Reset Password</a></li>
                                     <div class="dropdown-divider"></div>

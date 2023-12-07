@@ -199,4 +199,9 @@ public class HomeController {
 	// public String comment() {
 	// return "movie_detail";
 	// }
+	
+	@GetMapping("/user/profile")
+	String profile() {
+		return "profile";
+	}
 }

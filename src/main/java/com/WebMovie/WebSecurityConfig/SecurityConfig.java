@@ -43,7 +43,7 @@ public class SecurityConfig {
                         "/api/comment/**", "/api/comment")
                 .permitAll()
                 .requestMatchers("/booking/**", "/checkout/**", "/historyBooking/**", "/login-success").authenticated()
-                .requestMatchers("/home/**").authenticated()
+                .requestMatchers("/home/**", "/user/**").authenticated()
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/**", "/rest/**").authenticated()
