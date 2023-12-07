@@ -43,7 +43,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 	private Set<GrantedAuthority> getAuthoritiesFromDatabase(OAuth2User oauth2User) {
 		String email = oauth2User.getAttribute("email");
 		Optional<Customer> userOptional = customerRepository.findByEMAIL(email);
-		System.out.println("name: " + oauth2User.getName());
+		System.out.println("name: " + oauth2User.getAttribute("name"));
 		if (!userOptional.isPresent()) {
 			System.out.println("null");
 
@@ -53,7 +53,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 			customer.setEXIST(true);
 			customer.setROLE("ROLE_USER");
 			customer.setProvider(Provider.GOOGLE);
-			customer.setFULLNAME(oauth2User.getName());
+			customer.setFULLNAME(oauth2User.getAttribute("name"));
 			customerRepository.save(customer);
 
 			// Lấy thông tin mới từ database
