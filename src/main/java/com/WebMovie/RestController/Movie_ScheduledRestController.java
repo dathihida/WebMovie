@@ -24,48 +24,48 @@ import com.WebMovie.Service.Movie_ScheduledService;
 public class Movie_ScheduledRestController {
 	@Autowired
 	Movie_ScheduledService movie_ScheduledService;
-	
+
 	@Autowired
 	BookingRepo bookingRepo;
-	
+
 	@GetMapping("/all")
 	List<Movie_Scheduled> getAll(){
 		return movie_ScheduledService.getAlls();
 	}
-	
+
 	@GetMapping("/detail/{id}")
 	List<Movie_Scheduled> listMovieScheduled(@PathVariable("id") Integer id){
 		return movie_ScheduledService.listMovieSheduledById(id);
 	}
-	
+
 	@GetMapping("/date/{id}")
 	List<Movie_Scheduled> listDate(@PathVariable("id") Integer id){
 		return movie_ScheduledService.listDateMovieScheduled(id);
 	}
-	
+
 	@PostMapping
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	Movie_Scheduled addMovie_Scheduled(@RequestBody Movie_Scheduled movie_Scheduled) {
 		return movie_ScheduledService.addMovie_Scheduled(movie_Scheduled);
 	}
-	
+
 	@PutMapping
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	Movie_Scheduled updateMovie_Scheduled(@PathVariable Integer id,@RequestBody Movie_Scheduled movie_Scheduled) {
 		return movie_ScheduledService.updateMovie_Scheduled(movie_Scheduled, id);
 	}
-	
+
 	@GetMapping("/{id}")
 	Movie_Scheduled getMovie_ScheduledById(@PathVariable Integer id) {
 		return movie_ScheduledService.getMovie_ScheduledById(id);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	void DeleteMoviScheduleById(@PathVariable Integer id) {
 		movie_ScheduledService.deleteMovie_Scheduled(id);
 	}
-	
+
 	@GetMapping("/updateStatusMovie_Scheduled")
 	void updateStatusMovie_Scheduled() {
 		bookingRepo.updateStatusMovie_Scheduled();

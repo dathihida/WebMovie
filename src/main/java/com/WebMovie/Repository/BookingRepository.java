@@ -1,20 +1,14 @@
 package com.WebMovie.Repository;
 
-import java.sql.SQLPermission;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.jdbc.object.SqlQuery;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.WebMovie.Entity.Booking;
-import com.WebMovie.Entity.Seat_Scheduled;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
 	@Query("select b from Booking b, Movie_Scheduled ms, "
@@ -54,4 +48,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
 	@Query("SELECT b FROM Booking b, Customer c, Seat_Scheduled ss where ss.ID_BOOKING = b.ID AND c.ID = b.ID_CUSTOMER AND c.ID = ?1")
 	List<Booking> geAllBookingByIdCustomer(Integer id);
+
+	@Query("SELECT b FROM Booking b, Customer c, Seat_Scheduled ss where ss.ID_BOOKING = b.ID AND c.ID = b.ID_CUSTOMER AND c.ID = :email")
+	List<Booking> geAllBookingByEmailCustomer(@Param("email") String email);
 }

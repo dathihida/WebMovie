@@ -2,7 +2,6 @@ package com.WebMovie.RestController;
 
 import java.io.File;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +20,7 @@ import jakarta.websocket.server.PathParam;
 public class UploadRestController {
 	@Autowired
 	com.WebMovie.Service.UploadService uploadService;
-	
+
 	@PostMapping("/rest/upload/{folder}")
 	public JsonNode upload(@PathParam("file") MultipartFile file,
 			@PathVariable("folder") String folder) {

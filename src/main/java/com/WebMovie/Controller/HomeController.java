@@ -1,21 +1,24 @@
 package com.WebMovie.Controller;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.RedirectStrategy;
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
-import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.WebMovie.WebSecurityConfig.CustomOAuth2User;
+import com.WebMovie.WebSecurityConfig.UserInfoDetails;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -104,6 +107,7 @@ public class HomeController {
 	String voucher() {
 		return "voucher";
 	}
+
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/home/bill")
 	String bill() {
@@ -119,7 +123,7 @@ public class HomeController {
 	String seat() {
 		return "seat";
 	}
-	
+
 	@GetMapping("/home/nowshowing")
 	String nowshowing() {
 		return "nowshowing";
@@ -129,42 +133,42 @@ public class HomeController {
 	String comingsoon() {
 		return "comingsoon";
 	}
-	
+
 	@GetMapping("/home/about-us")
 	String aboutus() {
 		return "infopage/about_us";
 	}
-	
+
 	@GetMapping("/home/payment-policy")
 	String paymentpolicy() {
 		return "infopage/payment_policy";
 	}
-	
+
 	@GetMapping("/home/privacy-policy")
 	String privacypolicy() {
 		return "infopage/privacy_policy";
 	}
-	
+
 	@GetMapping("/home/terms-conditions")
 	String termsconditions() {
 		return "infopage/terms_conditions";
 	}
-	
+
 	@GetMapping("/home/terms-use")
 	String termsuse() {
 		return "infopage/terms_use";
 	}
-	
+
 	@GetMapping("/home/connect")
 	String connect() {
 		return "infopage/connect";
 	}
-	
+
 	@GetMapping("/home/showtime")
 	String showtime() {
 		return "showtime";
 	}
-	
+
 	@GetMapping("/home/question")
 	String question() {
 		return "infopage/question";
@@ -199,4 +203,24 @@ public class HomeController {
 	// public String comment() {
 	// return "movie_detail";
 	// }
+
+	@GetMapping("/home/thongtin")
+    public String yourPage(Model model, Authentication authentication) {
+		authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null) {
+			Object principal = authentication.getPrincipal();
+			if(principal instanceof UserInfoDetails) {
+				UserInfoDetails use = (UserInfoDetails) authentication.getPrincipal();
+				model.addAttribute("username", use.getUsername());
+				Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+			    model.addAttribute("roles", roles);
+			}else if (principal instanceof OAuth2User) {
+		        CustomOAuth2User oauth2User = (CustomOAuth2User) principal;
+		        model.addAttribute("username", oauth2User.getName());
+		        Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+		        model.addAttribute("roles", roles);
+		    }
+		}
+        return "user";
+    }
 }

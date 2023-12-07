@@ -15,8 +15,8 @@ public interface Seat_ScheduledRepository extends JpaRepository<Seat_Scheduled, 
 			+ "AND b.STATUS IN ('success', 'unpaid')"
 			+ "AND ms.STATUS = 'TRUE'"
 			+ "AND ms.ID_ROOM = r.ID AND r.ID = ?1 AND ms.DATE = ?2 AND ms.TIME_START = ?3 AND ms.ID = ?4")
-	List<Seat_Scheduled> getAllSeat_ScheduledByIdRoom(Integer id, Date date, String time, Integer idMovieS);	
-	
+	List<Seat_Scheduled> getAllSeat_ScheduledByIdRoom(Integer id, Date date, String time, Integer idMovieS);
+
 	@Query("SELECT ss FROM Booking b, Seat s, Seat_Scheduled ss where b.ID = ss.ID_BOOKING AND ss.ID_SEAT = s.ID AND b.ID = ?1")
 	List<Seat_Scheduled> getAllSeat_ScheduledByIdBooking(Integer id);
 }

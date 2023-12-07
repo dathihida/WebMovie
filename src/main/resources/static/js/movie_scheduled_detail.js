@@ -3,6 +3,7 @@ let host_movie="http://localhost:8080/api/movie";
 let host_room="http://localhost:8080/api/room";
 let host_cinemas="http://localhost:8080/api/cinema";
 let host_booking = "http://localhost:8080/api/booking/update";
+let host_comment = "http://localhost:8080/api/comment";
 const app = angular.module("app",[]);
 app.controller("controller", function($scope, $http, $timeout){
     $scope.form = {};
@@ -84,6 +85,9 @@ app.controller("controller", function($scope, $http, $timeout){
 	console.log("$scope.inputValue", $scope.inputValue);
 	$scope.selectedValue = "";
 	$scope.selectedDate = "";
+
+    var idMovie = $scope.inputValue;
+    console.log("idMovie",idMovie)
 	
 	//loadListMovieScheduledByID
 	$scope.loadMovie_ScheduledsById = function(id){
@@ -135,48 +139,18 @@ app.controller("controller", function($scope, $http, $timeout){
 
   	// Hàm kiểm tra xem một mục có nên hiển thị hay không
   	$scope.isFutureEvent = function(movieOfCinemas) {
-
-        // $interval(function() {
-        //     $scope.checkShowTimes();
-        // }, 1000 * 60); // Kiểm tra mỗi 1 phút
-
-        // $scope.checkShowTimes = function() {
-        //     var currentTime = new Date();
-
-        //     angular.forEach($scope.movie_scheduleds, function(movie) {
-        //         var showDateTimeString = movie.date + ' ' + movie.time_START;
-        //         var showDateTime = new Date(showDateTimeString);
-        //         var notificationTime = new Date(showDateTime - 15 * 60 * 1000);
-
-        //         if (currentTime >= notificationTime && currentTime < showDateTime) {
-        //             $scope.notificationMessage = 'Thông báo: Đóng vé cho ' + movie.id_MOVIE.name + ' sẽ diễn ra trong 15 phút tới!';
-        //         }
-        //     });
-        // };
-
-        // // Kiểm tra ngay khi trang được tải lên
-        // $scope.checkShowTimes();
-        var currentTime = new Date();
-        var startTime = new Date(movieOfCinemas.date + ' ' + movieOfCinemas.time_START);
-        var showDateTime = new Date(startTime);
-        var timeCheck = new Date(showDateTime - 15 * 60 * 1000);
-
-	  	var endTime = new Date(movieOfCinemas.date + ' ' + movieOfCinemas.time_END);
-	  	var currentDateTime = new Date($scope.currentDate + ' ' + $scope.currentTime);
-            // if(currentTime >= timeCheck && currentTime < showDateTime){
-            //     $scope.noDataMessage = "Phim đã đến giờ chiếu nên sẽ khóa đặt chỗ";
-            // } else {
-                
-            // }
-            if (endTime < currentDateTime) {
-                // Nếu không có dữ liệu, hiển thị thông báo
-                    $scope.noDataMessage = "Phim đã kết thúc";
-                } else {
-                // Nếu có dữ liệu, đặt thông báo về null
-                    $scope.noDataMessage = null;
-                }
-	  	return endTime > currentDateTime;
-	};
+        var endTime = new Date(movieOfCinemas.date + ' ' + movieOfCinemas.time_END);
+        var currentDateTime = new Date($scope.currentDate + ' ' + $scope.currentTime);
+            // Kiểm tra xem có dữ liệu hay không
+          if (endTime < currentDateTime) {
+          // Nếu không có dữ liệu, hiển thị thông báo
+              $scope.noDataMessage = "Đã hết thời gian lên phim";
+              } else {
+          // Nếu có dữ liệu, đặt thông báo về null
+                 $scope.noDataMessage = null;
+          }
+        return endTime > currentDateTime;
+    };
 
 	$scope.loadAllMovies = function(){
         var url = `${host_movie}/all`;
@@ -286,11 +260,20 @@ app.controller("controller", function($scope, $http, $timeout){
 	$scope.listComments = [];
 
     // Load initial data from the server
-    $http.get("http://localhost:8080/api/comment/all").then(function (response) {
-        $scope.listComments= response.data;
+    // $http.get("http://localhost:8080/api/comment/${idMovie}").then(function (response) {
+    //     $scope.listComments= response.data;
         
-        console.log("listComments",$scope.listComments)
-    });
+    //     console.log("listComments",$scope.listComments)
+    // });
+
+    $scope.loadCommentByIdMovie = function(){
+        var url = `${host_comment}/${idMovie}`;
+        $http.get(url).then(resp=>{
+            $scope.listComments= resp.data;
+        
+            console.log("listComments",$scope.listComments)
+        })
+    }
 
     // Establish WebSocket connection after loading initial data
     var socket = new SockJS("http://localhost:8080/my-websocket-endpoint");
@@ -298,7 +281,6 @@ app.controller("controller", function($scope, $http, $timeout){
 
     stompClient.connect({}, function (frame) {
         console.log("Connected: " + frame);
-
         // Subscribe to the WebSocket topic and define the callback function
         stompClient.subscribe("/topic/product", function (message) {
             console.log("WebSocket Message Received:", message.body);
@@ -371,5 +353,5 @@ app.controller("controller", function($scope, $http, $timeout){
     $scope.loadAllMovies();
     $scope.loadAllCinemas();
     $scope.loadAllRooms();
-    
+    $scope.loadCommentByIdMovie();
 });

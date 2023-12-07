@@ -19,12 +19,12 @@ public class SeatRestController {
 
 	@Autowired
 	SeatService seatService;
-	
+
 	@GetMapping("/all")
 	List<Seat> getAll(){
 		return seatService.getAll();
 	}
-	
+
 	@GetMapping("/{id}")
 	List<Seat> listSeatByIdRoom(@PathVariable("id") Integer id){
 		return seatService.ListSeatByIdRoom(id);

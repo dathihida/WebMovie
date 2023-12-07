@@ -14,7 +14,7 @@ public class SeatServiceImpl implements SeatService{
 
 	@Autowired
 	SeatRepository seatRepository;
-	
+
 	@Override
 	public List<Seat> getAll() {
 		// TODO Auto-generated method stub

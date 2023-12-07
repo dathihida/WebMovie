@@ -1,19 +1,29 @@
 package com.WebMovie.WebSecurityConfig;
 
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.WebMovie.Service.CustomerServiceGoogle;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
@@ -25,9 +35,9 @@ public class SecurityConfig {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
 
-                .requestMatchers("/home/**","/", "/home", "/home/resetPassword", "/my-websocket-endpoint",
+                .requestMatchers("/home/**", "/", "/home", "/home/resetPassword",
+                        "/my-websocket-endpoint",
                         "/my-websocket-endpoint/**",
-
                         "/signup", "/js/**", "/css/**", "/images/**",
                         "/add", "/add/userNoExist",
                         "/api/movie/all", "/movie/**", "/v1/movie/**",
@@ -40,7 +50,7 @@ public class SecurityConfig {
                         "/api/booking/**", "/api/booking", "/api/booking/update/**", "/api/voucher/**",
                         "/pay", "/pay/**", "/api/pay", "/api/pay/**", "/mail/**",
                         "/api/resetPassword/**", "/changePassword/**", "/api/user/**", "/api/find/**", "/error/**",
-                        "/api/comment/**", "/api/comment")
+                        "/api/comment/**", "/api/comment", "/oauth2/**")
                 .permitAll()
                 .requestMatchers("/booking/**", "/checkout/**", "/historyBooking/**", "/login-success").authenticated()
                 .requestMatchers("/home/**").authenticated()
@@ -48,21 +58,38 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/**", "/rest/**").authenticated()
                 .and()
-                .formLogin()
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/signin")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/home")
+                        .permitAll())
+                .oauth2Login()
                 .loginPage("/signin")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/home")
-                .permitAll()
-                // logout in page home
+                .userInfoEndpoint()
+                .userService(oauthUserService)
                 .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/home")
-                .permitAll()
-                // url and page 404
+                .successHandler(new AuthenticationSuccessHandler() {
+
+                    @Override
+                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                            Authentication authentication) throws IOException, ServletException {
+                    	System.out.println("AuthenticationSuccessHandler invoked");
+						System.out.println("Authentication name: " + authentication.getName());
+                        CustomOAuth2User oauthUser = (CustomOAuth2User) authentication.getPrincipal();
+                        
+                        
+                        customerService.processOAuthPostLoginGoogle(oauthUser.getEmail());
+
+                        response.sendRedirect("/home");
+                    }
+                })
                 .and()
-                .exceptionHandling().accessDeniedPage("/error/404")// duong dan
-                .and().build();
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/home"))
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .accessDeniedPage("/error/404"))
+                .build();
     }
 
     @Bean
@@ -87,4 +114,10 @@ public class SecurityConfig {
     public RedirectStrategy redirectStrategy() {
         return new DefaultRedirectStrategy();
     }
+
+    @Autowired
+    private CustomOAuth2UserService oauthUserService;
+
+    @Autowired
+    private CustomerServiceGoogle customerService;
 }

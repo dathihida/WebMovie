@@ -15,7 +15,7 @@ public class Seat_ScheduledServiceImpl implements Seat_ScheduledService{
 
 	@Autowired
 	Seat_ScheduledRepository seat_ScheduledRepository;
-	
+
 	@Override
 	public List<Seat_Scheduled> getAll() {
 		// TODO Auto-generated method stub
@@ -33,6 +33,6 @@ public class Seat_ScheduledServiceImpl implements Seat_ScheduledService{
 		// TODO Auto-generated method stub
 		return seat_ScheduledRepository.getAllSeat_ScheduledByIdBooking(id);
 	}
-	
-	
+
+
 }

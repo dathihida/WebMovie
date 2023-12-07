@@ -1,11 +1,8 @@
 package com.WebMovie.Entity;
 
 import java.util.Date;
-import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,22 +24,22 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ID;
 	private String CONTENT;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "ID_COMMENT")
 	private Comment ID_COMMENT;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "ID_CUSTOMER")
 	private Customer ID_CUSTOMER;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "ID_MOVIE")
 	private Movie ID_MOVIE;
-	
+
 	@Column(name = "TIME_COMMENT", columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreationTimestamp
 	private Date TIME_COMMENT;
-	
+
 }

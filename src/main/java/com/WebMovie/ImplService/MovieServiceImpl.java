@@ -13,7 +13,7 @@ public class MovieServiceImpl implements IMovieService{
 
 	@Autowired
 	MovieRepository movieRepository;
-	
+
 	@Override
 	public Movie addMovie(Movie movie) {
 		// TODO Auto-generated method stub
@@ -44,7 +44,7 @@ public class MovieServiceImpl implements IMovieService{
 	public void deleteMovie(Integer id) {
 		// TODO Auto-generated method stub
 		movieRepository.deleteById(id);
-		
+
 	}
 
 	@Override

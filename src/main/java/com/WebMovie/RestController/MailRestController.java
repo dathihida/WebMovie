@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MailRestController {
 	private final MailService mailService;
-	
+
 	@GetMapping("/send-test")
 	public String sendMailTest() {
 		mailService.sendMailTest();

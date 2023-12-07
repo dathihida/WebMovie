@@ -23,30 +23,30 @@ import com.WebMovie.ImplService.MovieServiceImpl;
 public class MovieRestController {
 	@Autowired
 	MovieServiceImpl movieServiceImpl;
-	
+
 	@GetMapping("/all")
 	public List<Movie> getAlls(){
 		return movieServiceImpl.getAlls();
 	}
-	
+
 	@PostMapping()
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public Movie addMovie(@RequestBody Movie movie) {
 		return movieServiceImpl.addMovie(movie);
 	}
-	
+
 	@PutMapping("/{id}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public Movie updateMovie(@PathVariable Integer id,@RequestBody Movie movie) {
 		return movieServiceImpl.updateMovie(movie, id);
 	}
-	
+
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public Movie getMovieById(@PathVariable Integer id) {
 		return movieServiceImpl.getMovieById(id);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public void deleteMovie(@PathVariable Integer id) {

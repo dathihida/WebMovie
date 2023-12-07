@@ -17,7 +17,7 @@ app.controller("controller", function ($scope, $http) {
             $scope.reset();
             console.log("CustomerNew", resp);
 
-            window.location.href = `http://localhost:8080/login`;
+            window.location.href = `http://localhost:8080/signin`;
         }).catch(error=>{
 
             console.log(error);
