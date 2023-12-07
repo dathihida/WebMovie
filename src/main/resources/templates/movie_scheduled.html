@@ -300,26 +300,26 @@
 
 										<input ng-model="form.id" type="hidden" />
 										<br />
-										<div class="form-group">
-											<label>Movie</label>
-											<select ng-model="form.id_MOVIE.id" class="form-select mb-3" id="nameMovie"
+										<div class="form-group mb-3">
+											<label id="slect">Movie</label>
+											<select ng-model="form.id_MOVIE.id" class="form-select" id="nameMovie"
 												aria-label="Floating label select example">
+												<option value="" disabled></option>
 												<option ng-repeat="c in movies" ng-value="c.id">{{c.name}}</option>
 											</select>
 											<small>Error message</small>
 										</div>
-										<div class="form-group">
-											<label>Room-CINEMAS</label>
-											<select ng-model="form.id_ROOM.id" class="form-select mb-3" id="roomCinema"
+										<div class="form-group mb-2">
+											<label id="slect">Room-CINEMAS</label>
+											<select ng-model="form.id_ROOM.id" class="form-select" id="roomCinema"
 												aria-label="Floating label select example">
+												<option value="" disabled></option>
 												<option ng-repeat="c in rooms" ng-value="c.id">
 													{{c.name}}-{{c.id_CINEMAS.name}}</option>
 											</select>
 											<small>Error message</small>
 										</div>
 
-
-										<br />
 
 
 										<div class="form-floating mb-3 mt-4 form-group">
@@ -344,7 +344,7 @@
 									<button id="btn2" ng-click="checkAndupdateMovie_scheduled()"
 										type="submit">Update</button>
 									<!-- <button id="btn" ng-click="delete(form.id)" type="submit">Delete</button> -->
-									<button id="btn" ng-click="reset()" type="submit">Reset</button>
+									<button id="btn3" ng-click="reset()" type="submit">Reset</button>
 
 								</div>
 							</div>
@@ -466,7 +466,7 @@
 
 
 	<script th:src="@{/js/movie_scheduled.js}"></script>
-	<script th:src="@{/js/layout/validate_adscheduled.js}"></script>
+
 
 
 

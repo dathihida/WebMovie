@@ -343,6 +343,17 @@ app.controller("controller", function ($scope, $http, $filter) {
 		return /^([1-2]\d|[1-9]\d*)$/.test(number);
 	}
 
+	function resetForm(ele) {
+        // Xóa lớp error và success
+        Array.from(inputEles).forEach(ele => ele.classList.remove('error', 'success'));
+    
+        // Thêm lớp normal
+        Array.from(inputEles).forEach(ele => ele.classList.add('normal'));
+    }
+    
+    // Gọi hàm resetForm khi nút reset được nhấn
+    document.getElementById('btn3').addEventListener('click', resetForm);
+
 	// ==========================END VALIDATION==============================
 
 

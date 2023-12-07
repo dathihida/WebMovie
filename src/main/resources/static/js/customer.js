@@ -123,6 +123,18 @@ app.controller("controller", function ($scope, $http) {
     function isPhone(number) {
         return /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(number);
     }
+
+    function resetForm(ele) {
+        // Xóa lớp error và success
+        Array.from(inputEles).forEach(ele => ele.classList.remove('error', 'success'));
+    
+        // Thêm lớp normal
+        Array.from(inputEles).forEach(ele => ele.classList.add('normal'));
+    }
+    
+    // Gọi hàm resetForm khi nút reset được nhấn
+    document.getElementById('btn3').addEventListener('click', resetForm);
+
     // =====================END VALIDATION==============================
 
 
