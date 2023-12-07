@@ -150,13 +150,13 @@ app.controller("controller", function ($scope, $http) {
 
         let isCheck = true;
 
-        if (nameMovieValue == '') {
+        if (nameMovieValue === '') {
             setError(nameMovieEle, 'You have not selected data information');
             isCheck = false;
         } else {
             setSuccess(nameMovieEle);
         }
-        if (roomCinemaValue == '') {
+        if (roomCinemaValue === '') {
             setError(roomCinemaEle, 'You have not selected data information');
             isCheck = false;
         } else {
@@ -210,6 +210,18 @@ app.controller("controller", function ($scope, $http) {
     function isTimes(time) {
         return /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/.test(time);
     }
+
+    function resetForm(ele) {
+        // Xóa lớp error và success
+        Array.from(inputEles).forEach(ele => ele.classList.remove('error', 'success'));
+    
+        // Thêm lớp normal
+        Array.from(inputEles).forEach(ele => ele.classList.add('normal'));
+    }
+    
+    // Gọi hàm resetForm khi nút reset được nhấn
+    document.getElementById('btn3').addEventListener('click', resetForm);
+
     // =====================END VALIDATION==============================
     // =================================================================
 

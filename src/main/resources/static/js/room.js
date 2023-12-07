@@ -87,7 +87,7 @@ app.controller("controller", function ($scope, $http) {
             setSuccess(nameEle);
         }
 
-        if (floatingSelectValue == '') {
+        if (floatingSelectValue === '') {
             setError(floatingSelectEle, 'You have not selected Cinema information');
             isCheck = false;
         } else {
@@ -107,6 +107,20 @@ app.controller("controller", function ($scope, $http) {
         parentEle.classList.add('error');
         parentEle.querySelector('small').innerText = message;
     }
+
+
+    function resetForm(ele) {
+        // Xóa lớp error và success
+        Array.from(inputEles).forEach(ele => ele.classList.remove('error', 'success'));
+    
+        // Thêm lớp normal
+        Array.from(inputEles).forEach(ele => ele.classList.add('normal'));
+    }
+    
+    // Gọi hàm resetForm khi nút reset được nhấn
+    document.getElementById('btn3').addEventListener('click', resetForm);
+
+    
     // =====================END VALIDATION==============================
 
 
