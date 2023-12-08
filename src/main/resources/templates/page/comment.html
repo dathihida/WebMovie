@@ -39,7 +39,7 @@
 					<!-- Thông tin của bình luận -->
 					<div ng-if="!com.id_COMMENT">
 						<div class="comment-info">
-							<img th:src="@{|/images/avt.jpg|}" alt="Avatar" class="avatar" />
+							<img th:src="@{|/images/no-avatar.png|}" alt="Avatar" class="avatar" />
 							<div class="comment-details">
 								<h6 class="comment-author">{{com.id_CUSTOMER.fullname}}</h6>
 								<small class="comment-time">{{com.time_COMMENT}}</small>
@@ -68,7 +68,7 @@
 					<div ng-if="com.id_COMMENT" >
 						<div ng-style="{'margin-left': '100px !important'}">
 							<div class="comment-info">
-								<img th:src="@{|/images/avt.jpg|}" alt="Avatar" class="avatar" />
+								<img th:src="@{|/images/no-avatar.png|}" alt="Avatar" class="avatar" />
 								<div class="comment-details">
 									<h6 class="comment-author">{{com.id_CUSTOMER.fullname}}</h6>
 									<small class="comment-time">{{com.time_COMMENT}}</small>

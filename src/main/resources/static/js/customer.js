@@ -4,6 +4,7 @@ app.controller("controller", function ($scope, $http) {
     $scope.form = {};
     $scope.customers = [];
 
+
     $scope.reset = function () {
         $scope.form = {};
     }
@@ -47,7 +48,7 @@ app.controller("controller", function ($scope, $http) {
     const btnCustomer1 = document.getElementById('btn1');
     const btnCustomer2 = document.getElementById('btn2');
     const inputEles = document.querySelectorAll('.form-group');
-	// Nếu nhảy lỗi console đến đây thì copy 3 nút thêm,sửa, resset qua file html chứa file js này rồi chỉnh hidden
+    // Nếu nhảy lỗi console đến đây thì copy 3 nút thêm,sửa, resset qua file html chứa file js này rồi chỉnh hidden
     btnCustomer1.addEventListener('click', function () {
         Array.from(inputEles).map((ele) =>
             ele.classList.remove('success', 'error')
@@ -83,7 +84,7 @@ app.controller("controller", function ($scope, $http) {
         } else {
             setSuccess(emailEle);
         }
-        
+
         if (numberphoneValue == '') {
             setError(numberphoneEle, 'This data must not be blank');
             isCheck = false;
@@ -127,11 +128,11 @@ app.controller("controller", function ($scope, $http) {
     function resetForm(ele) {
         // Xóa lớp error và success
         Array.from(inputEles).forEach(ele => ele.classList.remove('error', 'success'));
-    
+
         // Thêm lớp normal
         Array.from(inputEles).forEach(ele => ele.classList.add('normal'));
     }
-    
+
     // Gọi hàm resetForm khi nút reset được nhấn
     document.getElementById('btn3').addEventListener('click', resetForm);
 

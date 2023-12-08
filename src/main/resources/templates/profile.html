@@ -19,8 +19,8 @@
 
     <link rel="stylesheet" th:href="@{|/css/header.css|}">
     <link rel="stylesheet" th:href="@{|/css/home.css|}">
-    <link rel="stylesheet" th:href="@{|/css/details.css|}">
     <link rel="stylesheet" th:href="@{|/css/footer.css|}">
+    <link rel="stylesheet" th:href="@{|/css/profile.css|}">
 
     <title>Quản lý tài khoản | MovieTime</title>
 
@@ -32,15 +32,140 @@
     <div th:replace="~{/navbar/navbar}"></div>
 
 
+    <header>
+        <div class="main-content">
+            <div class="img-header" style="background: url(/images/banner_profile.jpg) center center/cover no-repeat;">
+            </div>
+            <div class="container">
+                <div class="name_header d-flex flex-column align-items-center">
+                    <div class="avatar">
+                        <img th:src="@{|/images/no-avatar.png|}" alt="Avatar">
+                    </div>
+                    <div class="name-user">
+                        <h3 sec:authentication="name">Username</h3>
+                    </div>
+                </div>
+                <div class="menu-header">
+                    <div class="sidebar">
+                        <div class="mini-nav d-flex justify-content-center px-5">
+                            <ul
+                                class="d-flex justify-content-around align-items-center gap-3 m-0 py-0 px-5 list-unstyled">
+                                <li class="nav-item x1 mx-2 active">
+                                    <a class="nav-link a-active" aria-current="page"
+                                        th:href="@{/user/profile}">Account</a>
+                                </li>
+                                <li class="nav-item x2 mx-2">
+                                    <button class="dropdown-item" ng-click="loadIdUserLogin()">Order
+                                        History</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container main-info">
+            <div class="card-body">
+                <form name="user">
+                    <div class="form-floating mb-3" hidden>
+                        <input ng-model="form.id" class="form-control" type="hidden">
+                        <label for="floatingInput">Id</label>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group"><label for="user_username" class="required">Tên tài
+                                    khoản</label><input type="text" id="user_username" name="user[username]"
+                                    disabled="disabled" required="required" class="form-control" value="quangvinh123">
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="user_fullname">Họ và tên</label>
+                                <input type="text" id="fullname" class="form-control"
+                                    value="" ng-model="form.fullname">
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="user_email" class="required">Email</label>
+                                <input type="email" disabled="disabled" id="email" required="required" class="form-control"
+                                   value="" ng-model="form.email">
+                                   <small hidden>Error message</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="user_phone">Số điện thoại</label>
+                                <input type="tel" id="numberphone" placeholder="(+84) 123 456 789" class="form-control"
+                                    ng-model="form.phonenumber">
+                                <small>Error message</small>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3 form-group" hidden>
+                            <input type="password" ng-model="form.password" class="form-control" id="password">
+                            <small>Error message</small>
+                            <label for="floatingPassword">Password</label>
+                        </div>
+
+                        <div class="col-sm-6 d-flex justify-content-center align-items-end">
+                            <div class="form-group">
+                                <label class="text-white">.</label>
+                                <a th:href="@{/home/resetPassword}" class="btn btn-outline-dark btn-block">Thay đổi
+                                    mật khẩu</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="user_file">Ảnh đại diện</label>
+                                <div class="custom-file">
+                                    <input type="file" id="" name="" lang="en" class="form-control"
+                                        accept="image/gif, image/jpeg, image/png" >
+                                    <label for="user_file" class="custom-file-label"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group btn-update mb-0">
+                        <button type="submit" id="btn2" ng-click="checkAndupdateCustomer()" class="btn btn-dark">Cập
+                            nhật</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 
 
 
+    <!--dùng để fix bug validate kiểu chữa cháy :)) -->
+    <div class="mt-2 form-group" hidden>
+        <button id="btn1" ng-click="checkAndcreateCustomer()" type="submit">Create</button>
+        <!-- <button id="btn2" ng-click="checkAndupdateCustomer()" type="submit">Update</button> -->
+        <!-- <button id="btn" ng-click="delete(form.id)" type="submit">Delete</button> -->
+        <button id="btn3" ng-click="reset()" type="submit">Reset</button>
+    </div>
+    <!--dùng để fix bug validate kiểu chữa cháy  -->
 
 
     <div th:replace="~{/navbar/_footer}"></div>
 
     <!-- js -->
-    
+
     <script th:src="@{/js/customer.js}"></script>
     <script th:src="@{/js/layout/main.js}"></script>
 </body>

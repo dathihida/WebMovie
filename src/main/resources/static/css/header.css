@@ -7,7 +7,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-header *{
+header, nav *{
     background-color: white;
 }
 
@@ -22,29 +22,29 @@ header .logo_hd img {
     height: auto;
 }
 
-.offcanvas-body .nav-item {
+.navbar .offcanvas-body .nav-item {
     border-bottom: 0.1rem solid rgb(237, 38, 71, 0);
 
 }
 
-.offcanvas-body .nav-item:hover {
+.navbar .offcanvas-body .nav-item:hover {
     border-bottom: 0.1rem solid rgb(237, 38, 71);
 
 }
 
-.nav-link {
+.navbar .nav-link {
     font-size: 1.1rem;
 }
 
-.nav-link:hover {
+.navbar .nav-link:hover {
     color: rgb(237, 38, 71);
 }
 
-.dropdown-item:hover {
+.navbar .dropdown-item:hover {
     color: rgb(237, 38, 71);
 }
 
-.dropdown-item:focus{
+.navbar .dropdown-item:focus{
     background-color: rgb(255, 255, 255);
 }
 

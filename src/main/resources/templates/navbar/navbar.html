@@ -60,7 +60,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     
-                                	 <span sec:authentication="name">Username</span>
+                                	 <span sec:authentication="name">{{currentUser ? currentUser.username : 'Username'}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" th:href="@{/user/profile}">My Account</a></li>
@@ -74,7 +74,7 @@
                             <li class="nav-item dropdown mx-2" sec:authorize="hasRole('ADMIN')">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false" >
-                                    <span sec:authentication="name">Username</span>
+                                    <span sec:authentication="name">{{currentUser ? currentUser.username : 'Username'}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" th:href="@{/home/admin}">Manage</a></li>
