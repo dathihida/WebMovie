@@ -32,10 +32,27 @@
 
 }
 
+.card {
+  border: 0;
+  height: auto;
+  transition: .3s;
+}
+.card:hover {
+  transform: translateY(-0.4rem);
+}
 
 .card img {
   height: 22em;
   object-fit: fill;
+  height: auto;
+  min-height: 220px;
+  border-radius: 5px;
+}
+.card-body a{
+  text-decoration: none;
+  color: #12263f;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 

@@ -28,6 +28,9 @@ footer * a{
   text-decoration: none;
   
 }
+footer .footer_mvt_policy p{
+  transition: .2s;
+}
 footer .footer_mvt_policy p:hover{
   color: rgb(237, 38, 71);
   transform: scale(1.1);

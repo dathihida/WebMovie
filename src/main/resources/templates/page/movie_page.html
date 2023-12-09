@@ -20,7 +20,9 @@
                                     alt="Hollywood Sign on The Hill" />
                             </a>
                             <div class="card-body p-2">
-                                <h6 class="card-title">{{item.id_MOVIE.name}}</h6>
+                                <a th:href="@{/movie/{{item.id_MOVIE.id}}}">
+                                    <span class="card-title">{{item.id_MOVIE.name}}</span>
+                                </a>
                             </div>
                         </div>
                     </div>

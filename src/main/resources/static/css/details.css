@@ -6,6 +6,10 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+body {
+    background-color: rgb(249, 251, 253);
+}
+
 .bg_details {
     /* margin-top: 3.2rem; */
     height: auto;
@@ -19,7 +23,6 @@
     height: auto;
     width: auto;
     border-radius: 0.2rem;
-
 
 }
 
@@ -281,8 +284,6 @@
 
 
 
-
-
 /* .modal_buyticket .modal-body .choose_date .gr_date input:hover {
     z-index: 2;
     position: relative;
@@ -410,29 +411,30 @@
 
 /* ===================================COMMENT============================== */
 
-.comment h4{
+.comment h4 {
     color: rgb(38, 58, 82);
 }
-.comment .cmt{
-    padding: 20px;
+
+.comment .cmt {
+    padding: 10px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.10);
+    background-color: white;
+    border-radius: 5px;
 }
 
-.comment .cmt input {
-    height: 40px;
+.comment .cmt textarea {
+    min-height: 35px;
     border: 0;
     border-bottom: 0.5px solid rgb(185, 185, 185);
     padding: 0 5px;
     width: 100%;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    max-height: 5em;
+    /* Đặt giới hạn chiều cao là 5 dòng */
 }
 
-.comment .cmt input::after + :focus {
-    height: 40px;
-    border: 0;
-    border-bottom: 0.5px solid rgb(43, 52, 114);
-    padding: 0 5px;
-    width: 100%;
-}
+
 
 .comment .cmt button {
     background-color: rgb(18, 38, 63);
@@ -445,11 +447,28 @@
 }
 
 /* Định dạng cho bình luận chính */
-.comment-container {
-    margin-bottom: 20px;
+/* .comment-container {
+    margin-bottom: 5px;
     border: 0;
     padding: 10px;
     border-radius: 5px;
+    background-color: white;
+} */
+.cmtcha {
+    margin-bottom: 5px;
+    border: 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.cmtcon {
+    margin-bottom: 5px;
+    border: 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    margin-left: 60px;
 }
 
 .comment-info {
@@ -479,23 +498,34 @@
     color: #888;
 }
 
-.comment-content {
-    margin-bottom: 10px;
-}
+
 
 /* Định dạng cho phần trả lời bình luận */
 
-.comment-reply input {
-    height: 30px;
+.comment .comment-reply textarea {
+    min-height: 30px;
     border: 0;
     border-bottom: 0.5px solid rgb(185, 185, 185);
     padding: 0 5px;
     width: 100%;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    max-height: 5em;
+    /* Đặt giới hạn chiều cao là 5 dòng */
+}
+.comment-content {
+    margin-bottom: 10px;
+    white-space: pre-line;
 }
 
 /* Định dạng cho link đăng nhập khi chưa đăng nhập */
+.btn_cmt a {
+    color: rgb(66, 155, 224);
+    text-decoration: none;
+}
+
 .comment-reply a {
-    color: #007bff;
+    color: rgb(66, 155, 224);
     text-decoration: none;
 }
 
@@ -514,20 +544,66 @@
     background-color: #333333;
 }
 
-.comment .showcmt button{
+.comment .showcmt button {
     width: 100px;
     height: auto;
     border: 0;
     box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
     border-radius: 3px;
     color: rgb(17, 13, 68);
+    font-size: 15px;
 }
-.comment .showcmt button:hover{
+
+.comment .showcmt button:hover {
     width: 100px;
     height: auto;
     border: 0;
     box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
     border-radius: 3px;
     transform: scale(1.1);
-    transition:  1s ;
+    transition: 1s;
+}
+
+#btn-reply {
+    border-radius: 30px;
+    border: 0;
+    color: rgb(18, 38, 63);
+    background-color: #ececec;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 7px;
+    margin-bottom: 3px;
+}
+
+#btn-reply:hover {
+    border-radius: 30px;
+    border: 0;
+    color: rgb(18, 38, 63);
+    background-color: #dedada;
+}
+
+#huy {
+    background-color: white;
+    color: #000000;
+    width: auto;
+    font-weight: 500;
+}
+
+#huy:hover {
+    background-color: white;
+    color: #000000;
+    width: auto;
+    font-weight: 600;
+}
+
+/* CSS để tạo hiệu ứng khi nút bị khóa */
+button:disabled {
+    opacity: 0.5;
+    /* Thiết lập độ mờ khi bị khóa */
+    cursor: default;
+    /* Chuyển con trỏ thành not-allowed khi bị khóa */
+}
+.comment-reply {
+    color: rgb(12, 133, 255) !important;
+    font-weight: 450 !important;
 }
