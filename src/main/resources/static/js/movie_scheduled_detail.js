@@ -277,6 +277,8 @@ app.controller("controller", function ($scope, $http, $timeout) {
         })
     }
 
+    $scope.content = "";
+    $scope.contentChilren = "";
     // Establish WebSocket connection after loading initial data
     var socket = new SockJS("http://localhost:8080/my-websocket-endpoint");
     var stompClient = Stomp.over(socket);
@@ -293,10 +295,12 @@ app.controller("controller", function ($scope, $http, $timeout) {
                 $scope.listComments.push(commentData.body); // Only push message.body
                 console.log("Updated listComments:", $scope.listComments);
             });
+            
         });
 
     });
 
+    $scope.content = "";
     $scope.addComment = function () {
         $scope.loadIdUserLogin = function () {
             $http.get('http://localhost:8080/api/getUserId').then(function (response) {
@@ -315,6 +319,7 @@ app.controller("controller", function ($scope, $http, $timeout) {
                         content: $scope.content
                     };
                     stompClient.send("/app/products", {}, JSON.stringify(message));
+                    $scope.content = "";
                 })
             });
         }
@@ -343,8 +348,10 @@ app.controller("controller", function ($scope, $http, $timeout) {
                         }
                     };
 
+                    var contentChilrenVar = '';
                     // Send the WebSocket message inside this success callback
                     stompClient.send("/app/products", {}, JSON.stringify(message));
+                    $scope.contentChilren = contentChilrenVar;
                 });
             });
         };

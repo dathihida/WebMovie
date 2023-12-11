@@ -122,26 +122,29 @@ app.controller("controller", function($scope, $http, $rootScope) {
 						if (seat.isSelected) {
 							$scope.selectedSeats.push(seat);
 								if (seat.seat_TYPE === "ECO") {
-									$scope.totalAmount += 10;
+									$scope.totalAmount += seat.seat_PRICE;
 								} else if (seat.seat_TYPE === "VIP") {
-									$scope.totalAmount += 20;
+									$scope.totalAmount += seat.seat_PRICE;
+								}else{
+									$scope.totalAmount -= 15;
 								}
 							} else {
 								var index = $scope.selectedSeats.indexOf(seat);
 									if (index !== -1) {
 										$scope.selectedSeats.splice(index, 1);
 										if (seat.seat_TYPE === "ECO") {
-											$scope.totalAmount -= 10;
+											$scope.totalAmount -= seat.seat_PRICE;
 										} else if (seat.seat_TYPE === "VIP") {
-											$scope.totalAmount -= 20;
+											$scope.totalAmount -= seat.seat_PRICE;
+										}else{
+											$scope.totalAmount -= 15;
+										}
 									}
 								}
-							}
 							console.log('selectedSeats', $scope.selectedSeats);
 							$rootScope.selectedSeats = $scope.selectedSeats;
 							createFormObject();
-							$scope.getIdSeat();
-							
+							$scope.getIdSeat();		
 					};
 
 					// Duyệt qua danh sách ghế và kiểm tra điều kiện

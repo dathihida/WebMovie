@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .requestMatchers("/home/**", "/", "/home", "/home/resetPassword",
                         "/my-websocket-endpoint",
                         "/my-websocket-endpoint/**",
+                        "/dat/**",
                         "/signup", "/js/**", "/css/**", "/images/**",
                         "/add", "/add/userNoExist",
                         "/api/movie/all", "/movie/**", "/v1/movie/**",
@@ -73,11 +74,10 @@ public class SecurityConfig {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                             Authentication authentication) throws IOException, ServletException {
-                    	System.out.println("AuthenticationSuccessHandler invoked");
-						System.out.println("Authentication name: " + authentication.getName());
+                        System.out.println("AuthenticationSuccessHandler invoked");
+                        System.out.println("Authentication name: " + authentication.getName());
                         CustomOAuth2User oauthUser = (CustomOAuth2User) authentication.getPrincipal();
-                        
-                        
+
                         customerService.processOAuthPostLoginGoogle(oauthUser.getEmail());
 
                         response.sendRedirect("/home");
