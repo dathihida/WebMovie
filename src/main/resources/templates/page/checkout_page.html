@@ -73,7 +73,7 @@
                         <div ng-repeat="booking in booking">
                             <div class="content-pay d-flex gap-3">
                                 <div class="card-img">
-                                    <img th:src="@{|/images/{{booking.id_MOVIE_SCHEDULED.id_MOVIE.image}}|}" alt="">
+                                    <img th:src="@{|https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{booking.id_MOVIE_SCHEDULED.id_MOVIE.image}}.jpg|}" alt="">
                                 </div>
                                 <div class="info-movie">
                                     <h5>{{booking.id_MOVIE_SCHEDULED.id_MOVIE.name}}</h5>

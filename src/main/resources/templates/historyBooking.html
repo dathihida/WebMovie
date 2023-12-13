@@ -78,7 +78,7 @@
       <div class="row m-3" ng-repeat="b in BookingByIdCustomer">
         <div class="col-2 img_movie p-0">
           <div class="card-body d-flex justify-content-center align-items-center">
-            <img th:src="@{|/images/{{b.id_MOVIE_SCHEDULED.id_MOVIE.image}}|}" class="card-img-top" alt="display error">
+            <img th:src="@{|https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{b.id_MOVIE_SCHEDULED.id_MOVIE.image}}.jpg|}" class="card-img-top" alt="display error">
           </div>
         </div>
         <div class="info_history_booking col-8 d-flex flex-column p-0 gap-2">
@@ -103,7 +103,17 @@
                 <label>Ticket price: </label> <span> {{b.price}}</span>
               </div>
               <div class="trang_thai">
-                <label>Payment status: </label> <span id="my-Status">{{b.status}}</span>
+                <label>Payment status: </label> 
+                
+                <div ng-if="b.status === 'success'">
+                  <span id="my-Status">Đã thanh toán</span>
+                </div>
+                <div ng-if="b.status === 'failed'">
+                  <span id="my-Status">Thanh toán thất bại</span>
+                </div>
+                <div ng-if="b.status === 'unpaid'">
+                  <span id="my-Status">Chưa thanh toán</span>
+                </div>
               </div>
               <div class="btn px-5">
                 <a th:href="@{/checkout/{{b.id}}}">Detail</a>

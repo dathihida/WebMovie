@@ -401,6 +401,14 @@ app.controller("controller", function ($scope, $http, $timeout) {
         console.log("Setting contentChilren:", username);
     };
 
+    $scope.loadIdUserLogin = function () {
+		$http.get('http://localhost:8080/api/getUserId').then(function (response) {
+			$scope.userId = response.data;
+			userIdLogin = $scope.userId;
+			console.log('idUserLogin', userIdLogin);
+			window.location.href = `http://localhost:8080/historyBooking/` + userIdLogin
+		});
+	}
  
     // ====================EDIT COMMENT======================
 
