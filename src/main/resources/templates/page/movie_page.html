@@ -16,8 +16,10 @@
                     <div class="col p-2" ng-repeat="item in filteredMoviesToDay | limitTo:moviesLimit">
                         <div class="card">
                             <a th:href="@{/movie/{{item.id_MOVIE.id}}}">
-                                <img ng-src="/images/{{item.id_MOVIE.image}}" class="card-img-top"
+
+                                <img ng-src="https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{item.id_MOVIE.image}}.jpg" class="card-img-top"
                                     alt="{{item.id_MOVIE.name}}-image" />
+
                             </a>
                             <div class="card-body p-2">
                                 <a th:href="@{/movie/{{item.id_MOVIE.id}}}">
@@ -46,7 +48,7 @@
                     <div class="col p-2" ng-repeat="item in filteredMovies | limitTo:moviesLimit">
                         <div class="card">
                             <a th:href="@{/movie/{{item.id_MOVIE.id}}}">
-                                <img ng-src="/images/{{item.id_MOVIE.image}}" class="card-img-top"
+                                <img ng-src="https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{item.id_MOVIE.image}}.jpg" class="card-img-top"
                                     alt="Hollywood Sign on The Hill" />
                             </a>
                             <div class="card-header d-flex justify-content-between align-items-center py-2 px-2">

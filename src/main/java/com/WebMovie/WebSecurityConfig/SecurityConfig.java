@@ -51,7 +51,7 @@ public class SecurityConfig {
                         "/api/booking/**", "/api/booking", "/api/booking/update/**", "/api/voucher/**",
                         "/pay", "/pay/**", "/api/pay", "/api/pay/**", "/mail/**",
                         "/api/resetPassword/**", "/changePassword/**", "/api/user/**", "/api/find/**", "/error/**",
-                        "/api/comment/**", "/api/comment", "/oauth2/**")
+                        "/api/comment/**", "/api/comment", "/oauth2/**", "/cloudinary/upload")
                 .permitAll()
                 .requestMatchers("/booking/**", "/checkout/**", "/historyBooking/**", "/login-success").authenticated()
                 .requestMatchers("/home/**", "/user/**").authenticated()

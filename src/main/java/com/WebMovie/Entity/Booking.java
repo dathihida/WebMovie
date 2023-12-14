@@ -48,7 +48,6 @@ public class Booking {
 	@CreationTimestamp
 	private Date startTime;
 
-
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_BOOKING")
 	private List<Seat_Scheduled> LIST_SEAT_SCHEDULED;

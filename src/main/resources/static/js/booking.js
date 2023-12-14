@@ -12,8 +12,8 @@ app.controller("controller", function ($scope, $http, $rootScope) {
 	$scope.booking = [];
 
 	$scope.reset = function () {
-        $scope.form = {};
-    }
+		$scope.form = {};
+	}
 
 	var url = window.location.href;
 	var parts = url.split('/');
@@ -179,6 +179,7 @@ app.controller("controller", function ($scope, $http, $rootScope) {
 								seat.isDisabled = false;
 							}
 						});
+
 					});
 				}).catch(error => {
 					console.log("Error", error);
@@ -198,6 +199,15 @@ app.controller("controller", function ($scope, $http, $rootScope) {
 				});
 			}
 			$scope.loadIdUserLogin();
+
+			$scope.loadIdUserLogin = function () {
+				$http.get('http://localhost:8080/api/getUserId').then(function (response) {
+					$scope.userId = response.data;
+					userIdLogin = $scope.userId;
+					console.log('idUserLogin', userIdLogin);
+					window.location.href = `http://localhost:8080/historyBooking/` + userIdLogin
+				});
+			}
 
 			function createFormObject() {
 				$scope.form = {
@@ -261,6 +271,8 @@ app.controller("controller", function ($scope, $http, $rootScope) {
 
 						var idSeatScheduled = seatsScheduled.map(function (seatScheduled) {
 							return seatScheduled.id_SEAT.id;
+
+
 						})
 						console.log("Danh sach id seatScheduled", idSeatScheduled);
 

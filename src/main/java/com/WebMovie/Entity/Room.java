@@ -1,6 +1,5 @@
 package com.WebMovie.Entity;
 
-
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,7 +25,7 @@ public class Room {
 	private String NAME;
 
 	@ManyToOne
-	@JoinColumn(name="ID_CINEMAS")
+	@JoinColumn(name = "ID_CINEMAS")
 	private Cinemas ID_CINEMAS;
 
 	@JsonIgnore

@@ -352,16 +352,19 @@
                                             <div class="form-floating mb-3">
                                                 <div class="mb-3 form-group">
                                                     <label for="formFile" class="form-label">Image</label>
-                                                    <input ng-model="form.image" class="form-control" type="file"
+                                                    <!-- <input ng-model="form.image" class="form-control" type="file"
                                                         id="formFile"
-                                                        onchange="angular.element(this).scope().imageChanged(this.files)">
+                                                        onchange="angular.element(this).scope().imageChanged(this.files)"> -->
+                                                    <input type="file" onchange="angular.element(this).scope().uploadImage(this.files)"
+                                                        ng-model="form.image" id="formFile">
                                                     <small>Error message</small>
                                                 </div>
 
                                             </div>
                                             <div
                                                 class="form-floating mb-3 d-flex justify-content-center align-items-center">
-                                                <img ng-src="/images/{{form.image}}" style="width: 85%; height: 85%">
+                                                <img ng-src="https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{form.image}}.jpg" 
+                                                    style="width: 85%; height: 85%">
                                             </div>
                                         </div>
                                     </div>

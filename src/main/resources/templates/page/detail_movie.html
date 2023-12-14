@@ -11,7 +11,7 @@
                                 <div class=" col-lg-2 col-md-2 col-sm-4 col-5 pt-2 align-items-center">
                                     <div class="card card_img">
                                         <a href="detail.html"></a>
-                                        <img th:src="@{|/images/${movie1.IMAGE}|}" class="card-img-top"
+                                        <img th:src="@{|https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/${movie1.IMAGE}.jpg|}" class="card-img-top"
                                             alt="display error">
                                         </a>
                                     </div>
@@ -161,7 +161,7 @@
                                     </li> -->
                                     <!-- ng-if="noDataMessage === null" -->
                                     <li class="item">
-                                        <a
+                                        <a  ng-if="trangthai"
                                             th:href="@{/booking/{{movieOfCinemas.id}}}">
                                             {{movieOfCinemas.time_START}}
                                         </a>
@@ -171,7 +171,7 @@
                         </div>
 						 
 						 <table class="table" hidden>
-						 	<div ng-if="noDataMessage">{{noDataMessage}}</div>
+						 	<!-- <div ng-if="noDataMessage">{{noDataMessage}}</div> -->
 						  	<thead>
 							    <tr>
 							      <th>MovieName</th>
