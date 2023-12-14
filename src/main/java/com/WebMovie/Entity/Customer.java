@@ -23,6 +23,7 @@ public class Customer {
 	private String PHONENUMBER;
 	private String ROLE;
 	private Boolean EXIST;
+	private String AVATAR;
 
 	@Enumerated(EnumType.STRING)
     private Provider provider;

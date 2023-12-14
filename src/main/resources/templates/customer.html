@@ -322,6 +322,19 @@
 											<label for="floatingPassword">Password</label>
 										</div>
 
+										<div class="mb-3 form-group">
+											<label for="formFile" class="form-label">Image</label>
+											<input ng-model="form.avatar" class="form-control" type="file"
+												id="formFile"
+												onchange="angular.element(this).scope().imageChanged(this.files)">
+											<small>Error message</small>
+										</div>
+
+										<div
+											class="form-floating mb-3 d-flex justify-content-center align-items-center">
+											<img ng-src="/images/{{form.avatar}}" style="width: 85%; height: 85%">
+										</div>
+
 									</div>
 									<button id="btn1" ng-click="checkAndcreateCustomer()" type="submit">Create</button>
 									<button id="btn2" ng-click="checkAndupdateCustomer()" type="submit">Update</button>
