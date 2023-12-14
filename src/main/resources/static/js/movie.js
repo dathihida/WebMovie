@@ -399,19 +399,35 @@ app.controller("controller", function ($scope, $http, $filter) {
 	}
 
 	//upload hinh anh
-	$scope.imageChanged = function (files) {
-		var data = new FormData();
-		data.append('file', files[0]);
-		$http.post('http://localhost:8080/rest/upload/images', data, {
-			transformRequest: angular.indentity,
-			headers: { 'Content-Type': undefined }
-		}).then(resp => {
-			$scope.form.image = resp.data.name;
-		}).catch(error => {
-			alert("loi updoad hinh")
-			console.log(error)
-		})
-	}
+	// $scope.imageChanged = function (files) {
+	// 	var data = new FormData();
+	// 	data.append('file', files[0]);
+	// 	$http.post('http://localhost:8080/rest/upload/images', data, {
+	// 		transformRequest: angular.indentity,
+	// 		headers: { 'Content-Type': undefined }
+	// 	}).then(resp => {
+	// 		$scope.form.image = resp.data.name;
+	// 	}).catch(error => {
+	// 		alert("loi updoad hinh")
+	// 		console.log(error)
+	// 	})
+	// }
+
+	// upload image cloudinary
+	$scope.uploadImage = function(files) {
+        var data = new FormData();
+        data.append('image', files[0]);
+
+        $http.post('http://localhost:8080/cloudinary/upload', data, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }
+        }).then(function(response) {
+            $scope.form.image = response.data.public_id;
+            console.log('Image uploaded successfully:', $scope.form.image);
+        }).catch(function(error) {
+            console.error('Error uploading image:', error);
+        });
+    };
 	//reset
 	$scope.reset = function () {
 		$scope.form = {

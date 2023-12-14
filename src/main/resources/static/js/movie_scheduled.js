@@ -257,6 +257,7 @@ app.controller("controller", function ($scope, $http) {
         var url = `${host}/${id}`;
         $http.get(url).then(resp => {
             $scope.form = resp.data;
+            resp.data.date = new Date(resp.data.date);
             console.log("movie_scheduledEdit", resp);
         }).catch(error => {
             console.log("Error", error);

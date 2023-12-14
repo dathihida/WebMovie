@@ -32,6 +32,6 @@ public class Voucher {
     private Boolean STATUS;
 
     @JsonIgnore
-	@OneToMany(mappedBy = "ID_VOUCHER")
-	private List<Pay> LIST_PAY;
+    @OneToMany(mappedBy = "ID_VOUCHER")
+    private List<Pay> LIST_PAY;
 }

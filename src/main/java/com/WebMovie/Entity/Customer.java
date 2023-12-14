@@ -26,21 +26,21 @@ public class Customer {
 	private String AVATAR;
 
 	@Enumerated(EnumType.STRING)
-    private Provider provider;
+	private Provider provider;
 
-    public Provider getProvider() {
-        return provider;
-    }
+	public Provider getProvider() {
+		return provider;
+	}
 
-    public void setProvider(Provider provider) {
-        this.provider = provider;
-    }
+	public void setProvider(Provider provider) {
+		this.provider = provider;
+	}
 
-//	@JsonIgnore
-//	@OneToMany(mappedBy = "ID_CUSTOMER")
-//	private List<Booking> LIST_BOOKING;
-//
-//	@JsonIgnore
-//	@OneToMany(mappedBy = "ID_CUSTOMER")
-//	private List<Comment> LIST_COMMENT;
+	// @JsonIgnore
+	// @OneToMany(mappedBy = "ID_CUSTOMER")
+	// private List<Booking> LIST_BOOKING;
+
+	// @JsonIgnore
+	// @OneToMany(mappedBy = "ID_CUSTOMER")
+	// private List<Comment> LIST_COMMENT;
 }

@@ -19,18 +19,18 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="MOVIE_SCHEDULED")
+@Table(name = "MOVIE_SCHEDULED")
 public class Movie_Scheduled {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ID;
 
 	@ManyToOne
-	@JoinColumn(name="ID_MOVIE")
+	@JoinColumn(name = "ID_MOVIE")
 	private Movie ID_MOVIE;
 
 	@ManyToOne
-	@JoinColumn(name ="ID_ROOM")
+	@JoinColumn(name = "ID_ROOM")
 	private Room ID_ROOM;
 
 	@JsonIgnore
