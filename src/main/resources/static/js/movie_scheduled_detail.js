@@ -5,7 +5,7 @@ let host_cinemas = "http://localhost:8080/api/cinema";
 let host_booking = "http://localhost:8080/api/booking/update";
 let host_comment = "http://localhost:8080/api/comment";
 const app = angular.module("app", []);
-app.controller("controller", function ($scope, $http, $timeout) {
+app.controller("controller", function ($scope, $http, $timeout, $interval) {
     $scope.form = {};
 
     $scope.movie_scheduleds = [];
@@ -139,18 +139,45 @@ app.controller("controller", function ($scope, $http, $timeout) {
         });
     }
 
-    // Hàm kiểm tra xem một mục có nên hiển thị hay không
+    // // Hàm kiểm tra xem một mục có nên hiển thị hay không
+    // $scope.isFutureEvent = function (movieOfCinemas) {
+    //     var endTime = new Date(movieOfCinemas.date + ' ' + movieOfCinemas.time_END);
+    //     var currentDateTime = new Date($scope.currentDate + ' ' + $scope.currentTime);
+    //     // Kiểm tra xem có dữ liệu hay không
+    //     if (endTime < currentDateTime) {
+    //         // Nếu không có dữ liệu, hiển thị thông báo
+    //         $scope.noDataMessage = "Đã hết thời gian lên phim";
+    //     } else {
+    //         // Nếu có dữ liệu, đặt thông báo về null
+    //         $scope.noDataMessage = null;
+    //     }
+    //     return endTime > currentDateTime;
+    // };
+
+    // Trong controller của bạn
+    $scope.countdownMinutes = 15;
+    $scope.countdownSeconds = 0;
+
     $scope.isFutureEvent = function (movieOfCinemas) {
-        var endTime = new Date(movieOfCinemas.date + ' ' + movieOfCinemas.time_END);
+        var endTime = new Date(movieOfCinemas.date + ' ' + movieOfCinemas.time_START);
         var currentDateTime = new Date($scope.currentDate + ' ' + $scope.currentTime);
+
+        var timeDiff = endTime - currentDateTime;
+        
+        var minutesDiff = Math.floor(timeDiff / (1000 * 60)); // Chuyển đổi miligiay thành phút
         // Kiểm tra xem có dữ liệu hay không
         if (endTime < currentDateTime) {
             // Nếu không có dữ liệu, hiển thị thông báo
             $scope.noDataMessage = "Đã hết thời gian lên phim";
-        } else {
+        }else if(minutesDiff === 15 || minutesDiff < 15){
+            $scope.noDataMessage = "Đã sắp đến giờ chiếu phim nên khóa đặt ghế";
+            $scope.trangthai = false;
+        }else {
             // Nếu có dữ liệu, đặt thông báo về null
-            $scope.noDataMessage = null;
+            $scope.noDataMessage = null;   
+            $scope.trangthai = true; 
         }
+
         return endTime > currentDateTime;
     };
 

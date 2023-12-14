@@ -161,7 +161,7 @@
                                     </li> -->
                                     <!-- ng-if="noDataMessage === null" -->
                                     <li class="item">
-                                        <a
+                                        <a  ng-if="trangthai"
                                             th:href="@{/booking/{{movieOfCinemas.id}}}">
                                             {{movieOfCinemas.time_START}}
                                         </a>
@@ -171,7 +171,7 @@
                         </div>
 						 
 						 <table class="table" hidden>
-						 	<div ng-if="noDataMessage">{{noDataMessage}}</div>
+						 	<!-- <div ng-if="noDataMessage">{{noDataMessage}}</div> -->
 						  	<thead>
 							    <tr>
 							      <th>MovieName</th>
