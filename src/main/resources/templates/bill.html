@@ -295,44 +295,70 @@
                             <div class="row g-4 d-flex justify-content-center">
                                 <div class="form1 p-4">
                                     <div class="form-floating mb-3" hidden>
-                                        <input ng-model="form.id" class="form-control" type="hidden">
+                                        <input ng-model="form.id" class="form-control mb-5" type="hidden">
                                         <label for="floatingInput">Id</label>
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.name" class="form-control" id="name">
+                                                <input ng-model="form.id_CUSTOMER.id" class="form-control"
+                                                    id="id_customer">
                                                 <small>Error message</small>
-                                                <label for="floatingInput">Name</label>
+                                                <label for="floatingInput">Id customer</label>
                                             </div>
-                                            <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.discount" class="form-control" id="discount">
+                                            <!-- <div class="form-group mb-3">
+                                                <label id="slect">Id Customer</label>
+                                                <select ng-model="form.id_CUSTOMER.id" class="form-select" id="nameMovie"
+                                                    aria-label="Floating label select example">
+                                                    <option value="" disabled></option>
+                                                    <option ng-repeat="c in customers" ng-value="c.id">{{c.id}}</option>
+                                                </select>
                                                 <small>Error message</small>
-                                                <label for="floatingPassword">Discount</label>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label id="slect">Id movie</label>
+                                                <select ng-model="form.id_MOVIE_SCHEDULED.id" class="form-select" id="nameMovie"
+                                                    aria-label="Floating label select example">
+                                                    <option value="" disabled></option>
+                                                    <option ng-repeat="c in movie_scheduleds" ng-value="c.id">{{c.id}}</option>
+                                                </select>
+                                                <small>Error message</small>
+                                            </div> -->
+                                            <div class="form-floating mb-3 form-group">
+                                                <input ng-model="form.id_MOVIE_SCHEDULED.id" class="form-control"
+                                                    id="id_movie">
+                                                <small>Error message</small>
+                                                <label for="floatingPassword">Id movie</label>
                                             </div>
 
                                             <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.date_START" class="form-control" id="date_START" type="date">
+                                                <input ng-model="form.startTime" class="form-control" id="startTime">
                                                 <small>Error message</small>
-                                                <label for="floatingPassword">StartDate</label>
+                                                <label for="floatingPassword">Start time</label>
                                             </div>
 
                                             <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.date_END" class="form-control" id="date_END" type="date">
+                                                <input ng-model="form.date" class="form-control" id="date">
                                                 <small>Error message</small>
-                                                <label for="floatingPassword">EndDate</label>
+                                                <label for="floatingPassword">Date</label>
                                             </div>
 
                                             <div class="form-floating mb-3 form-group">
-                                                <input ng-model="form.describe" class="form-control" id="describe">
+                                                <input ng-model="form.price" class="form-control" id="price">
                                                 <small>Error message</small>
-                                                <label for="floatingPassword">Describe</label>
+                                                <label for="floatingPassword">Price</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3 form-group">
+                                                <input ng-model="form.status" class="form-control" id="status">
+                                                <small>Error message</small>
+                                                <label for="floatingPassword">Status</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mt-2">
-                                        <button id="btn1" ng-click="checkAndcreateVoucher()" type="submit">Create</button>
-                                        <button id="btn2" ng-click="checkAndupdateVoucher()" type="submit">Update</button>
+                                        <!-- <button id="btn1" ng-click="checkAndcreateVoucher()" type="submit">Create</button> -->
+                                        <!-- <button id="btn2" ng-click="delete(form.id)" type="submit">Delete</button> -->
                                         <button id="btn3" ng-click="reset()" type="submit">Reset</button>
                                     </div>
                                 </div>
@@ -356,7 +382,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <div class="card" ng-if="vouchers">
+                            <div class="card" ng-if="booking_create">
                                 <div class="card-header">
                                     <h3 class="card-title">DataTable </h3>
                                 </div>
@@ -366,27 +392,26 @@
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Name</th>
-                                                <th>Discount</th>
-                                                <th>Date_start</th>
-                                                <th>Date_end</th>
-                                                <th>Describe</th>
+                                                <th>Id Customer</th>
+                                                <th>Id Movie</th>
+                                                <th>Time Start</th>
+                                                <th>Date</th>
+                                                <th>Price</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="p in pager.items">
-                                                <td>{{p.id}}</td>
-                                                <td>{{p.name}}</td>
-                                                <td>{{p.discount}}</td>
-                                                <td>{{p.date_START | date:'dd-MM-yyyy'}}</td>
-                                                <td>{{p.date_END | date:'dd-MM-yyyy'}}</td>
-                                                <td>{{p.describe}}</td>
+                                            <tr ng-repeat="b in pager.items">
+                                                <td>{{b.id}}</td>
+                                                <td>{{b.id_CUSTOMER.id}}</td>
+                                                <td>{{b.id_MOVIE_SCHEDULED.id}}</td>
+                                                <td>{{b.startTime}}</td>
+                                                <td>{{b.date | date:'dd-MM-yyyy'}}</td>
+                                                <td>{{b.price}}</td>
+                                                <td>{{b.status}}</td>
                                                 <td>
                                                     <div class="d-flex flex-column align-items-center mt-3">
-                                                        <button id="btn" class="button1"
-                                                            ng-click="edit(p.id)">Edit</button>
-                                                        <button id="btn" class="button2 mt-2"
-                                                            ng-click="delete(p.id)">Delete</button>
+                                                        <button id="btn" ng-click="edit(b.id)">View</button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -461,7 +486,9 @@
 
 
 
-    <script th:src="@{/js/voucher.js}"></script>
+    <script th:src="@{/js/booking.js}"></script>
+
+
 
 
 

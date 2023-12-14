@@ -17,7 +17,7 @@
                         <div class="card">
                             <a th:href="@{/movie/{{item.id_MOVIE.id}}}">
                                 <img ng-src="/images/{{item.id_MOVIE.image}}" class="card-img-top"
-                                    alt="Hollywood Sign on The Hill" />
+                                    alt="{{item.id_MOVIE.name}}-image" />
                             </a>
                             <div class="card-body p-2">
                                 <a th:href="@{/movie/{{item.id_MOVIE.id}}}">
