@@ -169,12 +169,12 @@ app.controller("controller", function ($scope, $http, $timeout, $interval, $filt
         if (endTime < currentDateTime) {
             // Nếu không có dữ liệu, hiển thị thông báo
             $scope.noDataMessage = "Đã hết thời gian lên phim";
-        } 
-        else if (minutesDiff === 15 || minutesDiff < 15) {
+        }
+        else if(minutesDiff === 15 || minutesDiff < 15){
             $scope.noDataMessage = "Đã sắp đến giờ chiếu phim nên khóa đặt ghế";
             $scope.trangthai = false;
-        } else 
-        {
+        }
+        else {
             // Nếu có dữ liệu, đặt thông báo về null
             $scope.noDataMessage = null;
             $scope.trangthai = true;
