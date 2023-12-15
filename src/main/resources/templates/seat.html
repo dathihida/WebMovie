@@ -34,12 +34,47 @@
 <body ng-app ="app" ng-controller = "controller">
 	<div th:replace="~{/navbar/navbar}"></div>
 
-	<table>
-		<tr ng-repeat="row.SEAT_ROW in seat">
-			<td>{{row.SEAT_ROW}}</td>
-		</tr>
-	</table>
-	
+	<form ng-submit="demoViewSeat()">
+        <label>Total Number of Seats:</label>
+        <input type="number" ng-model="totalSeats" required>
+
+        <label>Number of Rows:</label>
+        <input type="number" ng-model="numRows" required>
+
+        <label>Number of Columns:</label>
+        <input type="number" ng-model="numColumns" required>
+
+        <button type="submit">Create Seats</button>
+    </form>
+
+    <div class="form-group">
+        <label>Room-CINEMAS</label>
+        <select ng-model="form.id" class="form-select mb-3" id="roomCinema"
+            aria-label="Floating label select example">
+            <option ng-repeat="c in rooms" ng-value="c.id">
+                {{c.name}}-{{c.id_CINEMAS.name}}</option>
+        </select>
+        <small>Error message</small>
+    </div>
+
+    <div ng-if="seats.length">
+        <h3>Seat Layout</h3>
+        <table border="1">
+            <tr ng-repeat="row in seats">
+                <td ng-repeat="seat in row">
+                    {{ seat.row }}{{ seat.column }}
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <div ng-if="errorMessage">
+        <p style="color: red;">{{ errorMessage }}</p>
+    </div>
+
+    <div ng-if="!errorMessage">
+        <button ng-click="createSeats()">CreatSeat</button>
+    </div>
 	<script th:src="@{/js/seat.js}"></script>
 </body>
 </html>
