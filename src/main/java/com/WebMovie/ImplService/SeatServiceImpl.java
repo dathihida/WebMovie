@@ -10,7 +10,7 @@ import com.WebMovie.Repository.SeatRepository;
 import com.WebMovie.Service.SeatService;
 
 @Service
-public class SeatServiceImpl implements SeatService{
+public class SeatServiceImpl implements SeatService {
 
 	@Autowired
 	SeatRepository seatRepository;
@@ -25,6 +25,12 @@ public class SeatServiceImpl implements SeatService{
 	public List<Seat> ListSeatByIdRoom(Integer id) {
 		// TODO Auto-generated method stub
 		return seatRepository.ListSeatByIdRoom(id);
+	}
+
+	@Override
+	public List<Seat> addSeat(List<Seat> seat) {
+		// TODO Auto-generated method stub
+		return seatRepository.saveAll(seat);
 	}
 
 }

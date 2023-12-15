@@ -119,6 +119,7 @@ public class HomeController {
 		return "checkout";
 	}
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/home/seat")
 	String seat() {
 		return "seat";
@@ -204,31 +205,29 @@ public class HomeController {
 	// return "movie_detail";
 	// }
 
-	
 	@GetMapping("/user/profile")
 	String profile() {
 		return "profile";
 	}
 
-
 	@GetMapping("/home/thongtin")
-    public String yourPage(Model model, Authentication authentication) {
+	public String yourPage(Model model, Authentication authentication) {
 		authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication != null) {
 			Object principal = authentication.getPrincipal();
-			if(principal instanceof UserInfoDetails) {
+			if (principal instanceof UserInfoDetails) {
 				UserInfoDetails use = (UserInfoDetails) authentication.getPrincipal();
 				model.addAttribute("username", use.getUsername());
 				Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-			    model.addAttribute("roles", roles);
-			}else if (principal instanceof OAuth2User) {
-		        CustomOAuth2User oauth2User = (CustomOAuth2User) principal;
-		        model.addAttribute("username", oauth2User.getName());
-		        Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-		        model.addAttribute("roles", roles);
-		    }
+				model.addAttribute("roles", roles);
+			} else if (principal instanceof OAuth2User) {
+				CustomOAuth2User oauth2User = (CustomOAuth2User) principal;
+				model.addAttribute("username", oauth2User.getName());
+				Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+				model.addAttribute("roles", roles);
+			}
 		}
-        return "user";
-    }
+		return "user";
+	}
 
 }
