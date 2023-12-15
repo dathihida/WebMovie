@@ -15,6 +15,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+	<!--Library for export file-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <!-- jsPDF-AutoTable Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.16/jspdf.plugin.autotable.min.js"></script>
 
 
 
@@ -324,15 +330,20 @@
 
 										<div class="mb-3 form-group">
 											<label for="formFile" class="form-label">Image</label>
-											<input ng-model="form.avatar" class="form-control" type="file"
+											<!-- <input ng-model="form.avatar" class="form-control" type="file"
 												id="formFile"
 												onchange="angular.element(this).scope().imageChanged(this.files)">
-											<small>Error message</small>
+											<small>Error message</small> -->
+											<input type="file" onchange="angular.element(this).scope().uploadImage(this.files)"
+                                                        ng-model="form.avatar" id="formFile">
+                                                    <small>Error message</small>
 										</div>
 
 										<div
 											class="form-floating mb-3 d-flex justify-content-center align-items-center">
-											<img ng-src="/images/{{form.avatar}}" style="width: 85%; height: 85%">
+											<!-- <img ng-src="/images/{{form.avatar}}" style="width: 85%; height: 85%"> -->
+											<img ng-src="https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{form.avatar}}.jpg" 
+                                                    style="width: 85%; height: 85%">
 										</div>
 
 									</div>
@@ -363,24 +374,27 @@
 								</div>
 								<!-- /.card-header -->
 								<div class="card-body">
-									<table id="example1" class="table table-bordered table-striped">
+									<button ng-click="exportToExcel()">Export to Excel</button>
+                                    <button ng-click="exportToPDF()">Export to PDF</button>
+                                    <input type="text" ng-model="searchText" placeholder="Search...">
+									<table id="customertable" class="table table-hover">
 										<thead>
 											<tr>
 												<th>Id</th>
 												<th>Name</th>
 												<th>Email</th>
 												<th>Phone</th>
-												<th>Password</th>
+												<!-- <th>Password</th> -->
 												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr ng-repeat="cus in pager.items">
+											<tr ng-repeat="cus in pager.items | filter: searchText">
 												<td>{{cus.id}}</td>
 												<td>{{cus.fullname}}</td>
 												<td>{{cus.email}}</td>
 												<td>{{cus.phonenumber}}</td>
-												<td>{{cus.password}}</td>
+												<!-- <td>{{cus.password}}</td> -->
 												<td>
 													<div
 														class="d-flex gap-3 justify-content-center align-items-center">
@@ -488,29 +502,6 @@
 	<script th:src="@{/css/dist/js/demo.js}"></script>
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script th:src="@{/css/dist/js/pages/dashboard3.js}"></script>
-
-	<script>
-		$(function () {
-			$("#example1").DataTable({
-				"responsive": true, "lengthChange": false, "autoWidth": false,
-				"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-			}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-			$('#example2').DataTable({
-				"paging": true,
-				"lengthChange": false,
-				"searching": false,
-				"ordering": true,
-				"info": true,
-				"autoWidth": false,
-				"responsive": true,
-			});
-		});
-	</script>
-
-
-
-
-
 </body>
 
 </html>

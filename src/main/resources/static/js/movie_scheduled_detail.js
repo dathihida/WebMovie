@@ -439,7 +439,6 @@ app.controller("controller", function ($scope, $http, $timeout, $interval) {
  
     // ====================EDIT COMMENT======================
 
-
     $scope.loadAllMovie_Scheduleds();
     $scope.loadAllMovies();
     $scope.loadAllCinemas();

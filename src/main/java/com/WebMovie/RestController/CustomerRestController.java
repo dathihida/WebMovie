@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -102,9 +103,7 @@ public class CustomerRestController {
 	 //Get data of user login for function function edit profile
 	 @GetMapping("/customer/edit")
 	 public Customer getDataCustomerLogin() {
-		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		 String email = authentication.getName();
-		 return customerService.findByEmail(email);
+		 return customerService.getDataUserLogin();
 	 }
 
 //	 @GetMapping("/")
