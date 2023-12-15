@@ -661,20 +661,10 @@
     position: absolute;
     left: 0;
     visibility: hidden;
-    font-size: 12px;
+    font-size: 11px;
+    top: -5px;
 }
 
 .form-group.error small {
-    visibility: visible;
-}
-.social-icons small {
-    color: #e74c3c;
-    position: absolute;
-    left: 0;
-    visibility: hidden;
-    font-size: 12px;
-}
-
-.social-icons.error small {
     visibility: visible;
 }

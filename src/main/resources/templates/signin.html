@@ -51,7 +51,6 @@
 						<a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
 						<a href="#" class="icon"><i class="fa-brands fa-x-twitter"></i></a>  -->
 						<a th:href="@{/oauth2/authorization/google}" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-						<small>Error message</small>
 					</div>
 					<span>Use your email for registeration</span>
 					<div class="form-group">
@@ -116,9 +115,10 @@
 	
 
 	<div th:replace="~{/navbar/_footer}"></div>
+
+	
+
     <script th:src="@{/js/signup.js}"></script>
-
-
 	<script th:src="@{/js/layout/main.js}"></script>
 	<script th:src="@{/js/layout/signin_up.js}"></script>
 </body>

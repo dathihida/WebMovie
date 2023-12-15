@@ -1,6 +1,7 @@
 let host = "http://localhost:8080/add/userNoExist";
+let movie_scheduled = "http://localhost:8080/api/movie_scheduled";
 const app = angular.module("app", []);
-app.controller("controller", function ($scope, $http) {
+app.controller("controller", function ($scope, $http, $filter) {
     $scope.form = {};
     $scope.customers = [];
 
@@ -18,7 +19,7 @@ app.controller("controller", function ($scope, $http) {
             console.log("CustomerNew", resp);
 
             window.location.href = `http://localhost:8080/signin`;
-        }).catch(error=>{
+        }).catch(error => {
 
             console.log(error);
         })
@@ -100,8 +101,18 @@ app.controller("controller", function ($scope, $http) {
 
         let isCheck = true;
 
+        // if (fullnameValue == '') {
+        //     setError(fullnameEle, '***');
+        //     isCheck = false;
+        // } else {
+        //     setSuccess(fullnameEle);
+        // }
+
         if (fullnameValue == '') {
             setError(fullnameEle, '***');
+            isCheck = false;
+        } else if (!isFullname(fullnameValue)) {
+            setError(fullnameEle, '*With at least 2 words');
             isCheck = false;
         } else {
             setSuccess(fullnameEle);
@@ -121,14 +132,24 @@ app.controller("controller", function ($scope, $http) {
             setError(numberphoneEle, '***');
             isCheck = false;
         } else if (!isPhone(numberphoneValue)) {
-            setError(numberphoneEle, '*+84xxxxxxxxx');
+            setError(numberphoneEle, '*+84 xxx xxx xxx');
             isCheck = false;
         } else {
             setSuccess(numberphoneEle);
         }
 
+        // if (password_signupValue == '') {
+        //     setError(password_signupEle, '***');
+        //     isCheck = false;
+        // } else {
+        //     setSuccess(password_signupEle);
+        // }
+
         if (password_signupValue == '') {
             setError(password_signupEle, '***');
+            isCheck = false;
+        } else if (!isPassword(password_signupValue)) {
+            setError(password_signupEle, '*[6-16] characters and 1 !@#$%^&*');
             isCheck = false;
         } else {
             setSuccess(password_signupEle);
@@ -151,6 +172,11 @@ app.controller("controller", function ($scope, $http) {
     }
 
 
+    function isFullname(fullname) {
+        // Kiểm tra xem fullname có ít nhất 2 chuỗi ký tự không
+        return /^(\D+\s){1}\D+$/.test(fullname);
+    }
+
     function isEmail(email) {
         return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
             email
@@ -160,10 +186,72 @@ app.controller("controller", function ($scope, $http) {
     function isPhone(number) {
         return /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(number);
     }
+
+    function isPassword(password) {
+        // Kiểm tra xem mật khẩu có ít nhất 6 ký tự, tối đa 16 ký tự, và chứa ít nhất một ký tự đặt biệt
+        return /^(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{6,16}$/.test(password);
+    }
     // =====================END VALIDATION==============================
 
 
+    $scope.movie_scheduleds = [];
+    $scope.searchQuery = '';
+    $scope.searchResults = [];
 
 
+    $scope.loadAllMovie_Scheduleds = function () {
+        var url = `${movie_scheduled}/all`;
+        $http.get(url).then(resp => {
+            $scope.movie_scheduleds = resp.data;
+            console.log("Allmovie_scheduleds", resp);
+        }).catch(error => {
+            console.log("Error", error);
+        })
+    }
 
+    // =========================SEARCH BY USER================================
+    $scope.searchQuery = '';
+    $scope.searchResults = [];
+
+    // Lọc danh sách movie_scheduleds theo name và ngày hiện tại trở đi
+    $scope.searchMovie = function () {
+        var currentDate = new Date();
+
+        // Kiểm tra nếu chuỗi tìm kiếm trống hoặc có ít hơn 3 ký tự
+        if ($scope.searchQuery.trim().length < 1) {
+            $scope.searchResults = [];
+            $scope.searchMessage = "";
+        } else {
+
+            // Lọc danh sách movie_scheduleds theo name và ngày hiện tại trở đi
+            $scope.searchResults = $filter('filter')($scope.movie_scheduleds, function (movie) {
+
+                var movieDate = new Date(movie.date + ' ' + movie.time_START);
+                return movie.id_MOVIE.name.toLowerCase().includes($scope.searchQuery.toLowerCase()) && movieDate >= currentDate;
+            });
+            // console.log("searchResults", $scope.searchResults);
+
+            // xoa id_Movie trung
+            var uniqueMovies = {};
+            $scope.searchResults = $scope.searchResults.filter(function (movie) {
+                if (!uniqueMovies[movie.id_MOVIE.id]) {
+                    uniqueMovies[movie.id_MOVIE.id] = true;
+                    return true;
+                }
+                return false;
+            });
+
+            // Kiểm tra và đặt thông báo
+            if ($scope.searchResults.length > 0) {
+                $scope.searchMessage = $scope.searchQuery;
+            } else {
+                $scope.searchMessage = "Không có kết quả tìm kiếm cho: " + $scope.searchQuery;
+            }
+        };
+        // console.log("searchResults (after removing duplicates)", $scope.searchResults);
+    };
+
+    // =========================END SEARCH BY USER================================
+
+    $scope.loadAllMovie_Scheduleds();
 });

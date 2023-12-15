@@ -151,7 +151,7 @@ ul.search-results {
     border-radius: 5px;
     background-color: #ffffff;
     position: relative;
-    z-index: 3;
+    z-index: 10;
     box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2);
 }
 
