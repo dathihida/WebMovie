@@ -44,7 +44,7 @@
 
             <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
 
-                <div class="row row-cols-1 row-cols-md-5 g-4">
+                <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 grid-phimdc">
                     <div class="col p-2" ng-repeat="item in filteredMovies | limitTo:moviesLimit">
                         <div class="card">
                             <a th:href="@{/movie/{{item.id_MOVIE.id}}}">

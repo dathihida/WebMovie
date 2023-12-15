@@ -151,7 +151,7 @@ ul.search-results {
     border-radius: 5px;
     background-color: #ffffff;
     position: relative;
-    z-index: 2;
+    z-index: 3;
     box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2);
 }
 
@@ -192,7 +192,13 @@ ul.search-results li a{
     font-weight: 500;
 }
 
-/* Thêm các kiểu CSS khác theo ý muốn của bạn */
+
+/* Đặt chiều cao tối đa của container là 450px */
+.scroll-bar {
+    max-height: 400px;
+    overflow-y: auto; /* Bật thanh cuộn theo chiều dọc khi nội dung vượt quá kích thước */
+}
+
 
 /* ================LOGOUT============ */
 /* .sidebar .logout {

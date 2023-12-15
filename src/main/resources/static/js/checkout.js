@@ -1,10 +1,11 @@
 let host_seatScheduled = "http://localhost:8080/api/seat_scheduled";
 let host_booking = "http://localhost:8080/api/booking";
 let host_pay = "http://localhost:8080/api/pay";
-let host_voucher = "http://localhost:8080/api/voucher"
+let host_voucher = "http://localhost:8080/api/voucher";
+let host_movie_scheduled = "http://localhost:8080/api/movie_scheduled";
 const app = angular.module("appBooking", []);
 
-app.controller("controllerBooking", function ($scope, $http, $interval, $timeout) {
+app.controller("controllerBooking", function ($scope, $http, $interval, $timeout, $filter) {
 	var url = window.location.href;
 	var parts = url.split('/'); // Tách URL bằng dấu '/'
 	var idBooking = parts[parts.length - 1];
@@ -257,11 +258,11 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 				});
 
 			});
-		
-		$scope.stopClock();
-	}).catch(error => {
-		console.log("Error", error);
-	});
+
+			$scope.stopClock();
+		}).catch(error => {
+			console.log("Error", error);
+		});
 	};
 
 	$scope.loadIdUserLogin = function () {
@@ -273,8 +274,63 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 		});
 	}
 
-$scope.pay(idBooking);
-$scope.getBookingId(idBooking);
-$scope.getSeat_Scheduled(idBooking);
-$scope.voucher();
+	$scope.movie_scheduleds = [];
+	$scope.loadAllMovie_Scheduleds = function () {
+		var url = `${host_movie_scheduled}/all`;
+		$http.get(url).then(resp => {
+			$scope.movie_scheduleds = resp.data;
+			console.log("Allmovie_scheduleds", resp);
+		}).catch(error => {
+			console.log("Error", error);
+		})
+	}
+	// =========================SEARCH BY USER================================
+	$scope.searchQuery = '';
+	$scope.searchResults = [];
+
+	// Lọc danh sách movie_scheduleds theo name và ngày hiện tại trở đi
+	$scope.searchMovie = function () {
+		var currentDate = new Date();
+
+		// Kiểm tra nếu chuỗi tìm kiếm trống hoặc có ít hơn 3 ký tự
+		if ($scope.searchQuery.trim().length < 1) {
+			$scope.searchResults = [];
+			$scope.searchMessage = "";
+		} else {
+
+			// Lọc danh sách movie_scheduleds theo name và ngày hiện tại trở đi
+			$scope.searchResults = $filter('filter')($scope.movie_scheduleds, function (movie) {
+
+				var movieDate = new Date(movie.date + ' ' + movie.time_START);
+				return movie.id_MOVIE.name.toLowerCase().includes($scope.searchQuery.toLowerCase()) && movieDate >= currentDate;
+			});
+			// console.log("searchResults", $scope.searchResults);
+
+			// xoa id_Movie trung
+			var uniqueMovies = {};
+			$scope.searchResults = $scope.searchResults.filter(function (movie) {
+				if (!uniqueMovies[movie.id_MOVIE.id]) {
+					uniqueMovies[movie.id_MOVIE.id] = true;
+					return true;
+				}
+				return false;
+			});
+
+			// Kiểm tra và đặt thông báo
+			if ($scope.searchResults.length > 0) {
+				$scope.searchMessage = $scope.searchQuery;
+			} else {
+				$scope.searchMessage = "Không có kết quả tìm kiếm cho: " + $scope.searchQuery;
+			}
+		};
+		// console.log("searchResults (after removing duplicates)", $scope.searchResults);
+	};
+
+	// =========================END SEARCH BY USER================================
+
+	$scope.pay(idBooking);
+	$scope.getBookingId(idBooking);
+	$scope.getSeat_Scheduled(idBooking);
+	$scope.loadAllMovie_Scheduleds();
+	$scope.voucher();
 });

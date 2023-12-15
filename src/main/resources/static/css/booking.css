@@ -276,6 +276,11 @@
 }
 
 
+/* Đặt chiều cao tối đa của container là 450px */
+.list_seat {
+    overflow-x: auto; /* Bật thanh cuộn theo chiều dọc khi nội dung vượt quá kích thước */
+}
+
 
 
 /* ===============INFO_SEATBOOKING============= */
