@@ -194,10 +194,26 @@ app.controller("controller", function ($scope, $http, $filter) {
     // =====================END VALIDATION==============================
 
 
+    //upload hinh anh
+    $scope.imageChanged = function (files) {
+        var data = new FormData();
+        data.append('file', files[0]);
+        $http.post('http://localhost:8080/rest/upload/images', data, {
+            transformRequest: angular.indentity,
+            headers: { 'Content-Type': undefined }
+        }).then(resp => {
+            $scope.form.avatar = resp.data.name;
+        }).catch(error => {
+            alert("loi updoad hinh")
+            console.log(error)
+        })
+    }
+
+
+
     $scope.movie_scheduleds = [];
     $scope.searchQuery = '';
     $scope.searchResults = [];
-
 
     $scope.loadAllMovie_Scheduleds = function () {
         var url = `${movie_scheduled}/all`;

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
@@ -56,8 +57,8 @@ public class CustomerService implements ICustomerService {
 	@Override
 	public Customer updateCustomer(Customer customer, Integer id) {
 		// TODO Auto-generated method stub
-		customer.setEXIST(true);
-		customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
+//		customer.setEXIST(true);
+//		customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
 		mailService.sendMailUpdateCustomer(customer);
 		return customerRepository.save(customer);
 	}
@@ -149,5 +150,27 @@ public class CustomerService implements ICustomerService {
 	public Optional<Customer> findCustomerByEMAILAndProvider(String email, Provider provider) {
 		// TODO Auto-generated method stub
 		return customerRepository.findCustomerByEMAILAndProvider(email, provider);
+	}
+
+	@Override
+	public Customer getDataUserLogin() {
+		//Hàm lấy ra dữ liệu tài khoản đăng nhập của người dùng.
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+	    if (authentication instanceof OAuth2AuthenticationToken) {
+	        // Đăng nhập bằng Google hoặc một dịch vụ OAuth2 khác
+	        String email = getEmailFromOAuth2Authentication((OAuth2AuthenticationToken) authentication);
+	        //return customerService.findByEmail(email);
+	        return customerRepository.findByEMAIL(email).get();
+	    } else {
+	        // Đăng nhập bằng tài khoản thông thường
+	        String email = authentication.getName();
+	        //return customerService.findByEmail(email);
+	        return customerRepository.findByEMAIL(email).get();
+	    }
+	}
+	//Hàm được sử dụng để lấy ra email khi người dùng sử dụng phương thức đăng nhập bằng google
+	private String getEmailFromOAuth2Authentication(OAuth2AuthenticationToken oauthToken) {
+	    return oauthToken.getPrincipal().getAttribute("email");
 	}
 }

@@ -28,4 +28,6 @@ public interface ICustomerService {
 
 	Optional<Customer> findCustomerById(Integer id);
 	Optional<Customer> findCustomerByEMAILAndProvider(String email, Provider provider);
+	
+	Customer getDataUserLogin();
 }

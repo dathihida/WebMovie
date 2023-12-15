@@ -27,7 +27,7 @@
 </head>
 
 
-<body ng-app="app" ng-controller="controller">
+<body ng-app="app" ng-controller="profileController">
 
     <div th:replace="~{/navbar/navbar}"></div>
 
@@ -39,7 +39,9 @@
             <div class="container">
                 <div class="name_header d-flex flex-column align-items-center">
                     <div class="avatar">
-                        <img th:src="@{|/images/no-avatar.png|}" alt="Avatar">
+                        <!-- <img ng-src="/images/{{form.avatar}}" alt="Avatar"> -->
+                        <img ng-src="https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{form.avatar}}.jpg"
+                            >
                     </div>
                     <div class="name-user">
                         <h3 sec:authentication="name">Username</h3>
@@ -86,17 +88,16 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="user_fullname">Họ và tên</label>
-                                <input type="text" id="fullname" class="form-control"
-                                    value="" ng-model="form.fullname">
+                                <input type="text" id="fullname" class="form-control" value="" ng-model="form.fullname">
                                 <small>Error message</small>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="user_email" class="required">Email</label>
-                                <input type="email" disabled="disabled" id="email" required="required" class="form-control"
-                                   value="" ng-model="form.email">
-                                   <small hidden>Error message</small>
+                                <input type="email" disabled="disabled" id="email" required="required"
+                                    class="form-control" value="" ng-model="form.email">
+                                <small hidden>Error message</small>
                             </div>
                         </div>
                     </div>
@@ -130,8 +131,11 @@
                             <div class="form-group">
                                 <label for="user_file">Ảnh đại diện</label>
                                 <div class="custom-file">
-                                    <input type="file" id="" name="" lang="en" class="form-control"
-                                        accept="image/gif, image/jpeg, image/png" >
+                                    <!-- <input ng-model="form.avatar" class="form-control" type="file" id="formFile"
+                                        onchange="angular.element(this).scope().imageChanged(this.files)"> -->
+                                    <input type="file" onchange="angular.element(this).scope().uploadImage(this.files)"
+                                        ng-model="form.avatar" id="formFile">
+                                    <small>Error message</small>
                                     <label for="user_file" class="custom-file-label"></label>
                                 </div>
                             </div>
@@ -166,8 +170,9 @@
 
     <!-- js -->
 
-    <script th:src="@{/js/customer.js}"></script>
+    <!-- <script th:src="@{/js/customer.js}"></script> -->
     <script th:src="@{/js/layout/main.js}"></script>
+    <script th:src="@{/js/profile.js}"></script>
 </body>
 
 </html>
