@@ -1,6 +1,7 @@
 let host = "http://localhost:8080/api/movie";
 let movie_scheduled = "http://localhost:8080/api/movie_scheduled";
-let booking = "http://localhost:8080/api/booking"
+let booking = "http://localhost:8080/api/booking";
+let host_customer = "http://localhost:8080/api";
 const app = angular.module("app", []);
 app.controller("controller", function ($scope, $http, $filter) {
 	$scope.form = {};
@@ -505,7 +506,7 @@ app.controller("controller", function ($scope, $http, $filter) {
 			$scope.searchResults = [];
 			$scope.searchMessage = "";
 		} else {
-			
+
 			// Lọc danh sách movie_scheduleds theo name và ngày hiện tại trở đi
 			$scope.searchResults = $filter('filter')($scope.movie_scheduleds, function (movie) {
 
@@ -580,25 +581,25 @@ app.controller("controller", function ($scope, $http, $filter) {
 	$scope.exportToPDF = function () {
 		// Lấy tên cột từ bảng trên giao diện
 		$scope.columns = $scope.getTableColumns();
-	
+
 		// Tạo đối tượng jsPDF
 		var doc = new window.jspdf.jsPDF();
-	
+
 		// Lấy dữ liệu từ bảng
 		var data = [];
 		var trElements = document.querySelectorAll('#movietable tbody tr');
-	
+
 		trElements.forEach(function (tr) {
 			var row = [];
 			var tdElements = tr.querySelectorAll('td');
-	
+
 			tdElements.forEach(function (td) {
 				row.push(td.innerText);
 			});
-	
+
 			data.push(row);
 		});
-	
+
 		// Tạo bảng trong file PDF với định dạng tùy chỉnh và sử dụng $scope.columns
 		doc.autoTable({
 			head: [$scope.columns.map(column => column.title)],
@@ -616,7 +617,7 @@ app.controller("controller", function ($scope, $http, $filter) {
 				doc.text('Movie Data', 14, 15);
 			}
 		});
-	
+
 		// Tải file PDF
 		if (doc) {
 			doc.save('Movie_data.pdf');
@@ -646,6 +647,23 @@ app.controller("controller", function ($scope, $http, $filter) {
 	};
 	//Export file data table to pdf - end
 
+
+
+	$scope.avt = {};
+	$scope.loadInfoCustomer = function () {
+		var url = `${host_customer}/customer/edit`
+		$http.get(url)
+			.then(function (response) {
+				// Gán dữ liệu người dùng vào $scope.form
+				$scope.avt = response.data;
+			})
+			.catch(function (error) {
+				console.error('Error fetching user info:', error);
+			});
+	};
+
+
+	$scope.loadInfoCustomer();
 	$scope.updateStatus();
 	$scope.loadAllMovies();
 	$scope.loadAllMovie_Scheduleds();

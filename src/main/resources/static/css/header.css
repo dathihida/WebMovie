@@ -7,9 +7,12 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-
-nav * {
+header {
     background-color: white;
+}
+
+nav {
+    background-color: rgba(255, 255, 255, 0);
 }
 
 nav {

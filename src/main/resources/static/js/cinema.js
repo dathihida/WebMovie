@@ -1,4 +1,5 @@
 let host = "http://localhost:8080/api/cinema";
+let host_customer = "http://localhost:8080/api";
 const app = angular.module("app", []);
 app.controller("controller", function ($scope, $http) {
     $scope.form = {};
@@ -45,7 +46,7 @@ app.controller("controller", function ($scope, $http) {
     const btnCinema1 = document.getElementById('btn1');
     const btnCinema2 = document.getElementById('btn2');
     const inputEles = document.querySelectorAll('.form-group');
-	// Nếu nhảy lỗi console đến đây thì copy 3 nút thêm,sửa, resset qua file html chứa file js này rồi chỉnh hidden
+    // Nếu nhảy lỗi console đến đây thì copy 3 nút thêm,sửa, resset qua file html chứa file js này rồi chỉnh hidden
     btnCinema1.addEventListener('click', function () {
         Array.from(inputEles).map((ele) =>
             ele.classList.remove('success', 'error')
@@ -93,11 +94,11 @@ app.controller("controller", function ($scope, $http) {
     function resetForm(ele) {
         // Xóa lớp error và success
         Array.from(inputEles).forEach(ele => ele.classList.remove('error', 'success'));
-    
+
         // Thêm lớp normal
         Array.from(inputEles).forEach(ele => ele.classList.add('normal'));
     }
-    
+
     // Gọi hàm resetForm khi nút reset được nhấn
     document.getElementById('btn3').addEventListener('click', resetForm);
 
@@ -178,107 +179,123 @@ app.controller("controller", function ($scope, $http) {
 
     //==========================START EXPORT FILE===================
     //Export file data table to excel - start
-	$scope.exportToExcel = function () {
-		// Lấy dữ liệu từ bảng
-		var data = [];
-		var headers = [];
+    $scope.exportToExcel = function () {
+        // Lấy dữ liệu từ bảng
+        var data = [];
+        var headers = [];
 
-		// Sử dụng document.querySelectorAll thay vì angular.element
-		var thElements = document.querySelectorAll('#cinemastable thead th');
-		thElements.forEach(function (th) {
-			headers.push(th.innerText);
-		});
+        // Sử dụng document.querySelectorAll thay vì angular.element
+        var thElements = document.querySelectorAll('#cinemastable thead th');
+        thElements.forEach(function (th) {
+            headers.push(th.innerText);
+        });
 
-		var trElements = document.querySelectorAll('#cinemastable tbody tr');
-		trElements.forEach(function (tr) {
-			var row = [];
-			var tdElements = tr.querySelectorAll('td');
-			tdElements.forEach(function (td) {
-				row.push(td.innerText);
-			});
-			data.push(row);
-		});
+        var trElements = document.querySelectorAll('#cinemastable tbody tr');
+        trElements.forEach(function (tr) {
+            var row = [];
+            var tdElements = tr.querySelectorAll('td');
+            tdElements.forEach(function (td) {
+                row.push(td.innerText);
+            });
+            data.push(row);
+        });
 
-		// Tạo workbook và thêm dữ liệu
-		var workbook = XLSX.utils.book_new();
-		var sheet = XLSX.utils.aoa_to_sheet([headers].concat(data));
-		XLSX.utils.book_append_sheet(workbook, sheet, 'Sheet1');
+        // Tạo workbook và thêm dữ liệu
+        var workbook = XLSX.utils.book_new();
+        var sheet = XLSX.utils.aoa_to_sheet([headers].concat(data));
+        XLSX.utils.book_append_sheet(workbook, sheet, 'Sheet1');
 
-		// Xuất file Excel
-		XLSX.writeFile(workbook, 'Cinemas_Data.xlsx');
-	};
-	//Export file data table to excel - end
+        // Xuất file Excel
+        XLSX.writeFile(workbook, 'Cinemas_Data.xlsx');
+    };
+    //Export file data table to excel - end
 
-	//Export file data table to pdf - start
-	$scope.exportToPDF = function () {
-		// Lấy tên cột từ bảng trên giao diện
-		$scope.columns = $scope.getTableColumns();
-	
-		// Tạo đối tượng jsPDF
-		var doc = new window.jspdf.jsPDF();
-	
-		// Lấy dữ liệu từ bảng
-		var data = [];
-		var trElements = document.querySelectorAll('#cinemastable tbody tr');
-	
-		trElements.forEach(function (tr) {
-			var row = [];
-			var tdElements = tr.querySelectorAll('td');
-	
-			tdElements.forEach(function (td) {
-				row.push(td.innerText);
-			});
-	
-			data.push(row);
-		});
-	
-		// Tạo bảng trong file PDF với định dạng tùy chỉnh và sử dụng $scope.columns
-		doc.autoTable({
-			head: [$scope.columns.map(column => column.title)],
-			body: data,
-			columns: $scope.columns,
-			styles: {
-				cellPadding: 2,
-				fontSize: 10,
-				valign: 'middle',
-				halign: 'center'
-			},
-			margin: { top: 20 },
-			addPageContent: function (data) {
-				// Thêm tiêu đề nếu cần
-				doc.text('Cinemas Data', 14, 15);
-			}
-		});
-	
-		// Tải file PDF
-		if (doc) {
-			doc.save('Cinemas_Data.pdf');
-		} else {
-			console.error("Không thể tạo đối tượng jsPDF");
-		}
-	};
+    //Export file data table to pdf - start
+    $scope.exportToPDF = function () {
+        // Lấy tên cột từ bảng trên giao diện
+        $scope.columns = $scope.getTableColumns();
 
-	// Hàm để lấy tên cột từ bảng trên giao diện
-	$scope.getTableColumns = function () {
-		var columns = [];
+        // Tạo đối tượng jsPDF
+        var doc = new window.jspdf.jsPDF();
 
-		// Kiểm tra xem phần tử #cinemastable có tồn tại hay không
-		var tableElement = document.getElementById('cinemastable');
+        // Lấy dữ liệu từ bảng
+        var data = [];
+        var trElements = document.querySelectorAll('#cinemastable tbody tr');
 
-		if (tableElement) {
-			// Lấy tên cột từ bảng trên giao diện
-			var headerCells = tableElement.querySelectorAll('thead th');
-			headerCells.forEach(function (th) {
-				columns.push({ title: th.textContent, dataKey: th.textContent });
-			});
-		} else {
-			console.error("Không tìm thấy phần tử #cinemastable");
-		}
+        trElements.forEach(function (tr) {
+            var row = [];
+            var tdElements = tr.querySelectorAll('td');
 
-		return columns;
-	};
-	//Export file data table to pdf - end
+            tdElements.forEach(function (td) {
+                row.push(td.innerText);
+            });
+
+            data.push(row);
+        });
+
+        // Tạo bảng trong file PDF với định dạng tùy chỉnh và sử dụng $scope.columns
+        doc.autoTable({
+            head: [$scope.columns.map(column => column.title)],
+            body: data,
+            columns: $scope.columns,
+            styles: {
+                cellPadding: 2,
+                fontSize: 10,
+                valign: 'middle',
+                halign: 'center'
+            },
+            margin: { top: 20 },
+            addPageContent: function (data) {
+                // Thêm tiêu đề nếu cần
+                doc.text('Cinemas Data', 14, 15);
+            }
+        });
+
+        // Tải file PDF
+        if (doc) {
+            doc.save('Cinemas_Data.pdf');
+        } else {
+            console.error("Không thể tạo đối tượng jsPDF");
+        }
+    };
+
+    // Hàm để lấy tên cột từ bảng trên giao diện
+    $scope.getTableColumns = function () {
+        var columns = [];
+
+        // Kiểm tra xem phần tử #cinemastable có tồn tại hay không
+        var tableElement = document.getElementById('cinemastable');
+
+        if (tableElement) {
+            // Lấy tên cột từ bảng trên giao diện
+            var headerCells = tableElement.querySelectorAll('thead th');
+            headerCells.forEach(function (th) {
+                columns.push({ title: th.textContent, dataKey: th.textContent });
+            });
+        } else {
+            console.error("Không tìm thấy phần tử #cinemastable");
+        }
+
+        return columns;
+    };
+    //Export file data table to pdf - end
     //==========================END EXPORT FILE=====================
 
+
+    $scope.avt = {};
+    $scope.loadInfoCustomer = function () {
+        var url = `${host_customer}/customer/edit`
+        $http.get(url)
+            .then(function (response) {
+                // Gán dữ liệu người dùng vào $scope.form
+                $scope.avt = response.data;
+            })
+            .catch(function (error) {
+                console.error('Error fetching user info:', error);
+            });
+    };
+
+
+    $scope.loadInfoCustomer();
     $scope.loadAllCinemas();
 });

@@ -16,7 +16,7 @@ app.controller("controller", function ($scope, $http, $filter) {
         })
     }
 
-    // =========================SEARCH BY USER================================
+    // =========================TÌM KIẾM PHIM CHO NGƯỜI DÙNG================================
     $scope.searchQuery = '';
     $scope.searchResults = [];
 
@@ -58,7 +58,7 @@ app.controller("controller", function ($scope, $http, $filter) {
         // console.log("searchResults (after removing duplicates)", $scope.searchResults);
     };
 
-    // =========================END SEARCH BY USER================================
+    // =========================END TÌM KIẾM PHIM CHO NGƯỜI DÙNG================================
 
     $scope.userId = [];
     var userIdLogin = '';;

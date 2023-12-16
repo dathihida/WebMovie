@@ -100,9 +100,11 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <!--                     <div class="image">
-                        <img src="" class="img-circle elevation-2" alt="User Image">
-                    </div> -->
+                    <div class="image">
+                        <img ng-src="https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{avt.avatar}}.jpg"
+                            ng-if="avt.avatar" alt="Avatar" class="img-circle elevation-2" style="height: 2.1rem;">
+                        <img ng-src="/images/no-avatar.png" ng-if="!avt.avatar" alt="No Avatar" class="img-circle elevation-2">
+                    </div>
                     <div class="info" id="user">
                         <a href="" id="name_user" th:text="${#authentication.name}"></a>
                     </div>
@@ -284,7 +286,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    
+
                                     <div class="radio-button-container">
                                         <h5>Status:</h5>
                                         <div class="radio-button">

@@ -4,6 +4,7 @@ let host_room = "http://localhost:8080/api/room";
 let host_cinemas = "http://localhost:8080/api/cinema";
 let host_booking = "http://localhost:8080/api/booking/update";
 let host_comment = "http://localhost:8080/api/comment";
+
 const app = angular.module("app", []);
 app.controller("controller", function ($scope, $http, $timeout, $interval, $filter) {
     $scope.form = {};
@@ -12,6 +13,8 @@ app.controller("controller", function ($scope, $http, $timeout, $interval, $filt
     $scope.movies = [];
     $scope.rooms = [];
     $scope.cinemas = [];
+
+
 
 
     // Hiển thị số bình luận
@@ -170,7 +173,7 @@ app.controller("controller", function ($scope, $http, $timeout, $interval, $filt
             // Nếu không có dữ liệu, hiển thị thông báo
             $scope.noDataMessage = "Đã hết thời gian lên phim";
         }
-        else if(minutesDiff === 15 || minutesDiff < 15){
+        else if (minutesDiff === 15 || minutesDiff < 15) {
             $scope.noDataMessage = "Đã sắp đến giờ chiếu phim nên khóa đặt ghế";
             $scope.trangthai = false;
         }
@@ -301,8 +304,9 @@ app.controller("controller", function ($scope, $http, $timeout, $interval, $filt
         var url = `${host_comment}/${idMovie}`;
         $http.get(url).then(resp => {
             $scope.listComments = resp.data;
-
+            $scope.form = resp.data;
             console.log("listComments", $scope.listComments)
+            console.log("form", $scope.form)
         })
     }
 
@@ -486,6 +490,7 @@ app.controller("controller", function ($scope, $http, $timeout, $interval, $filt
     };
 
     // =========================END SEARCH BY USER================================
+
 
 
 

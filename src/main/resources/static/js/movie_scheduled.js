@@ -2,6 +2,7 @@ let host = "http://localhost:8080/api/movie_scheduled";
 let host_movie = "http://localhost:8080/api/movie";
 let host_room = "http://localhost:8080/api/room";
 let host_cinemas = "http://localhost:8080/api/cinema";
+let host_customer = "http://localhost:8080/api";
 const app = angular.module("app", []);
 app.controller("controller", function ($scope, $http) {
     $scope.form = {};
@@ -404,6 +405,22 @@ app.controller("controller", function ($scope, $http) {
 	//Export file data table to pdf - end
     //==========================END EXPORT FILE=====================
 
+
+    $scope.avt = {};
+    $scope.loadInfoCustomer = function () {
+      var url = `${host_customer}/customer/edit`
+      $http.get(url)
+        .then(function (response) {
+          // Gán dữ liệu người dùng vào $scope.form
+          $scope.avt = response.data;
+        })
+        .catch(function (error) {
+          console.error('Error fetching user info:', error);
+        });
+    };
+  
+  
+    $scope.loadInfoCustomer();
     $scope.loadAllMovie_Scheduleds();
     $scope.loadAllMovies();
     $scope.loadAllCinemas();

@@ -62,8 +62,12 @@ app.controller("profileController", function ($scope, $http) {
 
         let isCheck = true;
 
+
         if (fullnameValue == '') {
             setError(fullnameEle, 'This data must not be blank');
+            isCheck = false;
+        } else if (!isFullname(fullnameValue)) {
+            setError(fullnameEle, '*With at least 2 words');
             isCheck = false;
         } else {
             setSuccess(fullnameEle);
@@ -109,6 +113,12 @@ app.controller("profileController", function ($scope, $http) {
         parentEle.querySelector('small').innerText = message;
     }
 
+    function isFullname(fullname) {
+        // Kiểm tra xem fullname có ít nhất 2 chuỗi ký tự không
+        return /^(\D+\s){1}\D+$/.test(fullname);
+    }
+
+
     function isEmail(email) {
         return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
             email
@@ -132,6 +142,7 @@ app.controller("profileController", function ($scope, $http) {
 
     // =====================END VALIDATION==============================
 
+    $scope.showSuccessMessage = false;
     $scope.updateCustomer = function () {
         var customer = angular.copy($scope.form);
         var url = `${host}/user/v1/${$scope.form.id}`;
@@ -139,6 +150,7 @@ app.controller("profileController", function ($scope, $http) {
             var index = $scope.customers.findIndex(customer => customer.id == $scope.form.id);
             $scope.customers[index] = resp.data;
             console.log("UpdateCustomer", resp);
+            $scope.showSuccessMessage = true;
         }).catch(error => {
             console.log("Error", error);
         })

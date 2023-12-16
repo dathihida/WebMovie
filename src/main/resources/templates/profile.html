@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"> </script>
-    <script nomodule src="https://unpkg .com/ionicons@5.5.2/dist/ionicons/ionicons.js"> </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css'>
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
@@ -22,7 +22,7 @@
     <link rel="stylesheet" th:href="@{|/css/footer.css|}">
     <link rel="stylesheet" th:href="@{|/css/profile.css|}">
 
-    <title>Quản lý tài khoản | MovieTime</title>
+    <title>My Account | MovieTime</title>
 
 </head>
 
@@ -39,9 +39,11 @@
             <div class="container">
                 <div class="name_header d-flex flex-column align-items-center">
                     <div class="avatar">
-                        <!-- <img ng-src="/images/{{form.avatar}}" alt="Avatar"> -->
-                        <img ng-src="https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{form.avatar}}.jpg">
+                        <img ng-src="https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{form.avatar}}.jpg"
+                            ng-if="form.avatar" alt="Avatar">
+                        <img ng-src="/images/no-avatar.png" ng-if="!form.avatar" alt="No Avatar">
                     </div>
+
                     <div class="name-user">
                         <h3 sec:authentication="name">Username</h3>
                     </div>
@@ -133,7 +135,7 @@
                                     <!-- <input ng-model="form.avatar" class="form-control" type="file" id="formFile"
                                         onchange="angular.element(this).scope().imageChanged(this.files)"> -->
                                     <input type="file" onchange="angular.element(this).scope().uploadImage(this.files)"
-                                        ng-model="form.avatar" id="formFile">
+                                        ng-model="form.avatar" id="formFile" class="form-control">
                                     <small>Error message</small>
                                     <label for="user_file" class="custom-file-label"></label>
                                 </div>
@@ -143,6 +145,12 @@
                         </div>
                     </div>
 
+                    <div class="Editproile_sucssec" ng-show="showSuccessMessage" role="alert">
+                        <ion-icon name="checkmark-circle-outline"></ion-icon>&nbsp;
+                        <small>
+                            Update successful!
+                        </small>
+                    </div>
 
                     <div class="form-group btn-update mb-0">
                         <button type="submit" id="btn2" ng-click="checkAndupdateCustomer()" class="btn btn-dark">Cập
