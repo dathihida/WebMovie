@@ -1,7 +1,8 @@
 let host = "http://localhost:8080/add/userNoExist";
 let movie_scheduled = "http://localhost:8080/api/movie_scheduled";
+let host_customer = "http://localhost:8080/api";
 const app = angular.module("app", []);
-app.controller("controller", function ($scope, $http, $filter) {
+app.controller("controller", function ($scope, $http, $filter, $timeout) {
     $scope.form = {};
     $scope.customers = [];
 
@@ -9,7 +10,16 @@ app.controller("controller", function ($scope, $http, $filter) {
         $scope.form = {};
     }
 
-
+    $scope.loadAllCustomers = function () {
+        var url = `${host_customer}/user`;
+        $http.get(url).then(resp => {
+            $scope.customers = resp.data;
+            console.log("AllCustomers", resp);
+        }).catch(error => {
+            console.log("Error", error);
+        })
+    }
+    $scope.showSuccessMessage = false;
     $scope.createCustomer = function () {
         var customer = angular.copy($scope.form);
         var url = `${host}`;
@@ -18,7 +28,14 @@ app.controller("controller", function ($scope, $http, $filter) {
             $scope.reset();
             console.log("CustomerNew", resp);
 
-            window.location.href = `http://localhost:8080/signin`;
+            $scope.showSuccessMessage = true;
+            $timeout(function () {
+                $scope.showSuccessMessage = false;
+                window.location.href = `http://localhost:8080/signin`;
+            }, 5000);
+            // alert("Đăng ký thành công");
+
+
         }).catch(error => {
 
             console.log(error);
@@ -32,6 +49,7 @@ app.controller("controller", function ($scope, $http, $filter) {
         var isValid = checkValidateSignup();
 
         if (isValid) {
+
             // Nếu validation thành công, gọi createMovie()
             $scope.createCustomer();
         }
@@ -101,12 +119,6 @@ app.controller("controller", function ($scope, $http, $filter) {
 
         let isCheck = true;
 
-        // if (fullnameValue == '') {
-        //     setError(fullnameEle, '***');
-        //     isCheck = false;
-        // } else {
-        //     setSuccess(fullnameEle);
-        // }
 
         if (fullnameValue == '') {
             setError(fullnameEle, '***');
@@ -124,6 +136,9 @@ app.controller("controller", function ($scope, $http, $filter) {
         } else if (!isEmail(emailValue)) {
             setError(emailEle, '*xyz@gmail.com');
             isCheck = false;
+        } else if (isEmailExists(emailValue)) {
+            setError(emailEle, '*The email has been used!');
+            isCheck = false;
         } else {
             setSuccess(emailEle);
         }
@@ -137,13 +152,6 @@ app.controller("controller", function ($scope, $http, $filter) {
         } else {
             setSuccess(numberphoneEle);
         }
-
-        // if (password_signupValue == '') {
-        //     setError(password_signupEle, '***');
-        //     isCheck = false;
-        // } else {
-        //     setSuccess(password_signupEle);
-        // }
 
         if (password_signupValue == '') {
             setError(password_signupEle, '***');
@@ -182,6 +190,11 @@ app.controller("controller", function ($scope, $http, $filter) {
             email
         );
     }
+    function isEmailExists(email) {
+        return $scope.customers.some(function (customer) {
+            return customer.email === email;
+        });
+    };
 
     function isPhone(number) {
         return /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(number);
@@ -194,6 +207,7 @@ app.controller("controller", function ($scope, $http, $filter) {
     // =====================END VALIDATION==============================
 
 
+    $scope.showUploadSuccessMessage = false;
     //upload hinh anh
     $scope.imageChanged = function (files) {
         var data = new FormData();
@@ -203,6 +217,7 @@ app.controller("controller", function ($scope, $http, $filter) {
             headers: { 'Content-Type': undefined }
         }).then(resp => {
             $scope.form.avatar = resp.data.name;
+            $scope.showUploadSuccessMessage = true; // Hiển thị thông báo khi ảnh đã tải lên
         }).catch(error => {
             alert("loi updoad hinh")
             console.log(error)
@@ -269,5 +284,7 @@ app.controller("controller", function ($scope, $http, $filter) {
 
     // =========================END SEARCH BY USER================================
 
+
+    $scope.loadAllCustomers();
     $scope.loadAllMovie_Scheduleds();
 });
