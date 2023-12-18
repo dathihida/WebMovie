@@ -1,6 +1,7 @@
 let host = "http://localhost:8080/api/movie";
 let movie_scheduled = "http://localhost:8080/api/movie_scheduled";
-let booking = "http://localhost:8080/api/booking"
+let booking = "http://localhost:8080/api/booking";
+let host_customer = "http://localhost:8080/api";
 const app = angular.module("app", []);
 app.controller("controller", function ($scope, $http, $filter) {
 	$scope.form = {};
@@ -8,6 +9,9 @@ app.controller("controller", function ($scope, $http, $filter) {
 	$scope.movie_scheduleds = [];
 	$scope.columns = [];
 
+	$scope.form = {
+        exist: true 
+    };
 
 	$scope.reset = function () {
 		$scope.form = {};
@@ -151,6 +155,7 @@ app.controller("controller", function ($scope, $http, $filter) {
 	const gerneEle = document.getElementById('gerne');
 	const trailerEle = document.getElementById('trailer');
 	const durationEle = document.getElementById('duration');
+	const ageEle = document.getElementById('age');
 	const dateEle = document.getElementById('date');
 	const imageEle = document.getElementById('formFile');
 
@@ -180,6 +185,7 @@ app.controller("controller", function ($scope, $http, $filter) {
 		let gerneValue = gerneEle.value;
 		let trailerValue = trailerEle.value;
 		let durationValue = durationEle.value;
+		let ageValue = ageEle.value;
 		let dateValue = dateEle.value;
 		let imageValue = imageEle.value;
 
@@ -237,6 +243,13 @@ app.controller("controller", function ($scope, $http, $filter) {
 			setSuccess(durationEle);
 		}
 
+		if (ageValue == '') {
+			setError(ageEle, 'This data must not be blank');
+			isCheck = false;
+		} else {
+			setSuccess(ageEle);
+		}
+
 		if (dateValue == '') {
 			setError(dateEle, 'This data must not be blank');
 			isCheck = false;
@@ -263,6 +276,7 @@ app.controller("controller", function ($scope, $http, $filter) {
 		let gerneValue = gerneEle.value;
 		let trailerValue = trailerEle.value;
 		let durationValue = durationEle.value;
+		let ageValue = ageEle.value;
 		let dateValue = dateEle.value;
 
 		let isCheck = true;
@@ -317,6 +331,13 @@ app.controller("controller", function ($scope, $http, $filter) {
 			isCheck = false;
 		} else {
 			setSuccess(durationEle);
+		}
+
+		if (ageValue === '') {
+			setError(ageEle, 'You have not selected Cinema information');
+			isCheck = false;
+		} else {
+			setSuccess(ageEle);
 		}
 
 		if (dateValue == '') {
@@ -492,12 +513,54 @@ app.controller("controller", function ($scope, $http, $filter) {
 	}
 
 
+	// =========================SEARCH BY USER================================
+	$scope.searchQuery = '';
+	$scope.searchResults = [];
+
+	// Lọc danh sách movie_scheduleds theo name và ngày hiện tại trở đi
+	$scope.searchMovie = function () {
+		var currentDate = new Date();
+
+		// Kiểm tra nếu chuỗi tìm kiếm trống hoặc có ít hơn 3 ký tự
+		if ($scope.searchQuery.trim().length < 1) {
+			$scope.searchResults = [];
+			$scope.searchMessage = "";
+		} else {
+			// Lọc danh sách movie_scheduleds theo name và ngày hiện tại trở đi
+			$scope.searchResults = $filter('filter')($scope.movie_scheduleds, function (movie) {
+
+				var movieDate = new Date(movie.date + ' ' + movie.time_START);
+				return movie.id_MOVIE.name.toLowerCase().includes($scope.searchQuery.toLowerCase()) && movieDate >= currentDate;
+			});
+			// console.log("searchResults", $scope.searchResults);
+
+			// xoa id_Movie trung
+			var uniqueMovies = {};
+			$scope.searchResults = $scope.searchResults.filter(function (movie) {
+				if (!uniqueMovies[movie.id_MOVIE.id]) {
+					uniqueMovies[movie.id_MOVIE.id] = true;
+					return true;
+				}
+				return false;
+			});
+
+			// Kiểm tra và đặt thông báo
+			if ($scope.searchResults.length > 0) {
+				$scope.searchMessage = $scope.searchQuery;
+			} else {
+				$scope.searchMessage = "Không có kết quả tìm kiếm cho: " + $scope.searchQuery;
+			}
+		};
+		// console.log("searchResults (after removing duplicates)", $scope.searchResults);
+	};
+
+	// =========================END SEARCH BY USER================================
+
 
 	// =========================NOW SHOWING +  SHOWTIME==============================
 
 	// Lọc số lượng hiện thị phim
 	$scope.moviesLimit = 10;
-
 
 	// =========================END  NOW SHOWING +  SHOWTIME==============================
 
@@ -537,25 +600,25 @@ app.controller("controller", function ($scope, $http, $filter) {
 	$scope.exportToPDF = function () {
 		// Lấy tên cột từ bảng trên giao diện
 		$scope.columns = $scope.getTableColumns();
-	
+
 		// Tạo đối tượng jsPDF
 		var doc = new window.jspdf.jsPDF();
-	
+
 		// Lấy dữ liệu từ bảng
 		var data = [];
 		var trElements = document.querySelectorAll('#movietable tbody tr');
-	
+
 		trElements.forEach(function (tr) {
 			var row = [];
 			var tdElements = tr.querySelectorAll('td');
-	
+
 			tdElements.forEach(function (td) {
 				row.push(td.innerText);
 			});
-	
+
 			data.push(row);
 		});
-	
+
 		// Tạo bảng trong file PDF với định dạng tùy chỉnh và sử dụng $scope.columns
 		doc.autoTable({
 			head: [$scope.columns.map(column => column.title)],
@@ -573,7 +636,7 @@ app.controller("controller", function ($scope, $http, $filter) {
 				doc.text('Movie Data', 14, 15);
 			}
 		});
-	
+
 		// Tải file PDF
 		if (doc) {
 			doc.save('Movie_data.pdf');
@@ -603,6 +666,43 @@ app.controller("controller", function ($scope, $http, $filter) {
 	};
 	//Export file data table to pdf - end
 
+
+	// ===============AVATAR PAGE ADMIN=======================
+	$scope.avt = {};
+	$scope.loadInfoCustomer = function () {
+		var url = `${host_customer}/customer/edit`
+		$http.get(url)
+			.then(function (response) {
+				// Gán dữ liệu người dùng vào $scope.form
+				$scope.avt = response.data;
+			})
+			.catch(function (error) {
+				console.error('Error fetching user info:', error);
+			});
+	};
+	// ===============AVATAR PAGE ADMIN=======================
+
+
+	// ==============TOP PHIM==================
+
+
+	// $scope.loadAllBooking = function () {
+	// 	var url = `${booking}/all`;
+	// 	$http.get(url).then(resp => {
+	// 		$scope.bookings = resp.data;
+	// 		console.log("bookingsAll", resp);
+	// 	}).catch(error => {
+	// 		console.log("Error", error);
+	// 	})
+	// }
+
+
+
+	// ==============END TOP PHIM================
+
+
+	// $scope.loadAllBooking();
+	$scope.loadInfoCustomer();
 	$scope.updateStatus();
 	$scope.loadAllMovies();
 	$scope.loadAllMovie_Scheduleds();

@@ -1,8 +1,13 @@
 let host = "http://localhost:8080/api/voucher";
+let host_customer = "http://localhost:8080/api";
 const app = angular.module("app", []);
 app.controller("controller", function ($scope, $http, $filter) {
     $scope.form = {};
     $scope.vouchers = [];
+
+    $scope.form = {
+        exist: true 
+    };
 
     $scope.reset = function () {
         $scope.form = {};
@@ -351,6 +356,22 @@ app.controller("controller", function ($scope, $http, $filter) {
 	//Export file data table to pdf - end
     //==========================END EXPORT FILE=====================
 
+
+    $scope.avt = {};
+    $scope.loadInfoCustomer = function () {
+      var url = `${host_customer}/customer/edit`
+      $http.get(url)
+        .then(function (response) {
+          // Gán dữ liệu người dùng vào $scope.form
+          $scope.avt = response.data;
+        })
+        .catch(function (error) {
+          console.error('Error fetching user info:', error);
+        });
+    };
+  
+  
+    $scope.loadInfoCustomer();
     $scope.loadAllVoucher();
     $scope.updateStatusVoucher();
 })

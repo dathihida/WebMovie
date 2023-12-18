@@ -9,6 +9,9 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+.hea-title{
+    background-color: rgb(18, 38, 63);
+}
 
 .checkout .promotion {
     padding: 12px 0 12px 0;
@@ -78,17 +81,45 @@
 }
 
 .checkout .dieukhoan input {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
 }
 /* .checkout .dieukhoan #checkbox{
     box-shadow: 0 0 10px rgba(237, 38, 71, 0.965);
 } */
 .checkout .dieukhoan #checkbox:hover{
-    /* box-shadow: 0 0 10px rgba(237, 38, 71, 0.965); */
     border: 1px solid rgb(237, 38, 71);
     cursor: pointer;
 }
+
+.checkout .dieukhoan #checkbox:focus{
+    box-shadow: 0 0 10px rgba(237, 38, 71, 0.965);
+    border: 1px solid rgb(237, 38, 71);
+    cursor: pointer;
+}
+
+.checkout .dieukhoan #checkbox:checked{
+    box-shadow: 0 0 10px rgba(237, 38, 71, 0);
+    border: 1px solid rgb(237, 38, 71);
+    cursor: pointer;
+}
+
+.checkout .dieukhoan a:hover {
+    color: rgb(237, 38, 71);
+    transition: 0.2s;
+}
+
+
+.warning-check small{
+    color: rgb(215, 160, 11);
+}
+
+.warning-check ion-icon{
+    color: rgb(215, 160, 11);
+    font-size: 20px;
+}
+
+
 /* ---------------DETAIL_PAY--------------- */
 
 .checkout .detail-pay {

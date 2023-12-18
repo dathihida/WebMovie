@@ -5,6 +5,11 @@ app.controller("controller", function ($scope, $http) {
     $scope.customers = [];
 
 
+    $scope.form = {
+        exist: true
+    };
+
+
     $scope.reset = function () {
         $scope.form = {};
     }
@@ -368,5 +373,21 @@ app.controller("controller", function ($scope, $http) {
 	//Export file data table to pdf - end
     //==========================END EXPORT FILE=====================
 
+
+    $scope.avt = {};
+    $scope.loadInfoCustomer = function () {
+      var url = `${host}/customer/edit`
+      $http.get(url)
+        .then(function (response) {
+          // Gán dữ liệu người dùng vào $scope.form
+          $scope.avt = response.data;
+        })
+        .catch(function (error) {
+          console.error('Error fetching user info:', error);
+        });
+    };
+  
+  
+    $scope.loadInfoCustomer();
     $scope.loadAllCustomers();
 });

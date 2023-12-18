@@ -54,7 +54,7 @@
 					<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 				</li>
 				<li class="nav-item d-none d-sm-inline-block">
-					<a th:href="@{/home/admin}" class="nav-link">Home</a>
+					<a th:href="@{/home}" class="nav-link">Home</a>
 				</li>
 				<!-- <li class="nav-item d-none d-sm-inline-block">
 					<a href="#" class="nav-link">Services</a>
@@ -112,11 +112,13 @@
 			<div class="sidebar">
 				<!-- Sidebar user panel (optional) -->
 				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<!--                     <div class="image">
-                        <img src="" class="img-circle elevation-2" alt="User Image">
-                    </div> -->
+                    <div class="image">
+                        <img ng-src="https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{avt.avatar}}.jpg"
+                            ng-if="avt.avatar" alt="Avatar" class="img-circle elevation-2" style="height: 2.1rem;">
+                        <img ng-src="/images/no-avatar.png" ng-if="!avt.avatar" alt="No Avatar" class="img-circle elevation-2">
+                    </div>
 					<div class="info">
-						<a href="#" id="name_user" class="d-block" th:text="${#authentication.name}"></a>
+						<a th:href="@{/user/profile}" id="name_user" class="d-block" th:text="${#authentication.name}"></a>
 					</div>
 				</div>
 
@@ -180,6 +182,12 @@
 										<p>Manage room</p>
 									</a>
 								</li>
+								<li class="nav-item">
+                                    <a th:href="@{/home/seat}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Manage seat</p>
+                                    </a>
+                                </li>
 							</ul>
 						</li>
 						<li class="nav-item">
@@ -362,9 +370,24 @@
 								</div>
 								<!-- /.card-header -->
 								<div class="card-body">
-									<button ng-click="exportToExcel()">Export to Excel</button>
-                                    <button ng-click="exportToPDF()">Export to PDF</button>
-                                    <input type="text" ng-model="searchText" placeholder="Search...">
+                                    <div
+                                        class="hd_tabledata d-flex justify-content-between align-items-center flex-wrap">
+                                        <div class="export">
+                                            <button class="btn-exl" ng-click="exportToExcel()">Export to Excel</button>
+                                            <button class="btn-pdf" ng-click="exportToPDF()">Export to PDF</button>
+                                        </div>
+                                        <div class="group">
+                                            <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                                                <g>
+                                                    <path
+                                                        d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                            <input type="text" id="input" ng-model="searchText"
+                                                placeholder="Search...">
+                                        </div>
+                                    </div>
 									<table id="roomtable" class="table table-hover">
 										<thead>
 											<tr>
@@ -381,7 +404,7 @@
 												<td>{{ci.id_CINEMAS.name}}</td>
 												<td>
 													<div
-														class="d-flex gap-3 justify-content-center align-items-center ">
+														class="d-flex justify-content-center align-items-center">
 														<button id="btn" class="button1"
 															ng-click="edit(ci.id)">Edit</button>
 														<!-- <button id="btn" class="button2"
@@ -394,7 +417,7 @@
 
 									<!-- Page Start -->
 									<nav aria-label="Page navigation example">
-										<ul class="pagination justify-content-center">
+										<ul class="pagination justify-content-center mt-3">
 											<li class="page-item">
 												<a class="page-link" ng-click="pager.first()" tabindex="-1">First</a>
 											</li>

@@ -31,7 +31,7 @@ public class VoucherServiceImpl implements VoucherService {
 	@Override
 	public Voucher updateVoucher(Voucher voucher, Integer id) {
 		// TODO Auto-generated method stub
-		voucher.setSTATUS(true);
+//		voucher.setSTATUS(true);
 		return voucherRepository.save(voucher);
 	}
 

@@ -39,6 +39,7 @@ public class Movie {
 	private Boolean EXIST;
 
 	private String GERNE;
+	private String AGE;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_MOVIE")

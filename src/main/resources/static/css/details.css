@@ -477,9 +477,16 @@ body {
     margin-bottom: 10px;
 }
 
-.avatar {
+.cmtcha .avatar img{
     width: 40px;
     height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid white;
+}
+.cmtcon .avatar img{
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     margin-right: 10px;
 }

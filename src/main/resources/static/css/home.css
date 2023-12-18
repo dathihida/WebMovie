@@ -44,7 +44,6 @@
 .card img {
   height: 22em;
   object-fit: fill;
-  height: auto;
   min-height: 220px;
   border-radius: 5px;
 }

@@ -31,7 +31,11 @@
 					<div ng-if="!com.id_COMMENT" class="cmtcha">
 						<!-- Thông tin của bình luận -->
 						<div class="comment-info">
-							<img th:src="@{|/images/no-avatar.png|}" alt="Avatar" class="avatar" />
+							<div class="avatar">
+								<img ng-src="https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{com.id_CUSTOMER.avatar}}.jpg"
+									ng-if="com.id_CUSTOMER.avatar" alt="Avatar">
+								<img ng-src="/images/no-avatar.png" ng-if="!com.id_CUSTOMER.avatar" alt="No Avatar">
+							</div>
 							<div class="comment-details">
 								<h6 class="comment-author">{{com.id_CUSTOMER.fullname}}</h6>
 								<small class="comment-time">{{com.time_COMMENT}}</small>
@@ -72,7 +76,11 @@
 
 					<div ng-if="com.id_COMMENT" class="cmtcon">
 						<div class="comment-info">
-							<img th:src="@{|/images/no-avatar.png|}" alt="Avatar" class="avatar" />
+							<div class="avatar">
+								<img ng-src="https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{com.id_CUSTOMER.avatar}}.jpg"
+									ng-if="com.id_CUSTOMER.avatar" alt="Avatar">
+								<img ng-src="/images/no-avatar.png" ng-if="!com.id_CUSTOMER.avatar" alt="No Avatar">
+							</div>
 							<div class="comment-details">
 								<h6 class="comment-author">{{com.id_CUSTOMER.fullname}}</h6>
 								<small class="comment-time">{{com.time_COMMENT}}</small>

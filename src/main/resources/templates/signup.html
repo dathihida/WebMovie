@@ -50,8 +50,10 @@
 						<a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
 						<a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
 						<a href="#" class="icon"><i class="fa-brands fa-x-twitter"></i></a> -->
+						<a th:href="@{/oauth2/authorization/google}" class="icon"><i
+								class="fa-brands fa-google-plus-g"></i></a>
 					</div>
-					<span>Use your email password</span>
+					<span>Or use your email password</span>
 					<div class="form-group">
 						<small>Error message</small>
 						<input type="email" id="username" name="username" placeholder="Email">
@@ -72,8 +74,10 @@
 						<a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
 						<a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
 						<a href="#" class="icon"><i class="fa-brands fa-x-twitter"></i></a>  -->
+						<a th:href="@{/oauth2/authorization/google}" class="icon"><i
+								class="fa-brands fa-google-plus-g"></i></a>
 					</div>
-					<span>Use your email for registeration</span>
+					<span>Or use your email for registeration</span>
 					<div class="form-group">
 						<small>Error message</small>
 						<input type="text" ng-model="form.fullname" id="name_signup" placeholder="Name">
@@ -91,11 +95,15 @@
 						<small>Error message</small>
 						<input type="password" ng-model="form.password" id="password_signup" placeholder="Password">
 					</div>
-					<div class="form-group">
-						<small>Error message</small>
+					<div class="form-group d-flex">
+						<label for="formFile" class="custom-file-upload">
+							<i class="fa fa-cloud-upload"></i> Avatar
+						</label>
+						<div ng-show="showUploadSuccessMessage" role="alert" class="d-flex align-items-center">
+							<ion-icon name="checkmark-outline"></ion-icon>
+						</div>
 						<input ng-model="form.avatar" class="form-control" type="file" id="formFile"
-							onchange="angular.element(this).scope().imageChanged(this.files)">
-						<small>Error message</small>
+							onchange="angular.element(this).scope().imageChanged(this.files)" hidden>
 					</div>
 					<input ng-model="form.id" type="hidden" />
 					<button ng-click="checkAndcreateCustomer()" id="btn2">Sign Up</button>
@@ -117,12 +125,21 @@
 			</div>
 		</div>
 	</div>
+	<div class="Message_signup">
+		<div class="SignUp_sucssec" ng-show="showSuccessMessage" role="alert">
+			<i class="fa-solid fa-user-check fa-2xl" style="color: #00c227;"></i>
+			<small>
+				Registration successful! <br>
+				Please log in after 10 seconds!
+			</small>
+		</div>
+	</div>
 
 	<div th:replace="~{/navbar/_footer}"></div>
+
+
+
 	<script th:src="@{/js/signup.js}"></script>
-
-
-
 	<script th:src="@{/js/layout/main.js}"></script>
 	<script th:src="@{/js/layout/signin_up.js}"></script>
 </body>
