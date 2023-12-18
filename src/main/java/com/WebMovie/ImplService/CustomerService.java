@@ -57,8 +57,13 @@ public class CustomerService implements ICustomerService {
 	@Override
 	public Customer updateCustomer(Customer customer, Integer id) {
 		// TODO Auto-generated method stub
+
+		// customer.setEXIST(true);
+		// customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
+
 		customer.setEXIST(true);
 		customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
+
 		mailService.sendMailUpdateCustomer(customer);
 		return customerRepository.save(customer);
 	}
@@ -99,19 +104,19 @@ public class CustomerService implements ICustomerService {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication != null) {
 			Object principal = authentication.getPrincipal();
-			if(principal instanceof UserInfoDetails) {
+			if (principal instanceof UserInfoDetails) {
 				UserInfoDetails use = (UserInfoDetails) authentication.getPrincipal();
 				Integer idUser = use.getId();
 				return String.valueOf(idUser);
-			}else if (principal instanceof OAuth2User) {
-		        CustomOAuth2User oauth2User = (CustomOAuth2User) principal;
-		        String providerName = oauth2User.getEmail();
-		        Customer customer = customerRepository.getUserByEmail(providerName);
-		        if(customer != null) {
-		        	Integer id = customer.getID();
-		        	return String.valueOf(id);
-		        }
-		    }
+			} else if (principal instanceof OAuth2User) {
+				CustomOAuth2User oauth2User = (CustomOAuth2User) principal;
+				String providerName = oauth2User.getEmail();
+				Customer customer = customerRepository.getUserByEmail(providerName);
+				if (customer != null) {
+					Integer id = customer.getID();
+					return String.valueOf(id);
+				}
+			}
 		}
 		return null;
 	}
@@ -154,23 +159,25 @@ public class CustomerService implements ICustomerService {
 
 	@Override
 	public Customer getDataUserLogin() {
-		//Hàm lấy ra dữ liệu tài khoản đăng nhập của người dùng.
+		// Hàm lấy ra dữ liệu tài khoản đăng nhập của người dùng.
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-	    if (authentication instanceof OAuth2AuthenticationToken) {
-	        // Đăng nhập bằng Google hoặc một dịch vụ OAuth2 khác
-	        String email = getEmailFromOAuth2Authentication((OAuth2AuthenticationToken) authentication);
-	        //return customerService.findByEmail(email);
-	        return customerRepository.findByEMAIL(email).get();
-	    } else {
-	        // Đăng nhập bằng tài khoản thông thường
-	        String email = authentication.getName();
-	        //return customerService.findByEmail(email);
-	        return customerRepository.findByEMAIL(email).get();
-	    }
+		if (authentication instanceof OAuth2AuthenticationToken) {
+			// Đăng nhập bằng Google hoặc một dịch vụ OAuth2 khác
+			String email = getEmailFromOAuth2Authentication((OAuth2AuthenticationToken) authentication);
+			// return customerService.findByEmail(email);
+			return customerRepository.findByEMAIL(email).get();
+		} else {
+			// Đăng nhập bằng tài khoản thông thường
+			String email = authentication.getName();
+			// return customerService.findByEmail(email);
+			return customerRepository.findByEMAIL(email).get();
+		}
 	}
-	//Hàm được sử dụng để lấy ra email khi người dùng sử dụng phương thức đăng nhập bằng google
+
+	// Hàm được sử dụng để lấy ra email khi người dùng sử dụng phương thức đăng nhập
+	// bằng google
 	private String getEmailFromOAuth2Authentication(OAuth2AuthenticationToken oauthToken) {
-	    return oauthToken.getPrincipal().getAttribute("email");
+		return oauthToken.getPrincipal().getAttribute("email");
 	}
 }
