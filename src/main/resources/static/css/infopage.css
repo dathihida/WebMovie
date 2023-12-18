@@ -28,3 +28,47 @@ p {
     border: 0;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.10);
 }
+
+.hh1{
+    width: 130px;
+    height: 130px;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.10);
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+#pay-ss{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    color: rgb(33, 196, 0);
+    font-weight: 600;
+    font-size: 20px;
+}
+#pay-ss ion-icon{
+    font-size: 30px !important;
+    color: rgb(33, 196, 0);
+}
+.hh2{
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.10);
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+#pay-f{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    color: rgb(196, 0, 0);
+    font-weight: 600;
+}
+#pay-f ion-icon{
+    font-size: 30px;
+    color: rgb(196, 0, 0);
+}

@@ -60,13 +60,13 @@
                         </div>
 
                         <div class="dieukhoan mt-4 gap-3 d-flex align-items-center">
-                            <input type="checkbox" id="checkbox" name="" value="false">
+                            <input type="checkbox" id="checkbox" name="" value="false" ng-model="checkboxChecked">
                             <label for="true">
                                 I agree to the <a th:href="@{/home/terms-use}">terms of use</a> and purchase tickets for
                                 people of appropriate age.</label>
                         </div>
 
-                        <div class="warning-check d-flex align-items-center" ng-show="showSuccessMessage">
+                        <div class="warning-check d-flex align-items-center">
                             <ion-icon name="alert-circle-outline"></ion-icon>
                             <small>You need to accept the terms to continue.</small>
                         </div>
@@ -129,9 +129,15 @@
                                     </div>
                                 </div>
                                 <div class="">
-                                    <div ng-show="form.idVoucher">
-                                        <h5>Price after discount: {{ discountedPrice}}.000</h5><em
+                                    <div class="total d-flex justify-content-between" ng-show="form.idVoucher">
+                                        <div>
+                                            <h6>PRICE AFTER DISCOUNT:</h6>
+                                        </div>
+                                        <div>
+                                            <span> {{ discountedPrice}}.000</span><em
                                             class="text-decoration-underline">đ</em>
+                                        </div>
+
                                     </div>
                                     <div ng-repeat="pay in payBooking">
                                         <div
@@ -147,32 +153,44 @@
 
                             </div>
                         </div>
-                        <div class="btn-pay d-flex justify-content-between" ng-repeat="booking in booking">
-                            <a th:href="@{/home}"><button type="submit" class="btn btn-outline-warning">Thoát</button></a>
-                            <button type="submit" ng-click="updateCheckbox()" sec:authorize="hasAnyRole('ADMIN')"
+                        <div class="btn-pay d-flex justify-content-end" ng-repeat="booking in booking"
+                            sec:authorize="hasAnyRole('ADMIN')">
+                            <!-- <a th:href="@{/home}"><button type="submit" class="btn btn-outline-warning">Thoát</button></a> -->
+                            <button type="submit" ng-click="updateCheckbox()"
                                 ng-disabled="booking.status === 'success' || booking.status === 'failed'"
                                 class="btn btn-warning pay" id="thanhtoan">Payment</button>
                         </div>
+
+                        <div class="btn-pay d-flex justify-content-between">
+                            <a th:href="@{/home}"><button type="submit"
+                                class="btn btn-outline-warning">Thoát</button></a>
+
                         <div ng-repeat="booking in booking">
                             <form method="post" action="/pay">
                                 <div class="col-50" hidden>
                                     <label for="price">Total</label>
                                     <input type="text" id="PRICE" name="PRICE" value="{{booking.price}}">
                                     <label for="currency">Currency</label>
-                                    <input type="text" id="CURRENCY" name="CURRENCY" placeholder="Enter Currency" value="USD">
+                                    <input type="text" id="CURRENCY" name="CURRENCY" placeholder="Enter Currency"
+                                        value="USD">
                                     <label for="method">Payment Method</label>
-                                    <input type="text" id="METHOD" name="METHOD" placeholder="Payment Method" value="PAYPAL">
+                                    <input type="text" id="METHOD" name="METHOD" placeholder="Payment Method"
+                                        value="PAYPAL">
                                     <label for="intent">Intent</label>
                                     <input type="text" id="INTENT" name="INTENT" value="sale">
                                     <label for="description">Payment Description</label>
-                                    <input type="text" id="DESCRIPTION" name="DESCRIPTION" placeholder="Payment Description" value="Thanh toan qua paypal">
+                                    <input type="text" id="DESCRIPTION" name="DESCRIPTION"
+                                        placeholder="Payment Description" value="Thanh toan qua paypal">
                                 </div>
                                 <!-- <input type="submit" value="Continue to checkout" class="btn"> -->
-                                <button  ng-disabled="booking.status === 'success' || booking.status === 'failed'" 
-                                    ng-click="updateCheckboxPaypal()">Thanh toan qua paypal</button>
+                               
+                                    <button ng-disabled="!checkboxChecked || booking.status === 'success' || booking.status === 'failed'"
+                                        ng-click="updateCheckboxPaypal()" class="btn btn-warning pay"
+                                        id="thanhtoan">PayPal payment</button>
+                               
                             </form>
                         </div>
-
+                    </div>
                     </div>
                 </div>
             </div>

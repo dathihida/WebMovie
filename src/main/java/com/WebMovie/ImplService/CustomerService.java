@@ -57,13 +57,13 @@ public class CustomerService implements ICustomerService {
 	@Override
 	public Customer updateCustomer(Customer customer, Integer id) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
+
 		// customer.setEXIST(true);
 		// customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
-=======
+
 		customer.setEXIST(true);
 		customer.setPASSWORD(bCryptPasswordEncoder.encode(customer.getPASSWORD()));
->>>>>>> 7adbbd61998df2832e682a40f18f85e59ade9742
+
 		mailService.sendMailUpdateCustomer(customer);
 		return customerRepository.save(customer);
 	}
