@@ -526,7 +526,6 @@ app.controller("controller", function ($scope, $http, $filter) {
 			$scope.searchResults = [];
 			$scope.searchMessage = "";
 		} else {
-
 			// Lọc danh sách movie_scheduleds theo name và ngày hiện tại trở đi
 			$scope.searchResults = $filter('filter')($scope.movie_scheduleds, function (movie) {
 
