@@ -9,6 +9,9 @@ app.controller("controller", function ($scope, $http, $filter) {
 	$scope.movie_scheduleds = [];
 	$scope.columns = [];
 
+	$scope.form = {
+        exist: true 
+    };
 
 	$scope.reset = function () {
 		$scope.form = {};
@@ -152,6 +155,7 @@ app.controller("controller", function ($scope, $http, $filter) {
 	const gerneEle = document.getElementById('gerne');
 	const trailerEle = document.getElementById('trailer');
 	const durationEle = document.getElementById('duration');
+	const ageEle = document.getElementById('age');
 	const dateEle = document.getElementById('date');
 	const imageEle = document.getElementById('formFile');
 
@@ -181,6 +185,7 @@ app.controller("controller", function ($scope, $http, $filter) {
 		let gerneValue = gerneEle.value;
 		let trailerValue = trailerEle.value;
 		let durationValue = durationEle.value;
+		let ageValue = ageEle.value;
 		let dateValue = dateEle.value;
 		let imageValue = imageEle.value;
 
@@ -238,6 +243,13 @@ app.controller("controller", function ($scope, $http, $filter) {
 			setSuccess(durationEle);
 		}
 
+		if (ageValue == '') {
+			setError(ageEle, 'This data must not be blank');
+			isCheck = false;
+		} else {
+			setSuccess(ageEle);
+		}
+
 		if (dateValue == '') {
 			setError(dateEle, 'This data must not be blank');
 			isCheck = false;
@@ -264,6 +276,7 @@ app.controller("controller", function ($scope, $http, $filter) {
 		let gerneValue = gerneEle.value;
 		let trailerValue = trailerEle.value;
 		let durationValue = durationEle.value;
+		let ageValue = ageEle.value;
 		let dateValue = dateEle.value;
 
 		let isCheck = true;
@@ -318,6 +331,13 @@ app.controller("controller", function ($scope, $http, $filter) {
 			isCheck = false;
 		} else {
 			setSuccess(durationEle);
+		}
+
+		if (ageValue === '') {
+			setError(ageEle, 'You have not selected Cinema information');
+			isCheck = false;
+		} else {
+			setSuccess(ageEle);
 		}
 
 		if (dateValue == '') {
@@ -506,12 +526,10 @@ app.controller("controller", function ($scope, $http, $filter) {
 			$scope.searchResults = [];
 			$scope.searchMessage = "";
 		} else {
-			// Lọc danh sách movie_scheduleds theo name và ngày hiện tại trở đi
-			$scope.searchResults = $filter('filter')($scope.movie_scheduleds, function (movie) {
-
-				var movieDate = new Date(movie.date + ' ' + movie.time_START);
-				return movie.id_MOVIE.name.toLowerCase().includes($scope.searchQuery.toLowerCase()) && movieDate >= currentDate;
-			});
+        // Lọc danh sách movie_scheduleds theo name và status=true
+        $scope.searchResults = $filter('filter')($scope.movie_scheduleds, function (movie) {
+            return movie.id_MOVIE.name.toLowerCase().includes($scope.searchQuery.toLowerCase()) && movie.status;
+        });
 			// console.log("searchResults", $scope.searchResults);
 
 			// xoa id_Movie trung
@@ -647,7 +665,7 @@ app.controller("controller", function ($scope, $http, $filter) {
 	//Export file data table to pdf - end
 
 
-
+	// ===============AVATAR PAGE ADMIN=======================
 	$scope.avt = {};
 	$scope.loadInfoCustomer = function () {
 		var url = `${host_customer}/customer/edit`
@@ -660,8 +678,28 @@ app.controller("controller", function ($scope, $http, $filter) {
 				console.error('Error fetching user info:', error);
 			});
 	};
+	// ===============AVATAR PAGE ADMIN=======================
 
 
+	// ==============TOP PHIM==================
+
+
+	// $scope.loadAllBooking = function () {
+	// 	var url = `${booking}/all`;
+	// 	$http.get(url).then(resp => {
+	// 		$scope.bookings = resp.data;
+	// 		console.log("bookingsAll", resp);
+	// 	}).catch(error => {
+	// 		console.log("Error", error);
+	// 	})
+	// }
+
+
+
+	// ==============END TOP PHIM================
+
+
+	// $scope.loadAllBooking();
 	$scope.loadInfoCustomer();
 	$scope.updateStatus();
 	$scope.loadAllMovies();

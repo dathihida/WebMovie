@@ -166,6 +166,57 @@
   visibility: visible;
 }
 
+.content #lbl{
+  color: #767676 !important;
+}
+
+
+/* radio */
+
+#radio {
+  display: flex;
+  align-items: center;
+}
+
+#radio input {
+  appearance: none;
+  width: 1.5em;
+  height: 1.5em;
+  background-color: #d5d5d5;
+  box-shadow: inset 2px 5px 10px rgb(112, 112, 112);
+  border-radius: 50%;
+  transition: .3s ease-in-out;
+}
+
+#radio input:hover {
+  scale: 1.2;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+#radio .circle {
+  position: relative;
+  top: 0.01em;
+  left: -1.2em;
+  width: 0.9em;
+  height: 0.9em;
+  background-color: rgb(1, 188, 10);
+  scale: 0;
+  border-radius: 10px;
+  transition: .3s ease-in-out;
+}
+
+#radio input:checked {
+  box-shadow: none;
+  border: 1px solid rgb(0, 154, 8);
+}
+
+#radio input:checked + .circle {
+  transform: rotate(360deg);
+  scale: 1;
+}
+
+
 
 
 /* ============Export file============= */

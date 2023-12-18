@@ -56,7 +56,9 @@ p {
     background-color: rgb(55, 69, 86);
 }
 
-
+.sidebar .nav-sidebar .nav-treeview .active{
+    background-color: #007bff54;
+  }
 
 /* ====================Radio ================ */
 .radio-button-container {

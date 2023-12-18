@@ -19,6 +19,9 @@ nav {
     padding-top: 0;
 }
 
+.banner{
+    background-color: #33333300;
+}
 
 @media (max-width: 991px) {
     .sidebar {

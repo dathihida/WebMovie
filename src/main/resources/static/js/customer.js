@@ -5,6 +5,11 @@ app.controller("controller", function ($scope, $http) {
     $scope.customers = [];
 
 
+    $scope.form = {
+        exist: true
+    };
+
+
     $scope.reset = function () {
         $scope.form = {};
     }

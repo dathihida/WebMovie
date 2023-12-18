@@ -34,9 +34,9 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 				$scope.invoiceTime = new Date(resp.data.startTime);
 
 				if (resp.data.status === "success") {
-					$scope.elapsedTime = "Đã thanh toán";
+					$scope.elapsedTime = "Payment completed";
 				} else if (resp.data.status === "failed") {
-					$scope.elapsedTime = "Thanh toán thất bại";
+					$scope.elapsedTime = "Payment failed";
 				} else {
 					intervalPromise = $interval(function () {
 						$scope.currentTime = new Date();
@@ -133,14 +133,21 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 			$scope.thanhtoan(idBooking);
 		}
 	};
-	const btncheckbox = document.getElementById('checkbox');
-	// const btnThanhToan = document.getElementById('thanhtoan');
 
+
+	const btnCheckbox = document.getElementById('checkbox');
+	// const btnThanhToan = document.getElementById('thanhtoan');
+	$scope.showSuccessMessage = false;
 	function checkValidate() {
 		let isCheck = true;
-		if (!btncheckbox.checked) {
-			btncheckbox.focus();
+		if (!btnCheckbox.checked) {
+			btnCheckbox.focus();
+			btnCheckbox.style.border = '2px solid red'; // Add a red border to the checkbox
 			isCheck = false;
+			$scope.showSuccessMessage = true; // Show message
+		} else {
+			btnCheckbox.style.border = ''; // Remove the red border if the checkbox is checked
+			$scope.showSuccessMessage = false;
 		}
 		return isCheck;
 	}
@@ -298,12 +305,10 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 			$scope.searchMessage = "";
 		} else {
 
-			// Lọc danh sách movie_scheduleds theo name và ngày hiện tại trở đi
-			$scope.searchResults = $filter('filter')($scope.movie_scheduleds, function (movie) {
-
-				var movieDate = new Date(movie.date + ' ' + movie.time_START);
-				return movie.id_MOVIE.name.toLowerCase().includes($scope.searchQuery.toLowerCase()) && movieDate >= currentDate;
-			});
+        // Lọc danh sách movie_scheduleds theo name và status=true
+        $scope.searchResults = $filter('filter')($scope.movie_scheduleds, function (movie) {
+            return movie.id_MOVIE.name.toLowerCase().includes($scope.searchQuery.toLowerCase()) && movie.status;
+        });
 			// console.log("searchResults", $scope.searchResults);
 
 			// xoa id_Movie trung

@@ -34,5 +34,83 @@
 
 
 
-/* ========================COMING SOON============================= */
+/* ========================SHOWTIMES============================= */
 
+
+
+.showtime #ccc{
+    border: 15px solid rgb(242, 242, 242);
+    border-radius: 10px 0 0 10px;
+
+}
+
+.showtime img{
+    border-radius: 5px;
+}
+
+.showtime .info-movie h3{
+    font-size: 32px;
+    font-weight: 700;
+    color: rgb(18, 38, 63);
+
+}
+.showtime .info-movie h5{
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(95, 145, 207, 0.767);
+    margin-top: 5px;
+}
+.showtime .info-movie span{
+    font-weight: 400;
+
+
+}
+.showtime .info-movie #age{
+    font-size: 22px;
+    font-weight: 650;
+    padding: 5px 7px;
+    border-radius: 5px;
+    border: 3px solid rgb(18, 38, 63);
+
+}
+
+
+.showtime #showtime{
+    background-color: rgb(242, 242, 242);
+    border-radius: 0 10px 10px 0;
+}
+
+.showtime #date{
+    height: 80px;
+    width: auto;
+    border-radius: 5px;
+    background-color: rgb(18, 38, 63);
+    padding: 5px;
+    font-weight: 600;
+}
+
+.showtime #date span{
+    font-weight: 600;
+    color: white;
+}
+
+.showtime .movie-info li{
+    height: 30px;
+    width: auto;
+    font-weight: 500;
+
+}
+
+#time{
+    color: rgb(18, 38, 63);
+    font-weight: 600;
+    padding: 5px;
+    height: 35px;
+    margin: 5px;
+    background-color: rgba(95, 145, 207, 0.767);
+    border-radius: 5px;
+}
+#time a{
+    color: rgb(18, 38, 63);
+    text-decoration: none;
+}

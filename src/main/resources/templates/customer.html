@@ -23,7 +23,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.16/jspdf.plugin.autotable.min.js"></script>
 
 
-
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -40,7 +39,7 @@
 	<link rel="stylesheet" th:href="@{|/css/ad_customer.css|}">
 
 
-	<title>Admin</title>
+	<title>Customer | MovieTime</title>
 </head>
 
 
@@ -56,7 +55,7 @@
 					<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 				</li>
 				<li class="nav-item d-none d-sm-inline-block">
-					<a th:href="@{/home/admin}" class="nav-link">Home</a>
+					<a th:href="@{/home}" class="nav-link">Home</a>
 				</li>
 				<!-- <li class="nav-item d-none d-sm-inline-block">
 					<a href="#" class="nav-link">Services</a>
@@ -121,7 +120,7 @@
 							class="img-circle elevation-2">
 					</div>
 					<div class="info">
-						<a href="#" id="name_user" class="d-block" th:text="${#authentication.name}"></a>
+						<a th:href="@{/user/profile}" id="name_user" class="d-block" th:text="${#authentication.name}"></a>
 					</div>
 				</div>
 
@@ -185,6 +184,12 @@
 										<p>Manage room</p>
 									</a>
 								</li>
+								<li class="nav-item">
+                                    <a th:href="@{/home/seat}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Manage seat</p>
+                                    </a>
+                                </li>
 							</ul>
 						</li>
 						<li class="nav-item">
@@ -332,6 +337,29 @@
 												<small>Error message</small>
 												<label for="floatingPassword">Password</label>
 											</div>
+
+                                            <div class="form-group mb-3">
+												<label id="lbl">Status</label>
+
+												<div class="form-check ps-0" id="radio">
+													<input ng-model="form.exist" class="form-check-input1" checked=""
+														name="exist" ng-value="true" type="radio" id="inlineFormCheck">
+													<div class="circle">
+													</div>
+													<label class="form-check-label" for="inlineFormCheck">
+														On
+													</label>
+													<input ng-model="form.exist" class="form-check-input2 ms-4"
+														name="exist" ng-value="false" type="radio"
+														id="inlineFormCheck2">
+													<div class="circle">
+													</div>
+													<label class="form-check-label" for="inlineFormCheck2">
+														Off
+													</label>
+												</div>
+
+											</div>
 										</div>
 										<div class="col-4">
 											<div class="form-floating mb-3">
@@ -350,6 +378,8 @@
 													style="width: 60%; height: 60%">
 											</div>
 										</div>
+
+
 									</div>
 									<div class="mt-2 form-group">
 										<button id="btn1" ng-click="checkAndcreateCustomer()"

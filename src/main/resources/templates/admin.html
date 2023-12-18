@@ -27,7 +27,7 @@
 
     <link rel="stylesheet" th:href="@{|/css/admin.css|}">
 
-    <title>Admin</title>
+    <title>Admin | MovieTime</title>
 
 </head>
 
@@ -42,7 +42,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a th:href="@{/home/admin}" class="nav-link">Home</a>
+                    <a th:href="@{/home}" class="nav-link">Home</a>
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Services</a>
@@ -106,7 +106,7 @@
                         <img ng-src="/images/no-avatar.png" ng-if="!avt.avatar" alt="No Avatar" class="img-circle elevation-2">
                     </div>
                     <div class="info" id="user">
-                        <a href="" id="name_user" th:text="${#authentication.name}"></a>
+                        <a th:href="@{/user/profile}" id="name_user" th:text="${#authentication.name}"></a>
                     </div>
                 </div>
 
@@ -281,7 +281,7 @@
                             <div class="card">
                                 <div class="card-header border-0">
                                     <div class="d-flex justify-content-between">
-                                        <h3 class="card-title">Tổng doanh thu theo ngày</h3>
+                                        <h3 class="card-title">Total daily revenue</h3>
 
                                     </div>
                                 </div>
@@ -335,7 +335,7 @@
                             <div class="card">
                                 <div class="card-header border-0">
                                     <div class="d-flex justify-content-between">
-                                        <h3 class="card-title">Tỉ lệ đặt rạp phim</h3>
+                                        <h3 class="card-title">Cinema booking rate</h3>
 
                                     </div>
                                 </div>
@@ -362,7 +362,7 @@
                             <div class="card">
                                 <div class="card-header border-0">
                                     <div class="d-flex justify-content-between">
-                                        <h3 class="card-title">Tổng doanh thu theo phim</h3>
+                                        <h3 class="card-title">Total revenue by movie</h3>
                                     </div>
                                 </div>
                                 <div class="card-body">
