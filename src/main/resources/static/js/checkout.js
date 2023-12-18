@@ -305,12 +305,10 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 			$scope.searchMessage = "";
 		} else {
 
-			// Lọc danh sách movie_scheduleds theo name và ngày hiện tại trở đi
-			$scope.searchResults = $filter('filter')($scope.movie_scheduleds, function (movie) {
-
-				var movieDate = new Date(movie.date + ' ' + movie.time_START);
-				return movie.id_MOVIE.name.toLowerCase().includes($scope.searchQuery.toLowerCase()) && movieDate >= currentDate;
-			});
+        // Lọc danh sách movie_scheduleds theo name và status=true
+        $scope.searchResults = $filter('filter')($scope.movie_scheduleds, function (movie) {
+            return movie.id_MOVIE.name.toLowerCase().includes($scope.searchQuery.toLowerCase()) && movie.status;
+        });
 			// console.log("searchResults", $scope.searchResults);
 
 			// xoa id_Movie trung
