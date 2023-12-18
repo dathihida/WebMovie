@@ -30,7 +30,7 @@ public class MovieServiceImpl implements IMovieService{
 	@Override
 	public Movie updateMovie(Movie movie, Integer id) {
 		// TODO Auto-generated method stub
-		movie.setEXIST(true);
+//		movie.setEXIST(true);
 		return movieRepository.save(movie);
 	}
 

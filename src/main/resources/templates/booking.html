@@ -138,7 +138,8 @@
                             <div class="d-flex flex-wrap gap-1">
                                 <h6 id="selected-seats" ng-repeat="ss in selectedSeats">
                                     <p hidden>{{ss.id}}</p>
-                                    {{ss.seat_ROW}}{{ss.seat_NUMBER}}({{ss.seat_TYPE === 'VIP' ? 'VIP' : (ss.seat_TYPE === 'ECO' ? 'Sta' : ss.seat_TYPE)}})&nbsp
+                                    {{ss.seat_ROW}}{{ss.seat_NUMBER}}({{ss.seat_TYPE === 'VIP' ? 'VIP' : (ss.seat_TYPE
+                                    === 'ECO' ? 'Sta' : ss.seat_TYPE)}})&nbsp
                                 </h6>
                             </div>
                         </div>
@@ -199,14 +200,38 @@
     </section>
 
     <!-- Thêm modal vào phần cuối body -->
-    <div class="modal fade policy" id="myModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade policy" id="myModal" data-bs-backdrop="static" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <!-- Nội dung thông báo -->
-                    Phim dành cho mọi độ tuổi. MovieTime không được phép phục vụ khách hàng dưới 13 tuổi cho các suất chiếu
-                    kết thúc sau 22:00 và 16 tuổi cho các suất chiếu kết thúc sau 23:00. MovieTime sẽ không hoàn tiền nếu
-                    người xem không đáp ứng đủ điều kiện. Tham khảo <a th:href="@{/home/terms-use}">quy định của Bộ Văn Hóa, Thể thao, Du lịch</a>
+            <div class="modal-content" ng-repeat="mo in movie_ScheduledById">
+                <div class="modal-body" ng-if="mo.id_MOVIE.age === 'T13'">
+                    Phim không dành cho khán giả <b>dưới 13 tuổi</b>. MovieTime sẽ không hoàn tiền nếu
+                    người xem không đáp ứng đủ điều kiện. Tham khảo <a th:href="@{/home/terms-use}">quy định của Bộ Văn
+                        Hóa, Thể thao, Du lịch</a>
+                </div>
+                <div class="modal-body" ng-if="mo.id_MOVIE.age === 'T16'">
+                    Phim không dành cho khán giả <b>dưới 16 tuổi</b>. MovieTime sẽ không hoàn tiền nếu
+                    người xem không đáp ứng đủ điều kiện. Tham khảo <a th:href="@{/home/terms-use}">quy định của Bộ Văn
+                        Hóa, Thể thao, Du lịch</a>
+                </div>
+                <div class="modal-body" ng-if="mo.id_MOVIE.age === 'T18'">
+                    Phim không dành cho khán giả <b>dưới 18 tuổi</b>. MovieTime sẽ không hoàn tiền nếu
+                    người xem không đáp ứng đủ điều kiện. Tham khảo <a th:href="@{/home/terms-use}">quy định của Bộ Văn
+                        Hóa, Thể thao, Du lịch</a>
+                </div>
+                <div class="modal-body" ng-if="mo.id_MOVIE.age === 'P'">
+                    Phim dành cho khán giả ở <b>mọi độ tuổi</b>. Tham khảo <a th:href="@{/home/terms-use}">quy định của
+                        Bộ Văn Hóa, Thể thao, Du lịch</a>
+                </div>
+                <div class="modal-body" ng-if="mo.id_MOVIE.age === 'K'">
+                    Phim dành cho khán giả <b>có người bảo hộ đi kèm</b>. MovieTime sẽ không hoàn tiền nếu
+                    người xem không đáp ứng đủ điều kiện. Tham khảo <a th:href="@{/home/terms-use}">quy định của Bộ Văn
+                        Hóa, Thể thao, Du lịch</a>
+                </div>
+                <div class="modal-body" ng-if="mo.id_MOVIE.age === 'C'">
+                    Phim <b>không được phép phổ biến</b>. MovieTime sẽ không hoàn tiền nếu
+                    người xem không đáp ứng đủ điều kiện. Tham khảo <a th:href="@{/home/terms-use}">quy định của Bộ Văn
+                        Hóa, Thể thao, Du lịch</a>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tôi đã hiểu và đồng ý</button>
@@ -215,7 +240,7 @@
         </div>
     </div>
 
-    
+
 
 
 
@@ -225,7 +250,7 @@
 
 
 
-    
+
     <!-- js -->
     <script th:src="@{/js/booking.js}"></script>
 

@@ -88,7 +88,7 @@ app.controller("controller", function ($scope, $http) {
         }
 
         if (floatingSelectValue === '') {
-            setError(floatingSelectEle, 'You have not selected Cinema information');
+            setError(floatingSelectEle, 'You have not selected Age Restricted information');
             isCheck = false;
         } else {
             setSuccess(floatingSelectEle);

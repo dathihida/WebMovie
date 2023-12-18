@@ -1,10 +1,9 @@
 @charset "ISO-8859-1";
 
 
-
 .content #btn {
   height: 2em;
-  width: 4.7em;
+  width: auto;
   color: white;
   font-weight: 500;
   border-radius: 5px;

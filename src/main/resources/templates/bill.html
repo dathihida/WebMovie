@@ -56,7 +56,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a th:href="@{/home/admin}" class="nav-link">Home</a>
+                    <a th:href="@{/home}" class="nav-link">Home</a>
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Services</a>
@@ -119,7 +119,7 @@
                         <img ng-src="/images/no-avatar.png" ng-if="!avt.avatar" alt="No Avatar" class="img-circle elevation-2">
                     </div>
                     <div class="info">
-                        <a href="#" id="name_user" class="d-block" th:text="${#authentication.name}"></a>
+                        <a th:href="@{/user/profile}" id="name_user" class="d-block" th:text="${#authentication.name}"></a>
                     </div>
                 </div>
 
@@ -181,6 +181,12 @@
                                     <a th:href="@{/home/room}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Manage room</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a th:href="@{/home/seat}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Manage seat</p>
                                     </a>
                                 </li>
                             </ul>
@@ -419,10 +425,12 @@
                                                 <th>Id</th>
                                                 <th>Id Customer</th>
                                                 <th>Id Movie</th>
-                                                <th>Time Start</th>
+                                                <th>Start Time</th>
                                                 <th>Date</th>
                                                 <th>Price</th>
                                                 <th>Status</th>
+                                                <th>Action</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>

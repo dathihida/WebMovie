@@ -57,7 +57,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a th:href="@{/home/admin}" class="nav-link">Home</a>
+                    <a th:href="@{/home}" class="nav-link">Home</a>
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Services</a>
@@ -120,7 +120,7 @@
                         <img ng-src="/images/no-avatar.png" ng-if="!avt.avatar" alt="No Avatar" class="img-circle elevation-2">
                     </div>
                     <div class="info">
-                        <a href="#" id="name_user" class="d-block" th:text="${#authentication.name}"></a>
+                        <a th:href="@{/user/profile}" id="name_user" class="d-block" th:text="${#authentication.name}"></a>
                     </div>
                 </div>
 
@@ -182,6 +182,12 @@
                                     <a th:href="@{/home/room}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Manage room</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a th:href="@{/home/seat}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Manage seat</p>
                                     </a>
                                 </li>
                             </ul>
@@ -336,11 +342,34 @@
                                                 <small>Error message</small>
                                                 <label for="floatingPassword">Describe</label>
                                             </div>
+                                            <div class="form-group mb-3">
+												<label id="lbl">Status</label>
+
+												<div class="form-check ps-0" id="radio">
+													<input ng-model="form.status" class="form-check-input1" checked=""
+														name="status" ng-value="true" type="radio" id="inlineFormCheck">
+													<div class="circle">
+													</div>
+													<label class="form-check-label" for="inlineFormCheck">
+														On
+													</label>
+													<input ng-model="form.status" class="form-check-input2 ms-4"
+														name="status" ng-value="false" type="radio"
+														id="inlineFormCheck2">
+													<div class="circle">
+													</div>
+													<label class="form-check-label" for="inlineFormCheck2">
+														Off
+													</label>
+												</div>
+
+											</div>
                                         </div>
                                     </div>
                                     <div class="mt-2">
                                         <button id="btn1" ng-click="checkAndcreateVoucher()" type="submit">Create</button>
                                         <button id="btn2" ng-click="checkAndupdateVoucher()" type="submit">Update</button>
+                                        <button id="btn" ng-click="delete(p.id)">Delete</button>
                                         <button id="btn3" ng-click="reset()" type="submit">Reset</button>
                                     </div>
                                 </div>
@@ -394,9 +423,11 @@
                                                 <th>Id</th>
                                                 <th>Name</th>
                                                 <th>Discount</th>
-                                                <th>Date_start</th>
-                                                <th>Date_end</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
                                                 <th>Describe</th>
+                                                <th>Action</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>

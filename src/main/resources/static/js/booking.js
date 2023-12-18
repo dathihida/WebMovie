@@ -142,7 +142,7 @@ app.controller("controller", function ($scope, $http, $rootScope, $filter) {
 									} else if (seat.seat_TYPE === "VIP") {
 										$scope.totalAmount -= seat.seat_PRICE;
 									} else {
-										$scope.totalAmount -= 15;
+										$scope.totalAmount += 15;
 									}
 								}
 							}

@@ -57,7 +57,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a th:href="@{/home/admin}" class="nav-link">Home</a>
+                    <a th:href="@{/home}" class="nav-link">Home</a>
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Services</a>
@@ -121,7 +121,7 @@
                             class="img-circle elevation-2">
                     </div>
                     <div class="info">
-                        <a href="#" id="name_user" class="d-block" th:text="${#authentication.name}"></a>
+                        <a th:href="@{/user/profile}" id="name_user" class="d-block" th:text="${#authentication.name}"></a>
                     </div>
                 </div>
 
@@ -183,6 +183,12 @@
                                     <a th:href="@{/home/room}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Manage room</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a th:href="@{/home/seat}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Manage seat</p>
                                     </a>
                                 </li>
                             </ul>
@@ -350,12 +356,57 @@
                                                 <small>Error message</small>
                                                 <label for="floatingPassword">Duration</label>
                                             </div>
+
+                                            <!-- <div class="form-floating mb-3 form-group">
+                                                <input ng-model="form.age" class="form-control" id="age">
+                                                <small>Error message</small>
+                                                <label for="floatingPassword">Age Restricted</label>
+                                            </div> -->
+                                            <div class="form-floating mb-3 form-group">
+                                                <select ng-model="form.age" class="form-select" id="age"
+                                                    aria-label="Floating label select example">
+                                                    <option value="" disabled></option>
+                                                    <option value="P">P</option>
+                                                    <option value="K">K</option>
+                                                    <option value="C">C</option>
+                                                    <option value="T13">T13</option>
+                                                    <option value="T16">T16</option>
+                                                    <option value="T18">T18</option>
+                                                </select>
+                                                <small>Error message</small>
+                                                <label for="floatingInput" id="slect">Age Restricted</label>
+                                            </div>
+
                                             <div class="form-floating mb-3 form-group">
                                                 <input ng-model="form.publish_DATE" type="date" class="form-control"
                                                     id="date">
                                                 <small>Error message</small>
                                                 <label for="floatingPassword">Release Date</label>
                                             </div>
+
+                                            <div class="form-group mb-3">
+												<label id="lbl">Status</label>
+
+												<div class="form-check ps-0" id="radio">
+													<input ng-model="form.exist" class="form-check-input1" checked=""
+														name="exist" ng-value="true" type="radio" id="inlineFormCheck">
+													<div class="circle">
+													</div>
+													<label class="form-check-label" for="inlineFormCheck">
+														On
+													</label>
+													<input ng-model="form.exist" class="form-check-input2 ms-4"
+														name="exist" ng-value="false" type="radio"
+														id="inlineFormCheck2">
+													<div class="circle">
+													</div>
+													<label class="form-check-label" for="inlineFormCheck2">
+														Off
+													</label>
+												</div>
+
+											</div>
+
                                         </div>
                                         <div class="col-4">
                                             <div class="form-floating mb-3">
@@ -427,8 +478,7 @@
                                                     </path>
                                                 </g>
                                             </svg>
-                                            <input type="text" id="input" ng-model="searchText"
-                                                placeholder="Search...">
+                                            <input type="text" id="input" ng-model="searchText" placeholder="Search...">
                                         </div>
                                     </div>
                                     <table id="movietable" class="table table-hover">
@@ -440,7 +490,7 @@
                                                 <!-- <th>Actors</th> -->
                                                 <th>Diretors</th>
                                                 <th>Gerne</th>
-                                                <th>Trailer</th>
+                                                <th>Age Restricted</th>
                                                 <th>Duration</th>
                                                 <!-- <th>Image</th> -->
                                                 <th>Release Date</th>
@@ -455,7 +505,7 @@
                                                 <!-- <td>{{p.actors}}</td> -->
                                                 <td>{{p.diretors}}</td>
                                                 <td>{{p.gerne}}</td>
-                                                <td>{{p.trailer}}</td>
+                                                <td>{{p.age}}</td>
                                                 <td>{{p.time}}</td>
                                                 <!-- <td>{{p.image}}</td> -->
                                                 <td>{{p.publish_DATE | date:'dd-MM-yyyy'}}</td>
