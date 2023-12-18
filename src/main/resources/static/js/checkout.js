@@ -272,6 +272,138 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 		});
 	};
 
+	$scope.updateCheckboxPaypal = function(){
+		var isValid = checkValidate();
+
+		if (isValid) {
+			// Nếu validation thành công, gọi thanhtoan(idBooking)
+			$scope.thanhtoanPayPal(idBooking);
+		}
+	}
+
+	$scope.thanhtoanPayPal = function (idBooking) {
+		var dataVoucher = angular.copy($scope.form);
+		var index = $scope.availableVouchers.findIndex(
+			(idVoucher) => idVoucher.id === $scope.form.idVoucher
+		);
+
+		// Kiểm tra nếu index không tìm thấy hoặc discount là undefined
+		if (
+			index === -1 ||
+			$scope.availableVouchers[index].discount === undefined
+		) {
+			// Xử lý khi không chọn voucher hoặc khi discount là undefined
+			console.log("No voucher selected or discount is undefined");
+			// Thực hiện thanh toán với giá gốc
+			var url = `${host_booking}/v1/${idBooking}`;
+			$http.get(url).then((resp) => {
+				$scope.discountedPrice = resp.data.price;
+				$scope.form.idVoucher = null;
+				// Gọi hàm xử lý thanh toán
+				$scope.performPaymentPaypal1(idBooking);
+				console.log("thanhtoan", resp.data);
+			});
+			return;
+		}
+
+		const discount = $scope.availableVouchers[index].discount;
+
+		var url = `${host_booking}/v1/${idBooking}`;
+		$http.get(url).then((resp) => {
+			$scope.discountedPrice =
+				resp.data.price - (resp.data.price * discount) / 100;
+			// Gọi hàm xử lý thanh toán
+			$scope.performPaymentPaypal(idBooking);
+			console.log("thanhtoan", resp.data);
+		});
+	};
+	
+	$scope.performPaymentPaypal = function (idBooking) {
+
+		var url = `${host_pay}/all`;
+	
+		$http.get(url).then((resp) => {
+			var allPays = resp.data;
+	
+			// Lọc các pay có id_BOOKING.id bằng với idBooking
+			var paysWithMatchingId = allPays.filter(function(pay) {
+				return pay.id_BOOKING.id === idBooking;
+			});
+	
+			if (paysWithMatchingId.length > 0) {
+				console.log(paysWithMatchingId);
+			} else {
+				console.log("Không tìm thấy dữ liệu cho id_BOOKING.id =", idBooking);
+				var data = {
+					price: $scope.discountedPrice,
+					intent: "Buy",
+					method: "Online",
+					currency: "USD",
+					description: "Thanh toan tien ve xem phim qua Paypal",
+					id_BOOKING: {
+						id: idBooking,
+					},
+					id_VOUCHER: {
+						id: $scope.form.idVoucher,
+					},
+				};
+
+				console.log("data", data);
+
+				// create pay
+				$http
+					.post(`${host_pay}`, data)
+					.then((resp) => {
+						$scope.stopClock();
+					})
+					.catch((error) => {
+						console.log("Error", error);
+				});
+			}
+		});
+	};
+
+	$scope.performPaymentPaypal1 = function (idBooking) {
+		var url = `${host_pay}/all`;
+	
+		$http.get(url).then((resp) => {
+			var allPays = resp.data;
+	
+			// Lọc các pay có id_BOOKING.id bằng với idBooking
+			var paysWithMatchingId = allPays.filter(function(pay) {
+				return pay.id_BOOKING.id === idBooking;
+			});
+	
+			if (paysWithMatchingId.length > 0) {
+				console.log(paysWithMatchingId);
+			} else {
+				console.log("Không tìm thấy dữ liệu cho id_BOOKING.id =", idBooking);
+				var data = {
+					price: $scope.discountedPrice,
+					intent: "Buy",
+					method: "Online",
+					currency: "USD",
+					description: "Thanh toan tien ve xem phim qua Paypal",
+					id_BOOKING: {
+						id: idBooking,
+					}
+				};
+
+				console.log("data", data);
+
+				// create pay
+				$http
+					.post(`${host_pay}`, data)
+					.then((resp) => {
+						$scope.stopClock();
+					})
+					.catch((error) => {
+						console.log("Error", error);
+				});
+			}
+		});
+	};
+
 	$scope.loadIdUserLogin = function () {
 		$http.get('http://localhost:8080/api/getUserId').then(function (response) {
 			$scope.userId = response.data;
