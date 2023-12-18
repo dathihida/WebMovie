@@ -81,4 +81,9 @@ public class BookingRestController {
 		bookingRepo.updateStatusBookingAll();
 	}
 
+	@GetMapping("/updateStatusBookingByIdExistsTablePay")
+	void updateStatusBookingByIdExistsTablePay() {
+		bookingRepo.updateStatusBookingByIdExistsTablePay();
+	}
+
 }

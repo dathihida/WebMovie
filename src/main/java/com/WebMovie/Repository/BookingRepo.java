@@ -37,4 +37,12 @@ public class BookingRepo {
 		String jpql = "UPDATE Voucher v SET v.STATUS = false WHERE v.DATE_END < GETDATE()";
 		entityManager.createQuery(jpql).executeUpdate();
 	}
+
+	@Transactional
+	public void updateStatusBookingByIdExistsTablePay() {
+		String updateStatus = "UPDATE Booking b\r\n" + //
+				"SET b.STATUS = 'success'\r\n" + //
+				"WHERE b.STATUS = 'unpaid' AND EXISTS(SELECT p.ID_BOOKING FROM Pay p)";
+		entityManager.createQuery(updateStatus).executeUpdate();
+	}
 }

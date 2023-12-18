@@ -31,12 +31,12 @@ public class PayRestController {
 	}
 
 	@GetMapping("/all")
-	List<Pay> getAllPay(){
+	List<Pay> getAllPay() {
 		return payService.geAllPay();
 	}
 
 	@GetMapping("/{id}")
-	Pay listPayIdBooking(@PathVariable("id") Integer id){
+	Pay listPayIdBooking(@PathVariable("id") Integer id) {
 		return payRepository.listPayByIdBooking(id);
 	}
 }

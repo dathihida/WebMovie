@@ -144,11 +144,29 @@
                         <div class="btn-pay d-flex justify-content-between" ng-repeat="booking in booking">
                             <a th:href="@{/home}"><button type="submit"
                                     class="btn btn-outline-warning">Thoát</button></a>
-                            <button type="submit" ng-click="updateCheckbox()"
+                            <button type="submit" ng-click="updateCheckbox()" sec:authorize="hasAnyRole('ADMIN')"
                                 ng-disabled="booking.status === 'success' || booking.status === 'failed'"
                                 class="btn btn-warning pay" id="thanhtoan">Thanh toán</button>
                         </div>
-
+                        <div ng-repeat="booking in booking">
+                            <form method="post" action="/pay">
+                                <div class="col-50" hidden>
+                                    <label for="price">Total</label>
+                                    <input type="text" id="PRICE" name="PRICE" value="{{booking.price}}">
+                                    <label for="currency">Currency</label>
+                                    <input type="text" id="CURRENCY" name="CURRENCY" placeholder="Enter Currency" value="USD">
+                                    <label for="method">Payment Method</label>
+                                    <input type="text" id="METHOD" name="METHOD" placeholder="Payment Method" value="PAYPAL">
+                                    <label for="intent">Intent</label>
+                                    <input type="text" id="INTENT" name="INTENT" value="sale">
+                                    <label for="description">Payment Description</label>
+                                    <input type="text" id="DESCRIPTION" name="DESCRIPTION" placeholder="Payment Description" value="Thanh toan qua paypal">
+                                </div>
+                                <!-- <input type="submit" value="Continue to checkout" class="btn"> -->
+                                <button  ng-disabled="booking.status === 'success' || booking.status === 'failed'" 
+                                    ng-click="updateCheckboxPaypal()">Thanh toan qua paypal</button>
+                            </form>
+                        </div>
 
                     </div>
                 </div>
