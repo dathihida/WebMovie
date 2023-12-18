@@ -55,7 +55,11 @@ public class RoomRestController {
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	void deleteRoom(@PathVariable Integer id) {
-		roomService.deleteRoom(id);
+		try {
+			roomService.deleteRoom(id);
+		} catch (Exception e) {
+			System.out.println("Lỗi có dữ liệu khóa");
+		}
 	}
 
 	@GetMapping("/{id}")

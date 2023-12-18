@@ -148,7 +148,9 @@ app.controller("controller", function ($scope, $http) {
             $scope.cinemas.splice(index, 1);
             console.log("cinemasDelete", reps);
         }).catch(error => {
-            console.log("Error", error);
+            console.log("Rạp phim không thể xóa vì đang có dữ liệu con");
+            //console.log("Error", error);
+            alert("Rạp phim không thể xóa vì đang có dữ liệu con");
         })
     }
 
