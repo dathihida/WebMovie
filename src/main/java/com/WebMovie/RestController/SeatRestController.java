@@ -46,14 +46,14 @@ public class SeatRestController {
 	private void setSeatTypeAndPrice(Seat seat) {
 		String row = seat.getSEAT_ROW();
 		if (row.equals("A") || row.equals("B")) {
-			seat.setSEAT_TYPE("VIP");
-			seat.setSEAT_PRICE(20);
-		} else if (row.equals("C") || row.equals("D")) {
 			seat.setSEAT_TYPE("ECO");
-			seat.setSEAT_PRICE(10);
+			seat.setSEAT_PRICE(40000);
+		} else if (row.equals("C") || row.equals("D")) {
+			seat.setSEAT_TYPE("VIP");
+			seat.setSEAT_PRICE(60000);
 		} else {
-			seat.setSEAT_TYPE("PROMO");
-			seat.setSEAT_PRICE(15);
+			seat.setSEAT_TYPE("ECO");
+			seat.setSEAT_PRICE(40000);
 		}
 	}
 }

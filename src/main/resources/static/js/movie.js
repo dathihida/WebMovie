@@ -558,7 +558,7 @@ app.controller("controller", function ($scope, $http, $filter) {
 	// =========================NOW SHOWING +  SHOWTIME==============================
 
 	// Lọc số lượng hiện thị phim
-	$scope.moviesLimit = 10;
+	$scope.moviesLimit = 5;
 
 	// =========================END  NOW SHOWING +  SHOWTIME==============================
 

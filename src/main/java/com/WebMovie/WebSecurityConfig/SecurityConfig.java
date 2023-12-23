@@ -43,7 +43,7 @@ public class SecurityConfig {
                         "/add", "/add/userNoExist",
                         "/api/movie/all", "/movie/**", "/v1/movie/**",
                         "/page/**", "/api/cinema/all",
-                        "/api/room/all",
+                        "/api/room/all","/api/chat/**",
                         "/api/movie_scheduled/all", "/listMovieSheduled/**",
                         "/api/movie_scheduled/detail/**", "/api/movie_scheduled/date/**",
                         "/api/seat_scheduled/**", "/api/seat_scheduled", "/api/movie_scheduled/**",

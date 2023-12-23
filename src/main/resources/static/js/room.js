@@ -169,6 +169,7 @@ app.controller("controller", function ($scope, $http) {
             console.log("RoomDelete", reps);
         }).catch(error => {
             console.log("Error", error);
+            alert("Không thể xóa phòng này vì đã có dữ liệu")
         })
     }
 
