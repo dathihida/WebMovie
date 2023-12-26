@@ -1,10 +1,17 @@
 @charset "ISO-8859-1";
 
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 /* =======================CHECKOUT================ */
 
 
 /* ------------Promotion-------------- */
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.hea-title{
+    background-color: rgb(18, 38, 63);
+}
 
 .checkout .promotion {
     padding: 12px 0 12px 0;
@@ -14,24 +21,33 @@
     padding: 0 12px 0 12px;
 } */
 
-.checkout .makhuyenmai input {
+/* .checkout .makhuyenmai input {
     width: 250px;
     border: 2px solid rgb(209, 209, 209);
     border-radius: 4px;
-}
+} */
 
-.checkout .makhuyenmai button {
+/* .checkout .makhuyenmai button {
     border: 1px solid rgb(225, 225, 225);
     border-radius: 4px;
     background-color: rgb(237, 38, 71);
     color: white;
     font-weight: 500;
     padding: 6px 15px;
-}
+} */
 
-.checkout .kmcuaban:hover {
-    color: black !important;
+.checkout .makhuyenmai select{
+    width: 70%;
 }
+/* .checkout .makhuyenmai #vchet{
+    background-color: rgb(237, 38, 71);
+    color: white;
+
+} */
+
+/* .checkout .kmcuaban:hover {
+    color: black !important;
+} */
 
 
 /* ---------------method-payment-------------- */
@@ -65,9 +81,44 @@
 }
 
 .checkout .dieukhoan input {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
 }
+/* .checkout .dieukhoan #checkbox{
+    box-shadow: 0 0 10px rgba(237, 38, 71, 0.965);
+} */
+.checkout .dieukhoan #checkbox:hover{
+    border: 1px solid rgb(237, 38, 71);
+    cursor: pointer;
+}
+
+.checkout .dieukhoan #checkbox:focus{
+    box-shadow: 0 0 10px rgba(237, 38, 71, 0.965);
+    border: 1px solid rgb(237, 38, 71);
+    cursor: pointer;
+}
+
+.checkout .dieukhoan #checkbox:checked{
+    box-shadow: 0 0 10px rgba(237, 38, 71, 0);
+    border: 1px solid rgb(237, 38, 71);
+    cursor: pointer;
+}
+
+.checkout .dieukhoan a:hover {
+    color: rgb(237, 38, 71);
+    transition: 0.2s;
+}
+
+
+.warning-check small{
+    color: rgb(215, 160, 11);
+}
+
+.warning-check ion-icon{
+    color: rgb(215, 160, 11);
+    font-size: 20px;
+}
+
 
 /* ---------------DETAIL_PAY--------------- */
 

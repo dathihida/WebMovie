@@ -1,6 +1,5 @@
 package com.WebMovie.Entity;
 
-
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,17 +21,18 @@ public class Room {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ID;
+
 	private String NAME;
-	
+
 	@ManyToOne
-	@JoinColumn(name="ID_CINEMAS")
+	@JoinColumn(name = "ID_CINEMAS")
 	private Cinemas ID_CINEMAS;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy = "ID_ROOM")
-	private List<Seat> LIST_SEAT;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_ROOM")
 	private List<Movie_Scheduled> ID_MOVIE_SCHEDULED;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "ID_ROOM")
+	private List<Movie_Scheduled> ID_SEAT;
 }

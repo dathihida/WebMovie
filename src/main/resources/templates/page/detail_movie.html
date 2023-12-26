@@ -11,7 +11,7 @@
                                 <div class=" col-lg-2 col-md-2 col-sm-4 col-5 pt-2 align-items-center">
                                     <div class="card card_img">
                                         <a href="detail.html"></a>
-                                        <img th:src="@{|/images/${movie1.IMAGE}|}" class="card-img-top"
+                                        <img th:src="@{|https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/${movie1.IMAGE}.jpg|}" class="card-img-top"
                                             alt="display error">
                                         </a>
                                     </div>
@@ -25,7 +25,7 @@
                                     <div class="container row justify-content-around pe-0">
                                         <div class="col-lg-7 p-0">
                                             <div class="mota d-flex justify-content-start gap-1 mb-3">
-                                                <button type="button">Like</button>
+                                                <button type="button" hidden>Like</button>
                                                 <button type="button" class="btn btn-dark" data-bs-toggle="modal"
                                                     data-bs-target="#myModalTrailer">Trailer</button>
                                                 <button type="button" class="btn_muave" data-bs-toggle="modal"
@@ -52,7 +52,7 @@
                                                 <div class="col">
                                                     <span><ion-icon name="person-add-outline"></ion-icon> Age Restricted
                                                     </span> <br>
-                                                    <p>T18</p>
+                                                    <p>[[${movie1.AGE}]]</p>
                                                 </div>
                                             </div>
                                         </div>

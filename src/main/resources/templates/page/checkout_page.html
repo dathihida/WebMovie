@@ -1,38 +1,32 @@
 <div xmlns:th="http://www.thymeleaf.org">
     <main>
-
         <section>
             <div class="checkout container p-0">
-                <div class="hea-title text-center bg-dark text-white my-3 p-0">
-                    <h4>THANH TOÁN</h4>
+                <div class="hea-title text-center text-white my-3 p-0">
+                    <h4>PAYMENT</h4>
                 </div>
 
                 <div class="checkout-content row mt-5">
-                    <div class="col-md-7 d-flex flex-column gap-3">
+                    <div class="col-md-6 d-flex flex-column gap-3">
                         <div class="promotion ">
-                            <h5>Khuyến mãi</h5>
+                            <h5>Promotion</h5>
                             <div class="makhuyenmai mt-4">
-                                <h6>Mã khuyến mãi</h6>
-                                <div class="d-flex gap-2">
-                                    <input type="email" class="form-control p-1" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
-                                    <button type="submit" class="btn">Áp dụng</button>
-                                </div>
-                                <div class="dropdown my-3">
-                                    <a class="nav-link kmcuaban dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Khuyến mãi của bạn
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Giảm 20% giá khi mua từ 2 vé trở lên</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Giảm 10%</a></li>
-                                    </ul>
+                                <h6>Promotional code</h6>
+                                <div class="dropdown my-3" ng-repeat="booking in booking">
+                                    <label> Your promotion</label>
+                                    <select ng-model="form.idVoucher" ng-click="updatePrice(idBooking)"
+                                        class="form-select mb-3" id="floatingSelect"
+                                        ng-disabled="booking.status === 'success' || booking.status === 'failed'"
+                                        aria-label="Floating label select example">
+                                        <option id="vcher" ng-repeat="voucher in availableVouchers"
+                                            ng-value="voucher.id" ng-if="voucher.status !== false">
+                                            {{voucher.name}}-{{voucher.describe}}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="pay-method ">
-                            <h5>Phương thức thanh toán</h5>
+                            <!-- <h5>Phương thức thanh toán</h5>
                             <div class="list-pay mt-4 d-flex justify-content-around flex-column gap-3">
                                 <div class="form-check d-flex align-items-center">
                                     <input class="form-check-input " type="radio" name="flexRadioDefault"
@@ -62,66 +56,141 @@
                                     <label class="form-check-label" for="flexRadioDefault4">
                                         Ví MoMo</label>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
+
                         <div class="dieukhoan mt-4 gap-3 d-flex align-items-center">
-                            <input type="checkbox" id="" name="" value="true">
-                            <label for="true">Tôi đồng ý với <a href="#">điều khoản sử dụng</a> và mua vé cho người có
-                                độ
-                                tuổi phù hợp</label>
+                            <input type="checkbox" id="checkbox" name="" value="false" ng-model="checkboxChecked">
+                            <label for="true">
+                                I agree to the <a th:href="@{/home/terms-use}">terms of use</a> and purchase tickets for
+                                people of appropriate age.</label>
+                        </div>
+
+                        <div class="warning-check d-flex align-items-center">
+                            <ion-icon name="alert-circle-outline"></ion-icon>
+                            <small>You need to accept the terms to continue.</small>
                         </div>
                     </div>
-                    <div class="detail-pay col-md-5">
+                    <div class="detail-pay col-md-6">
                         <div class="countdown text-center">
-                            Thời gian giữ ghế: <span id="time"> 10:00</span>
+                            Seat hold time (15 minutes): <span id="time">{{ elapsedTime }}</span>
                         </div>
-                        <div class="content-pay d-flex gap-3">
-                            <div class="card-img">
-                                <img th:src="@{|/images/phimdc7.jpg|}" alt="">
-                            </div>
-                            <div class="info-movie">
-                                <h5>Kẻ Kiến Tạo</h5>
-                                <span>3D Phụ đề </span> <br>
-                                <span class="dotuoi">T13</span>
+                        <div ng-repeat="booking in booking">
+                            <div class="content-pay d-flex gap-3">
+                                <div class="card-img">
+                                    <img th:src="@{|https://res.cloudinary.com/dgxlsc5tu/image/upload/v1702434593/{{booking.id_MOVIE_SCHEDULED.id_MOVIE.image}}.jpg|}"
+                                        alt="">
+                                </div>
+                                <div class="info-movie">
+                                    <h5>{{booking.id_MOVIE_SCHEDULED.id_MOVIE.name}}</h5>
+                                    <span>{{booking.id_MOVIE_SCHEDULED.id_ROOM.name}}</span> <br>
+                                    <span class="dotuoi">{{booking.id_MOVIE_SCHEDULED.id_MOVIE.age}}</span>
+                                </div>
                             </div>
                         </div>
+
                         <div class="info-ticket mt-2">
-                            <div class="time">
-                                <div class="d-flex align-items-center gap-2">
-                                    <h6>MovieTime Trường Chinh</h6> - <span>RAP 4</span>
+                            <div>
+                                <div class="time" ng-repeat="booking in booking">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <h6>{{booking.id_MOVIE_SCHEDULED.id_ROOM.id_CINEMAS.name}}</h6> -
+                                        <span>{{booking.id_MOVIE_SCHEDULED.id_ROOM.name}}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span>Session: </span>
+                                        <h6>{{booking.id_MOVIE_SCHEDULED.time_START}}</h6> -
+                                        <span>{{booking.id_MOVIE_SCHEDULED.date| date:'dd-MM-yyyy'}}</span>
+                                    </div>
                                 </div>
-                                <div class="d-flex align-items-center gap-2">
-                                    <span>Suất: </span>
-                                    <h6>21:30 </h6> - <span> Thứ 3, 20/10/2023</span>
+                                <div ng-repeat="seat in seatArray">
+                                    <div class="fare d-flex justify-content-between">
+                                        <div class="">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <h6>1</h6> x <span>Single seat: {{seat.seat_TYPE}}</span>
+                                            </div>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span>Seat:</span>
+                                                <h6>{{seat.seat_ROW}}{{seat.seat_NUMBER}}</h6>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span>{{seat.seat_PRICE}}.000</span> <em
+                                                class="text-decoration-underline">đ</em>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="fare d-flex justify-content-between">
+
+                                <div class="total d-flex justify-content-between">
+                                    <div>
+                                        <h6>TOTAL PRICE</h6>
+                                    </div>
+                                    <div ng-repeat="booking in booking">
+                                        <span>{{booking.price}}.000</span> <em class="text-decoration-underline">đ</em>
+                                    </div>
+                                </div>
                                 <div class="">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <h6>1</h6> x <span>Ghế đơn</span>
+                                    <div class="total d-flex justify-content-between" ng-show="form.idVoucher">
+                                        <div>
+                                            <h6>PRICE AFTER DISCOUNT:</h6>
+                                        </div>
+                                        <div>
+                                            <span> {{ discountedPrice}}.000</span><em
+                                            class="text-decoration-underline">đ</em>
+                                        </div>
+
                                     </div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span>Ghế:</span>
-                                        <h6>F6</h6>
+                                    <div ng-repeat="pay in payBooking">
+                                        <div
+                                            ng-if="pay.id_BOOKING.status === 'success' || pay.id_BOOKING.status === 'failed'">
+                                            <p>Voucher information: {{ pay.id_VOUCHER.describe }} - {{
+                                                pay.id_VOUCHER.discount }}%</p>
+                                            <p>Price after discount: {{ pay.price }}.000<em
+                                                    class="text-decoration-underline">đ</em></p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <span>65.000</span> <em class="text-decoration-underline">đ</em>
-                                </div>
-                            </div>
-                            <div class="total d-flex justify-content-between">
-                                <div>
-                                    <h6>Tổng cộng</h6>
-                                </div>
-                                <div>
-                                    <span>65.000</span> <em class="text-decoration-underline">đ</em>
-                                </div>
+
+
                             </div>
                         </div>
+                        <div class="btn-pay d-flex justify-content-end" ng-repeat="booking in booking"
+                            sec:authorize="hasAnyRole('ADMIN')">
+                            <!-- <a th:href="@{/home}"><button type="submit" class="btn btn-outline-warning">Thoát</button></a> -->
+                            <button type="submit" ng-click="updateCheckbox()"
+                                ng-disabled="booking.status === 'success' || booking.status === 'failed'"
+                                class="btn btn-warning pay" id="thanhtoan">Payment</button>
+                        </div>
+
                         <div class="btn-pay d-flex justify-content-between">
-                            <button type="submit" class="btn btn-outline-warning">Quay lại</button>
-                            <button type="submit" class="btn btn-warning pay">Thanh toán</button>
+                            <a th:href="@{/home}"><button type="submit"
+                                class="btn btn-outline-warning">Thoát</button></a>
+
+                        <div ng-repeat="booking in booking">
+                            <form method="post" action="/pay">
+                                <div class="col-50" hidden>
+                                    <label for="price">Total</label>
+                                    <input type="text" id="PRICE" name="PRICE" value="{{booking.price}}">
+                                    <label for="currency">Currency</label>
+                                    <input type="text" id="CURRENCY" name="CURRENCY" placeholder="Enter Currency"
+                                        value="USD">
+                                    <label for="method">Payment Method</label>
+                                    <input type="text" id="METHOD" name="METHOD" placeholder="Payment Method"
+                                        value="PAYPAL">
+                                    <label for="intent">Intent</label>
+                                    <input type="text" id="INTENT" name="INTENT" value="sale">
+                                    <label for="description">Payment Description</label>
+                                    <input type="text" id="DESCRIPTION" name="DESCRIPTION"
+                                        placeholder="Payment Description" value="Thanh toan qua paypal">
+                                </div>
+                                <!-- <input type="submit" value="Continue to checkout" class="btn"> -->
+                               
+                                    <button ng-disabled="!checkboxChecked || booking.status === 'success' || booking.status === 'failed'"
+                                        ng-click="updateCheckboxPaypal()" class="btn btn-warning pay"
+                                        id="thanhtoan">PayPal payment</button>
+                               
+                            </form>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

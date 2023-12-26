@@ -1,5 +1,7 @@
 package com.WebMovie.WebSecurityConfig;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,8 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.WebMovie.Entity.Customer;
 import com.WebMovie.Service.ICustomerService;
-
-import java.util.Optional;
 
 @Configuration
 public class UserInfoUserDetailsService implements UserDetailsService {

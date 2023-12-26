@@ -10,11 +10,11 @@ import com.WebMovie.Repository.RoomRepository;
 import com.WebMovie.Service.RoomService;
 
 @Service
-public class RoomServiceImpl implements RoomService{
+public class RoomServiceImpl implements RoomService {
 
 	@Autowired
 	RoomRepository roomRepository;
-	
+
 	@Override
 	public Room addRoom(Room room) {
 		// TODO Auto-generated method stub

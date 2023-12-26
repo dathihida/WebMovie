@@ -14,6 +14,6 @@ public interface IMovieService {
 	Movie updateMovie(Movie movie, Integer id);
 	Movie getMovieById(Integer id);
 	void deleteMovie(Integer id);
-	
+
 	List<Movie> findMovieByName(String name);
 }

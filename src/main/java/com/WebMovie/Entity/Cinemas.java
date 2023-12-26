@@ -14,15 +14,17 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="CINEMAS")
+@Table(name = "CINEMAS")
 public class Cinemas {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ID;
+
 	private String NAME;
+
 	private String ADDRESS;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "ID_CINEMAS")
-	private List<Room> room;
+	private List<Room> List_Room;
 }
