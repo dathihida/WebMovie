@@ -28,10 +28,10 @@
                                                 <button type="button" hidden>Like</button>
                                                 <button type="button" class="btn btn-dark" data-bs-toggle="modal"
                                                     data-bs-target="#myModalTrailer">Trailer</button>
-                                                <button type="button" class="btn_muave" data-bs-toggle="modal"
-                                                    data-bs-target="#myModalMuave"
-                                                    ng-click="loadMovie_ScheduledsById(inputValue)">Tickets</button>
-
+                                                <button type="button"
+                                                        class="btn_muave" data-bs-toggle="modal"
+                                                data-bs-target="#myModalMuave" ng-click="loadMovie_ScheduledsById(inputValue)" >Tickets</button>
+                                                
                                             </div>
                                             <p class="mota_docx text-white" th:inline="text">
                                                 [[${movie1.DESCRIPTION}]]
@@ -39,8 +39,7 @@
 
                                             <div class="row mota_2">
                                                 <div class="col">
-                                                    <span> <ion-icon name="calendar-outline"></ion-icon> Release
-                                                        Date</span>
+                                                    <span> <ion-icon name="calendar-outline"></ion-icon> Release Date</span>
                                                     <br>
                                                     <a href="detail.html">[[${movie1.PUBLISH_DATE}]]</a>
                                                 </div>
@@ -124,39 +123,85 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-0">
-                        <ul>
-                            <p>Chọn date:</p>
-                            <li ng-repeat="date in displayedDates">
-                                <input type="radio" id="idRadio" name="id" ng-model="selectedDate" value="{{date}}"
-                                    ng-click="filterDate(selectedDate)">
-                                <label for="tuychon1">{{date}}</label><br>
+                        <ul class="choose_date">
+                            <li class="gr_date" ng-repeat="date in displayedDates">
+                                <div class="gr">
+                                    <label>
+                                    <input type="radio" id="idRadio" name="id" ng-model="selectedDate"
+                                        value="{{date}}" ng-click="filterDate(selectedDate)">
+                                        <span>{{date}}</span>
+                                    </label>
+                                </div>
                             </li>
                         </ul>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>MovieName</th>
-                                    <th>TimeStart</th>
-                                    <th>Room</th>
-                                    <th>Cinema</th>
-                                    <th>Address</th>
-                                    <th>DateStart</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="movieOfCinemas in filterMovieDate">
-                                    <td>{{movieOfCinemas.id_MOVIE.name}}</td>
-                                    <td>{{movieOfCinemas.time_START}}</td>
-                                    <td>{{movieOfCinemas.id_ROOM.name}}</td>
-                                    <td>{{movieOfCinemas.id_ROOM.id_CINEMAS.name}}</td>
-                                    <td>{{movieOfCinemas.id_ROOM.id_CINEMAS.address}}</td>
-                                    <td>{{movieOfCinemas.date_END}}</td>
-                                    <td>
-                                        <a href="asdas">Booking</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+ 						 <div class="tab-content showtimes">
+                            
+                            <div class="site-mvt" ng-repeat="movieOfCinemas in filterMovieDate" ng-if="isFutureEvent(movieOfCinemas)">
+                                <div ng-if="noDataMessage">{{noDataMessage}}</div>
+                                <div class="site d-flex flex-column">
+                                    <span>{{movieOfCinemas.id_ROOM.id_CINEMAS.name}}</span>
+                                    <em>{{movieOfCinemas.id_ROOM.id_CINEMAS.address}} - <a target="_blank" href="https://www.google.com/maps/search/{{movieOfCinemas.id_ROOM.id_CINEMAS.address}}">Bản đồ</a></em>
+                                </div>
+
+                                <div class="cinema d-flex align-items-center gap-3">
+                                    <h4>{{movieOfCinemas.id_ROOM.name}} Vietsub</h4> - <h4> Room {{movieOfCinemas.id_ROOM.id}}
+                                    </h4>
+                                </div>
+                                <ul class="products-grid-movie tab-showtime list-unstyled">
+                                    <!-- <li class="item" sec:authorize="!isAuthenticated()">
+                                        <a th:href="@{/login}">
+                                            {{movieOfCinemas.time_START}}
+                                        </a>
+                                    </li>
+                                    <li class="item" sec:authorize="isAuthenticated()">
+                                        <a
+                                            th:href="@{/booking/{{movieOfCinemas.id}}}">
+                                            {{movieOfCinemas.time_START}}
+                                        </a>
+                                    </li> -->
+                                    <!-- ng-if="noDataMessage === null" -->
+                                    <li class="item">
+                                        <a  ng-if="trangthai"
+                                            th:href="@{/booking/{{movieOfCinemas.id}}}">
+                                            {{movieOfCinemas.time_START}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+						 
+						 <table class="table" hidden>
+						 	<div ng-if="noDataMessage">{{noDataMessage}}</div>
+						  	<thead>
+							    <tr>
+							      <th>MovieName</th>
+							      <th>TimeStart</th>
+							      <th>Room</th>
+							      <th>Cinema</th>
+							      <th>Address</th>
+							      <th>DateStart</th>
+							    </tr>
+						  	</thead>
+						  	<tbody>
+							    <tr ng-repeat="movieOfCinemas in filterMovieDate" ng-if="isFutureEvent(movieOfCinemas)">
+							      <td>{{movieOfCinemas.id_MOVIE.name}}</td>
+							      <td>{{movieOfCinemas.time_START}}</td>
+							      <td>{{movieOfCinemas.id_ROOM.id}}</td>
+							      <td>{{movieOfCinemas.id_ROOM.name}}</td>
+							      <td>{{movieOfCinemas.id_ROOM.id_CINEMAS.name}}</td>
+							      <td>{{movieOfCinemas.id_ROOM.id_CINEMAS.address}}</td>
+							      <td>{{movieOfCinemas.date}}</td>
+							      <td sec:authorize="!isAuthenticated()">
+							      //tu sua
+							      	<a th:href="@{/home}">Dang nhap</a>
+							      </td>
+							      <td sec:authorize="isAuthenticated()">
+							      	<a th:href="@{/booking/{{movieOfCinemas.id}}}">Booking</a>
+							      </td>
+							    </tr>
+						  	</tbody>
+						 </table> 
+                        
                     </div>
                 </div>
             </div>
@@ -164,37 +209,3 @@
     </main>
 </div>
 
-
-<!-- <ul>
-   	<p>Chọn date:</p>
-   	<li ng-repeat="date in displayedDates">
-	<input type="radio" id="idRadio" name="id"
-	ng-model="selectedDate" value="{{date}}" ng-click="filterDate(selectedDate)">
-	<label for="tuychon1">{{date}}</label><br>
-   	</li>
-   	</ul>
-  	<table class="table">
-  	<thead>
-    <tr>
-      <th>MovieName</th>
-      <th>TimeStart</th>
-      <th>Room</th>
-      <th>Cinema</th>
-      <th>Address</th>
-      <th>DateStart</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="movieOfCinemas in filterMovieDate">
-      <td>{{movieOfCinemas.id_MOVIE.name}}</td>
-      <td>{{movieOfCinemas.time_START}}</td>
-      <td>{{movieOfCinemas.id_ROOM.name}}</td>
-      <td>{{movieOfCinemas.id_ROOM.id_CINEMAS.name}}</td>
-      <td>{{movieOfCinemas.id_ROOM.id_CINEMAS.address}}</td>
-      <td>{{movieOfCinemas.date_END}}</td>
-      <td>
-      	<a href="asdas">Booking</a>
-      </td>
-    </tr>
-  </tbody>
-  	</table> -->
