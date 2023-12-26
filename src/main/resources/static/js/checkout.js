@@ -48,7 +48,7 @@ app.controller("controllerBooking", function ($scope, $http, $interval, $timeout
 							$scope.elapsedTime = formatElapsedTime(elapsedTimeMilliseconds);
 
 							// Kiểm tra nếu thời gian đã trôi qua lớn hơn 15 phút
-							if (elapsedTimeMilliseconds > 15 * 60 * 1000) {
+							if (elapsedTimeMilliseconds > 1 * 60 * 1000) { 
 								// Hiển thị cảnh báo và dừng cập nhật thời gian
 								$scope.elapsedTime = "Hết giờ";
 								$interval.cancel(intervalPromise);
